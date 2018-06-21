@@ -2,7 +2,7 @@ package com.procurement.formsservice.domain.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class EIFormRS(
+class FormRS(
     @field:JsonProperty("schema")
     @param:JsonProperty("schema")
     val schema: Map<String, Any>,

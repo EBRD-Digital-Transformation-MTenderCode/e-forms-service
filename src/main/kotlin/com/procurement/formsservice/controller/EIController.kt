@@ -1,6 +1,6 @@
 package com.procurement.formsservice.controller
 
-import com.procurement.formsservice.domain.response.EIFormRS
+import com.procurement.formsservice.domain.response.FormRS
 import com.procurement.formsservice.service.EIService
 import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,5 +12,5 @@ import reactor.core.publisher.Mono
 @RequestMapping("/forms")
 class EIController(private val eiService: EIService) {
     @GetMapping("/ei")
-    fun formEI(request: ServerHttpRequest): Mono<EIFormRS> = eiService.form(request)
+    fun formEI(request: ServerHttpRequest): Mono<FormRS> = eiService.form(request)
 }
