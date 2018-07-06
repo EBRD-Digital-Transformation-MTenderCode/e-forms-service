@@ -1,125 +1,115 @@
 package com.procurement.formsservice.json
 
+import com.procurement.formsservice.client.execute
+import com.procurement.formsservice.definition.parameter.StringParameterValueDefinition
 import com.procurement.formsservice.json.data.mdm.MdmCPV
 import com.procurement.formsservice.json.data.mdm.MdmCPVS
+import com.procurement.formsservice.json.data.mdm.MdmCountries
 import com.procurement.formsservice.json.data.mdm.MdmCurrency
+import com.procurement.formsservice.json.data.mdm.MdmLanguage
+import com.procurement.formsservice.json.data.mdm.MdmRegions
+import com.procurement.formsservice.json.data.mdm.MdmRegistrationScheme
+import com.procurement.formsservice.json.data.mdm.MdmUnitClasses
+import kotlinx.coroutines.experimental.reactive.awaitFirst
+import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.util.UriComponentsBuilder
 
 interface MDMRepository {
-    fun cpv(lang: String): List<MdmCPV>
-    fun cpvs(lang: String): List<MdmCPVS>
-    fun currency(lang: String, country: String): List<MdmCurrency>
+    suspend fun cpv(lang: StringParameterValueDefinition): MdmCPV
+
+    suspend fun cpvs(lang: StringParameterValueDefinition): MdmCPVS
+
+    suspend fun currency(lang: StringParameterValueDefinition,
+                         country: StringParameterValueDefinition): MdmCurrency
+
+    suspend fun schemeRegistration(lang: StringParameterValueDefinition,
+                                   country: StringParameterValueDefinition): MdmRegistrationScheme
+
+    suspend fun countries(lang: StringParameterValueDefinition): MdmCountries
+
+    suspend fun regions(lang: StringParameterValueDefinition,
+                        country: StringParameterValueDefinition): MdmRegions
+
+    suspend fun language(): MdmLanguage
+
+    suspend fun unitClasses(lang: StringParameterValueDefinition): MdmUnitClasses
 }
 
-class MDMRepositoryImpl : MDMRepository {
-    override fun cpv(lang: String): List<MdmCPV> = mutableListOf<MdmCPV>().apply {
-        add(
-            MdmCPV(
-                "03000000-1",
-                "Сільськогосподарська, фермерська продукція, продукція рибальства, лісівництва та супутня продукція"
-            )
-        )
-        add(MdmCPV("09000000-3", "Нафтопродукти, паливо, електроенергія та інші джерела енергії"))
-        add(MdmCPV("14000000-1", "Гірнича продукція, неблагородні метали та супутня продукція"))
-        add(MdmCPV("15000000-8", "Продукти харчування, напої, тютюн та супутня продукція"))
-        add(MdmCPV("16000000-5", "Сільськогосподарська техніка"))
-        add(MdmCPV("18000000-9", "Одяг, взуття, сумки та аксесуари"))
-        add(MdmCPV("19000000-6", "Шкіряні та текстильні, пластмасові та гумові матеріали"))
-        add(MdmCPV("22000000-0", "Друкована та супутня продукція"))
-        add(MdmCPV("24000000-4", "Хімічна продукція"))
-        add(
-            MdmCPV(
-                "30000000-9",
-                "Офісна та комп’ютерна техніка, устаткування та приладдя, крім меблів та пакетів програмного забезпечення"
-            )
-        )
-        add(
-            MdmCPV(
-                "31000000-6",
-                "Електротехнічне устаткування, апаратура, обладнання та матеріали; освітлювальне устаткування"
-            )
-        )
-        add(
-            MdmCPV(
-                "32000000-3",
-                "Радіо-, телевізійна, комунікаційна, телекомунікаційна та супутня апаратура й обладнання"
-            )
-        )
-        add(MdmCPV("33000000-0", "Медичне обладнання, фармацевтична продукція та засоби особистої гігієни"))
-        add(MdmCPV("34000000-7", "Транспортне обладнання та допоміжне приладдя до нього"))
-        add(MdmCPV("35000000-4", "Охоронне, протипожежне, поліцейське та оборонне обладнання"))
-        add(
-            MdmCPV(
-                "37000000-8",
-                "Музичні інструменти, спортивні товари, ігри, іграшки, ремісничі, художні матеріали та приладдя"
-            )
-        )
-        add(MdmCPV("38000000-5", "Лабораторне, оптичне та високоточне обладнання (крім лінз)"))
-        add(
-            MdmCPV(
-                "39000000-2",
-                "Меблі (у тому числі офісні меблі), меблево-декоративні вироби, побутова техніка (крім освітлювального обладнання) та засоби для чищення"
-            )
-        )
-        add(MdmCPV("41000000-9", "Зібрана дощова та очищена вода"))
-        add(MdmCPV("42000000-6", "Промислова техніка"))
-        add(MdmCPV("43000000-3", "Гірничодобувне та будівельне обладнання"))
-        add(
-            MdmCPV(
-                "44000000-0",
-                "Конструкції та конструкційні матеріали; допоміжна будівельна продукція (крім електроапаратури)"
-            )
-        )
-        add(MdmCPV("45000000-7", "Будівельні роботи та поточний ремонт"))
-        add(MdmCPV("48000000-8", "Пакети програмного забезпечення та інформаційні системи"))
-        add(MdmCPV("50000000-5", "Послуги з ремонту і технічного обслуговування"))
-        add(MdmCPV("51000000-9", "Послуги зі встановлення (крім програмного забезпечення)"))
-        add(MdmCPV("55000000-0", "Готельні, ресторанні послуги та послуги з роздрібної торгівлі"))
-        add(MdmCPV("60000000-8", "Транспортні послуги (крім транспортування відходів)"))
-        add(MdmCPV("63000000-9", "Додаткові та допоміжні транспортні послуги; послуги туристичних агентств"))
-        add(MdmCPV("64000000-6", "Поштові та телекомунікаційні послуги"))
-        add(MdmCPV("65000000-3", "Комунальні послуги"))
-        add(MdmCPV("66000000-0", "Фінансові та страхові послуги"))
-        add(MdmCPV("70000000-1", "Послуги у сфері нерухомості"))
-        add(MdmCPV("71000000-8", "Архітектурні, будівельні, інженерні та інспекційні послуги"))
-        add(
-            MdmCPV(
-                "72000000-5",
-                "Послуги у сфері інформаційних технологій: консультування, розробка програмного забезпечення, послуги мережі Інтернет і послуги з підтримки"
-            )
-        )
-        add(MdmCPV("73000000-2", "Послуги у сфері НДДКР та пов’язані консультаційні послуги"))
-        add(MdmCPV("75000000-6", "Адміністративні, оборонні послуги та послуги у сфері соціального захисту"))
-        add(MdmCPV("76000000-3", "Послуги, пов’язані з нафтогазовою промисловістю"))
-        add(
-            MdmCPV(
-                "77000000-0",
-                "Послуги у сфері сільського господарства, лісівництва, рослинництва, водного господарства та бджільництва"
-            )
-        )
-        add(
-            MdmCPV(
-                "79000000-4",
-                "Ділові послуги: юридичні, маркетингові, консультаційні, кадрові, поліграфічні та охоронні"
-            )
-        )
-        add(MdmCPV("80000000-4", "Послуги у сфері освіти та навчання"))
-        add(MdmCPV("85000000-9", "Послуги у сфері охорони здоров’я та соціальної допомоги"))
-        add(
-            MdmCPV(
-                "90000000-7",
-                "Послуги у сферах поводження зі стічними водами та сміттям, послуги у сферах санітарії та охорони довкілля"
-            )
-        )
-        add(MdmCPV("92000000-1", "Послуги у сфері відпочинку, культури та спорту"))
-        add(MdmCPV("98000000-3", "Інші громадські, соціальні та особисті послуги"))
-        add(MdmCPV("99999999-9", "Не відображене в інших розділах"))
+class MDMRepositoryImpl(private val webClientBuilder: WebClient.Builder) : MDMRepository {
+    override suspend fun cpv(lang: StringParameterValueDefinition): MdmCPV {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("cpv")
+            .queryParam("lang", lang.value)
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
     }
 
-    override fun cpvs(lang: String): List<MdmCPVS> = emptyList()
+    override suspend fun cpvs(lang: StringParameterValueDefinition): MdmCPVS {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("cpvs")
+            .queryParam("lang", lang.value)
+            .toUriString()
 
-    override fun currency(lang: String, country: String): List<MdmCurrency> = mutableListOf<MdmCurrency>().apply {
-        add(MdmCurrency("MDL", "Moldovan Leu"))
-        add(MdmCurrency("EUR", "Euro"))
-        add(MdmCurrency("USD", "US Dollar"))
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
+    }
+
+    override suspend fun currency(lang: StringParameterValueDefinition,
+                                  country: StringParameterValueDefinition): MdmCurrency {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("currency")
+            .queryParam("lang", lang.value)
+            .queryParam("country", country.value)
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
+    }
+
+    override suspend fun schemeRegistration(lang: StringParameterValueDefinition,
+                                            country: StringParameterValueDefinition): MdmRegistrationScheme {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("registration-scheme")
+            .queryParam("lang", lang.value)
+            .queryParam("country", country.value)
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
+    }
+
+    override suspend fun countries(lang: StringParameterValueDefinition): MdmCountries {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("country")
+            .queryParam("lang", lang.value)
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
+    }
+
+    override suspend fun regions(lang: StringParameterValueDefinition,
+                                 country: StringParameterValueDefinition): MdmRegions {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("region")
+            .queryParam("lang", lang.value)
+            .queryParam("country", country.value)
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
+    }
+
+    override suspend fun language(): MdmLanguage {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("language")
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
+    }
+
+    override suspend fun unitClasses(lang: StringParameterValueDefinition): MdmUnitClasses {
+        val uri = UriComponentsBuilder.fromHttpUrl("http://E-MDM")
+            .pathSegment("unit-class")
+            .queryParam("lang", lang.value)
+            .toUriString()
+
+        return webClientBuilder.execute(uri) { it.awaitFirst() }
     }
 }

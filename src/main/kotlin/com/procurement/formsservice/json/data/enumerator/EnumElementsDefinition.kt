@@ -1,8 +1,12 @@
 package com.procurement.formsservice.json.data.enumerator
 
+import com.procurement.formsservice.json.BOOLEAN
+import com.procurement.formsservice.json.INTEGER
+import com.procurement.formsservice.json.NUMBER
+import com.procurement.formsservice.json.STRING
 import com.procurement.formsservice.json.exception.EnumDefinitionException
 
-abstract class AbstractEnumElementsDefinition<V, T : EnumElementDefinition<V>>(elements: Array<out T>) {
+abstract class AbstractEnumElementsDefinition<V, T : EnumElementDefinition<V>>(elements: Set<T>) {
     private val _values = linkedSetOf<V>()
     private val _names = mutableListOf<String>()
     private val _descriptions = mutableListOf<String>()
@@ -18,7 +22,7 @@ abstract class AbstractEnumElementsDefinition<V, T : EnumElementDefinition<V>>(e
         if (elements.isEmpty()) {
             throw EnumDefinitionException("List of the elements is empty.")
         }
-        for (element in elements.toSet()) {
+        for (element in elements) {
             _values.add(element.value)
 
             if (element.name.isNotEmpty()) {
@@ -38,14 +42,14 @@ abstract class AbstractEnumElementsDefinition<V, T : EnumElementDefinition<V>>(e
     }
 }
 
-class BooleanEnumElementsDefinition(vararg elements: BooleanEnumElementDefinition) :
-    AbstractEnumElementsDefinition<Boolean, BooleanEnumElementDefinition>(elements)
+class BooleanEnumElementsDefinition(elements: Set<BooleanEnumElementDefinition>) :
+    AbstractEnumElementsDefinition<BOOLEAN, BooleanEnumElementDefinition>(elements)
 
-class StringEnumElementsDefinition(vararg elements: StringEnumElementDefinition) :
-    AbstractEnumElementsDefinition<String, StringEnumElementDefinition>(elements)
+class StringEnumElementsDefinition(elements: Set<StringEnumElementDefinition>) :
+    AbstractEnumElementsDefinition<STRING, StringEnumElementDefinition>(elements)
 
-class IntegerEnumElementsDefinition(vararg elements: IntegerEnumElementDefinition) :
-    AbstractEnumElementsDefinition<Long, IntegerEnumElementDefinition>(elements)
+class IntegerEnumElementsDefinition(elements: Set<IntegerEnumElementDefinition>) :
+    AbstractEnumElementsDefinition<INTEGER, IntegerEnumElementDefinition>(elements)
 
-class NumberEnumElementsDefinition(vararg elements: NumberEnumElementDefinition) :
-    AbstractEnumElementsDefinition<Float, NumberEnumElementDefinition>(elements)
+class NumberEnumElementsDefinition(elements: Set<NumberEnumElementDefinition>) :
+    AbstractEnumElementsDefinition<NUMBER, NumberEnumElementDefinition>(elements)

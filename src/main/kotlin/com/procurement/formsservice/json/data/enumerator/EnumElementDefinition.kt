@@ -1,14 +1,19 @@
 package com.procurement.formsservice.json.data.enumerator
 
+import com.procurement.formsservice.json.BOOLEAN
+import com.procurement.formsservice.json.INTEGER
+import com.procurement.formsservice.json.NUMBER
+import com.procurement.formsservice.json.STRING
+
 sealed class EnumElementDefinition<T> {
     abstract val value: T
     abstract val name: String
     abstract val description: String
 }
 
-class StringEnumElementDefinition(override val value: String,
+class StringEnumElementDefinition(override val value: STRING,
                                   override val name: String = "",
-                                  override val description: String = "") : EnumElementDefinition<String>() {
+                                  override val description: String = "") : EnumElementDefinition<STRING>() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -22,9 +27,9 @@ class StringEnumElementDefinition(override val value: String,
     }
 }
 
-class BooleanEnumElementDefinition(override val value: Boolean,
+class BooleanEnumElementDefinition(override val value: BOOLEAN,
                                    override val name: String = "",
-                                   override val description: String = "") : EnumElementDefinition<Boolean>() {
+                                   override val description: String = "") : EnumElementDefinition<BOOLEAN>() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -38,9 +43,9 @@ class BooleanEnumElementDefinition(override val value: Boolean,
     }
 }
 
-class IntegerEnumElementDefinition(override val value: Long,
+class IntegerEnumElementDefinition(override val value: INTEGER,
                                    override val name: String = "",
-                                   override val description: String = "") : EnumElementDefinition<Long>() {
+                                   override val description: String = "") : EnumElementDefinition<INTEGER>() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -54,9 +59,9 @@ class IntegerEnumElementDefinition(override val value: Long,
     }
 }
 
-class NumberEnumElementDefinition(override val value: Float,
+class NumberEnumElementDefinition(override val value: NUMBER,
                                   override val name: String = "",
-                                  override val description: String = "") : EnumElementDefinition<Float>() {
+                                  override val description: String = "") : EnumElementDefinition<NUMBER>() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

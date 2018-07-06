@@ -2,32 +2,31 @@ package com.procurement.formsservice.json.data.source.manual
 
 import com.procurement.formsservice.json.Context
 import com.procurement.formsservice.json.FALSE
+import com.procurement.formsservice.json.INTEGER
 import com.procurement.formsservice.json.IntegerValueBuilder
 import com.procurement.formsservice.json.Predicate
 import com.procurement.formsservice.json.data.source.IntegerSourceDefinition
 
-fun manualInteger(builder: IntegerManualSourceDefinition.Builder.() -> Unit) =
-    IntegerManualSourceDefinition.Builder().apply(builder).build()
-
 class IntegerManualSourceDefinition(val value: IntegerValueBuilder,
                                     val default: IntegerValueBuilder,
                                     override val readOnly: Predicate) :
-    IntegerSourceDefinition() {
+    IntegerSourceDefinition {
 
-    override fun buildForm(context: Context, writer: MutableMap<String, Any>) {
+    override suspend fun buildForm(context: Context, writer: MutableMap<String, Any>) {
         if (isReadOnly(context)) writer["readOnly"] = true
 
-        val defaultValue: Long? = default(context)
-        if (defaultValue != null) writer["default"] = default
+        val defaultValue: INTEGER? = default(context)
+        if (defaultValue != null) writer["default"] = defaultValue
     }
 
-    override fun buildData(context: Context): Any? = value(context)
+    override suspend fun buildData(context: Context): Any? = value(context)
 
-    class Builder {
+    class Builder : IntegerSourceDefinition.Builder<IntegerManualSourceDefinition> {
         var value: IntegerValueBuilder = { null }
         var default: IntegerValueBuilder = { null }
         var readOnly: Predicate = FALSE
 
-        fun build() = IntegerManualSourceDefinition(value = value, default = default, readOnly = readOnly)
+        override fun build(name: String) =
+            IntegerManualSourceDefinition(value = value, default = default, readOnly = readOnly)
     }
 }

@@ -1,24 +1,31 @@
 package com.procurement.formsservice.json.data.mdm
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.procurement.formsservice.definition.CommonNamesParameters
 import com.procurement.formsservice.json.Context
 import com.procurement.formsservice.json.FALSE
-import com.procurement.formsservice.json.Parameters.Companion.LANGUAGE
 import com.procurement.formsservice.json.Predicate
 import com.procurement.formsservice.json.data.source.StringSourceDefinition
 import com.procurement.formsservice.json.exception.EnumDefinitionException
 
-data class MdmCPV(val code: String, val name: String)
+data class MdmCPV(@JsonProperty("data") val data: MdmCPVData)
 
-fun mdmCPV(builder: CPVSourceDefinition.Builder.() -> Unit = {}) = CPVSourceDefinition.Builder().apply(builder).build()
+data class MdmCPVData(@JsonProperty("items") val items: List<MdmCPVItem>)
 
-class CPVSourceDefinition private constructor(override val readOnly: Predicate) : StringSourceDefinition() {
-    override fun buildForm(context: Context, writer: MutableMap<String, Any>) {
+data class MdmCPVItem(@JsonProperty("code") val code: String,
+                      @JsonProperty("name") val name: String)
+
+fun mdmCPV(builder: CPVSourceDefinition.Builder.() -> Unit = {}) =
+    CPVSourceDefinition.Builder().apply(builder)
+
+class CPVSourceDefinition private constructor(override val readOnly: Predicate) : StringSourceDefinition {
+    override suspend fun buildForm(context: Context, writer: MutableMap<String, Any>) {
         if (isReadOnly(context)) writer["readOnly"] = true
 
-        val listCPV = context.repository.cpv(context.parameters.getAsString(LANGUAGE))
+        val cpvData = context.repository.cpv(lang = context.parameters[CommonNamesParameters.LANGUAGE])
         val codes = mutableListOf<String>()
         val names = mutableListOf<String>()
-        for ((code, name) in listCPV) {
+        for ((code, name) in cpvData.data.items) {
             codes.add(code)
             names.add(name)
         }
@@ -31,11 +38,11 @@ class CPVSourceDefinition private constructor(override val readOnly: Predicate) 
         if (names.isNotEmpty()) writer["enumNames"] = names
     }
 
-    override fun buildData(context: Context): Any? = null
+    override suspend fun buildData(context: Context): Any? = null
 
-    class Builder {
+    class Builder : StringSourceDefinition.Builder<CPVSourceDefinition> {
         var readOnly: Predicate = FALSE
 
-        fun build() = CPVSourceDefinition(readOnly = readOnly)
+        override fun build(name: String) = CPVSourceDefinition(readOnly = readOnly)
     }
 }

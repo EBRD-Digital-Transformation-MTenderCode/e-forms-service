@@ -1,5 +1,9 @@
 package com.procurement.formsservice.json.data
 
+import com.procurement.formsservice.json.BOOLEAN
+import com.procurement.formsservice.json.INTEGER
+import com.procurement.formsservice.json.NUMBER
+import com.procurement.formsservice.json.STRING
 import java.util.*
 
 sealed class FieldWrapper<T> {
@@ -23,7 +27,7 @@ sealed class FieldWrapper<T> {
     abstract val isNumber: Boolean
 }
 
-class StringFieldWrapper : FieldWrapper<String>() {
+class StringFieldWrapper : FieldWrapper<STRING>() {
     val isEmpty: Boolean
         get() = value?.isEmpty() ?: true
 
@@ -42,21 +46,21 @@ class StringFieldWrapper : FieldWrapper<String>() {
     override val isNumber: Boolean = false
 }
 
-class BooleanFieldWrapper : FieldWrapper<Boolean>() {
+class BooleanFieldWrapper : FieldWrapper<BOOLEAN>() {
     override val isString: Boolean = false
     override val isBoolean: Boolean = true
     override val isInteger: Boolean = false
     override val isNumber: Boolean = false
 }
 
-class IntegerFieldWrapper : FieldWrapper<Long>() {
+class IntegerFieldWrapper : FieldWrapper<INTEGER>() {
     override val isString: Boolean = false
     override val isBoolean: Boolean = false
     override val isInteger: Boolean = true
     override val isNumber: Boolean = false
 }
 
-class NumberFieldWrapper : FieldWrapper<Float>() {
+class NumberFieldWrapper : FieldWrapper<NUMBER>() {
     override val isString: Boolean = false
     override val isBoolean: Boolean = false
     override val isInteger: Boolean = false

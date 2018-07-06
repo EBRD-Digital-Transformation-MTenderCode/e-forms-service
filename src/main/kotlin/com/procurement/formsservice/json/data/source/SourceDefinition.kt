@@ -3,20 +3,40 @@ package com.procurement.formsservice.json.data.source
 import com.procurement.formsservice.json.Context
 import com.procurement.formsservice.json.Predicate
 
-sealed class SourceDefinition {
-    abstract val readOnly: Predicate
+interface SourceDefinition {
+    val readOnly: Predicate
 
     fun isReadOnly(context: Context) = readOnly.invoke(context)
 
-    abstract fun buildForm(context: Context, writer: MutableMap<String, Any>)
+    suspend fun buildForm(context: Context, writer: MutableMap<String, Any>)
 
-    abstract fun buildData(context: Context): Any?
+    suspend fun buildData(context: Context): Any?
+
+    interface Builder<T : SourceDefinition> {
+        fun build(name: String): T
+    }
 }
 
-abstract class StringSourceDefinition : SourceDefinition()
+interface StringSourceDefinition : SourceDefinition {
+    interface Builder<T : StringSourceDefinition> {
+        fun build(name: String): T
+    }
+}
 
-abstract class BooleanSourceDefinition : SourceDefinition()
+interface BooleanSourceDefinition : SourceDefinition {
+    interface Builder<T : BooleanSourceDefinition> {
+        fun build(name: String): T
+    }
+}
 
-abstract class IntegerSourceDefinition : SourceDefinition()
+interface IntegerSourceDefinition : SourceDefinition {
+    interface Builder<T : IntegerSourceDefinition> {
+        fun build(name: String): T
+    }
+}
 
-abstract class NumberSourceDefinition : SourceDefinition()
+interface NumberSourceDefinition : SourceDefinition {
+    interface Builder<T : NumberSourceDefinition> {
+        fun build(name: String): T
+    }
+}

@@ -1,8 +1,8 @@
 package com.procurement.formsservice.json.attribute
 
 import com.procurement.formsservice.json.Context
+import com.procurement.formsservice.json.ElementDefinition
 import com.procurement.formsservice.json.Predicate
-import com.procurement.formsservice.json.PrintableElementDefinition
 
 abstract class AttributeDefinition(
     override val name: String,
@@ -11,8 +11,9 @@ abstract class AttributeDefinition(
     val destination: String,
     override val required: Predicate,
     override val usage: Predicate
-) : PrintableElementDefinition {
-    override fun buildForm(context: Context): Map<String, Any> = if (usage(context))
+) : ElementDefinition {
+
+    override suspend fun buildForm(context: Context): Map<String, Any> = if (usage(context))
         linkedMapOf<String, Any>()
             .apply {
                 if (title.isNotBlank()) this["title"] = title
@@ -24,6 +25,6 @@ abstract class AttributeDefinition(
     else
         emptyMap()
 
-    protected abstract fun buildType(writer: MutableMap<String, Any>)
-    protected abstract fun buildSource(context: Context, writer: MutableMap<String, Any>)
+    protected abstract suspend fun buildType(writer: MutableMap<String, Any>)
+    protected abstract suspend fun buildSource(context: Context, writer: MutableMap<String, Any>)
 }

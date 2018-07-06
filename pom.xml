@@ -27,16 +27,17 @@
         <java.version>1.8</java.version>
 
         <!--Kotlin-->
-        <kotlin.version>1.2.41</kotlin.version>
+        <kotlin.version>1.2.51</kotlin.version>
+        <kotlin-coroutines.version>0.23.3</kotlin-coroutines.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <!--Docker-->
-        <docker-registry>docker-registry.eprocurement.systems</docker-registry>
+        <docker-registry>dev.docker-registry.eprocurement.systems</docker-registry>
         <docker-image-profile></docker-image-profile>
         <docker-maven-plugin.version>0.24.0</docker-maven-plugin.version>
 
         <!--Spring-->
-        <spring-cloud.version>Finchley.RC1</spring-cloud.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
         <spring-restdocs-asciidoctor.version>2.0.1.RELEASE</spring-restdocs-asciidoctor.version>
 
         <!--Loggin-->
@@ -114,6 +115,16 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-annotation-processing-maven</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-jdk8</artifactId>
+            <version>${kotlin-coroutines.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-reactor</artifactId>
+            <version>${kotlin-coroutines.version}</version>
         </dependency>
 
         <!--Jackson-->
@@ -242,6 +253,7 @@
                 <configuration>
                     <args>
                         <arg>-Xjsr305=strict</arg>
+                        <arg>-Xcoroutines=enable</arg>
                     </args>
                     <jvmTarget>1.8</jvmTarget>
                     <compilerPlugins>
