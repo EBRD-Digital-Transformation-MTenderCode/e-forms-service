@@ -3,9 +3,9 @@ server:
 
 spring:
   application:
-    name: e-forms
+    name: forms
 
   cloud:
     config:
       failFast: true
-      name: e-forms
+      name: forms
