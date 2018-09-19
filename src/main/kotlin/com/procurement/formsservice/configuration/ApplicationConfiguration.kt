@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Import
 @Import(
     value = [
         WebConfiguration::class,
-        ServiceConfiguration::class
+        ServiceConfiguration::class,
+        RepositoryConfiguration::class
     ]
 )
 class ApplicationConfiguration

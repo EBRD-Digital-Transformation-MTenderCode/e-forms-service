@@ -1,0 +1,138 @@
+{
+  "uri": "https://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1532008123198/ocds-t1s2t3-MD-1532008123198",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-07-19T14:22:02Z",
+  "releases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1532008123198",
+      "id": "ocds-t1s2t3-MD-1532008123198-1532010122791",
+      "date": "2018-07-19T14:22:01Z",
+      "tag": [
+        "compiled"
+      ],
+      "initiationType": "tender",
+      "language": "ro",
+      "tender": {
+        "id": "ocds-t1s2t3-MD-1532008123198",
+        "title": "Hand become put day with west join.",
+        "description": "Break along kitchen whom trip choice seem class adult travel high throughout government room receive second former family girl base same son democratic itself public girl say week.",
+        "status": "planning",
+        "statusDetails": "empty",
+        "mainProcurementCategory": "goods",
+        "classification": {
+          "scheme": "CPV",
+          "id": "30100000-0",
+          "description": "Maşini de procesare de text"
+        }
+      },
+      "buyer": {
+        "name": "Burns-Davis",
+        "id": "MD-IDNO-354-37-1072"
+      },
+      "parties": [
+        {
+          "id": "MD-IDNO-354-37-1072",
+          "name": "Burns-Davis",
+          "identifier": {
+            "scheme": "MD-IDNO",
+            "id": "354-37-1072",
+            "legalName": "Burns-Davis PLC",
+            "uri": "http://edwards.net/"
+          },
+          "additionalIdentifiers": [
+            {
+              "scheme": "MD-IDNO",
+              "id": "713-49-7544",
+              "legalName": "Burns-Davis PLC",
+              "uri": "http://baker.com/posts/about.asp"
+            }
+          ],
+          "address": {
+            "streetAddress": "232323",
+            "postalCode": "424422",
+            "addressDetails": {
+              "country": {
+                "scheme": "iso-alpha2",
+                "id": "MD",
+                "description": "MOLDOVA",
+                "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+              },
+              "region": {
+                "id": "MD-AN",
+                "description": "Anenii Noi"
+              },
+              "locality": {
+                "scheme": "CUATM",
+                "id": "MD AIN",
+                "description": "Anenii Noi",
+                "uri": "locality"
+              }
+            }
+          },
+          "contactPoint": {
+            "name": "Jacqueline Soto",
+            "email": "tiffanygutierrez@yahoo.com",
+            "telephone": "724-095-3938x237",
+            "faxNumber": "897-612-1545",
+            "url": "http://hudson.biz/explore/list/category/"
+          },
+          "roles": [
+            "buyer"
+          ],
+          "details": {
+            "typeOfBuyer": "MINISTRY",
+            "mainGeneralActivity": "HEALTH",
+            "mainSectoralActivity": "WATER"
+          },
+          "buyerProfile": "http://ray.com/"
+        }
+      ],
+      "planning": {
+        "budget": {
+          "id": "30100000-0",
+          "period": {
+            "startDate": "2018-02-28T09:00:00Z",
+            "endDate": "2018-08-22T09:00:00Z"
+          },
+          "amount": {
+            "amount": 1000,
+            "currency": "MDL"
+          }
+        },
+        "rationale": "Ground national key nothing you sometimes."
+      },
+      "relatedProcesses": [
+        {
+          "id": "1b1e1370-8b5f-11e8-93f4-7779430ed2b6",
+          "relationship": [
+            "x_execution"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-t1s2t3-MD-1532010121824",
+          "uri": "http://point.eprocurement.systems/tenders/ocds-t1s2t3-MD-1532010121824/ocds-t1s2t3-MD-1532010121824"
+        },
+        {
+          "id": "1270d770-8b5b-11e8-93f4-7779430ed2b6",
+          "relationship": [
+            "x_financeSource"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-t1s2t3-MD-1532008123198-FS-1532008390030",
+          "uri": "http://point.eprocurement.systems/budgets/ocds-t1s2t3-MD-1532008123198/ocds-t1s2t3-MD-1532008123198-FS-1532008390030"
+        }
+      ]
+    }
+  ]
+}

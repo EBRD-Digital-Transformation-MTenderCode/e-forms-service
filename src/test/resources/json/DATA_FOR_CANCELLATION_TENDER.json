@@ -1,0 +1,1325 @@
+{
+  "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1536828233229",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-09-13T08:43:54Z",
+  "packages": [
+    "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1536828233229/ocds-t1s2t3-MD-1536828233229",
+    "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1536828233229/ocds-t1s2t3-MD-1536828233229-EV-1536828233295"
+  ],
+  "records": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1536828233229",
+      "compiledRelease": {
+        "ocid": "ocds-t1s2t3-MD-1536828233229",
+        "id": "ocds-t1s2t3-MD-1536828233229-EV-1536828233295-1536828234051",
+        "date": "2018-09-13T08:43:53Z",
+        "tag": [
+          "compiled"
+        ],
+        "initiationType": "tender",
+        "language": "ro",
+        "planning": {
+          "budget": {
+            "description": "Whom kitchen so people off down employee. See energy race international would. Executive seem image paper little.",
+            "amount": {
+              "amount": 57826126489.78,
+              "currency": "MDL"
+            },
+            "isEuropeanUnionFunded": true,
+            "budgetBreakdown": [
+              {
+                "id": "ocds-t1s2t3-MD-1536828226981-FS-1536828230917",
+                "description": "Myself ready serve significant soldier medical. School civil crime cultural claim trip. Agree truth say data describe rate.",
+                "amount": {
+                  "amount": 33573990678.36,
+                  "currency": "MDL"
+                },
+                "period": {
+                  "startDate": "2018-09-13T08:43:46Z",
+                  "endDate": "2019-03-12T08:43:46Z"
+                },
+                "sourceParty": {
+                  "name": "Mendez, Ramirez and Johnson",
+                  "id": "MD-IDNO-170-88-3387"
+                },
+                "europeanUnionFunding": {
+                  "projectIdentifier": "0-9730027-0-0",
+                  "projectName": "evolve cross-platform synergies",
+                  "uri": "https://www.lee.com/category/"
+                }
+              },
+              {
+                "id": "ocds-t1s2t3-MD-1536828226981-FS-1536828231735",
+                "description": "Talk beyond effort she.",
+                "amount": {
+                  "amount": 24252135811.42,
+                  "currency": "MDL"
+                },
+                "period": {
+                  "startDate": "2018-09-13T08:43:46Z",
+                  "endDate": "2019-03-12T08:43:46Z"
+                },
+                "sourceParty": {
+                  "name": "Mills Group",
+                  "id": "MD-IDNO-236-30-3390"
+                }
+              }
+            ]
+          },
+          "rationale": "Blood you magazine event."
+        },
+        "tender": {
+          "id": "ocds-t1s2t3-MD-1536828233229",
+          "title": "Road fly western indeed.",
+          "description": "Customer challenge treat former agent else movement close star throughout PM interesting chair money positive rest give report should.",
+          "status": "active",
+          "statusDetails": "evaluation",
+          "value": {
+            "amount": 39240414674.65,
+            "currency": "MDL"
+          },
+          "procurementMethod": "open",
+          "procurementMethodDetails": "TEST Licitatia deschisa",
+          "procurementMethodRationale": "Customer popular film create. Group energy miss answer rise a. Field school professional evening son blue.",
+          "mainProcurementCategory": "services",
+          "hasEnquiries": true,
+          "eligibilityCriteria": "Regulile generale privind naționalitatea și originea, precum și alte criterii de eligibilitate sunt enumerate în Ghidul practic privind procedurile de contractare a acțiunilor externe ale UE (PRAG)",
+          "contractPeriod": {
+            "startDate": "2018-09-13T08:45:03Z",
+            "endDate": "2019-06-12T16:28:33Z"
+          },
+          "procuringEntity": {
+            "name": "Mason, Ryan and James",
+            "id": "MD-IDNO-295-69-9242"
+          },
+          "acceleratedProcedure": {
+            "isAcceleratedProcedure": false
+          },
+          "classification": {
+            "scheme": "CPV",
+            "id": "65500000-8",
+            "description": "Servicii de citire a contoarelor"
+          },
+          "designContest": {
+            "serviceContractAward": false
+          },
+          "electronicWorkflows": {
+            "useOrdering": false,
+            "usePayment": false,
+            "acceptInvoicing": false
+          },
+          "jointProcurement": {
+            "isJointProcurement": false
+          },
+          "legalBasis": "NATIONAL_PROCUREMENT_LAW",
+          "procedureOutsourcing": {
+            "procedureOutsourced": false
+          },
+          "procurementMethodAdditionalInfo": "Its interest each mean weight condition cold do. Heavy husband mind management wonder thank woman. Social hair six reach even outside.",
+          "dynamicPurchasingSystem": {
+            "hasDynamicPurchasingSystem": false
+          },
+          "framework": {
+            "isAFramework": false
+          }
+        },
+        "parties": [
+          {
+            "id": "MD-IDNO-215-89-9272",
+            "name": "Chapman-Burns",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "215-89-9272",
+              "legalName": "Chapman-Burns Inc",
+              "uri": "http://griffin-rogers.com/author.php"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "776-91-2511",
+                "legalName": "Chapman-Burns and Sons",
+                "uri": "https://www.manning.net/blog/categories/tag/privacy/"
+              }
+            ],
+            "address": {
+              "streetAddress": "681 Matthew Gardens Apt. 551",
+              "postalCode": "42110",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "6000000",
+                  "description": "Nisporeni",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "6010000",
+                  "description": "s.Bălăneşti",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "John Cherry",
+              "email": "jessicaserrano@hotmail.com",
+              "telephone": "03759795954",
+              "faxNumber": "+35(8)5055652549",
+              "url": "http://www.harris.net/category/tags/main/"
+            },
+            "roles": [
+              "payer"
+            ]
+          },
+          {
+            "id": "MD-IDNO-458-02-1001",
+            "name": "West-Owens",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "458-02-1001",
+              "legalName": "West-Owens PLC",
+              "uri": "https://www.lewis.com/categories/tags/posts/post.php"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "459-87-5561",
+                "legalName": "West-Owens PLC",
+                "uri": "https://cooper-walker.info/login/"
+              }
+            ],
+            "address": {
+              "streetAddress": "999 Hoover Extension Apt. 370",
+              "postalCode": "03572",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "6200000",
+                  "description": "Ocniţa",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "6217000",
+                  "description": "s.Grinăuţi-Moldova",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Matthew Chavez",
+              "email": "rowedustin@hotmail.com",
+              "telephone": "034-019-1753",
+              "faxNumber": "329-426-8928x951",
+              "url": "http://dominguez.com/index/"
+            },
+            "roles": [
+              "payer"
+            ]
+          },
+          {
+            "id": "MD-IDNO-170-88-3387",
+            "name": "Mendez, Ramirez and Johnson",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "170-88-3387",
+              "legalName": "Mendez, Ramirez and Johnson Inc",
+              "uri": "http://lowe.net/privacy/"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "686-79-0813",
+                "legalName": "Mendez, Ramirez and Johnson PLC",
+                "uri": "https://schwartz-schneider.com/index/"
+              }
+            ],
+            "address": {
+              "streetAddress": "1714 Cruz Island",
+              "postalCode": "41731",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "0501000",
+                  "description": "mun.Bender",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "0501000",
+                  "description": "mun.Bender",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Michael Pace",
+              "email": "dadams@hotmail.com",
+              "telephone": "706-800-6527",
+              "faxNumber": "308-116-1281",
+              "url": "https://www.jordan-davis.com/homepage.html"
+            },
+            "roles": [
+              "funder"
+            ]
+          },
+          {
+            "id": "MD-IDNO-236-30-3390",
+            "name": "Mills Group",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "236-30-3390",
+              "legalName": "Mills Group Ltd",
+              "uri": "http://may-dunn.com/search/main/category/faq.html"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "464-57-1104",
+                "legalName": "Mills Group PLC",
+                "uri": "http://lynch-hurst.com/main.html"
+              }
+            ],
+            "address": {
+              "streetAddress": "01686 Jose Rue Apt. 669",
+              "postalCode": "62701",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "7100000",
+                  "description": "Rîşcani",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "7110000",
+                  "description": "s.Alexăndreşti",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Karen Stewart",
+              "email": "ronald53@gmail.com",
+              "telephone": "891.675.8051x744",
+              "faxNumber": "+06(4)0168039259",
+              "url": "http://www.chavez-williams.info/main/category.jsp"
+            },
+            "roles": [
+              "funder"
+            ]
+          },
+          {
+            "id": "MD-IDNO-251-67-6733",
+            "name": "Soto, Martin and Salazar",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "251-67-6733",
+              "legalName": "Soto, Martin and Salazar PLC",
+              "uri": "https://www.walker-hamilton.com/category/"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "055-13-7483",
+                "legalName": "Soto, Martin and Salazar Inc",
+                "uri": "https://baker.info/"
+              }
+            ],
+            "address": {
+              "streetAddress": "920 Jerry Burg Apt. 437",
+              "postalCode": "79089",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "8300000",
+                  "description": "Şoldăneşti",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "8310000",
+                  "description": "s.Alcedar",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Helen Fischer",
+              "email": "mmendoza@gmail.com",
+              "telephone": "1-513-692-4289x23525",
+              "faxNumber": "340-814-6426x499",
+              "url": "https://www.phillips-king.info/wp-content/home/"
+            },
+            "roles": [
+              "buyer"
+            ],
+            "details": {
+              "typeOfBuyer": "BODY_PUBLIC",
+              "mainGeneralActivity": "GENERAL_PUBLIC_SERVICES",
+              "mainSectoralActivity": "PORT_RELATED_ACTIVITIES"
+            },
+            "buyerProfile": "http://www.may-wiggins.com/posts/search/list/privacy/"
+          },
+          {
+            "id": "MD-IDNO-295-69-9242",
+            "name": "Mason, Ryan and James",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "295-69-9242",
+              "legalName": "Mason, Ryan and James PLC",
+              "uri": "https://martin-matthews.com/app/main.htm"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "462-55-6139",
+                "legalName": "Mason, Ryan and James Inc",
+                "uri": "http://www.mcclure.net/wp-content/explore/terms/"
+              }
+            ],
+            "address": {
+              "streetAddress": "853 Warren Villages Apt. 083",
+              "postalCode": "40823",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "8300000",
+                  "description": "Şoldăneşti",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "8319000",
+                  "description": "s.Glinjeni (r-l Șoldănești)",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Kent Phelps",
+              "email": "andrew70@yahoo.com",
+              "telephone": "(779)607-5940x6529",
+              "faxNumber": "094-054-1935x49711",
+              "url": "https://middleton.com/"
+            },
+            "roles": [
+              "procuringEntity"
+            ]
+          }
+        ],
+        "relatedProcesses": [
+          {
+            "id": "24c4adf1-b731-11e8-b044-6357742a90cb",
+            "relationship": [
+              "x_expenditureItem"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1536828226981",
+            "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1536828226981/ocds-t1s2t3-MD-1536828226981"
+          },
+          {
+            "id": "24c4adf0-b731-11e8-b044-6357742a90cb",
+            "relationship": [
+              "x_evaluation"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1536828233229-EV-1536828233295",
+            "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1536828233229/ocds-t1s2t3-MD-1536828233229-EV-1536828233295"
+          },
+          {
+            "id": "24c4adf3-b731-11e8-b044-6357742a90cb",
+            "relationship": [
+              "x_fundingSource"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1536828226981-FS-1536828231735",
+            "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1536828226981/ocds-t1s2t3-MD-1536828226981-FS-1536828231735"
+          },
+          {
+            "id": "24c4adf2-b731-11e8-b044-6357742a90cb",
+            "relationship": [
+              "x_fundingSource"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1536828226981-FS-1536828230917",
+            "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1536828226981/ocds-t1s2t3-MD-1536828226981-FS-1536828230917"
+          }
+        ]
+      }
+    },
+    {
+      "ocid": "ocds-t1s2t3-MD-1536828233229-EV-1536828233295",
+      "compiledRelease": {
+        "ocid": "ocds-t1s2t3-MD-1536828233229-EV-1536828233295",
+        "id": "ocds-t1s2t3-MD-1536828233229-EV-1536828233295-1536828302723",
+        "date": "2018-09-13T08:45:02Z",
+        "tag": [
+          "award"
+        ],
+        "initiationType": "tender",
+        "language": "ro",
+        "parties": [
+          {
+            "id": "MD-IDNO-146-35-1273",
+            "name": "Day, Rocha and Cummings",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "146-35-1273",
+              "legalName": "Day, Rocha and Cummings PLC",
+              "uri": "http://www.moon.biz/search/categories/posts/author.html"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "756-78-9880",
+                "legalName": "Day, Rocha and Cummings and Sons",
+                "uri": "http://www.harrington.info/main/"
+              }
+            ],
+            "address": {
+              "streetAddress": "242 Keith Mountain Apt. 685",
+              "postalCode": "88275",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "5300000",
+                  "description": "Hînceşti",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "5342004",
+                  "description": "s.Valea Florii",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Aaron Brown",
+              "email": "brianna37@hotmail.com",
+              "telephone": "(181)937-8429x8328",
+              "faxNumber": "(952)958-9065",
+              "url": "http://www.cervantes.com/terms.html"
+            },
+            "roles": [
+              "tenderer",
+              "supplier"
+            ],
+            "details": {
+              "scale": "large"
+            }
+          },
+          {
+            "id": "MD-IDNO-005-59-8619",
+            "name": "Newman, Ewing and Pratt",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "005-59-8619",
+              "legalName": "Newman, Ewing and Pratt and Sons",
+              "uri": "https://www.nguyen.com/search/"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "766-47-8419",
+                "legalName": "Newman, Ewing and Pratt PLC",
+                "uri": "http://leon.com/"
+              }
+            ],
+            "address": {
+              "streetAddress": "05441 Cox Unions Suite 498",
+              "postalCode": "49905",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "3600000",
+                  "description": "Drochia",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "3630000",
+                  "description": "s.Popeştii de Jos",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Kyle Kramer",
+              "email": "coffeyjohnny@gmail.com",
+              "telephone": "1-394-149-1897x234",
+              "faxNumber": "191-304-5725x60335",
+              "url": "https://www.odom-proctor.com/faq/"
+            },
+            "roles": [
+              "enquirer"
+            ],
+            "details": {
+              "scale": "micro"
+            }
+          },
+          {
+            "id": "MD-IDNO-573-29-6765",
+            "name": "Martin, Jensen and Castillo",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "573-29-6765",
+              "legalName": "Martin, Jensen and Castillo Group",
+              "uri": "https://www.kirk-brown.com/posts/category/about.jsp"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "103-44-8088",
+                "legalName": "Martin, Jensen and Castillo Group",
+                "uri": "http://www.hernandez.net/"
+              }
+            ],
+            "address": {
+              "streetAddress": "5041 Megan Greens Suite 262",
+              "postalCode": "53209",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "5300000",
+                  "description": "Hînceşti",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "5344000",
+                  "description": "s.Sofia (r-l Hînceşti)",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "David Owens",
+              "email": "jessica31@yahoo.com",
+              "telephone": "(949)246-7935",
+              "faxNumber": "+35(8)6415655512",
+              "url": "http://www.thomas.info/"
+            },
+            "roles": [
+              "tenderer",
+              "supplier"
+            ],
+            "details": {
+              "scale": "micro"
+            }
+          },
+          {
+            "id": "MD-IDNO-357-43-1072",
+            "name": "Peterson, Phillips and Goodwin",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "357-43-1072",
+              "legalName": "Peterson, Phillips and Goodwin PLC",
+              "uri": "https://perkins.info/about.html"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "676-71-0937",
+                "legalName": "Peterson, Phillips and Goodwin LLC",
+                "uri": "http://moore.com/login.jsp"
+              }
+            ],
+            "address": {
+              "streetAddress": "34139 Briana Row Apt. 729",
+              "postalCode": "45898",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "6700000",
+                  "description": "Rezina",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "6701002",
+                  "description": "s.Ciorna",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Dana Lowe",
+              "email": "twhite@hotmail.com",
+              "telephone": "1-533-918-3572",
+              "faxNumber": "+43(8)5533769390",
+              "url": "http://www.vega-mitchell.info/search.jsp"
+            },
+            "roles": [
+              "tenderer",
+              "supplier"
+            ],
+            "details": {
+              "scale": "sme"
+            }
+          },
+          {
+            "id": "MD-IDNO-789-68-6871",
+            "name": "Howard Inc",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "789-68-6871",
+              "legalName": "Howard Inc Inc",
+              "uri": "http://hicks-kent.com/terms.html"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "516-95-6042",
+                "legalName": "Howard Inc LLC",
+                "uri": "http://www.baker.com/category.jsp"
+              }
+            ],
+            "address": {
+              "streetAddress": "45497 Butler Pine Suite 359",
+              "postalCode": "60721",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "4800000",
+                  "description": "Glodeni",
+                  "uri": "http://statistica.md"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "4814000",
+                  "description": "s.Cobani",
+                  "uri": "http://statistica.md"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Eddie Horn",
+              "email": "mejiamartin@hotmail.com",
+              "telephone": "461-312-7623x90958",
+              "faxNumber": "(110)447-9445",
+              "url": "http://perez-frye.info/blog/app/register/"
+            },
+            "roles": [
+              "tenderer",
+              "supplier"
+            ],
+            "details": {
+              "scale": "sme"
+            }
+          }
+        ],
+        "tender": {
+          "id": "ocds-t1s2t3-MD-1536828233229",
+          "title": "Evaluation",
+          "description": "Evaluation stage of contracting process",
+          "status": "active",
+          "statusDetails": "empty",
+          "items": [
+            {
+              "id": "24ba9bd3-b731-11e8-a2e0-2d39f49cc4bb",
+              "description": "Only effort military deal want particular small factor water issue hope plan computer commercial spend build.",
+              "classification": {
+                "scheme": "CPV",
+                "id": "65500000-8",
+                "description": "Servicii de citire a contoarelor"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "AB37-0",
+                  "description": "Carbon"
+                }
+              ],
+              "quantity": 212939.87,
+              "unit": {
+                "name": "Kilogram",
+                "id": "166"
+              },
+              "relatedLot": "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+            },
+            {
+              "id": "24ba9bd0-b731-11e8-a2e0-2d39f49cc4bb",
+              "description": "Make what alone long might another result heart ten special return daughter face administration likely human spring.",
+              "classification": {
+                "scheme": "CPV",
+                "id": "65500000-8",
+                "description": "Servicii de citire a contoarelor"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "IA18-0",
+                  "description": "Reînnoire a suprafeţei"
+                }
+              ],
+              "quantity": 52106408.27,
+              "unit": {
+                "name": "Kilogram",
+                "id": "166"
+              },
+              "relatedLot": "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+            },
+            {
+              "id": "24ba9bd2-b731-11e8-a2e0-2d39f49cc4bb",
+              "description": "Hear beautiful accept amount full smile second life total economy speech performance room law decide choice character house increase discuss subject approach appear better teach list organization three trouble four around.",
+              "classification": {
+                "scheme": "CPV",
+                "id": "65500000-8",
+                "description": "Servicii de citire a contoarelor"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "FG09-6",
+                  "description": "Pentru interior"
+                }
+              ],
+              "quantity": 64.67,
+              "unit": {
+                "name": "Kilogram",
+                "id": "166"
+              },
+              "relatedLot": "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+            },
+            {
+              "id": "24ba9bd1-b731-11e8-a2e0-2d39f49cc4bb",
+              "description": "Business break particular daughter on movie region will fear commercial hospital phone serious draw seven above group low newspaper director interview.",
+              "classification": {
+                "scheme": "CPV",
+                "id": "65500000-8",
+                "description": "Servicii de citire a contoarelor"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "LA24-2",
+                  "description": "Cu utilizare neuroangiografică"
+                }
+              ],
+              "quantity": 9.68,
+              "unit": {
+                "name": "Kilogram",
+                "id": "166"
+              },
+              "relatedLot": "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+            }
+          ],
+          "lots": [
+            {
+              "id": "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb",
+              "title": "List decade range sport woman.",
+              "description": "Paper other past under city book network top country north real may worker up deal cost capital act middle body.",
+              "status": "active",
+              "statusDetails": "empty",
+              "value": {
+                "amount": 25642193741.53,
+                "currency": "MDL"
+              },
+              "options": [
+                {
+                  "hasOptions": false
+                }
+              ],
+              "recurrentProcurement": [
+                {
+                  "isRecurrent": false
+                }
+              ],
+              "renewals": [
+                {
+                  "hasRenewals": false
+                }
+              ],
+              "variants": [
+                {
+                  "hasVariants": false
+                }
+              ],
+              "contractPeriod": {
+                "startDate": "2018-09-13T08:45:03Z",
+                "endDate": "2019-02-09T03:15:30Z"
+              },
+              "placeOfPerformance": {
+                "address": {
+                  "streetAddress": "286 Victor Row Suite 161",
+                  "postalCode": "34273",
+                  "addressDetails": {
+                    "country": {
+                      "scheme": "iso-alpha2",
+                      "id": "MD",
+                      "description": "MOLDOVA",
+                      "uri": "http://reference.iatistandard.org"
+                    },
+                    "region": {
+                      "scheme": "CUATM",
+                      "id": "8000000",
+                      "description": "Străşeni",
+                      "uri": "http://statistica.md"
+                    },
+                    "locality": {
+                      "scheme": "CUATM",
+                      "id": "8017000",
+                      "description": "s.Grebleşti",
+                      "uri": "http://statistica.md"
+                    }
+                  }
+                },
+                "description": "Sort idea cut news wait Democrat its get year new these pass adult set list itself although home security value side."
+              }
+            },
+            {
+              "id": "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb",
+              "title": "Month agent middle worker activity environment forget.",
+              "description": "Season east leave forget factor serious away simply up relate fire man television head huge office management a natural lay better wide enough everything section huge I race blue walk.",
+              "status": "active",
+              "statusDetails": "empty",
+              "value": {
+                "amount": 13598220933.12,
+                "currency": "MDL"
+              },
+              "options": [
+                {
+                  "hasOptions": false
+                }
+              ],
+              "recurrentProcurement": [
+                {
+                  "isRecurrent": false
+                }
+              ],
+              "renewals": [
+                {
+                  "hasRenewals": false
+                }
+              ],
+              "variants": [
+                {
+                  "hasVariants": false
+                }
+              ],
+              "contractPeriod": {
+                "startDate": "2018-09-13T08:45:03Z",
+                "endDate": "2019-06-12T16:28:33Z"
+              },
+              "placeOfPerformance": {
+                "address": {
+                  "streetAddress": "2809 Stephen Springs Suite 112",
+                  "postalCode": "65158",
+                  "addressDetails": {
+                    "country": {
+                      "scheme": "iso-alpha2",
+                      "id": "MD",
+                      "description": "MOLDOVA",
+                      "uri": "http://reference.iatistandard.org"
+                    },
+                    "region": {
+                      "scheme": "CUATM",
+                      "id": "0501000",
+                      "description": "mun.Bender",
+                      "uri": "http://statistica.md"
+                    },
+                    "locality": {
+                      "scheme": "CUATM",
+                      "id": "0501000",
+                      "description": "mun.Bender",
+                      "uri": "http://statistica.md"
+                    }
+                  }
+                },
+                "description": "Bring movement main consumer investment ahead public sister who concern game series idea anyone thought here upon debate reason job nature account detail enter."
+              }
+            }
+          ],
+          "lotGroups": [
+            {
+              "optionToCombine": false
+            }
+          ],
+          "tenderPeriod": {
+            "startDate": "2018-09-13T08:43:53Z",
+            "endDate": "2018-09-13T08:45:02Z"
+          },
+          "enquiryPeriod": {
+            "startDate": "2018-09-13T08:43:53Z",
+            "endDate": "2018-09-13T08:44:02Z"
+          },
+          "awardPeriod": {
+            "startDate": "2018-09-13T08:45:02Z"
+          },
+          "hasEnquiries": true,
+          "enquiries": [
+            {
+              "id": "25363470-b731-11e8-81fb-31036f55e49e",
+              "date": "2018-09-13T08:43:53Z",
+              "author": {
+                "name": "Newman, Ewing and Pratt",
+                "id": "MD-IDNO-005-59-8619"
+              },
+              "title": "System production seven serious thousand quality any attorney.",
+              "description": "Record give international plant family stuff perhaps opportunity staff mention surface crime mouth later sort face nature beyond sister.",
+              "answer": "Can president task seek kid security medical style direction traditional whom meeting left culture instead meeting couple and including half remember writer notice against culture hotel at performance worry where challenge decision tend view fine to will deal physical world behavior radio sport that green full ten return skill gas region summer about sound second election lot lot develop natural visit social set.",
+              "dateAnswered": "2018-09-13T08:43:57Z"
+            }
+          ],
+          "documents": [
+            {
+              "id": "24281fd0-b731-11e8-941f-116f5508f313",
+              "documentType": "illustration",
+              "title": "Off here partner third.",
+              "description": "Source notice prevent class section wish administration ball our stop hour if top meeting raise now risk this shake cold age few build best pressure commercial true nature true fish cost international type maybe where have look.",
+              "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/24281fd0-b731-11e8-941f-116f5508f313",
+              "datePublished": "2018-09-13T08:43:53Z",
+              "language": "ro",
+              "relatedLots": [
+                "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+              ]
+            },
+            {
+              "id": "24281fd0-b731-11e8-941f-116f5508f313",
+              "documentType": "marketStudies",
+              "title": "Share democratic maintain over understand matter commercial.",
+              "description": "Necessary performance hotel surface financial strong economic something financial military none care occur positive visit law describe eight indeed easy four method budget hundred kitchen property wide rest ask once structure do give perhaps.",
+              "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/24281fd0-b731-11e8-941f-116f5508f313",
+              "datePublished": "2018-09-13T08:43:53Z",
+              "language": "ro",
+              "relatedLots": [
+                "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+              ]
+            }
+          ],
+          "awardCriteria": "priceOnly",
+          "submissionMethod": [
+            "electronicSubmission"
+          ],
+          "submissionMethodDetails": "Lista platformelor: achizitii, ebs, licitatie, yptender",
+          "submissionMethodRationale": [
+            "Ofertele vor fi primite prin intermediul unei platforme electronice de achiziții publice"
+          ],
+          "requiresElectronicCatalogue": false
+        },
+        "awards": [
+          {
+            "id": "4e19e300-b731-11e8-827d-cbc04df61117",
+            "description": "",
+            "status": "pending",
+            "statusDetails": "empty",
+            "date": "2018-09-13T08:45:02Z",
+            "value": {
+              "amount": 14357888304.59,
+              "currency": "MDL"
+            },
+            "suppliers": [
+              {
+                "name": "Day, Rocha and Cummings",
+                "id": "MD-IDNO-146-35-1273"
+              }
+            ],
+            "relatedLots": [
+              "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+            ],
+            "relatedBid": "286617a0-b731-11e8-8451-e3cbb26a1b25"
+          },
+          {
+            "id": "4e19e303-b731-11e8-827d-cbc04df61117",
+            "description": "",
+            "status": "pending",
+            "statusDetails": "consideration",
+            "date": "2018-09-13T08:45:02Z",
+            "value": {
+              "amount": 3459138750.78,
+              "currency": "MDL"
+            },
+            "suppliers": [
+              {
+                "name": "Howard Inc",
+                "id": "MD-IDNO-789-68-6871"
+              }
+            ],
+            "relatedLots": [
+              "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+            ],
+            "relatedBid": "2a99c080-b731-11e8-8451-e3cbb26a1b25"
+          },
+          {
+            "id": "4e19e301-b731-11e8-827d-cbc04df61117",
+            "description": "",
+            "status": "pending",
+            "statusDetails": "consideration",
+            "date": "2018-09-13T08:45:02Z",
+            "value": {
+              "amount": 6389423802.93,
+              "currency": "MDL"
+            },
+            "suppliers": [
+              {
+                "name": "Martin, Jensen and Castillo",
+                "id": "MD-IDNO-573-29-6765"
+              }
+            ],
+            "relatedLots": [
+              "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+            ],
+            "relatedBid": "29219f70-b731-11e8-8451-e3cbb26a1b25"
+          },
+          {
+            "id": "4e19e302-b731-11e8-827d-cbc04df61117",
+            "description": "",
+            "status": "pending",
+            "statusDetails": "empty",
+            "date": "2018-09-13T08:45:02Z",
+            "value": {
+              "amount": 4434542977.68,
+              "currency": "MDL"
+            },
+            "suppliers": [
+              {
+                "name": "Peterson, Phillips and Goodwin",
+                "id": "MD-IDNO-357-43-1072"
+              }
+            ],
+            "relatedLots": [
+              "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+            ],
+            "relatedBid": "29db5280-b731-11e8-8451-e3cbb26a1b25"
+          }
+        ],
+        "bids": {
+          "details": [
+            {
+              "id": "29db5280-b731-11e8-8451-e3cbb26a1b25",
+              "date": "2018-09-13T08:45:02Z",
+              "status": "pending",
+              "statusDetails": "empty",
+              "tenderers": [
+                {
+                  "name": "Peterson, Phillips and Goodwin",
+                  "id": "MD-IDNO-357-43-1072"
+                }
+              ],
+              "value": {
+                "amount": 4434542977.68,
+                "currency": "MDL"
+              },
+              "documents": [
+                {
+                  "id": "2955f5e0-b731-11e8-941f-116f5508f313",
+                  "documentType": "submissionDocuments",
+                  "title": "Beyond need door finally.",
+                  "description": "Fight down any whole point sit believe development use religious wait phone consider range risk participant.",
+                  "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/2955f5e0-b731-11e8-941f-116f5508f313",
+                  "datePublished": "2018-09-13T08:45:02Z",
+                  "language": "ro",
+                  "relatedLots": [
+                    "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+                  ]
+                }
+              ],
+              "relatedLots": [
+                "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+              ]
+            },
+            {
+              "id": "29219f70-b731-11e8-8451-e3cbb26a1b25",
+              "date": "2018-09-13T08:45:02Z",
+              "status": "pending",
+              "statusDetails": "empty",
+              "tenderers": [
+                {
+                  "name": "Martin, Jensen and Castillo",
+                  "id": "MD-IDNO-573-29-6765"
+                }
+              ],
+              "value": {
+                "amount": 6389423802.93,
+                "currency": "MDL"
+              },
+              "documents": [
+                {
+                  "id": "289d2d30-b731-11e8-941f-116f5508f313",
+                  "documentType": "submissionDocuments",
+                  "title": "Sometimes plan simple explain street.",
+                  "description": "Method walk necessary win gas guess all others although improve knowledge born movement player seek deal me he why perform next little recent anything experience focus who decision popular leave reflect room better test top.",
+                  "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/289d2d30-b731-11e8-941f-116f5508f313",
+                  "datePublished": "2018-09-13T08:45:02Z",
+                  "language": "ro",
+                  "relatedLots": [
+                    "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+                  ]
+                }
+              ],
+              "relatedLots": [
+                "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+              ]
+            },
+            {
+              "id": "2a99c080-b731-11e8-8451-e3cbb26a1b25",
+              "date": "2018-09-13T08:45:02Z",
+              "status": "pending",
+              "statusDetails": "empty",
+              "tenderers": [
+                {
+                  "name": "Howard Inc",
+                  "id": "MD-IDNO-789-68-6871"
+                }
+              ],
+              "value": {
+                "amount": 3459138750.78,
+                "currency": "MDL"
+              },
+              "documents": [
+                {
+                  "id": "2a14d910-b731-11e8-941f-116f5508f313",
+                  "documentType": "submissionDocuments",
+                  "title": "Skill indeed can better audience important white play.",
+                  "description": "Decision leader goal wide senior my available task major have seat knowledge threat star easy care.",
+                  "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/2a14d910-b731-11e8-941f-116f5508f313",
+                  "datePublished": "2018-09-13T08:45:02Z",
+                  "language": "ro",
+                  "relatedLots": [
+                    "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+                  ]
+                }
+              ],
+              "relatedLots": [
+                "24ba9bd5-b731-11e8-a2e0-2d39f49cc4bb"
+              ]
+            },
+            {
+              "id": "286617a0-b731-11e8-8451-e3cbb26a1b25",
+              "date": "2018-09-13T08:45:02Z",
+              "status": "pending",
+              "statusDetails": "empty",
+              "tenderers": [
+                {
+                  "name": "Day, Rocha and Cummings",
+                  "id": "MD-IDNO-146-35-1273"
+                }
+              ],
+              "value": {
+                "amount": 14357888304.59,
+                "currency": "MDL"
+              },
+              "documents": [
+                {
+                  "id": "27da7970-b731-11e8-941f-116f5508f313",
+                  "documentType": "submissionDocuments",
+                  "title": "Worker agreement medical garden.",
+                  "description": "Into factor real risk instead might save bank sense tough account civil report enter use data.",
+                  "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/27da7970-b731-11e8-941f-116f5508f313",
+                  "datePublished": "2018-09-13T08:45:02Z",
+                  "language": "ro",
+                  "relatedLots": [
+                    "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+                  ]
+                }
+              ],
+              "relatedLots": [
+                "24ba9bd4-b731-11e8-a2e0-2d39f49cc4bb"
+              ]
+            }
+          ]
+        },
+        "hasPreviousNotice": false,
+        "purposeOfNotice": {
+          "isACallForCompetition": true
+        },
+        "relatedProcesses": [
+          {
+            "id": "24c4adf4-b731-11e8-b044-6357742a90cb",
+            "relationship": [
+              "parent"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1536828233229",
+            "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1536828233229/ocds-t1s2t3-MD-1536828233229"
+          }
+        ]
+      }
+    }
+  ],
+  "actualReleases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1536828233229-EV-1536828233295",
+      "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1536828233229/ocds-t1s2t3-MD-1536828233229-EV-1536828233295"
+    }
+  ]
+}

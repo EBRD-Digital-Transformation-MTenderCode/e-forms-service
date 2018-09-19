@@ -1,0 +1,2097 @@
+{# @pebvariable name="context" type="com.procurement.formsservice.model.fs.FSCreateContext" #}
+{# @pebvariable name="additionalIdentifier" type="com.procurement.formsservice.model.fs.FSCreateContext.Buyer.AdditionalIdentifier" #}
+{
+{% import "../macros/translate" %}
+{% import "../macros/commaIf" %}
+{% import "../macros/attributeIf" %}
+  "schema": {
+    "title": "{{ translate("fs", "title") }}",
+    "type": "object",
+    "properties": {
+      "fsParent": {
+        "title": "{{ translate("fs", "fsParent.title") }}",
+        "description": "{{ translate("fs", "fsParent.description") }}",
+        "type": "object",
+        "properties": {
+          "eiOCID": {
+            "title": "{{ translate("fs", "fsParent.eiOCID.title") }}",
+            "type": "string",
+            "readOnly": true
+          },
+          "eiTitle": {
+            "title": "{{ translate("fs", "fsParent.eiTitle.title") }}",
+            "type": "string",
+            "readOnly": true
+          },
+          "eiDescription": {
+            "title": "{{ translate("fs", "fsParent.eiDescription.title") }}",
+            "type": "string",
+            "readOnly": true
+          },
+          "eiBudgetPeriod": {
+            "title": "{{ translate("fs", "fsParent.eiBudgetPeriod.title") }}",
+            "type": "object",
+            "properties": {
+              "startDate": {
+                "title": "{{ translate("fs", "fsParent.eiBudgetPeriod.startDate.title") }}",
+                "type": "string",
+                "readOnly": true
+              },
+              "endDate": {
+                "title": "{{ translate("fs", "fsParent.eiBudgetPeriod.endDate.title") }}",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          },
+          "eiClassification": {
+            "title": "{{ translate("fs", "fsParent.eiClassification.title") }}",
+            "type": "object",
+            "properties": {
+              "scheme": {
+                "title": "{{ translate("fs", "fsParent.eiClassification.scheme.title") }}",
+                "type": "string",
+                "readOnly": true
+              },
+              "id": {
+                "title": "{{ translate("fs", "fsParent.eiClassification.id.title") }}",
+                "type": "string",
+                "readOnly": true
+              },
+              "description": {
+                "title": "{{ translate("fs", "fsParent.eiClassification.description.title") }}",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      },
+      "fsFunding": {
+        "title": "{{ translate("fs", "fsFunding.title") }}",
+        "type": "object",
+        "properties": {
+          {% if context.parameters.funder == "BUYER" %}
+            "fsFunder": {
+              "title": "{{ translate("fs", "fsFunding.fsFunder.buyer.title") }}",
+              "description": "{{ translate("fs", "fsFunding.fsFunder.buyer.description") }}",
+              "type": "object",
+              "properties": {
+                "buyer": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("fs", "fsFunding.name.title") }}",
+                      "type": "string",
+                      "readOnly": true,
+                      "ocds": "buyer::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("fs", "fsFunding.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("fs", "fsFunding.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.country.title") }}",
+                              "type": "object",
+                              "source": "{{ context.funder.uris.country }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "buyer::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "buyer::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.region.title") }}",
+                              "type": "object",
+                              "source": "{{ context.funder.uris.region }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "buyer::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "buyer::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("fs", "fsFunding.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                  ],
+                                  "readOnly": true
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "source": "{{ context.funder.uris.locality }}",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "readOnly": true,
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "readOnly": true,
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "readOnly": true,
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("fs", "fsFunding.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("fs", "fsFunding.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.scheme.title") }}",
+                          "type": "string",
+                          "source": "{{ context.funder.uris.registrationScheme }}",
+                          "readOnly": true,
+                          "ocds": "buyer::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.id.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "buyer::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.legalName.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "buyer::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.uri.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "buyer::object/identifier::object/uri::string"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "source": "{{ context.funder.uris.registrationScheme }}",
+                            "readOnly": true,
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("fs", "fsFunding.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "person": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "url"
+                          ],
+                          "properties": {
+                            "name": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.name.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/contactPoint::object/name::string"
+                            },
+                            "url": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.url.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/contactPoint::object/url::string"
+                            }
+                          }
+                        },
+                        "contacts": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.title") }}",
+                          "type": "object",
+                          "required": [
+                            "telephone",
+                            "email"
+                          ],
+                          "properties": {
+                            "telephone": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.telephone.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/contactPoint::object/telephone::string"
+                            },
+                            "email": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.email.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/contactPoint::object/email::string"
+                            },
+                            "faxNumber": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.faxNumber.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "buyer::object/contactPoint::object/faxNumber::string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+          {% elseif context.parameters.funder == "STATE" %}
+          {% elseif context.parameters.funder == "DONOR" %}
+            "fsFunder": {
+              "title": "{{ translate("fs", "fsFunding.fsFunder.donor.title") }}",
+              "description": "{{ translate("fs", "fsFunding.fsFunder.donor.description") }}",
+              "type": "object",
+              "properties": {
+                "donor": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("fs", "fsFunding.name.title") }}",
+                      "type": "string",
+                      "ocds": "buyer::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("fs", "fsFunding.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("fs", "fsFunding.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.country.title") }}",
+                              "type": "object",
+                              "source": "{{ context.funder.uris.country }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "ocds": "buyer::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "ocds": "buyer::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.region.title") }}",
+                              "type": "object",
+                              "source": "{{ context.funder.uris.region }}",
+                              "dependentFields": {
+                                "country": "fsFunding.fsFunder.donor.address.location.country.id"
+                              },
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "ocds": "buyer::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "ocds": "buyer::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("fs", "fsFunding.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                  ]
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]")}}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "source": "{{ context.funder.uris.locality }}",
+                                              "dependentFields": {
+                                                "country": "fsFunding.fsFunder.donor.address.location.country.id",
+                                                "region": "fsFunding.fsFunder.donor.address.location.region.id"
+                                              },
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "ocds": "buyer::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("fs", "fsFunding.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("fs", "fsFunding.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.scheme.title") }}",
+                          "type": "string",
+                          "source": "{{ context.funder.uris.registrationScheme }}",
+                          "dependentFields": {
+                            "country": "fsFunding.fsFunder.donor.address.location.country.id"
+                          },
+                          "ocds": "buyer::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.id.title") }}",
+                          "type": "string",
+                          "ocds": "buyer::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.legalName.title") }}",
+                          "type": "string",
+                          "ocds": "buyer::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.uri.title") }}",
+                          "type": "string",
+                          "ocds": "buyer::object/identifier::object/uri::string"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "source": "{{ context.funder.uris.registrationScheme }}",
+                            "dependentFields": {
+                              "country": "fsFunding.fsFunder.donor.address.location.country.id"
+                            },
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "ocds": "buyer::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("fs", "fsFunding.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "person": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "url"
+                          ],
+                          "properties": {
+                            "name": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.name.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/contactPoint::object/name::string"
+                            },
+                            "url": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.url.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/contactPoint::object/url::string"
+                            }
+                          }
+                        },
+                        "contacts": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.title") }}",
+                          "type": "object",
+                          "required": [
+                            "telephone",
+                            "email"
+                          ],
+                          "properties": {
+                            "telephone": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.telephone.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/contactPoint::object/telephone::string"
+                            },
+                            "email": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.email.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/contactPoint::object/email::string"
+                            },
+                            "faxNumber": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.faxNumber.title") }}",
+                              "type": "string",
+                              "ocds": "buyer::object/contactPoint::object/faxNumber::string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+          {% endif %}
+          {% if context.parameters.payer == "BUYER" %}
+            "fsPayer": {
+              "title": "{{ translate("fs", "fsFunding.fsPayer.buyer.title") }}",
+              "description": "{{ translate("fs", "fsFunding.fsPayer.buyer.description") }}",
+              "type": "object",
+              "properties": {
+                "buyer": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("fs", "fsFunding.name.title") }}",
+                      "type": "string",
+                      "readOnly": true,
+                      "ocds": "tender::object/procuringEntity::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("fs", "fsFunding.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("fs", "fsFunding.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.country.title") }}",
+                              "type": "object",
+                              "source": "{{ context.payer.uris.country}}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.region.title") }}",
+                              "type": "object",
+                              "source": "{{ context.payer.uris.region }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("fs", "fsFunding.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                  ],
+                                  "readOnly": true
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "source": "{{ context.payer.uris.locality }}",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("fs", "fsFunding.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("fs", "fsFunding.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.scheme.title") }}",
+                          "type": "string",
+                          "source": "{{ context.payer.uris.registrationScheme }}",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.id.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.legalName.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.uri.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/uri"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "source": "{{ context.payer.uris.registrationScheme }}",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("fs", "fsFunding.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "person": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "url"
+                          ],
+                          "properties": {
+                            "name": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.name.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                            },
+                            "url": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.url.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                            }
+                          }
+                        },
+                        "contacts": {
+                          "title": "{{  translate("fs", "fsFunding.contactPoint.contacts.title") }}",
+                          "type": "object",
+                          "required": [
+                            "telephone",
+                            "email"
+                          ],
+                          "properties": {
+                            "telephone": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.telephone.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                            },
+                            "email": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.email.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                            },
+                            "faxNumber": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.faxNumber.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          {% elseif context.parameters.payer == "THIRDPARTY" %}
+            "fsPayer": {
+              "title": "{{ translate("fs", "fsFunding.fsPayer.thirdParty.title") }}",
+              "description": "{{ translate("fs", "fsFunding.fsPayer.thirdParty.description") }}",
+              "type": "object",
+              "properties": {
+                "thirdParty": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("fs", "fsFunding.name.title") }}",
+                      "type": "string",
+                      "ocds": "tender::object/procuringEntity::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("fs", "fsFunding.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("fs", "fsFunding.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.country.title") }}",
+                              "type": "object",
+                              "source": "{{ context.payer.uris.country }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.region.title") }}",
+                              "type": "object",
+                              "source": "{{ context.payer.uris.region }}",
+                              "dependentFields": {
+                                "country": "fsFunding.fsPayer.thirdParty.address.location.country.id"
+                              },
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("fs", "fsFunding.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                  ]
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "source": "{{ context.payer.uris.locality }}",
+                                              "dependentFields": {
+                                                "country": "fsFunding.fsPayer.thirdParty.address.location.country.id",
+                                                "region": "fsFunding.fsPayer.thirdParty.address.location.region.id"
+                                              },
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("fs", "fsFunding.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("fs", "fsFunding.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.scheme.title") }}",
+                          "type": "string",
+                          "source": "{{ context.payer.uris.registrationScheme }}",
+                          "dependentFields": {
+                            "country": "fsFunding.fsPayer.thirdParty.address.location.country.id"
+                          },
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.id.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.legalName.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.uri.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/uri"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "source": "{{ context.payer.uris.registrationScheme }}",
+                            "dependentFields": {
+                              "country": "fsFunding.fsPayer.thirdParty.address.location.country.id"
+                            },
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("fs", "fsFunding.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "person": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "url"
+                          ],
+                          "properties": {
+                            "name": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.name.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                            },
+                            "url": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.url.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                            }
+                          }
+                        },
+                        "contacts": {
+                          "title": "{{  translate("fs", "fsFunding.contactPoint.contacts.title") }}",
+                          "type": "object",
+                          "required": [
+                            "telephone",
+                            "email"
+                          ],
+                          "properties": {
+                            "telephone": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.telephone.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                            },
+                            "email": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.email.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                            },
+                            "faxNumber": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.faxNumber.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          {% elseif context.parameters.payer == "FUNDER" %}
+            "fsPayer": {
+              "title": "{{ translate("fs", "fsFunding.fsPayer.funder.title") }}",
+              "description": "{{ translate("fs", "fsFunding.fsPayer.funder.description") }}",
+              "type": "object",
+              "properties": {
+                "funder": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("fs", "fsFunding.name.title") }}",
+                      "type": "string",
+                      "readOnly": true,
+                      "ocds": "tender::object/procuringEntity::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("fs", "fsFunding.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("fs", "fsFunding.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.country.title") }}",
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("fs", "fsFunding.address.location.region.title") }}",
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("fs", "fsFunding.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                  ],
+                                  "readOnly": true
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("fs", "fsFunding.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("fs", "fsFunding.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("fs", "fsFunding.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("fs", "fsFunding.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.scheme.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.id.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.legalName.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("fs", "fsFunding.identifier.uri.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/uri"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("fs", "fsFunding.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("fs", "fsFunding.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "person": {
+                          "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "url"
+                          ],
+                          "properties": {
+                            "name": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.name.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                            },
+                            "url": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.person.url.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                            }
+                          }
+                        },
+                        "contacts": {
+                          "title": "{{  translate("fs", "fsFunding.contactPoint.contacts.title") }}",
+                          "type": "object",
+                          "required": [
+                            "telephone",
+                            "email"
+                          ],
+                          "properties": {
+                            "telephone": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.telephone.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                            },
+                            "email": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.email.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                            },
+                            "faxNumber": {
+                              "title": "{{ translate("fs", "fsFunding.contactPoint.contacts.faxNumber.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          {% endif %}
+        }
+      },
+      "fsBudget": {
+        "title": "{{ translate("fs", "fsBudget.title") }}",
+        "type": "object",
+        "properties": {
+          "rationale": {
+            "title": "{{ translate("fs", "fsBudget.rationale.title") }}",
+            "type": "string",
+            "ocds": "planning::object/rationale::string"
+          },
+          "budgetDetails": {
+            "title": "{{ translate("fs", "fsBudget.budgetDetails.title") }}",
+            "type": "object",
+            "properties": {
+              "description": {
+                "title": "{{ translate("fs", "fsBudget.budgetDetails.description.title") }}",
+                "description": "{{ translate("fs", "fsBudget.budgetDetails.description.description") }}",
+                "type": "string",
+                "ocds": "planning::object/budget::object/description::string"
+              },
+              "id": {
+                "title": "{{ translate("fs", "fsBudget.budgetDetails.id.title") }}",
+                "description": "{{ translate("fs", "fsBudget.budgetDetails.id.description") }}",
+                "type": "string",
+                "ocds": "planning::object/budget::object/id::string"
+              }
+            }
+          },
+          "budgetAmount": {
+            "title": "{{ translate("fs", "fsBudget.budgetAmount.title") }}",
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "title": "{{ translate("fs", "fsBudget.budgetAmount.amount.title") }}",
+                "type": "number",
+                "ocds": "planning::object/budget::object/amount::object/amount::number"
+              },
+              "currency": {
+                "title": "{{ translate("fs", "fsBudget.budgetAmount.currency.title") }}",
+                "type": "string",
+                "source": "{{ context.uris.currency }}",
+                {% if context.budget.amount is not null %}
+                  "readOnly": true,
+                {% endif %}
+                "ocds": "planning::object/budget::object/amount::object/currency::string"
+              }
+            }
+          },
+          "budgetPeriod": {
+            "title": "{{ translate("fs", "fsBudget.budgetPeriod.title") }}",
+            "type": "object",
+            "required": [
+              "startDate",
+              "endDate"
+            ],
+            "properties": {
+              "startDate": {
+                "title": "{{ translate("fs", "fsBudget.budgetPeriod.startDate.title") }}",
+                "type": "string",
+                "ocds": "planning::object/budget::object/period::object/startDate::string"
+              },
+              "endDate": {
+                "title": "{{ translate("fs", "fsBudget.budgetPeriod.endDate.title") }}",
+                "type": "string",
+                "ocds": "planning::object/budget::object/period::object/endDate::string"
+              }
+            }
+          },
+          "budgetProject": {
+            "title": "{{ translate("fs", "fsBudget.budgetProject.title") }}",
+            "type": "object",
+            "properties": {
+              "projectDetails": {
+                "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.title") }}",
+                "type": "object",
+                "properties": {
+                  "project": {
+                    "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.project.title") }}",
+                    "type": "string",
+                    "ocds": "planning::object/budget::object/project::string"
+                  },
+                  "projectID": {
+                    "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.projectID.title") }}",
+                    "type": "string",
+                    "ocds": "planning::object/budget::object/projectID::string"
+                  },
+                  "uri": {
+                    "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.uri.title") }}",
+                    "type": "string",
+                    "ocds": "planning::object/budget::object/uri::string"
+                  },
+                  "EUfunded": {
+                    "type": "object",
+                    "required": [
+                      "isEUfunded"
+                      {% if context.parameters.europeanUnionFunded == true %}
+                        ,
+                        "projectIdentifier",
+                        "projectName"
+                      {% endif %}
+                    ],
+                    "properties": {
+                      "isEUfunded": {
+                        "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.isEUfunded.title") }}",
+                        "type": "boolean",
+                        "enum": [
+                          true,
+                          false
+                        ],
+                        "enumNames": [
+                          "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.isEUfunded.enumNames[0]") }}",
+                          "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.isEUfunded.enumNames[1]") }}"
+                        ],
+                        "enumDesc": [
+                          "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.isEUfunded.enumDesc[0]") }}",
+                          "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.isEUfunded.enumDesc[1]") }}"
+                        ],
+                        "readOnly": true,
+                        "ocds": "planning::object/budget::object/isEuropeanUnionFunded::boolean"
+                      }
+                      {% if context.parameters.europeanUnionFunded == true %}
+                        ,
+                        "projectIdentifier": {
+                          "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectIdentifier.title") }}",
+                          "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectIdentifier.title") }}",
+                          "type": "string",
+                          "ocds": "planning::object/budget::object/europeanUnionFunding::object/projectIdentifier::string"
+                        },
+                        "projectName": {
+                          "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectName.title") }}",
+                          "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectName.title") }}",
+                          "type": "string",
+                          "ocds": "planning::object/budget::object/europeanUnionFunding::object/projectName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.uri.title") }}",
+                          "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.uri.title") }}",
+                          "type": "string",
+                          "ocds": "planning::object/budget::object/europeanUnionFunding::object/uri::string"
+                        }
+                      {% endif %}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": {
+    "fsParent": {
+      "eiOCID": "{{ context.ei.ocid }}",
+      "eiTitle": "{{ context.ei.title }}"
+      {{ commaIf(context.ei.description) }}
+      {{ stringAttributeIf(name = "eiDescription", value = context.ei.description) }},
+      "eiBudgetPeriod": {
+        "startDate": "{{ context.ei.budgetPeriod.startDate }}",
+        "endDate": "{{ context.ei.budgetPeriod.endDate }}"
+      },
+      "eiClassification": {
+        "scheme": "{{ context.ei.classification.scheme }}",
+        "id": "{{ context.ei.classification.id }}",
+        "description": "{{ context.ei.classification.description }}"
+      }
+    },
+    {% if context.parameters.funder == "BUYER" or context.parameters.payer == "BUYER" %}
+      "fsFunding": {
+        {% if context.parameters.funder == "BUYER" %}
+          "fsFunder": {
+            "buyer": {
+              "name": "{{ context.buyer.name }}",
+              "address": {
+                "location": {
+                  "country": {
+                    "id": "{{ context.buyer.address.country.id }}",
+                    "description": "{{ context.buyer.address.country.description }}"
+                  },
+                  "region": {
+                    "id": "{{ context.buyer.address.region.id }}",
+                    "description": "{{ context.buyer.address.region.description }}"
+                  },
+                  "locality": {
+                    {% if context.buyer.address.locality.scheme == "CUATM" %}
+                      "localityType": "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                      "directory": {
+                        "locality": {
+                          "scheme": "{{ context.buyer.address.locality.scheme }}",
+                          "id": "{{ context.buyer.address.locality.id }}",
+                          "description": "{{ context.buyer.address.locality.description }}"
+                        }
+                      }
+                    {% else %}
+                      "localityType": "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}",
+                      "manual": {
+                        "locality": {
+                          "scheme": "{{ context.buyer.address.locality.scheme }}",
+                          "id": "{{ context.buyer.address.locality.id }}",
+                          "description": "{{ context.buyer.address.locality.description }}"
+                        }
+                      }
+                    {% endif %}
+                  }
+                },
+                "postalAddress": {
+                  "streetAddress": "{{ context.buyer.address.streetAddress }}"
+                  {{ commaIf(context.buyer.address.postalCode) }}
+                  {{ stringAttributeIf(name = "postalCode", value = context.buyer.address.postalCode) }}
+                }
+              },
+              "identifier": {
+                "scheme": "{{ context.buyer.identifier.scheme }}",
+                "id": "{{ context.buyer.identifier.id }}",
+                "legalName": "{{ context.buyer.identifier.legalName }}"
+                {{ commaIf(context.buyer.identifier.uri) }}
+                {{ stringAttributeIf(name = "uri", value = context.buyer.identifier.uri) }}
+              },
+              {% if context.buyer.additionalIdentifiers != null %}
+                "additionalIdentifiers": [
+                  {% for additionalIdentifier in context.buyer.additionalIdentifiers %}
+                    {% if loop.index  > 0 %},{% endif %}
+                    {
+                      "scheme": "{{ additionalIdentifier.scheme }}",
+                      "id": "{{ additionalIdentifier.id }}",
+                      "legalName": "{{ additionalIdentifier.legalName }}"
+                      {{ commaIf(additionalIdentifier.uri) }}
+                      {{ stringAttributeIf(name = "uri", value = additionalIdentifier.uri) }}
+                    }
+                  {% endfor %}
+                ],
+              {% endif %}
+              "contactPoint": {
+                "person": {
+                  "name": "{{ context.buyer.contactPoint.name }}",
+                  "url": "{{ context.buyer.contactPoint.url }}"
+                },
+                "contacts": {
+                  "telephone": "{{ context.buyer.contactPoint.telephone }}",
+                  "email": "{{ context.buyer.contactPoint.email }}"
+                  {{ commaIf(context.buyer.contactPoint.faxNumber) }}
+                  {{ stringAttributeIf(name = "faxNumber", value = context.buyer.contactPoint.faxNumber) }}
+                }
+              }
+            }
+          }
+        {% endif %}
+        {% if context.parameters.funder == "BUYER" and context.parameters.payer == "BUYER" %},{% endif %}
+        {% if context.parameters.payer == "BUYER" %}
+          "fsPayer": {
+            "buyer": {
+              "name": "{{ context.buyer.name }}",
+              "address": {
+                "location": {
+                  "country": {
+                    "id": "{{ context.buyer.address.country.id }}",
+                    "description": "{{ context.buyer.address.country.description }}"
+                  },
+                  "region": {
+                    "id": "{{ context.buyer.address.region.id }}",
+                    "description": "{{ context.buyer.address.region.description }}"
+                  },
+                  "locality": {
+                    {% if context.buyer.address.locality.scheme == "CUATM" %}
+                      "localityType": "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[0]") }}",
+                      "directory": {
+                        "locality": {
+                          "scheme": "{{ context.buyer.address.locality.scheme }}",
+                          "id": "{{ context.buyer.address.locality.id }}",
+                          "description": "{{ context.buyer.address.locality.description }}"
+                        }
+                      }
+                    {% else %}
+                      "localityType": "{{ translate("fs", "fsFunding.address.location.locality.localityType.enum[1]") }}",
+                      "manual": {
+                        "locality": {
+                          "scheme": "{{ context.buyer.address.locality.scheme }}",
+                          "id": "{{ context.buyer.address.locality.id }}",
+                          "description": "{{ context.buyer.address.locality.description }}"
+                        }
+                      }
+                    {% endif %}
+                  }
+                },
+                "postalAddress": {
+                  "streetAddress": "{{ context.buyer.address.streetAddress }}"
+                  {{ commaIf(context.buyer.address.postalCode) }}
+                  {{ stringAttributeIf(name = "postalCode", value = context.buyer.address.postalCode) }}
+                }
+              },
+              "identifier": {
+                "scheme": "{{ context.buyer.identifier.scheme }}",
+                "id": "{{ context.buyer.identifier.id }}",
+                "legalName": "{{ context.buyer.identifier.legalName }}"
+                {{ commaIf(context.buyer.identifier.uri) }}
+                {{ stringAttributeIf(name = "uri", value = context.buyer.identifier.uri) }}
+              },
+              {% if context.buyer.additionalIdentifiers != null %}
+                "additionalIdentifiers": [
+                  {% for additionalIdentifier in context.buyer.additionalIdentifiers %}
+                    {% if loop.index  > 0 %},{% endif %}
+                    {
+                      "scheme": "{{ additionalIdentifier.scheme }}",
+                      "id": "{{ additionalIdentifier.id }}",
+                      "legalName": "{{ additionalIdentifier.legalName }}"
+                      {{ commaIf(additionalIdentifier.uri) }}
+                      {{ stringAttributeIf(name = "uri", value = additionalIdentifier.uri) }}
+                    }
+                  {% endfor %}
+                ],
+              {% endif %}
+              "contactPoint": {
+                "person": {
+                  "name": "{{ context.buyer.contactPoint.name }}",
+                  "url": "{{ context.buyer.contactPoint.url }}"
+                },
+                "contacts": {
+                  "telephone": "{{ context.buyer.contactPoint.telephone }}",
+                  "email": "{{ context.buyer.contactPoint.email }}"
+                  {{ commaIf(context.buyer.contactPoint.faxNumber) }}
+                  {{ stringAttributeIf(name = "faxNumber", value = context.buyer.contactPoint.faxNumber) }}
+                }
+              }
+            }
+          }
+        {% endif %}
+      },
+    {% endif %}
+    "fsBudget": {
+      {% if context.budget.amount is not null %}
+        "budgetAmount": {
+          "currency": "{{ context.budget.amount.currency }}"
+        },
+      {% endif %}
+      "budgetProject": {
+        "projectDetails": {
+          "EUfunded": {
+            "isEUfunded": {{ context.parameters.europeanUnionFunded }}
+          }
+        }
+      }
+    }
+  }
+}

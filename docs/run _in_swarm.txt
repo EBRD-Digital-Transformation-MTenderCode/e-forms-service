@@ -10,7 +10,7 @@ docker network create \
 
 
 #****************************************#
-# Run FORMS                               #
+# Run FORMS                              #
 # Need assign uri, username and password #
 #****************************************#
 
@@ -22,4 +22,4 @@ docker service create --name="forms-1" \
   --network ocds-network \
   --dns 10.0.10.115 \
   --with-registry-auth \
-  docker-registry.eprocurement.systems/e-forms:18.06.1
+  dev.docker-registry.eprocurement.systems/e-forms:18.06.1

@@ -1,0 +1,118 @@
+{
+  "uri": "http://public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534855472865/ocds-t1s2t3-MD-1534855472865-FS-1534855527341",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-08-21T12:45:27Z",
+  "releases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1534855472865-FS-1534855527341",
+      "id": "ocds-t1s2t3-MD-1534855472865-FS-1534855527341-1534855527380",
+      "date": "2018-08-21T12:45:27Z",
+      "tag": [
+        "planning"
+      ],
+      "initiationType": "tender",
+      "language": "ro",
+      "tender": {
+        "id": "ocds-t1s2t3-MD-1534855472865-FS-1534855527341",
+        "status": "active",
+        "statusDetails": "empty"
+      },
+      "parties": [
+        {
+          "id": "MD-IDNO-1",
+          "name": "1",
+          "identifier": {
+            "scheme": "MD-IDNO",
+            "id": "1",
+            "legalName": "1",
+            "uri": "1"
+          },
+          "additionalIdentifiers": [
+            {
+              "scheme": "MD-IDNO",
+              "id": "12",
+              "legalName": "21",
+              "uri": "12"
+            }
+          ],
+          "address": {
+            "streetAddress": "1",
+            "postalCode": "1",
+            "addressDetails": {
+              "country": {
+                "scheme": "iso-alpha2",
+                "id": "MD",
+                "description": "MOLDOVA",
+                "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+              },
+              "region": {
+                "scheme": "CUATM",
+                "id": "3400000",
+                "description": "Donduşeni",
+                "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+              },
+              "locality": {
+                "scheme": "CUATM",
+                "id": "3420000",
+                "description": "s.Moşana"
+              }
+            }
+          },
+          "contactPoint": {
+            "name": "12",
+            "email": "12",
+            "telephone": "2112",
+            "url": "1212"
+          },
+          "roles": [
+            "payer",
+            "funder"
+          ]
+        }
+      ],
+      "planning": {
+        "budget": {
+          "id": "44",
+          "description": "4",
+          "period": {
+            "startDate": "2018-08-13T21:00:00Z",
+            "endDate": "2018-08-21T21:00:00Z"
+          },
+          "amount": {
+            "amount": 40000,
+            "currency": "MDL"
+          },
+          "isEuropeanUnionFunded": false,
+          "verified": true,
+          "sourceEntity": {
+            "name": "1",
+            "id": "MD-IDNO-1"
+          }
+        }
+      },
+      "relatedProcesses": [
+        {
+          "id": "146a4940-a540-11e8-b6f3-214d15b990b2",
+          "relationship": [
+            "parent"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-t1s2t3-MD-1534855472865",
+          "uri": "http://public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534855472865/ocds-t1s2t3-MD-1534855472865"
+        }
+      ]
+    }
+  ]
+}

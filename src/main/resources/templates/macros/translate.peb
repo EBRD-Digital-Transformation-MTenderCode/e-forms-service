@@ -1,0 +1,3 @@
+{% macro translate(form, key) %}
+{{ i18n("i18n/" + form + "/messages", key) }}
+{% endmacro %}

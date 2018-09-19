@@ -1,0 +1,662 @@
+{
+  "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1534850358592",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-08-21T11:19:18Z",
+  "packages": [
+    "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1534850358592/ocds-t1s2t3-MD-1534850358592",
+    "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1534850358592/ocds-t1s2t3-MD-1534850358592-EV-1534850358927"
+  ],
+  "records": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1534850358592",
+      "compiledRelease": {
+        "ocid": "ocds-t1s2t3-MD-1534850358592",
+        "id": "ocds-t1s2t3-MD-1534850358592-1534850358926",
+        "date": "2018-08-21T11:19:18Z",
+        "tag": [
+          "compiled"
+        ],
+        "initiationType": "tender",
+        "language": "ro",
+        "planning": {
+          "budget": {
+            "amount": {
+              "amount": 1700,
+              "currency": "MDL"
+            },
+            "isEuropeanUnionFunded": false,
+            "budgetBreakdown": [
+              {
+                "id": "ocds-t1s2t3-MD-1534845582864-FS-1534846045276",
+                "description": "Hello world!",
+                "amount": {
+                  "amount": 900,
+                  "currency": "MDL"
+                },
+                "period": {
+                  "startDate": "2018-05-25T22:00:00Z",
+                  "endDate": "2018-12-27T21:00:00Z"
+                },
+                "sourceParty": {
+                  "name": "Edward-Company2",
+                  "id": "MD-IDNO-Enotis"
+                }
+              },
+              {
+                "id": "ocds-t1s2t3-MD-1534845582864-FS-1534846108019",
+                "description": "Hello world!",
+                "amount": {
+                  "amount": 800,
+                  "currency": "MDL"
+                },
+                "period": {
+                  "startDate": "2018-05-25T22:00:00Z",
+                  "endDate": "2018-12-27T21:00:00Z"
+                },
+                "sourceParty": {
+                  "name": "Edward-Company2",
+                  "id": "MD-IDNO-Enotis"
+                }
+              }
+            ]
+          }
+        },
+        "tender": {
+          "id": "ocds-t1s2t3-MD-1534850358592",
+          "title": "gav",
+          "description": "gav gav",
+          "status": "active",
+          "statusDetails": "evaluation",
+          "value": {
+            "amount": 900,
+            "currency": "MDL"
+          },
+          "procurementMethod": "open",
+          "procurementMethodDetails": "test",
+          "mainProcurementCategory": "goods",
+          "hasEnquiries": false,
+          "eligibilityCriteria": "eligibilityCriteria",
+          "contractPeriod": {
+            "startDate": "2018-11-19T14:45:00Z",
+            "endDate": "2018-12-25T14:45:00Z"
+          },
+          "procuringEntity": {
+            "name": "Edward_UPDATE",
+            "id": "MD-IDNO-66666666"
+          },
+          "acceleratedProcedure": {
+            "isAcceleratedProcedure": false
+          },
+          "classification": {
+            "scheme": "CPV",
+            "id": "30199200-2",
+            "description": "Plicuri, cărţi poştale şi cărţi poştale neilustrate"
+          },
+          "designContest": {
+            "serviceContractAward": false
+          },
+          "electronicWorkflows": {
+            "useOrdering": false,
+            "usePayment": false,
+            "acceptInvoicing": false
+          },
+          "jointProcurement": {
+            "isJointProcurement": false
+          },
+          "legalBasis": "DIRECTIVE_2014_24_EU",
+          "procedureOutsourcing": {
+            "procedureOutsourced": false
+          },
+          "procurementMethodAdditionalInfo": "fsdfsdf",
+          "dynamicPurchasingSystem": {
+            "hasDynamicPurchasingSystem": false
+          },
+          "framework": {
+            "isAFramework": false
+          }
+        },
+        "parties": [
+          {
+            "id": "MD-IDNO-66666666",
+            "name": "Edward_UPDATE",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "66666666",
+              "legalName": "6666",
+              "uri": "6666"
+            },
+            "address": {
+              "streetAddress": "66666666",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "1000000",
+                  "description": "Anenii Noi",
+                  "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "1001000",
+                  "description": "or.Anenii Noi",
+                  "uri": "enotis"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "6666",
+              "email": "6666",
+              "telephone": "66666666",
+              "faxNumber": "66666",
+              "url": "666666"
+            },
+            "roles": [
+              "procuringEntity"
+            ]
+          },
+          {
+            "id": "MD-IDNO-Enotis",
+            "name": "Edward-Company",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "Enotis",
+              "legalName": "legalName",
+              "uri": "uri"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "scheme",
+                "id": "id",
+                "legalName": "legalName2",
+                "uri": "uri2"
+              }
+            ],
+            "address": {
+              "streetAddress": "",
+              "postalCode": "",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "1000000",
+                  "description": "Anenii Noi",
+                  "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "1001000",
+                  "description": "or.Anenii Noi",
+                  "uri": "enotis"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "name",
+              "email": "email",
+              "telephone": "telephone",
+              "faxNumber": "fax",
+              "url": "uri3"
+            },
+            "roles": [
+              "payer",
+              "funder"
+            ]
+          },
+          {
+            "id": "MD-IDNO-354-37-1072",
+            "name": "Burns-Davis",
+            "identifier": {
+              "scheme": "MD-IDNO",
+              "id": "354-37-1072",
+              "legalName": "Burns-Davis PLC",
+              "uri": "http://edwards.net/"
+            },
+            "additionalIdentifiers": [
+              {
+                "scheme": "MD-IDNO",
+                "id": "713-49-7544",
+                "legalName": "Burns-Davis PLC",
+                "uri": "http://baker.com/posts/about.asp"
+              }
+            ],
+            "address": {
+              "streetAddress": "232323",
+              "postalCode": "424422",
+              "addressDetails": {
+                "country": {
+                  "scheme": "iso-alpha2",
+                  "id": "MD",
+                  "description": "MOLDOVA",
+                  "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+                },
+                "region": {
+                  "scheme": "CUATM",
+                  "id": "1000000",
+                  "description": "Anenii Noi",
+                  "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+                },
+                "locality": {
+                  "scheme": "CUATM",
+                  "id": "1001000",
+                  "description": "or.Anenii Noi",
+                  "uri": "enotis"
+                }
+              }
+            },
+            "contactPoint": {
+              "name": "Jacqueline Soto",
+              "email": "tiffanygutierrez@yahoo.com",
+              "telephone": "724-095-3938x237",
+              "faxNumber": "897-612-1545",
+              "url": "http://hudson.biz/explore/list/category/"
+            },
+            "roles": [
+              "buyer"
+            ],
+            "details": {
+              "typeOfBuyer": "MINISTRY",
+              "mainGeneralActivity": "HEALTH",
+              "mainSectoralActivity": "WATER"
+            },
+            "buyerProfile": "http://ray.com/"
+          }
+        ],
+        "relatedProcesses": [
+          {
+            "id": "0bc6f1f2-a534-11e8-83f2-7dea1fe99790",
+            "relationship": [
+              "x_budget"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1534845582864-FS-1534846045276",
+            "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534845582864/ocds-t1s2t3-MD-1534845582864-FS-1534846045276"
+          },
+          {
+            "id": "0bc6f1f3-a534-11e8-83f2-7dea1fe99790",
+            "relationship": [
+              "x_budget"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1534845582864-FS-1534846108019",
+            "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534845582864/ocds-t1s2t3-MD-1534845582864-FS-1534846108019"
+          },
+          {
+            "id": "0bc6f1f1-a534-11e8-83f2-7dea1fe99790",
+            "relationship": [
+              "x_expenditureItem"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1534845582864",
+            "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534845582864/ocds-t1s2t3-MD-1534845582864"
+          },
+          {
+            "id": "0bc6f1f0-a534-11e8-83f2-7dea1fe99790",
+            "relationship": [
+              "x_evaluation"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1534850358592-EV-1534850358927",
+            "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1534850358592/ocds-t1s2t3-MD-1534850358592-EV-1534850358927"
+          }
+        ]
+      }
+    },
+    {
+      "ocid": "ocds-t1s2t3-MD-1534850358592-EV-1534850358927",
+      "compiledRelease": {
+        "ocid": "ocds-t1s2t3-MD-1534850358592-EV-1534850358927",
+        "id": "ocds-t1s2t3-MD-1534850358592-EV-1534850358927-1534850358927",
+        "date": "2018-08-21T11:19:18Z",
+        "tag": [
+          "tender"
+        ],
+        "initiationType": "tender",
+        "language": "ro",
+        "tender": {
+          "id": "ocds-t1s2t3-MD-1534850358592",
+          "title": "Evaluation",
+          "description": "Evaluation stage of contracting process",
+          "status": "active",
+          "statusDetails": "empty",
+          "items": [
+            {
+              "id": "0b93d401-a534-11e8-9139-b5b419c3af61",
+              "description": "666-2",
+              "classification": {
+                "scheme": "CPV",
+                "id": "30199220-8",
+                "description": "Cărţi poştale neilustrate"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "AB06-7",
+                  "description": "Plastic"
+                }
+              ],
+              "quantity": 1,
+              "unit": {
+                "name": " Milion metri patrati spatiu locativ ",
+                "id": "86"
+              },
+              "relatedLot": "0b93d403-a534-11e8-9139-b5b419c3af61"
+            },
+            {
+              "id": "0b93d400-a534-11e8-9139-b5b419c3af61",
+              "description": "888-2",
+              "classification": {
+                "scheme": "CPV",
+                "id": "30199230-1",
+                "description": "Plicuri"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "AB06-7",
+                  "description": "Plastic"
+                }
+              ],
+              "quantity": 1,
+              "unit": {
+                "name": " Milion metri patrati spatiu locativ ",
+                "id": "86"
+              },
+              "relatedLot": "0b93d404-a534-11e8-9139-b5b419c3af61"
+            },
+            {
+              "id": "0b93d402-a534-11e8-9139-b5b419c3af61",
+              "description": "777-2",
+              "classification": {
+                "scheme": "CPV",
+                "id": "30199230-1",
+                "description": "Plicuri"
+              },
+              "additionalClassifications": [
+                {
+                  "scheme": "CPVS",
+                  "id": "AB06-7",
+                  "description": "Plastic"
+                }
+              ],
+              "quantity": 1,
+              "unit": {
+                "name": " Milion metri patrati spatiu locativ ",
+                "id": "86"
+              },
+              "relatedLot": "0b93d405-a534-11e8-9139-b5b419c3af61"
+            }
+          ],
+          "lots": [
+            {
+              "id": "0b93d403-a534-11e8-9139-b5b419c3af61",
+              "title": "lot1",
+              "description": "looot",
+              "status": "active",
+              "statusDetails": "empty",
+              "value": {
+                "amount": 200,
+                "currency": "MDL"
+              },
+              "options": [
+                {
+                  "hasOptions": false
+                }
+              ],
+              "recurrentProcurement": [
+                {
+                  "isRecurrent": false
+                }
+              ],
+              "renewals": [
+                {
+                  "hasRenewals": false
+                }
+              ],
+              "variants": [
+                {
+                  "hasVariants": false
+                }
+              ],
+              "contractPeriod": {
+                "startDate": "2018-11-19T14:45:00Z",
+                "endDate": "2018-12-25T14:45:00Z"
+              },
+              "placeOfPerformance": {
+                "address": {
+                  "streetAddress": "6666",
+                  "postalCode": "666",
+                  "addressDetails": {
+                    "country": {
+                      "scheme": "iso-alpha2",
+                      "id": "MD",
+                      "description": "MOLDOVA",
+                      "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+                    },
+                    "region": {
+                      "scheme": "CUATM",
+                      "id": "1000000",
+                      "description": "Anenii Noi",
+                      "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+                    },
+                    "locality": {
+                      "scheme": "666",
+                      "id": "666",
+                      "description": "666"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "id": "0b93d404-a534-11e8-9139-b5b419c3af61",
+              "title": "lot3",
+              "description": "looot",
+              "status": "active",
+              "statusDetails": "empty",
+              "value": {
+                "amount": 200,
+                "currency": "MDL"
+              },
+              "options": [
+                {
+                  "hasOptions": false
+                }
+              ],
+              "recurrentProcurement": [
+                {
+                  "isRecurrent": false
+                }
+              ],
+              "renewals": [
+                {
+                  "hasRenewals": false
+                }
+              ],
+              "variants": [
+                {
+                  "hasVariants": false
+                }
+              ],
+              "contractPeriod": {
+                "startDate": "2018-11-19T14:45:00Z",
+                "endDate": "2018-12-25T14:45:00Z"
+              },
+              "placeOfPerformance": {
+                "address": {
+                  "streetAddress": "888",
+                  "postalCode": "888",
+                  "addressDetails": {
+                    "country": {
+                      "scheme": "iso-alpha2",
+                      "id": "MD",
+                      "description": "MOLDOVA",
+                      "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+                    },
+                    "region": {
+                      "scheme": "CUATM",
+                      "id": "1000000",
+                      "description": "Anenii Noi",
+                      "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+                    },
+                    "locality": {
+                      "scheme": "888",
+                      "id": "888",
+                      "description": "888"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "id": "0b93d405-a534-11e8-9139-b5b419c3af61",
+              "title": "lot2",
+              "description": "looot",
+              "status": "active",
+              "statusDetails": "empty",
+              "value": {
+                "amount": 500,
+                "currency": "MDL"
+              },
+              "options": [
+                {
+                  "hasOptions": false
+                }
+              ],
+              "recurrentProcurement": [
+                {
+                  "isRecurrent": false
+                }
+              ],
+              "renewals": [
+                {
+                  "hasRenewals": false
+                }
+              ],
+              "variants": [
+                {
+                  "hasVariants": false
+                }
+              ],
+              "contractPeriod": {
+                "startDate": "2018-11-21T14:45:00Z",
+                "endDate": "2018-12-22T14:45:00Z"
+              },
+              "placeOfPerformance": {
+                "address": {
+                  "streetAddress": "777",
+                  "postalCode": "777",
+                  "addressDetails": {
+                    "country": {
+                      "scheme": "iso-alpha2",
+                      "id": "MD",
+                      "description": "MOLDOVA",
+                      "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+                    },
+                    "region": {
+                      "scheme": "CUATM",
+                      "id": "1000000",
+                      "description": "Anenii Noi",
+                      "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+                    },
+                    "locality": {
+                      "scheme": "CUATM",
+                      "id": "1001001",
+                      "description": "s.Albiniţa"
+                    }
+                  }
+                },
+                "description": "2"
+              }
+            }
+          ],
+          "lotGroups": [
+            {
+              "optionToCombine": false
+            }
+          ],
+          "tenderPeriod": {
+            "startDate": "2018-08-21T11:19:18Z",
+            "endDate": "2018-08-21T18:40:00Z"
+          },
+          "enquiryPeriod": {
+            "startDate": "2018-08-21T11:19:18Z",
+            "endDate": "2018-08-21T18:39:00Z"
+          },
+          "hasEnquiries": false,
+          "documents": [
+            {
+              "id": "f7178f90-9fba-11e8-9318-61ca1098e80e",
+              "documentType": "complaints",
+              "title": "doc1",
+              "description": "NEW",
+              "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/f7178f90-9fba-11e8-9318-61ca1098e80e",
+              "datePublished": "2018-08-14T12:10:54Z",
+              "relatedLots": [
+                "0b93d403-a534-11e8-9139-b5b419c3af61"
+              ]
+            },
+            {
+              "id": "f7178f90-9fba-11e8-9318-61ca1098e80e",
+              "documentType": "tenderNotice",
+              "title": "doc1",
+              "url": "http://dev.bpe.eprocurement.systems/api/v1/storage/get/f7178f90-9fba-11e8-9318-61ca1098e80e",
+              "datePublished": "2018-08-14T12:10:54Z"
+            }
+          ],
+          "awardCriteria": "priceOnly",
+          "submissionMethod": [
+            "electronicSubmission"
+          ],
+          "submissionMethodDetails": "submissionMethodDetails",
+          "submissionMethodRationale": [
+            "submissionMethodRationale"
+          ],
+          "requiresElectronicCatalogue": false
+        },
+        "hasPreviousNotice": false,
+        "purposeOfNotice": {
+          "isACallForCompetition": true
+        },
+        "relatedProcesses": [
+          {
+            "id": "0bc6f1f4-a534-11e8-83f2-7dea1fe99790",
+            "relationship": [
+              "parent"
+            ],
+            "scheme": "ocid",
+            "identifier": "ocds-t1s2t3-MD-1534850358592",
+            "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1534850358592/ocds-t1s2t3-MD-1534850358592"
+          }
+        ]
+      }
+    }
+  ],
+  "actualReleases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1534850358592-EV-1534850358927",
+      "uri": "http://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1534850358592/ocds-t1s2t3-MD-1534850358592-EV-1534850358927"
+    }
+  ]
+}

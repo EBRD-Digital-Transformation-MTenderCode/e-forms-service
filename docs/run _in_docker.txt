@@ -10,7 +10,7 @@ docker network create \
 
 
 #****************************************#
-# Run E-FORMS                             #
+# Run E-FORMS                            #
 # Need assign uri, username and password #
 #****************************************#
 
@@ -21,4 +21,4 @@ docker run -d --name=forms-1 \
   --publish 9171:8080 \
   --network ocds-network \
   --dns 10.0.10.115 \
-  docker-registry.eprocurement.systems/e-forms:18.06.1
+  dev.docker-registry.eprocurement.systems/e-forms:18.06.1

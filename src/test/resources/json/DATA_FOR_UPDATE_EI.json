@@ -1,0 +1,130 @@
+{
+  "uri": "http://public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534235784518/ocds-t1s2t3-MD-1534235784518",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-08-14T08:36:25Z",
+  "releases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1534235784518",
+      "id": "ocds-t1s2t3-MD-1534235784518-1534235785216",
+      "date": "2018-08-14T08:36:25Z",
+      "tag": [
+        "compiled"
+      ],
+      "initiationType": "tender",
+      "language": "ro",
+      "tender": {
+        "id": "ocds-t1s2t3-MD-1534235784518",
+        "title": "Inside knowledge ahead bad today.",
+        "description": "Suddenly piece sea behavior evening recently power deep ever positive impact rest station win top even ok raise friend thing.",
+        "status": "planning",
+        "statusDetails": "empty",
+        "mainProcurementCategory": "services",
+        "classification": {
+          "scheme": "CPV",
+          "id": "55000000-0",
+          "description": "Servicii hoteliere, de restaurant şi de vânzare cu amănuntul"
+        }
+      },
+      "buyer": {
+        "name": "Compton Group",
+        "id": "MD-IDNO-159-82-6695"
+      },
+      "parties": [
+        {
+          "id": "MD-IDNO-159-82-6695",
+          "name": "Compton Group",
+          "identifier": {
+            "scheme": "MD-IDNO",
+            "id": "159-82-6695",
+            "legalName": "Compton Group LLC",
+            "uri": "https://smith.org/homepage/"
+          },
+          "additionalIdentifiers": [
+            {
+              "scheme": "MD-IDNO",
+              "id": "547-99-5039",
+              "legalName": "Compton Group Inc",
+              "uri": "http://www.chen.com/app/posts/tags/login/"
+            }
+          ],
+          "address": {
+            "streetAddress": "96310 Angela Creek",
+            "postalCode": "22049-5623",
+            "addressDetails": {
+              "country": {
+                "scheme": "iso-alpha2",
+                "id": "MD",
+                "description": "MOLDOVA",
+                "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+              },
+              "region": {
+                "scheme": "CUATM",
+                "id": "9800000",
+                "description": "UATSN",
+                "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+              },
+              "locality": {
+                "scheme": "TEST",
+                "id": "1001001",
+                "description": "Mariastad"
+              }
+            }
+          },
+          "contactPoint": {
+            "name": "Daniel Flores",
+            "email": "norrisandrew@hotmail.com",
+            "telephone": "062-260-1344",
+            "faxNumber": "+30(0)5901328680",
+            "url": "https://www.ramirez.com/terms/"
+          },
+          "roles": [
+            "buyer"
+          ],
+          "details": {
+            "typeOfBuyer": "BODY_PUBLIC",
+            "mainGeneralActivity": "SOCIAL_PROTECTION",
+            "mainSectoralActivity": "POSTAL_SERVICES"
+          },
+          "buyerProfile": "http://www.gardner.com/search/posts/wp-content/terms/"
+        }
+      ],
+      "planning": {
+        "budget": {
+          "id": "55000000-0",
+          "period": {
+            "startDate": "2018-08-14T08:36:24Z",
+            "endDate": "2019-02-10T08:36:24Z"
+          },
+          "amount": {
+            "amount": 386190335.49,
+            "currency": "MDL"
+          }
+        },
+        "rationale": "Big hit degree."
+      },
+      "relatedProcesses": [
+        {
+          "id": "214cc000-9f9d-11e8-b6f3-214d15b990b2",
+          "relationship": [
+            "x_financeSource"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-t1s2t3-MD-1534235784518-FS-1534235785182",
+          "uri": "http://public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534235784518/ocds-t1s2t3-MD-1534235784518-FS-1534235785182"
+        }
+      ]
+    }
+  ]
+}

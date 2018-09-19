@@ -1,0 +1,153 @@
+{
+  "uri": "https://dev.public.eprocurement.systems/tenders/ocds-t1s2t3-MD-1532010121824/ocds-t1s2t3-MD-1532010121824-EV-1532010122650",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-07-19T14:22:02Z",
+  "releases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1532010121824-EV-1532010122650",
+      "id": "ocds-t1s2t3-MD-1532010121824-EV-1532010122650-1532010122650",
+      "date": "2018-07-19T14:22:01Z",
+      "tag": [
+        "tender"
+      ],
+      "initiationType": "tender",
+      "language": "ro",
+      "tender": {
+        "id": "ocds-t1s2t3-MD-1532010121824",
+        "title": "Evaluation",
+        "description": "Evaluation stage of contracting process",
+        "status": "active",
+        "statusDetails": "empty",
+        "items": [
+          {
+            "id": "1a8e0870-8b5f-11e8-a48b-9f2980d5bbdd",
+            "description": "",
+            "classification": {
+              "scheme": "CPV",
+              "id": "30100000-0",
+              "description": "Maşini de procesare de text"
+            },
+            "additionalClassifications": [
+              {
+                "scheme": "CPVS",
+                "id": "AB06-7",
+                "description": "Plastic"
+              }
+            ],
+            "quantity": 1.00,
+            "unit": {
+              "name": "square metre",
+              "id": "MTK"
+            },
+            "relatedLot": "1a8e2f80-8b5f-11e8-a48b-9f2980d5bbdd"
+          }
+        ],
+        "lots": [
+          {
+            "id": "1a8e2f80-8b5f-12e8-a48b-9f2980d5bbdd",
+            "title": "lot1",
+            "description": "looot",
+            "status": "active",
+            "statusDetails": "empty",
+            "value": {
+              "amount": 300.00,
+              "currency": "MDL"
+            },
+            "options": [
+              {
+                "hasOptions": false
+              }
+            ],
+            "recurrentProcurement": [
+              {
+                "isRecurrent": false
+              }
+            ],
+            "renewals": [
+              {}
+            ],
+            "variants": [
+              {
+                "hasVariants": false
+              }
+            ],
+            "contractPeriod": {
+              "startDate": "2018-10-10T14:45:00Z",
+              "endDate": "2018-10-19T14:45:00Z"
+            },
+            "placeOfPerformance": {
+              "address": {
+                "streetAddress": "",
+                "postalCode": "",
+                "addressDetails": {
+                  "country": {
+                    "id": "MD"
+                  },
+                  "region": {
+                    "id": "MD-AN"
+                  },
+                  "locality": {
+                    "scheme": "gfgf",
+                    "id": "gfg",
+                    "description": "gfg"
+                  }
+                }
+              },
+              "description": ""
+            }
+          }
+        ],
+        "lotGroups": [
+          {
+            "optionToCombine": false
+          }
+        ],
+        "tenderPeriod": {
+          "startDate": "2018-07-19T14:22:01Z",
+          "endDate": "2018-09-18T18:45:00Z"
+        },
+        "enquiryPeriod": {
+          "startDate": "2018-07-19T14:22:01Z",
+          "endDate": "2018-09-12T18:45:00Z"
+        },
+        "hasEnquiries": false,
+        "awardCriteria": "priceOnly",
+        "submissionMethod": [
+          "electronicSubmission"
+        ],
+        "submissionMethodDetails": "submissionMethodDetails",
+        "submissionMethodRationale": [
+          "submissionMethodRationale"
+        ],
+        "requiresElectronicCatalogue": false
+      },
+      "hasPreviousNotice": false,
+      "purposeOfNotice": {
+        "isACallForCompetition": true
+      },
+      "relatedProcesses": [
+        {
+          "id": "1b09c823-8b5f-11e8-93f4-7779430ed2b6",
+          "relationship": [
+            "parent"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-t1s2t3-MD-1532010121824",
+          "uri": "http://point.eprocurement.systems/tenders/ocds-t1s2t3-MD-1532010121824/ocds-t1s2t3-MD-1532010121824"
+        }
+      ]
+    }
+  ]
+}

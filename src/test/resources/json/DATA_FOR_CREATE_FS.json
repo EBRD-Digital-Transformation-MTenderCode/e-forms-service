@@ -1,0 +1,120 @@
+{
+  "uri": "http://dev.public.eprocurement.systems/budgets/ocds-t1s2t3-MD-1534157336217/ocds-t1s2t3-MD-1534157336217",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "publisher-name",
+    "scheme": "publisher-scheme",
+    "uid": "publisher-uid",
+    "uri": "publisher-uri"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-08-13T10:48:56Z",
+  "releases": [
+    {
+      "ocid": "ocds-t1s2t3-MD-1534157336217",
+      "id": "ocds-t1s2t3-MD-1534157336217-1534157336282",
+      "date": "2018-08-13T10:48:56Z",
+      "tag": [
+        "compiled"
+      ],
+      "initiationType": "tender",
+      "language": "ro",
+      "tender": {
+        "id": "ocds-t1s2t3-MD-1534157336217",
+        "title": "sdfgsdg",
+        "description": "asdgsdfgsdfg",
+        "status": "planning",
+        "statusDetails": "empty",
+        "mainProcurementCategory": "goods",
+        "classification": {
+          "scheme": "CPV",
+          "id": "15000000-8",
+          "description": "Alimente, băuturi, tutun şi produse conexe"
+        }
+      },
+      "buyer": {
+        "name": "asfasdfasdfasd",
+        "id": "MD-IDNO-asdfasdfasdf"
+      },
+      "parties": [
+        {
+          "id": "MD-IDNO-asdfasdfasdf",
+          "name": "asfasdfasdfasd",
+          "identifier": {
+            "scheme": "MD-IDNO",
+            "id": "asdfasdfasdf",
+            "legalName": "asdfasdfasdf",
+            "uri": "asdfasdfasdf"
+          },
+          "additionalIdentifiers": [
+            {
+              "scheme": "MD-IDNO",
+              "id": "asasdfasdfas",
+              "legalName": "dasdfasdfasdfasfg",
+              "uri": "asfasdfasdfasdfasdf"
+            },
+            {
+              "scheme": "MD-IDNO",
+              "id": "asdfasdf",
+              "legalName": "asdgxcbsdsdf",
+              "uri": "xcbsdbsdbxcv"
+            }
+          ],
+          "address": {
+            "streetAddress": "asfasdfasdf",
+            "postalCode": "2434123423",
+            "addressDetails": {
+              "country": {
+                "scheme": "iso-alpha2",
+                "id": "MD",
+                "description": "MOLDOVA",
+                "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+              },
+              "region": {
+                "scheme": "CUATM",
+                "id": "3100000",
+                "description": "Criuleni",
+                "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+              },
+              "locality": {
+                "scheme": "CUATM",
+                "id": "3114000",
+                "description": "s.Corjova (r-l Criuleni)"
+              }
+            }
+          },
+          "contactPoint": {
+            "name": "asfgsagasdfas",
+            "email": "sadfgzsdfgasdfg",
+            "telephone": "123456",
+            "faxNumber": "456789123",
+            "url": "dfasdfasfasdfasdf"
+          },
+          "roles": [
+            "buyer"
+          ],
+          "details": {
+            "typeOfBuyer": "BODY_PUBLIC",
+            "mainGeneralActivity": "DEFENCE",
+            "mainSectoralActivity": "AIRPORT_RELATED_ACTIVITIES"
+          }
+        }
+      ],
+      "planning": {
+        "budget": {
+          "id": "15000000-8",
+          "period": {
+            "startDate": "2018-07-31T21:00:00Z",
+            "endDate": "2018-12-30T22:00:00Z"
+          }
+        },
+        "rationale": "asdasfasf"
+      }
+    }
+  ]
+}

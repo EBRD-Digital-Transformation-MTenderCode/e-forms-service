@@ -1,0 +1,1670 @@
+{# @pebvariable name="context" type="com.procurement.formsservice.model.cn.CNCreateContext" #}
+{# @pebvariable name="additionalIdentifier" type="com.procurement.formsservice.model.cn.CNCreateContext.Buyer.AdditionalIdentifier" #}
+{
+{% import "../macros/translate" %}
+{% import "../macros/commaIf" %}
+{% import "../macros/attributeIf" %}
+  "schema": {
+    "title": "{{ translate("cn", "title") }}",
+    "type": "object",
+    "properties": {
+      "section1": {
+        "title": "{{ translate("cn", "section1.title") }}",
+        "description": "{{ translate("cn", "section1.description") }}",
+        "type": "object",
+        "properties": {
+          "procuringEntity": {
+            "title": "{{ translate("cn", "section1.procuringEntity.title") }}",
+            "description": "{{ translate("cn", "section1.procuringEntity.description") }}",
+            "type": "object",
+            "properties": {
+              {% if context.parameters.procuringEntity == "BUYER" %}
+                "buyer": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.name.title") }}",
+                      "type": "string",
+                      "readOnly": true,
+                      "ocds": "tender::object/procuringEntity::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.country.title") }}",
+                              "type": "object",
+                              "source": "{{ context.procuringEntity.uris.country }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.region.title") }}",
+                              "type": "object",
+                              "source": "{{ context.procuringEntity.uris.region }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "readOnly": true,
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[1]") }}"
+                                  ],
+                                  "readOnly": true
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[0]") }}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "source": "{{ context.procuringEntity.uris.locality }}",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "readOnly": true,
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "readOnly": true,
+                              "ocds": "tender::object/procuringEntity::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.scheme.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "source": "{{ context.procuringEntity.uris.registrationScheme }}",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.id.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.legalName.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.uri.title") }}",
+                          "type": "string",
+                          "readOnly": true,
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/uri::string"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "source": "{{ context.procuringEntity.uris.registrationScheme }}",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "readOnly": true,
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        {% if context.parameters.responsibleContactPerson == "BUYER" %}
+                          "buyer": {
+                            "type": "object",
+                            "properties": {
+                              "person": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "name",
+                                  "url"
+                                ],
+                                "properties": {
+                                  "name": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.name.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                                  },
+                                  "url": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.url.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                                  }
+                                }
+                              },
+                              "contacts": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "telephone",
+                                  "email"
+                                ],
+                                "properties": {
+                                  "telephone": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.telephone.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                                  },
+                                  "email": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.email.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                                  },
+                                  "faxNumber": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.faxNumber.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        {% endif %}
+                        {% if context.parameters.responsibleContactPerson == "THIRDPARTY" %}
+                          "thirdParty": {
+                            "type": "object",
+                            "properties": {
+                              "person": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "name",
+                                  "url"
+                                ],
+                                "properties": {
+                                  "name": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.name.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                                  },
+                                  "url": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.url.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                                  }
+                                }
+                              },
+                              "contacts": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "telephone",
+                                  "email"
+                                ],
+                                "properties": {
+                                  "telephone": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.telephone.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                                  },
+                                  "email": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.email.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                                  },
+                                  "faxNumber": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.faxNumber.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        {% endif %}
+                      }
+                    }
+                  }
+                }
+              {% endif %}
+              {% if context.parameters.procuringEntity == "THIRDPARTY" %}
+                "thirdParty": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.name.title") }}",
+                      "type": "string",
+                      "ocds": "tender::object/procuringEntity::object/name::string"
+                    },
+                    "address": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.address.title") }}",
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.address.location.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.country.title") }}",
+                              "type": "object",
+                              "source": "{{ context.procuringEntity.uris.country }}",
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/country::object/description::string"
+                                }
+                              }
+                            },
+                            "region": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.region.title") }}",
+                              "type": "object",
+                              "source": "{{ context.procuringEntity.uris.region }}",
+                              "dependentFields": {
+                                "country": "section1.procuringEntity.thirdParty.address.location.country.id"
+                              },
+                              "required": [
+                                "id",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/id::string"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/region::object/description::string"
+                                }
+                              }
+                            },
+                            "locality": {
+                              "type": "object",
+                              "required": [
+                                "localityType"
+                              ],
+                              "properties": {
+                                "localityType": {
+                                  "title": "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.title") }}",
+                                  "type": "string",
+                                  "enum": [
+                                    "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[0]") }}",
+                                    "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[1]") }}"
+                                  ]
+                                }
+                              },
+                              "dependencies": {
+                                "localityType": {
+                                  "oneOf": [
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[0]") }}"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "source": "{{ context.procuringEntity.uris.locality }}",
+                                              "dependentFields": {
+                                                "country": "section1.procuringEntity.thirdParty.address.location.country.id",
+                                                "region": "section1.procuringEntity.thirdParty.address.location.region.id"
+                                              },
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "CUATM",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "required": [
+                                        "localityType"
+                                      ],
+                                      "properties": {
+                                        "localityType": {
+                                          "enum": [
+                                            "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[1]") }}"
+                                          ]
+                                        },
+                                        "manual": {
+                                          "type": "object",
+                                          "properties": {
+                                            "locality": {
+                                              "title": "{{ translate("cn", "section1.procuringEntity.address.location.locality.title") }}",
+                                              "type": "object",
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "const": "other",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                },
+                                                "id": {
+                                                  "type": "string",
+                                                  "const": "999999999",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/id::string"
+                                                },
+                                                "description": {
+                                                  "type": "string",
+                                                  "ocds": "tender::object/procuringEntity::object/address::object/addressDetails::object/locality::object/description::string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "postalAddress": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.address.postalAddress.title") }}",
+                          "type": "object",
+                          "required": [
+                            "streetAddress"
+                          ],
+                          "properties": {
+                            "streetAddress": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.postalAddress.streetAddress.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/address::object/streetAddress::string"
+                            },
+                            "postalCode": {
+                              "title": "{{ translate("cn", "section1.procuringEntity.address.postalAddress.postalCode.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/procuringEntity::object/address::object/postalCode::string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "identifier": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.identifier.title") }}",
+                      "type": "object",
+                      "required": [
+                        "scheme",
+                        "id",
+                        "legalName"
+                      ],
+                      "properties": {
+                        "scheme": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.scheme.title") }}",
+                          "type": "string",
+                          "source": "{{ context.procuringEntity.uris.registrationScheme }}",
+                          "dependentFields": {
+                            "country": "section1.procuringEntity.thirdParty.address.location.country.id"
+                          },
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/scheme::string"
+                        },
+                        "id": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.id.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/id::string"
+                        },
+                        "legalName": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.legalName.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/legalName::string"
+                        },
+                        "uri": {
+                          "title": "{{ translate("cn", "section1.procuringEntity.identifier.uri.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/procuringEntity::object/identifier::object/uri::string"
+                        }
+                      }
+                    },
+                    "additionalIdentifiers": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.title") }}",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "legalName"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.scheme.title") }}",
+                            "type": "string",
+                            "source": "{{ context.procuringEntity.uris.registrationScheme }}",
+                            "dependentFields": {
+                              "country": "section1.procuringEntity.thirdParty.address.location.country.id"
+                            },
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.id.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/id::string"
+                          },
+                          "legalName": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.legalName.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/legalName::string"
+                          },
+                          "uri": {
+                            "title": "{{ translate("cn", "section1.procuringEntity.additionalIdentifiers.uri.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/procuringEntity::object/additionalIdentifiers::array[object]/uri::string"
+                          }
+                        }
+                      }
+                    },
+                    "contactPoint": {
+                      "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.title") }}",
+                      "type": "object",
+                      "properties": {
+                        {% if context.parameters.responsibleContactPerson == "BUYER" %}
+                          "buyer": {
+                            "type": "object",
+                            "properties": {
+                              "person": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "name",
+                                  "url"
+                                ],
+                                "properties": {
+                                  "name": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.name.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                                  },
+                                  "url": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.url.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                                  }
+                                }
+                              },
+                              "contacts": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "telephone",
+                                  "email"
+                                ],
+                                "properties": {
+                                  "telephone": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.telephone.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                                  },
+                                  "email": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.email.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                                  },
+                                  "faxNumber": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.faxNumber.title") }}",
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        {% endif %}
+                        {% if context.parameters.responsibleContactPerson == "THIRDPARTY" %}
+                          "thirdParty": {
+                            "type": "object",
+                            "properties": {
+                              "person": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "name",
+                                  "url"
+                                ],
+                                "properties": {
+                                  "name": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.name.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/name::string"
+                                  },
+                                  "url": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.person.url.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/url::string"
+                                  }
+                                }
+                              },
+                              "contacts": {
+                                "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.title") }}",
+                                "type": "object",
+                                "required": [
+                                  "telephone",
+                                  "email"
+                                ],
+                                "properties": {
+                                  "telephone": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.telephone.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/telephone::string"
+                                  },
+                                  "email": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.email.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/email::string"
+                                  },
+                                  "faxNumber": {
+                                    "title": "{{ translate("cn", "section1.procuringEntity.contactPoint.contacts.faxNumber.title") }}",
+                                    "type": "string",
+                                    "ocds": "tender::object/procuringEntity::object/contactPoint::object/faxNumber::string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        {% endif %}
+                      }
+                    }
+                  }
+                }
+              {% endif %}
+            }
+          }
+        }
+      },
+      "section2": {
+        "title": "{{ translate("cn", "section2.title") }}",
+        "type": "object",
+        "properties": {
+          "procurementScope": {
+            "title": "{{ translate("cn", "section2.procurementScope.title") }}",
+            "description": "{{ translate("cn", "section2.procurementScope.description") }}",
+            "type": "object",
+            "required": [
+              "title",
+              "description"
+            ],
+            "properties": {
+              "title": {
+                "title": "{{ translate("cn", "section2.procurementScope.title.title") }}",
+                "description": "{{ translate("cn", "section2.procurementScope.title.description") }}",
+                "type": "string",
+                "ocds": "tender::object/title::string"
+              },
+              "description": {
+                "title": "{{ translate("cn", "section2.procurementScope.description.title") }}",
+                "description": "{{ translate("cn", "section2.procurementScope.description.description") }}",
+                "type": "string",
+                "ocds": "tender::object/description::string"
+              }
+            }
+          },
+          "documents": {
+            "title": "{{ translate("cn", "section2.documents.title") }}",
+            "description": "{{ translate("cn", "section2.documents.description") }}",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "documentId",
+                "documentType"
+              ],
+              "properties": {
+                "file": {
+                  "title": "{{ translate("cn", "section2.documents.file.title") }}",
+                  "type": "string"
+                },
+                "documentId": {
+                  "type": "string",
+                  "ocds": "tender::object/documents::array[object]/id::string"
+                },
+                "title": {
+                  "title": "{{ translate("cn", "section2.documents.title.title") }}",
+                  "type": "string",
+                  "ocds": "tender::object/documents::array[object]/title::string"
+                },
+                "description": {
+                  "title": "{{ translate("cn", "section2.documents.description.title") }}",
+                  "type": "string",
+                  "ocds": "tender::object/documents::array[object]/description::string"
+                },
+                "documentType": {
+                  "title": "{{ translate("cn", "section2.documents.documentType.title") }}",
+                  "type": "string",
+                  "enum": [
+                    "tenderNotice",
+                    "procurementPlan",
+                    "biddingDocuments",
+                    "technicalSpecifications",
+                    "evaluationCriteria",
+                    "contractDraft",
+                    "hearingNotice",
+                    "marketStudies",
+                    "eligibilityCriteria",
+                    "clarifications",
+                    "environmentalImpact",
+                    "assetAndLiabilityAssessment",
+                    "riskProvisions",
+                    "complaints",
+                    "needsAssessment",
+                    "feasibilityStudy",
+                    "projectPlan",
+                    "billOfQuantity",
+                    "conflictOfInterest",
+                    "illustration",
+                    "cancellationDetails"
+                  ],
+                  "ocds": "tender::object/documents::array[object]/documentType::string"
+                }
+              }
+            }
+          },
+          "lots": {
+            "title": "{{ translate("cn", "section2.lots.title") }}",
+            "description": "{{ translate("cn", "section2.lots.description") }}",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "title": "{{ translate("cn", "section2.lots.description.title") }}",
+                  "description": "{{ translate("cn", "section2.lots.description.description") }}",
+                  "type": "object",
+                  "required": [
+                    "lotId",
+                    "title",
+                    "description"
+                  ],
+                  "properties": {
+                    "lotId": {
+                      "type": "string",
+                      "ocds": "tender::object/lots::array[object]/id::string"
+                    },
+                    "title": {
+                      "title": "{{ translate("cn", "section2.lots.description.title.title") }}",
+                      "description": "{{ translate("cn", "section2.lots.description.title.description") }}",
+                      "type": "string",
+                      "ocds": "tender::object/lots::array[object]/title::string"
+                    },
+                    "description": {
+                      "title": "{{ translate("cn", "section2.lots.description.description.title") }}",
+                      "description": "{{ translate("cn", "section2.lots.description.description.description") }}",
+                      "type": "string",
+                      "ocds": "tender::object/lots::array[object]/description::string"
+                    },
+                    "value": {
+                      "title": "{{ translate("cn", "section2.lots.description.value.title") }}",
+                      "description": "{{ translate("cn", "section2.lots.description.value.description") }}",
+                      "type": "object",
+                      "required": [
+                        "amount",
+                        "currency"
+                      ],
+                      "properties": {
+                        "amount": {
+                          "title": "{{ translate("cn", "section2.lots.description.value.amount.title") }}",
+                          "type": "number",
+                          "min": 0.00001,
+                          "ocds": "tender::object/lots::array[object]/value::object/amount::number"
+                        },
+                        "currency": {
+                          "title": "{{ translate("cn", "section2.lots.description.value.amount.title") }}",
+                          "type": "string",
+                          "default": "{{ context.budget.amount.currency }}",
+                          "readOnly": true,
+                          "ocds": "tender::object/lots::array[object]/value::object/currency::string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "performance": {
+                  "title": "{{ translate("cn", "section2.lots.performance.title") }}",
+                  "description": "{{ translate("cn", "section2.lots.performance.description") }}",
+                  "type": "object",
+                  "properties": {
+                    "placeOfPerformance": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "title": "{{ translate("cn", "section2.lots.performance.address.title") }}",
+                          "type": "object",
+                          "properties": {
+                            "location": {
+                              "title": "{{ translate("cn", "section2.lots.performance.address.location.title") }}",
+                              "type": "object",
+                              "properties": {
+                                "country": {
+                                  "title": "{{ translate("cn", "section2.lots.performance.address.location.country.title") }}",
+                                  "type": "object",
+                                  "source": "{{ context.lot.uris.country }}",
+                                  "required": [
+                                    "id",
+                                    "description"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/country::object/id::string"
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/country::object/description::string"
+                                    }
+                                  }
+                                },
+                                "region": {
+                                  "title": "{{ translate("cn", "section2.lots.performance.address.location.region.title") }}",
+                                  "type": "object",
+                                  "source": "{{ context.lot.uris.region }}",
+                                  "dependentFields": {
+                                    "country": "section2.lots[lotIndex].performance.placeOfPerformance.address.location.country.id"
+                                  },
+                                  "required": [
+                                    "id",
+                                    "description"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/region::object/id::string"
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/region::object/description::string"
+                                    }
+                                  }
+                                },
+                                "locality": {
+                                  "type": "object",
+                                  "required": [
+                                    "localityType"
+                                  ],
+                                  "properties": {
+                                    "localityType": {
+                                      "title": "{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.title") }}",
+                                      "type": "string",
+                                      "enum": [
+                                        "{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[0]") }}",
+                                        "{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[1]") }}"
+                                      ]
+                                    }
+                                  },
+                                  "dependencies": {
+                                    "localityType": {
+                                      "oneOf": [
+                                        {
+                                          "required": [
+                                            "localityType"
+                                          ],
+                                          "properties": {
+                                            "localityType": {
+                                              "enum": [
+                                                "{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[0]") }}"
+                                              ]
+                                            },
+                                            "directory": {
+                                              "type": "object",
+                                              "properties": {
+                                                "locality": {
+                                                  "title": "{{ translate("cn", "section2.lots.performance.address.location.locality.title") }}",
+                                                  "type": "object",
+                                                  "source": "{{ context.lot.uris.locality }}",
+                                                  "dependentFields": {
+                                                    "country": "section2.lots[lotIndex].performance.placeOfPerformance.address.location.country.id",
+                                                    "region": "section2.lots[lotIndex].performance.placeOfPerformance.address.location.region.id"
+                                                  },
+                                                  "required": [
+                                                    "scheme",
+                                                    "id",
+                                                    "description"
+                                                  ],
+                                                  "properties": {
+                                                    "scheme": {
+                                                      "type": "string",
+                                                      "const": "CUATM",
+                                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                    },
+                                                    "id": {
+                                                      "type": "string",
+                                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/locality::object/id::string"
+                                                    },
+                                                    "description": {
+                                                      "type": "string",
+                                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/locality::object/description::string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "required": [
+                                            "localityType"
+                                          ],
+                                          "properties": {
+                                            "localityType": {
+                                              "enum": [
+                                                "{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[1]") }}"
+                                              ]
+                                            },
+                                            "manual": {
+                                              "type": "object",
+                                              "properties": {
+                                                "locality": {
+                                                  "title": "{{ translate("cn", "section2.lots.performance.address.location.locality.title") }}",
+                                                  "type": "object",
+                                                  "required": [
+                                                    "scheme",
+                                                    "id",
+                                                    "description"
+                                                  ],
+                                                  "properties": {
+                                                    "scheme": {
+                                                      "type": "string",
+                                                      "const": "other",
+                                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/locality::object/scheme::string"
+                                                    },
+                                                    "id": {
+                                                      "type": "string",
+                                                      "const": "999999999",
+                                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/locality::object/id::string"
+                                                    },
+                                                    "description": {
+                                                      "type": "string",
+                                                      "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/addressDetails::object/locality::object/description::string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "postalAddress": {
+                              "title": "{{ translate("cn", "section2.lots.performance.address.postalAddress.title") }}",
+                              "type": "object",
+                              "required": [
+                                "streetAddress"
+                              ],
+                              "properties": {
+                                "streetAddress": {
+                                  "title": "{{ translate("cn", "section2.lots.performance.address.postalAddress.streetAddress.title") }}",
+                                  "type": "string",
+                                  "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/streetAddress::string"
+                                },
+                                "postalCode": {
+                                  "title": "{{ translate("cn", "section2.lots.performance.address.postalAddress.postalCode.title") }}",
+                                  "type": "string",
+                                  "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/address::object/postalCode::string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "description": {
+                          "title": "{{ translate("cn", "section2.lots.performance.description.title") }}",
+                          "description": "{{ translate("cn", "section2.lots.performance.description.description") }}",
+                          "type": "string",
+                          "ocds": "tender::object/lots::array[object]/placeOfPerformance::object/description::string"
+                        }
+                      }
+                    },
+                    "deliveryPeriod": {
+                      "title": "{{ translate("cn", "section2.lots.performance.deliveryPeriod.title") }}",
+                      "description": "{{ translate("cn", "section2.lots.performance.deliveryPeriod.description") }}",
+                      "type": "object",
+                      "required": [
+                        "startDate",
+                        "endDate"
+                      ],
+                      "properties": {
+                        "startDate": {
+                          "title": "{{ translate("cn", "section2.lots.performance.deliveryPeriod.startDate.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/lots::array[object]/contractPeriod::object/startDate::string"
+                        },
+                        "endDate": {
+                          "title": "{{ translate("cn", "section2.lots.performance.deliveryPeriod.endDate.title") }}",
+                          "type": "string",
+                          "ocds": "tender::object/lots::array[object]/contractPeriod::object/endDate::string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "items": {
+                  "title": "{{ translate("cn", "section2.lots.items.title") }}",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "itemId",
+                      "description",
+                      "relatedLot"
+                    ],
+                    "properties": {
+                      "itemId": {
+                        "type": "string",
+                        "ocds": "tender::object/items::array[object]/id::string"
+                      },
+                      "relatedLot": {
+                        "type": "string",
+                        "ocds": "tender::object/items::array[object]/relatedLot::string"
+                      },
+                      "description": {
+                        "title": "{{ translate("cn", "section2.lots.items.description.title") }}",
+                        "type": "string",
+                        "ocds": "tender::object/items::array[object]/description::string"
+                      },
+                      "quantity": {
+                        "title": "{{ translate("cn", "section2.lots.items.quantity.title") }}",
+                        "type": "object",
+                        "required": [
+                          "quantity"
+                        ],
+                        "properties": {
+                          "quantity": {
+                            "title": "{{ translate("cn", "section2.lots.items.quantity.quantity.title") }}",
+                            "type": "number",
+                            "ocds": "tender::object/items::array[object]/quantity::number"
+                          },
+                          "unitDetails": {
+                            "type": "object",
+                            "properties": {
+                              "unitClass": {
+                                "title": "{{ translate("cn", "section2.lots.items.quantity.title") }}",
+                                "type": "object",
+                                "source": "{{ context.uris.unitClass }}",
+                                "required": [
+                                  "id",
+                                  "description"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "unit": {
+                                "title": "{{ translate("cn", "section2.lots.items.quantity.unit.title") }}",
+                                "type": "object",
+                                "source": "{{ context.uris.unit }}",
+                                "dependentFields": {
+                                  "unitClass": "section2.lots[lotIndex].items[itemIndex].quantity.unitDetails.unitClass.id"
+                                },
+                                "required": [
+                                  "id",
+                                  "description"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "ocds": "tender::object/items::array[object]/unit::object/id::string"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "ocds": "tender::object/items::array[object]/unit::object/name::string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "classification": {
+                        "title": "{{ translate("cn", "section2.lots.items.classification.title") }}",
+                        "type": "object",
+                        "source": "{{ context.uris.cpv }}",
+                        "required": [
+                          "scheme",
+                          "id",
+                          "description",
+                          "title"
+                        ],
+                        "properties": {
+                          "scheme": {
+                            "title": "{{ translate("cn", "section2.lots.items.classification.scheme.title") }}",
+                            "type": "string",
+                            "default": "CPV",
+                            "ocds": "tender::object/items::array[object]/classification::object/scheme::string"
+                          },
+                          "id": {
+                            "title": "{{ translate("cn", "section2.lots.items.classification.id.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/items::array[object]/classification::object/id::string"
+                          },
+                          "description": {
+                            "title": "{{ translate("cn", "section2.lots.items.classification.description.title") }}",
+                            "type": "string",
+                            "ocds": "tender::object/items::array[object]/classification::object/description::string"
+                          },
+                          "title": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "additionalClassifications": {
+                        "title": "{{ translate("cn", "section2.lots.items.classification.title") }}",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "source": "{{ context.uris.cpvs }}",
+                          "required": [
+                            "scheme",
+                            "id",
+                            "description",
+                            "title"
+                          ],
+                          "properties": {
+                            "scheme": {
+                              "title": "{{ translate("cn", "section2.lots.items.additionalClassifications.scheme.title") }}",
+                              "type": "string",
+                              "default": "CPVS",
+                              "ocds": "tender::object/items::array[object]/additionalClassifications::array[object]/scheme::string"
+                            },
+                            "id": {
+                              "title": "{{ translate("cn", "section2.lots.items.additionalClassifications.id.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/items::array[object]/additionalClassifications::array[object]/id::string"
+                            },
+                            "description": {
+                              "title": "{{ translate("cn", "section2.lots.items.additionalClassifications.description.title") }}",
+                              "type": "string",
+                              "ocds": "tender::object/items::array[object]/additionalClassifications::array[object]/description::string"
+                            },
+                            "title": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "documents": {
+                  "title": "{{ translate("cn", "section2.lots.documents.title") }}",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "documentId",
+                      "documentType"
+                    ],
+                    "properties": {
+                      "file": {
+                        "title": "{{ translate("cn", "section2.lots.documents.file.title") }}",
+                        "type": "string"
+                      },
+                      "documentId": {
+                        "type": "string",
+                        "ocds": "tender::object/documents::array[object]/id::string"
+                      },
+                      "title": {
+                        "title": "{{ translate("cn", "section2.lots.documents.title.title") }}",
+                        "type": "string",
+                        "ocds": "tender::object/documents::array[object]/title::string"
+                      },
+                      "description": {
+                        "title": "{{ translate("cn", "section2.lots.documents.description.title") }}",
+                        "type": "string",
+                        "ocds": "tender::object/documents::array[object]/description::string"
+                      },
+                      "documentType": {
+                        "title": "{{ translate("cn", "section2.lots.documents.documentType.title") }}",
+                        "type": "string",
+                        "enum": [
+                          "tenderNotice",
+                          "procurementPlan",
+                          "biddingDocuments",
+                          "technicalSpecifications",
+                          "evaluationCriteria",
+                          "contractDraft",
+                          "hearingNotice",
+                          "marketStudies",
+                          "eligibilityCriteria",
+                          "clarifications",
+                          "environmentalImpact",
+                          "assetAndLiabilityAssessment",
+                          "riskProvisions",
+                          "complaints",
+                          "needsAssessment",
+                          "feasibilityStudy",
+                          "projectPlan",
+                          "billOfQuantity",
+                          "conflictOfInterest",
+                          "illustration",
+                          "cancellationDetails"
+                        ],
+                        "ocds": "tender::object/documents::array[object]/documentType::string"
+                      },
+                      "relatedLots": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "string",
+                          "ocds": "tender::object/documents::array[object]/relatedLots::array[string]"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "section4": {
+        "title": "{{ translate("cn", "section4.title") }}",
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "object",
+            "required": [
+              "legalBasis"
+            ],
+            "properties": {
+              "procurementMethodDetails": {
+                "title": "{{ translate("cn", "section4.procurementMethodDetails.title") }}",
+                "description": "{{ translate("cn", "section4.procurementMethodDetails.description") }}",
+                "type": "string",
+                "source": "{{ context.uris.pmd }}",
+                "readOnly": true,
+                "ocds": "tender::object/procurementMethodDetails::string"
+              },
+              "legalBasis": {
+                "title": "{{ translate("cn", "section4.legalBasis.title") }}",
+                "description": "{{ translate("cn", "section4.legalBasis.description") }}",
+                "type": "string",
+                "enum": [
+                  "DIRECTIVE_2014_23_EU",
+                  "DIRECTIVE_2014_24_EU",
+                  "DIRECTIVE_2014_25_EU",
+                  "DIRECTIVE_2009_81_EC",
+                  "REGULATION_966_2012",
+                  "NATIONAL_PROCUREMENT_LAW",
+                  "NULL"
+                ],
+                "ocds": "tender::object/legalBasis::string"
+              }
+            }
+          },
+          "administrative": {
+            "title": "{{ translate("cn", "section4.administrative.title") }}",
+            "description": "{{ translate("cn", "section4.administrative.description") }}",
+            "type": "object",
+            "properties": {
+              "validityPeriod": {
+                "type": "object",
+                "required": [
+                  "endDate"
+                ],
+                "properties": {
+                  "endDate": {
+                    "title": "{{ translate("cn", "section4.administrative.endDate.title") }}",
+                    "type": "string",
+                    "ocds": "tender::object/tenderPeriod::object/endDate::string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "budget": {
+        "title": "{{ translate("cn", "budget.title") }}",
+        "type": "object",
+        "properties": {
+          "budgetBreakdown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "ocds": "planning::object/budget::object/budgetBreakdown::array[object]/id::string"
+                },
+                "budgetBreakdownAmount": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "min": 0.00001,
+                      "ocds": "planning::object/budget::object/budgetBreakdown::array[object]/amount::object/amount::number"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "default": "{{ context.budget.amount.currency }}",
+                      "ocds": "planning::object/budget::object/budgetBreakdown::array[object]/amount::object/currency::string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": {
+    {% if context.parameters.procuringEntity == "BUYER" and context.parameters.responsibleContactPerson == "BUYER" %}
+      "section1": {
+        "procuringEntity": {
+          "buyer": {
+            "name": "{{ context.buyer.name }}",
+            "address": {
+              "location": {
+                "country": {
+                  "id": "{{ context.buyer.address.country.id }}",
+                  "description": "{{ context.buyer.address.country.description }}"
+                },
+                "region": {
+                  "id": "{{ context.buyer.address.region.id }}",
+                  "description": "{{ context.buyer.address.region.description }}"
+                },
+                "locality": {
+                  {% if context.buyer.address.locality.scheme == "CUATM" %}
+                    "localityType": "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[0]") }}",
+                    "directory": {
+                      "locality": {
+                        "scheme": "{{ context.buyer.address.locality.scheme }}",
+                        "id": "{{ context.buyer.address.locality.id }}",
+                        "description": "{{ context.buyer.address.locality.description }}"
+                      }
+                    }
+                  {% else %}
+                    "localityType": "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[1]") }}",
+                    "manual": {
+                      "locality": {
+                        "scheme": "{{ context.buyer.address.locality.scheme }}",
+                        "id": "{{ context.buyer.address.locality.id }}",
+                        "description": "{{ context.buyer.address.locality.description }}"
+                      }
+                    }
+                  {% endif %}
+                }
+              },
+              "postalAddress": {
+                "streetAddress": "{{ context.buyer.address.streetAddress }}"
+                 {{ commaIf(context.buyer.address.postalCode) }}
+                 {{ stringAttributeIf(name = "postalCode", value = context.buyer.address.postalCode) }}
+              }
+            },
+            "identifier": {
+              "scheme": "{{ context.buyer.identifier.scheme }}",
+              "id": "{{ context.buyer.identifier.id }}",
+              "legalName": "{{ context.buyer.identifier.legalName }}"
+              {{ commaIf(context.buyer.identifier.uri) }}
+              {{ stringAttributeIf(name = "uri", value = context.buyer.identifier.uri) }}
+            },
+            {% if context.buyer.additionalIdentifiers != null %}
+              "additionalIdentifiers": [
+                {% for additionalIdentifier in context.buyer.additionalIdentifiers %}
+                  {% if loop.index  > 0 %},{% endif %}
+                  {
+                    "scheme": "{{ additionalIdentifier.scheme }}",
+                    "id": "{{ additionalIdentifier.id }}",
+                    "legalName": "{{ additionalIdentifier.legalName }}"
+                    {{ commaIf(additionalIdentifier.uri) }}
+                    {{ stringAttributeIf(name = "uri", value = additionalIdentifier.uri) }}
+                  }
+                {% endfor %}
+              ],
+            {% endif %}
+            "contactPoint": {
+              "buyer": {
+                "person": {
+                  "name": "{{ context.buyer.contactPoint.name }}",
+                  "url": "{{ context.buyer.contactPoint.url }}"
+                },
+                "contacts": {
+                  "telephone": "{{ context.buyer.contactPoint.telephone }}",
+                  "email": "{{ context.buyer.contactPoint.email }}"
+                  {{ commaIf(context.buyer.contactPoint.faxNumber) }}
+                  {{ stringAttributeIf(name = "faxNumber", value = context.buyer.contactPoint.faxNumber) }}
+                }
+              }
+            }
+          }
+        }
+      },
+    {% endif %}
+    {% if context.parameters.procuringEntity == "BUYER" and context.parameters.responsibleContactPerson == "THIRDPARTY" %}
+      "section1": {
+        "procuringEntity": {
+          "buyer": {
+            "name": "{{ context.buyer.name }}",
+            "address": {
+              "location": {
+                "country": {
+                  "id": "{{ context.buyer.address.country.id }}",
+                  "description": "{{ context.buyer.address.country.description }}"
+                },
+                "region": {
+                  "id": "{{ context.buyer.address.region.id }}",
+                  "description": "{{ context.buyer.address.region.description }}"
+                },
+                "locality": {
+                  {% if context.buyer.address.locality.scheme == "CUATM" %}
+                    "localityType": "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[0]") }}",
+                    "directory": {
+                      "locality": {
+                        "scheme": "{{ context.buyer.address.locality.scheme }}",
+                        "id": "{{ context.buyer.address.locality.id }}",
+                        "description": "{{ context.buyer.address.locality.description }}"
+                      }
+                    }
+                  {% else %}
+                    "localityType": "{{ translate("cn", "section1.procuringEntity.address.location.locality.localityType.enum[1]") }}",
+                    "manual": {
+                      "locality": {
+                        "scheme": "{{ context.buyer.address.locality.scheme }}",
+                        "id": "{{ context.buyer.address.locality.id }}",
+                        "description": "{{ context.buyer.address.locality.description }}"
+                      }
+                    }
+                  {% endif %}
+                }
+              },
+              "postalAddress": {
+                "streetAddress": "{{ context.buyer.address.streetAddress }}"
+                 {{ commaIf(context.buyer.address.postalCode) }}
+                 {{ stringAttributeIf(name = "postalCode", value = context.buyer.address.postalCode) }}
+              }
+            },
+            "identifier": {
+              "scheme": "{{ context.buyer.identifier.scheme }}",
+              "id": "{{ context.buyer.identifier.id }}",
+              "legalName": "{{ context.buyer.identifier.legalName }}"
+              {{ commaIf(context.buyer.identifier.uri) }}
+              {{ stringAttributeIf(name = "uri", value = context.buyer.identifier.uri) }}
+            }
+            {% if context.buyer.additionalIdentifiers != null %},{% endif %}
+            {% if context.buyer.additionalIdentifiers != null %}
+              "additionalIdentifiers": [
+                {% for additionalIdentifier in context.buyer.additionalIdentifiers %}
+                  {% if loop.index  > 0 %},{% endif %}
+                  {
+                    "scheme": "{{ additionalIdentifier.scheme }}",
+                    "id": "{{ additionalIdentifier.id }}",
+                    "legalName": "{{ additionalIdentifier.legalName }}"
+                    {{ commaIf(additionalIdentifier.uri) }}
+                    {{ stringAttributeIf(name = "uri", value = additionalIdentifier.uri) }}
+                  }
+                {% endfor %}
+              ]
+            {% endif %}
+          }
+        }
+      },
+    {% endif %}
+    {% if context.parameters.procuringEntity == "THIRDPARTY" and context.parameters.responsibleContactPerson == "BUYER" %}
+      "section1": {
+        "procuringEntity": {
+          "thirdParty": {
+            "contactPoint": {
+              "buyer": {
+                "person": {
+                  "name": "{{ context.buyer.contactPoint.name }}",
+                  "url": "{{ context.buyer.contactPoint.url }}"
+                },
+                "contacts": {
+                  "telephone": "{{ context.buyer.contactPoint.telephone }}",
+                  "email": "{{ context.buyer.contactPoint.email }}"
+                  {{ commaIf(context.buyer.contactPoint.faxNumber) }}
+                  {{ stringAttributeIf(name = "faxNumber", value = context.buyer.contactPoint.faxNumber) }}
+                }
+              }
+            }
+          }
+        }
+      },
+    {% endif %}
+    "section4": {
+      "method": {
+        "procurementMethodDetails": "{{ context.parameters.pmd }}"
+      }
+    }
+  }
+}

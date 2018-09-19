@@ -1,0 +1,17 @@
+{% macro stringAttributeIf(name, value) %}
+    {% if value != null %}
+        "{{ name }}": "{{value}}"
+    {% endif %}
+{% endmacro %}
+
+{% macro numberAttributeIf(name, value) %}
+    {% if value != null %}
+        "{{ name }}": {{value}}
+    {% endif %}
+{% endmacro %}
+
+{% macro booleanAttributeIf(name, value) %}
+    {% if value != null %}
+        "{{ name }}": {{value}}
+    {% endif %}
+{% endmacro %}

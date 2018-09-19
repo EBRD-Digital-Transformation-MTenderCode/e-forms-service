@@ -1,0 +1,3 @@
+{% macro commaIf(value) %}
+    {% if value != null %},{% endif %}
+{% endmacro %}

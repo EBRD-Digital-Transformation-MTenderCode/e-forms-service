@@ -1,0 +1,88 @@
+{# @pebvariable name="context" type="com.procurement.formsservice.model.award.AwardUpdateContext" #}
+{
+{% import "../macros/translate" %}
+  "schema": {
+    "title": "{{ translate("award", "titleUpdate") }}",
+    "type": "object",
+    "required": [
+      "statusDetails"
+    ],
+    "properties": {
+      "statusDetails": {
+        "title": "{{ translate("award", "statusDetails.title") }}",
+        "type": "string",
+        "enum": [
+          "active",
+          "unsuccessful"
+        ],
+        "enumNames": [
+          "{{ translate("award", "statusDetails.enumNames[0]") }}",
+          "{{ translate("award", "statusDetails.enumNames[1]") }}"
+        ],
+        "ocds": "awards::object/statusDetails::string"
+      },
+      "description": {
+        "title": "{{ translate("award", "description.title") }}",
+        "type": "string",
+        "ocds": "awards::object/description::string"
+      },
+      "documents": {
+        "title": "{{ translate("award", "documents.title") }}",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "documentId",
+            "documentType"
+          ],
+          "properties": {
+            "file": {
+              "title": "{{ translate("award", "documents.file.title") }}",
+              "type": "string"
+            },
+            "documentId": {
+              "type": "string",
+              "ocds": "awards::object/documents::array[object]/id::string"
+            },
+            "title": {
+              "title": "{{ translate("award", "documents.title.title") }}",
+              "type": "string",
+              "ocds": "awards::object/documents::array[object]/title::string"
+            },
+            "description": {
+              "title": "{{ translate("award", "documents.description.title") }}",
+              "type": "string",
+              "ocds": "awards::object/documents::array[object]/description::string"
+            },
+            "documentType": {
+              "title": "{{ translate("award", "documents.documentType.title") }}",
+              "type": "string",
+              "enum": [
+                "awardNotice",
+                "evaluationReports",
+                "shortlistedFirms",
+                "winningBid",
+                "complaints",
+                "bidders",
+                "conflictOfInterest",
+                "cancellationDetails"
+              ],
+              "ocds": "awards::object/documents::array[object]/documentType::string"
+            },
+            "relatedLots": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "default": "{{ context.parameters.lotId }}",
+                "ocds": "awards::object/documents::array[object]/relatedLots::array[string]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": {
+  }
+}

@@ -7,8 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
 @JsonPropertyOrder("errors")
 data class ErrorRS @JsonCreator constructor(
     @field:JsonProperty("errors")
-    @param:JsonProperty("errors") val errors: List<Error>
-) : BaseRS() {
+    @param:JsonProperty("errors") val errors: List<Error>) {
 
     @JsonPropertyOrder("code", "description")
     data class Error @JsonCreator

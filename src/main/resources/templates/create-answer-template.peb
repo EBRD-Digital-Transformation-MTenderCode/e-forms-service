@@ -1,0 +1,16 @@
+{# @pebvariable name="context" type="com.procurement.formsservice.model.answer.AnswerCreateContext" #}
+{
+{% import "../macros/translate" %}
+    "schema": {
+      "type": "object",
+      "properties": {
+        "answer": {
+          "title": "{{ translate("answer", "answer.title") }}",
+          "type": "string",
+          "ocds": "enquiry::object/id::answer"
+        }
+      }
+    },
+    "data": {
+    }
+}
