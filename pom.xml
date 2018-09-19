@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.procurement</groupId>
-    <artifactId>e-forms</artifactId>
+    <artifactId>forms-service</artifactId>
     <version>18.06.1</version>
     <packaging>jar</packaging>
 
-    <name>e-forms</name>
+    <name>forms-service</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -27,8 +27,8 @@
         <java.version>1.8</java.version>
 
         <!--Kotlin-->
-        <kotlin.version>1.2.51</kotlin.version>
-        <kotlin-coroutines.version>0.23.3</kotlin-coroutines.version>
+        <kotlin.version>1.2.70</kotlin.version>
+        <kotlin-coroutines.version>0.24.0</kotlin-coroutines.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <!--Docker-->
@@ -42,6 +42,9 @@
 
         <!--Loggin-->
         <logstash.logback.encoder.version>4.11</logstash.logback.encoder.version>
+
+        <!--Libs-->
+        <pebble.version>2.4.0</pebble.version>
 
         <!--Test-->
         <json-path.version>2.3.0</json-path.version>
@@ -133,6 +136,13 @@
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
 
+        <!--Template-->
+        <dependency>
+            <groupId>com.mitchellbosecke</groupId>
+            <artifactId>pebble</artifactId>
+            <version>${pebble.version}</version>
+        </dependency>
+
         <!--Logging-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -192,6 +202,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-engine</artifactId>
             <version>${junit-platform.version}</version>
@@ -241,6 +257,8 @@
                 <includes>
                     <include>bootstrap.yml</include>
                     <include>banner.txt</include>
+                    <include>templates/**/*.*</include>
+                    <include>i18n/**/*.*</include>
                 </includes>
             </resource>
         </resources>
@@ -267,6 +285,39 @@
                         <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
+                <executions>
+                    <execution>
+                        <id>kapt</id>
+                        <goals>
+                            <goal>kapt</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/main/kotlin</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <source>src/main/kotlin</source>
+                                <source>target/generated-sources/kapt/compile</source>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!--Spring Boot-->
@@ -422,4 +473,23 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
