@@ -20,7 +20,7 @@ interface MDMRepository {
 @Repository
 class MDMRepositoryImpl(private val webClientBuilder: WebClient.Builder) : MDMRepository {
     companion object {
-        private const val MDM_DOMAIN = "http://E-MDM"
+        private const val MDM_DOMAIN = "http://mdm:8080"
     }
 
     @Cacheable("MDM")
