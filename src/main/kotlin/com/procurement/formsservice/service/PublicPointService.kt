@@ -37,6 +37,9 @@ interface PublicPointService {
 
 @Service
 class PublicPointServiceImpl(private val webClientBuilder: WebClient.Builder) : PublicPointService {
+    companion object {
+        private const val PUBLIC_POINT_DOMAIN = "http://public-point:8080"
+    }
 
     override suspend fun getBidCreateData(cpid: String, ocid: String): BidCreateData {
         val uri = genTendersUri(cpid = cpid, ocid = ocid)
@@ -98,19 +101,19 @@ class PublicPointServiceImpl(private val webClientBuilder: WebClient.Builder) : 
         return webClientBuilder.execute(uri) { it.awaitFirst() }
     }
 
-    private fun genBudgetsUri(cpid: String, ocid: String) = UriComponentsBuilder.fromHttpUrl("http://PUBLIC-POINT")
+    private fun genBudgetsUri(cpid: String, ocid: String) = UriComponentsBuilder.fromHttpUrl(PUBLIC_POINT_DOMAIN)
         .pathSegment("budgets")
         .pathSegment(cpid)
         .pathSegment(ocid)
         .toUriString()
 
-    private fun genTendersUri(cpid: String, ocid: String) = UriComponentsBuilder.fromHttpUrl("http://PUBLIC-POINT")
+    private fun genTendersUri(cpid: String, ocid: String) = UriComponentsBuilder.fromHttpUrl(PUBLIC_POINT_DOMAIN)
         .pathSegment("tenders")
         .pathSegment(cpid)
         .pathSegment(ocid)
         .toUriString()
 
-    private fun genTendersUri(cpid: String) = UriComponentsBuilder.fromHttpUrl("http://PUBLIC-POINT")
+    private fun genTendersUri(cpid: String) = UriComponentsBuilder.fromHttpUrl(PUBLIC_POINT_DOMAIN)
         .pathSegment("tenders")
         .pathSegment(cpid)
         .toUriString()
