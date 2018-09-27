@@ -154,30 +154,31 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             validityPeriod = cn.tender.tenderPeriod.endDate,
             budgetBreakdown = budgetBreakdown(ms),
             uris = CnUpdateContext.Tender.Uris(
-              country = "${MDMKind.COUNTRY}?lang=$lang",
-              region = "${MDMKind.REGION}?lang=$lang&country=\$country\$",
-              locality = "${MDMKind.LOCALITY}?lang=$lang&country=\$country\$&region=\$region\$",
-              unitClass = "${MDMKind.UNIT_CLASS}?lang=$lang",
-              unit = "${MDMKind.UNIT}?lang=$lang&unitClass=\$unitClass\$",
-              cpv = "${MDMKind.CPV}?lang=$lang&code=${ms.tender.classification.id}",
-              cpvs = "${MDMKind.CPVS}?lang=$lang",
-              pmd = "${MDMKind.PMD}?lang=$lang&country=${queryParameters.ocid.country}"
+                country = "${MDMKind.COUNTRY}?lang=$lang",
+                region = "${MDMKind.REGION}?lang=$lang&country=\$country\$",
+                locality = "${MDMKind.LOCALITY}?lang=$lang&country=\$country\$&region=\$region\$",
+                unitClass = "${MDMKind.UNIT_CLASS}?lang=$lang",
+                unit = "${MDMKind.UNIT}?lang=$lang&unitClass=\$unitClass\$",
+                cpv = "${MDMKind.CPV}?lang=$lang&code=${ms.tender.classification.id}",
+                cpvs = "${MDMKind.CPVS}?lang=$lang",
+                pmd = "${MDMKind.PMD}?lang=$lang&country=${queryParameters.ocid.country}"
             ),
             currency = ms.tender.value.currency
         )
     }
 
-    private fun tenderDocuments(cn: CnUpdateData.Record.CN):List<CnUpdateContext.Tender.Document> {
-        return cn.tender.documents.filter {
-            it.relatedLots == null || it.relatedLots.isEmpty()
-        }.map {
-            CnUpdateContext.Tender.Document(
-                id = it.id,
-                type = it.documentType,
-                title = it.title,
-                description = it.description
-            )
-        }
+    private fun tenderDocuments(cn: CnUpdateData.Record.CN): List<CnUpdateContext.Tender.Document>? {
+        return cn.tender.documents?.asSequence()
+            ?.filter {
+                it.relatedLots == null || it.relatedLots.isEmpty()
+            }?.map {
+                CnUpdateContext.Tender.Document(
+                    id = it.id,
+                    type = it.documentType,
+                    title = it.title,
+                    description = it.description
+                )
+            }?.toList()
     }
 
     private fun lots(cn: CnUpdateData.Record.CN): List<CnUpdateContext.Tender.Lot>? {
@@ -259,17 +260,18 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         }
 
     private fun documents(lotId: String, cn: CnUpdateData.Record.CN): List<CnUpdateContext.Tender.Lot.Document>? =
-        cn.tender.documents.filter {
-            it.relatedLots != null && it.relatedLots[0] == lotId
-        }.map {
-            CnUpdateContext.Tender.Lot.Document(
-                id = it.id,
-                type = it.documentType,
-                title = it.title,
-                description = it.description,
-                relatedLots = it.relatedLots!![0]
-            )
-        }
+        cn.tender.documents?.asSequence()
+            ?.filter {
+                it.relatedLots != null && it.relatedLots[0] == lotId
+            }?.map {
+                CnUpdateContext.Tender.Lot.Document(
+                    id = it.id,
+                    type = it.documentType,
+                    title = it.title,
+                    description = it.description,
+                    relatedLots = it.relatedLots!![0]
+                )
+            }?.toList()
 
     private fun budgetBreakdown(ms: CnUpdateData.Record.MS): List<CnUpdateContext.Tender.BudgetBreakdown> =
         ms.planning.budget.budgetBreakdown.map {

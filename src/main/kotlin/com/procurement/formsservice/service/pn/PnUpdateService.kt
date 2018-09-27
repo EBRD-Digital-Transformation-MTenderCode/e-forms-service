@@ -166,17 +166,18 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         )
     }
 
-    private fun tenderDocuments(cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Document> {
-        return cn.tender.documents.filter {
-            it.relatedLots == null || it.relatedLots.isEmpty()
-        }.map {
-            PnUpdateContext.Tender.Document(
-                id = it.id,
-                type = it.documentType,
-                title = it.title,
-                description = it.description
-            )
-        }
+    private fun tenderDocuments(cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Document>? {
+        return cn.tender.documents?.asSequence()
+            ?.filter {
+                it.relatedLots == null || it.relatedLots.isEmpty()
+            }?.map {
+                PnUpdateContext.Tender.Document(
+                    id = it.id,
+                    type = it.documentType,
+                    title = it.title,
+                    description = it.description
+                )
+            }?.toList()
     }
 
     private fun lots(cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot>? {
@@ -258,17 +259,18 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         }
 
     private fun documents(lotId: String, cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Document>? =
-        cn.tender.documents.filter {
-            it.relatedLots != null && it.relatedLots[0] == lotId
-        }.map {
-            PnUpdateContext.Tender.Lot.Document(
-                id = it.id,
-                type = it.documentType,
-                title = it.title,
-                description = it.description,
-                relatedLots = it.relatedLots!![0]
-            )
-        }
+        cn.tender.documents?.asSequence()
+            ?.filter {
+                it.relatedLots != null && it.relatedLots[0] == lotId
+            }?.map {
+                PnUpdateContext.Tender.Lot.Document(
+                    id = it.id,
+                    type = it.documentType,
+                    title = it.title,
+                    description = it.description,
+                    relatedLots = it.relatedLots!![0]
+                )
+            }?.toList()
 
     private fun budgetBreakdown(ms: PnUpdateData.Record.MS): List<PnUpdateContext.Tender.BudgetBreakdown> =
         ms.planning.budget.budgetBreakdown.map {

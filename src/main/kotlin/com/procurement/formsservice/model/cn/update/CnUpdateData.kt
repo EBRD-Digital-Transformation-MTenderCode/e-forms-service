@@ -123,7 +123,7 @@ data class CnUpdateData(
 
             data class Tender(
                 @JsonProperty("tenderPeriod") val tenderPeriod: TenderPeriod,
-                @JsonProperty("documents") val documents: List<Document>,
+                @JsonProperty("documents") val documents: List<Document>?,
                 @JsonProperty("items") val items: List<Item>?,
                 @JsonProperty("lots") val lots: List<Lot>?) {
 
