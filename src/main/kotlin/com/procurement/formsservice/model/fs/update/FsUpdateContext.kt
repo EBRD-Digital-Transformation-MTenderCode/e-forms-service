@@ -86,7 +86,7 @@ class FsUpdateContext(
 
         data class ContactPoint(
             val name: String, // FS.parties[role="funder"].contactPoint.name
-            val url: String, // FS.parties[role="funder"].contactPoint.url
+            val url: String?, // FS.parties[role="funder"].contactPoint.url
             val telephone: String, // FS.parties[role="funder"].contactPoint.telephone
             val email: String, // FS.parties[role="funder"].contactPoint.email
             val faxNumber: String? // FS.parties[role="funder"].contactPoint.faxNumber
@@ -148,7 +148,7 @@ class FsUpdateContext(
 
         data class ContactPoint(
             val name: String, // FS.parties[role="payer"].contactPoint.name
-            val url: String, // FS.parties[role="payer"].contactPoint.url
+            val url: String?, // FS.parties[role="payer"].contactPoint.url
             val telephone: String, // FS.parties[role="payer"].contactPoint.telephone
             val email: String, // FS.parties[role="payer"].contactPoint.email
             val faxNumber: String? // FS.parties[role="payer"].contactPoint.faxNumber

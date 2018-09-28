@@ -360,8 +360,7 @@
                           "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                           "type": "object",
                           "required": [
-                            "name",
-                            "url"
+                            "name"
                           ],
                           "properties": {
                             "name": {
@@ -693,8 +692,7 @@
                           "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                           "type": "object",
                           "required": [
-                            "name",
-                            "url"
+                            "name"
                           ],
                           "properties": {
                             "name": {
@@ -1030,8 +1028,7 @@
                           "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                           "type": "object",
                           "required": [
-                            "name",
-                            "url"
+                            "name"
                           ],
                           "properties": {
                             "name": {
@@ -1362,8 +1359,7 @@
                           "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                           "type": "object",
                           "required": [
-                            "name",
-                            "url"
+                            "name"
                           ],
                           "properties": {
                             "name": {
@@ -1693,8 +1689,7 @@
                           "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                           "type": "object",
                           "required": [
-                            "name",
-                            "url"
+                            "name"
                           ],
                           "properties": {
                             "name": {
@@ -1985,8 +1980,9 @@
               {% endif %}
               "contactPoint": {
                 "person": {
-                  "name": "{{ context.buyer.contactPoint.name }}",
-                  "url": "{{ context.buyer.contactPoint.url }}"
+                  "name": "{{ context.buyer.contactPoint.name }}"
+                  {{ commaIf(context.buyer.contactPoint.url) }}
+                  {{ stringAttributeIf(name = "url", value = context.buyer.contactPoint.url) }}
                 },
                 "contacts": {
                   "telephone": "{{ context.buyer.contactPoint.telephone }}",
@@ -2064,8 +2060,9 @@
               {% endif %}
               "contactPoint": {
                 "person": {
-                  "name": "{{ context.buyer.contactPoint.name }}",
-                  "url": "{{ context.buyer.contactPoint.url }}"
+                  "name": "{{ context.buyer.contactPoint.name }}"
+                  {{ commaIf(context.buyer.contactPoint.url) }}
+                  {{ stringAttributeIf(name = "url", value = context.buyer.contactPoint.url) }}
                 },
                 "contacts": {
                   "telephone": "{{ context.buyer.contactPoint.telephone }}",

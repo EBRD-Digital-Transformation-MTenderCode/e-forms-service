@@ -22,7 +22,7 @@ data class FsCreateData(
                 @JsonProperty("name") val name: String,
                 @JsonProperty("email") val email: String,
                 @JsonProperty("telephone") val telephone: String,
-                @JsonProperty("url") val url: String,
+                @JsonProperty("url") val url: String?,
                 @JsonProperty("faxNumber") val faxNumber: String?
             )
 

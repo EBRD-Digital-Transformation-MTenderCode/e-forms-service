@@ -357,8 +357,7 @@
                       "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                       "type": "object",
                       "required": [
-                        "name",
-                        "url"
+                        "name"
                       ],
                       "properties": {
                         "name": {
@@ -692,8 +691,7 @@
                     "title": "{{ translate("fs", "fsFunding.contactPoint.person.title") }}",
                     "type": "object",
                     "required": [
-                      "name",
-                      "url"
+                      "name"
                     ],
                     "properties": {
                       "name": {
@@ -987,8 +985,9 @@
           {% endif %}
           "contactPoint": {
             "person": {
-              "name": "{{ context.funder.contactPoint.name }}",
-              "url": "{{ context.funder.contactPoint.url }}"
+              "name": "{{ context.funder.contactPoint.name }}"
+              {{ commaIf(context.funder.contactPoint.url) }}
+              {{ stringAttributeIf(name = "url", value = context.funder.contactPoint.url) }}
             },
             "contacts": {
               "telephone": "{{ context.funder.contactPoint.telephone }}",
@@ -1051,8 +1050,9 @@
         {% endif %}
         "contactPoint": {
           "person": {
-            "name": "{{ context.payer.contactPoint.name }}",
-            "url": "{{ context.payer.contactPoint.url }}"
+            "name": "{{ context.payer.contactPoint.name }}"
+            {{ commaIf(context.payer.contactPoint.url) }}
+            {{ stringAttributeIf(name = "url", value = context.payer.contactPoint.url) }}
           },
           "contacts": {
             "telephone": "{{ context.payer.contactPoint.telephone }}",

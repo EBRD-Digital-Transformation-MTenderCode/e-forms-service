@@ -396,8 +396,7 @@
                   "title": "{{ translate("bid", "tenderers.contactPoint.title") }}",
                   "type": "object",
                   "required": [
-                    "name",
-                    "url"
+                    "name"
                   ],
                   "properties": {
                     "name": {

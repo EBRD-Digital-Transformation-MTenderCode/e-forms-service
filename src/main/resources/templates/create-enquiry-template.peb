@@ -282,8 +282,7 @@
                 "title": "{{ translate("enquiry", "author.contactPoint.person.title") }}",
                 "type": "object",
                 "required": [
-                  "name",
-                  "url"
+                  "name"
                 ],
                 "properties": {
                   "name": {

@@ -304,8 +304,7 @@
                     "title": "{{ translate("pn", "section1.procuringEntity.contactPoint.person.title") }}",
                     "type": "object",
                     "required": [
-                      "name",
-                      "url"
+                      "name"
                     ],
                     "properties": {
                       "name": {
@@ -1112,8 +1111,9 @@
         {% endif %}
         "contactPoint": {
           "person": {
-            "name": "{{ context.procuringEntity.contactPoint.name }}",
-            "url": "{{ context.procuringEntity.contactPoint.url }}"
+            "name": "{{ context.procuringEntity.contactPoint.name }}"
+            {{ commaIf(context.procuringEntity.contactPoint.url) }}
+            {{ stringAttributeIf(name = "url", value = context.procuringEntity.contactPoint.url) }}
           },
           "contacts": {
             "telephone": "{{ context.procuringEntity.contactPoint.telephone }}",

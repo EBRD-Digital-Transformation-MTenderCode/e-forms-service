@@ -72,7 +72,7 @@ data class PnUpdateData(
                     @JsonProperty("email") val email: String,
                     @JsonProperty("telephone") val telephone: String,
                     @JsonProperty("faxNumber") val faxNumber: String?,
-                    @JsonProperty("url") val url: String
+                    @JsonProperty("url") val url: String?
                 )
             }
 
@@ -119,7 +119,6 @@ data class PnUpdateData(
             data class Tender(
                 @JsonProperty("tenderPeriod") val tenderPeriod: TenderPeriod,
                 @JsonProperty("documents") val documents: List<Document>?,
-                //TODO ?
                 @JsonProperty("items") val items: List<Item>?,
                 @JsonProperty("lots") val lots: List<Lot>?) {
 

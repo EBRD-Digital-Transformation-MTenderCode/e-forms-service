@@ -93,7 +93,7 @@ class EiUpdateContext(
 
         data class ContactPoint(
             val name: String, // EI.parties[0].contactPoint.name
-            val url: String, // EI.parties[0].contactPoint.url
+            val url: String?, // EI.parties[0].contactPoint.url
             val telephone: String, // EI.parties[0].contactPoint.telephone
             val email: String, // EI.parties[0].contactPoint.email
             val faxNumber: String? // EI.parties[0].contactPoint.faxNumber

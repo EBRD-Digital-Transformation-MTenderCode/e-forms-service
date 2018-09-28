@@ -95,7 +95,7 @@ class FsUpdateFsData(
 
             data class ContactPoint(
                 @JsonProperty("name") val name: String,
-                @JsonProperty("url") val url: String,
+                @JsonProperty("url") val url: String?,
                 @JsonProperty("telephone") val telephone: String,
                 @JsonProperty("email") val email: String,
                 @JsonProperty("faxNumber") val faxNumber: String?

@@ -62,7 +62,7 @@ data class EiUpdateData(
                 @JsonProperty("email") val email: String,
                 @JsonProperty("telephone") val telephone: String,
                 @JsonProperty("faxNumber") val faxNumber: String?,
-                @JsonProperty("url") val url: String
+                @JsonProperty("url") val url: String?
             )
 
             data class Details(
