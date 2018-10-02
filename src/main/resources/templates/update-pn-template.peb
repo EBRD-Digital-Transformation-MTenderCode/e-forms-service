@@ -386,7 +386,6 @@
             "title": "{{ translate("pn", "section2.documents.title") }}",
             "description": "{{ translate("pn", "section2.documents.description") }}",
             "type": "array",
-            "minItems": 1,
             "items": {
               "type": "object",
               "required": [
@@ -447,7 +446,6 @@
             "title": "{{ translate("pn", "section2.lots.title") }}",
             "description": "{{ translate("pn", "section2.lots.description") }}",
             "type": "array",
-            "minItems": 1,
             "items": {
               "type": "object",
               "properties": {
@@ -727,12 +725,10 @@
                 "items": {
                   "title": "{{ translate("pn", "section2.lots.items.title") }}",
                   "type": "array",
-                  "minItems": 1,
                   "items": {
                     "type": "object",
                     "required": [
                       "itemId",
-                      "description",
                       "relatedLot"
                     ],
                     "properties": {

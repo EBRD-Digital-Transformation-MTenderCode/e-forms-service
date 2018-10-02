@@ -896,7 +896,9 @@
                   "description": "{{ translate("pn", "section2.lots.description.description") }}",
                   "type": "object",
                   "required": [
-                    "lotId"
+                    "lotId",
+                    "title",
+                    "description"
                   ],
                   "properties": {
                     "lotId": {
@@ -1165,7 +1167,6 @@
                 "items": {
                   "title": "{{ translate("pn", "section2.lots.items.title") }}",
                   "type": "array",
-                  "minItems": 1,
                   "items": {
                     "type": "object",
                     "required": [
@@ -1277,7 +1278,7 @@
                         }
                       },
                       "additionalClassifications": {
-                        "title": "{{ translate("pn", "section2.lots.items.classification.title") }}",
+                        "title": "{{ translate("pn", "section2.lots.items.additionalClassifications.title") }}",
                         "type": "array",
                         "items": {
                           "type": "object",
