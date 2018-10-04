@@ -1066,10 +1066,10 @@
     "fsBudget": {
       {{ stringAttributeIf(name = "rationale", value = context.budget.rationale) }}
       {{ commaIf(context.budget.rationale) }}
-      {% if context.budget.budgetDetails.description != null or context.budget.budgetDetails.id != null %}
+      {% if context.budget.budgetDetails != null %}
         "budgetDetails": {
           {{ stringAttributeIf(name = "description", value = context.budget.budgetDetails.description) }}
-          {{ commaIf(context.budget.budgetDetails.id) }}
+          {% if context.budget.budgetDetails.description != null and context.budget.budgetDetails.id != null %},{% endif %}
           {{ stringAttributeIf(name = "id", value = context.budget.budgetDetails.id) }}
         },
       {% endif %}
