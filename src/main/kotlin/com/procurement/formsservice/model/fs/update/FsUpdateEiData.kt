@@ -12,7 +12,7 @@ data class FsUpdateEiData(
 
         data class Tender(
             @JsonProperty("title") val title: String,
-            @JsonProperty("description") val description: String,
+            @JsonProperty("description") val description: String?,
             @JsonProperty("classification") val classification: Classification) {
 
             data class Classification(
