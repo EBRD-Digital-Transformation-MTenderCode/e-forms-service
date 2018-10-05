@@ -7,13 +7,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface CancellationTenderService {
-    fun cancel(queryParameters: CancellationTenderParameters): Mono<String>
+    fun cancel(queryParameters: CancellationTenderParameters): String
 }
 
 @Service
@@ -24,7 +22,7 @@ class CancellationTenderServiceImpl(
     CancellationTenderService {
     private val cancelationTenderTemplate = formTemplateService[KindTemplate.CANCELLATION, KindEntity.TENDER]
 
-    override fun cancel(queryParameters: CancellationTenderParameters): Mono<String> = mono {
+    override fun cancel(queryParameters: CancellationTenderParameters): String {
         val cpid = queryParameters.cpid.value
         val records = publicPointService.getCancellationTenderData(cpid = cpid).records
 
@@ -40,7 +38,7 @@ class CancellationTenderServiceImpl(
             )
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = cancelationTenderTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

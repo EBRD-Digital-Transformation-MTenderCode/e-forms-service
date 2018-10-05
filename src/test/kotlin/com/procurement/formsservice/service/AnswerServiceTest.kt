@@ -3,7 +3,6 @@ package com.procurement.formsservice.service
 import com.procurement.formsservice.AbstractBase
 import com.procurement.formsservice.domain.query.v4.sensitiveQueryParameters
 import com.procurement.formsservice.model.answer.create.AnswerCreateParameters
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -28,18 +27,16 @@ class AnswerServiceTest : AbstractBase() {
     @Test
     fun test() {
         val params = genParams()
-        runBlocking {
-            val json = service.create(params).block()
-            assertNotNull(json)
-        }
+        val json = service.create(params)
+        assertNotNull(json)
     }
 
     private fun genParams(): AnswerCreateParameters =
         AnswerCreateParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
                 .apply {
-                    this["lang"] = listOf("EN")
-                    this["enquiry-id"] = listOf(ENQUIRY_ID)
+                    this["lang"] = arrayOf("EN")
+                    this["enquiry-id"] = arrayOf(ENQUIRY_ID)
                 }
             )
         )

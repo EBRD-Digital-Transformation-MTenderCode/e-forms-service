@@ -10,13 +10,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface BidCreateService {
-    fun create(queryParameters: BidCreateParameters): Mono<String>
+    fun create(queryParameters: BidCreateParameters): String
 }
 
 @Service
@@ -25,7 +23,7 @@ class BidCreateServiceImpl(private val formTemplateService: FormTemplateService,
     BidCreateService {
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.BID]
 
-    override fun create(queryParameters: BidCreateParameters): Mono<String> = mono {
+    override fun create(queryParameters: BidCreateParameters): String {
         val ocid = queryParameters.ocid
         val cpid = queryParameters.ocid.toCPID()
         val release = publicPointService.getBidCreateData(cpid = cpid.value, ocid = ocid.value).releases[0]
@@ -38,7 +36,7 @@ class BidCreateServiceImpl(private val formTemplateService: FormTemplateService,
             uris = uris(queryParameters),
             amount = amount(queryParameters, release.tender)
         )
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = createTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

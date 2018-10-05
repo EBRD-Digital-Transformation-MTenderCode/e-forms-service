@@ -14,7 +14,6 @@ import com.procurement.formsservice.repository.MDMRepository
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
@@ -75,16 +74,15 @@ class PnCreateServiceTest : AbstractBase() {
              responsibleContactPerson: PnResponsibleContactPerson,
              pmd: PnPmd) {
         val params = genParams(procuringEntity, responsibleContactPerson, pmd)
-        runBlocking {
-            whenever(publicPointService.getPnCreateData(any()))
-                .thenReturn(EI_FOR_PN)
 
-            whenever(mdmRepository.pmd(any(), any()))
-                .thenReturn(allowablePmd)
+        whenever(publicPointService.getPnCreateData(any()))
+            .thenReturn(EI_FOR_PN)
 
-            val json = service.create(params).block()
-            assertNotNull(json)
-        }
+        whenever(mdmRepository.pmd(any(), any()))
+            .thenReturn(allowablePmd)
+
+        val json = service.create(params)
+        assertNotNull(json)
     }
 
     private fun genParams(procuringEntity: PnProcuringEntity,
@@ -92,13 +90,13 @@ class PnCreateServiceTest : AbstractBase() {
                           pmd: PnPmd): PnCreateParameters =
         PnCreateParameters(
             queryParameters = sensitiveQueryParameters(
-                mutableMapOf<String, List<String>>()
+                mutableMapOf<String, Array<String>>()
                     .apply {
-                        this["lang"] = listOf("EN")
-                        this["ocid"] = listOf(OCID)
-                        this["procuringEntity"] = listOf(procuringEntity.name)
-                        this["responsibleContactPerson"] = listOf(responsibleContactPerson.name)
-                        this["pmd"] = listOf(pmd.name)
+                        this["lang"] = arrayOf("EN")
+                        this["ocid"] = arrayOf(OCID)
+                        this["procuringEntity"] = arrayOf(procuringEntity.name)
+                        this["responsibleContactPerson"] = arrayOf(responsibleContactPerson.name)
+                        this["pmd"] = arrayOf(pmd.name)
                     }
             )
         )

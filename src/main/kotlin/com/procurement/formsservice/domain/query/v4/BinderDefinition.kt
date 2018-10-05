@@ -29,7 +29,7 @@ inline fun <reified T> transformer(noinline function: (String) -> T?): TypeTrans
     }
 
 sealed class AbstractBinder<T : Any>(val name: String, private val transformer: TypeTransformer<T>) {
-    protected fun getSingleValue(queryParameters: Map<String, List<String>>,
+    protected fun getSingleValue(queryParameters: Map<String, Array<String>>,
                                  default: (() -> T)? = null,
                                  validator: ((T) -> Boolean)? = null): T {
         val values = queryParameters[name]
@@ -39,7 +39,7 @@ sealed class AbstractBinder<T : Any>(val name: String, private val transformer: 
             buildSingle(values, validator)
     }
 
-    protected fun getValuesAsSet(queryParameters: Map<String, List<String>>,
+    protected fun getValuesAsSet(queryParameters: Map<String, Array<String>>,
                                  default: (() -> Set<T>)? = null,
                                  validator: ((T) -> Boolean)? = null): Set<T> {
         val values = queryParameters[name]
@@ -49,7 +49,7 @@ sealed class AbstractBinder<T : Any>(val name: String, private val transformer: 
             buildSet(values, validator)
     }
 
-    protected fun getValuesAsList(queryParameters: Map<String, List<String>>,
+    protected fun getValuesAsList(queryParameters: Map<String, Array<String>>,
                                   default: (() -> List<T>)? = null,
                                   validator: ((T) -> Boolean)? = null): List<T> {
         val values = queryParameters[name]
@@ -75,13 +75,13 @@ sealed class AbstractBinder<T : Any>(val name: String, private val transformer: 
         }
     }
 
-    private fun buildSingle(values: List<String>,
+    private fun buildSingle(values: Array<String>,
                             validator: ((T) -> Boolean)?): T {
         if (values.size > 1) throw QueryParameterInvalidNumberException(name)
         return values[0].transform().apply { validate(value = this, validator = validator) }
     }
 
-    private fun buildSet(values: List<String>,
+    private fun buildSet(values: Array<String>,
                          validator: ((T) -> Boolean)?): Set<T> {
         return mutableSetOf<T>().apply {
             values.forEach {
@@ -92,7 +92,7 @@ sealed class AbstractBinder<T : Any>(val name: String, private val transformer: 
         }
     }
 
-    private fun buildList(values: List<String>,
+    private fun buildList(values: Array<String>,
                           validator: ((T) -> Boolean)?): List<T> {
         return mutableListOf<T>().apply {
             values.forEach {
@@ -117,17 +117,17 @@ class BinderWithoutInnerValidator<T : Any>(name: String,
                                            transformer: TypeTransformer<T>) :
     AbstractBinder<T>(name, transformer) {
 
-    fun asSingle(queryParameters: Map<String, List<String>>,
+    fun asSingle(queryParameters: Map<String, Array<String>>,
                  default: (() -> T)? = null,
                  validator: ((T) -> Boolean)? = null): T =
         getSingleValue(queryParameters, default, validator)
 
-    fun asSet(queryParameters: Map<String, List<String>>,
+    fun asSet(queryParameters: Map<String, Array<String>>,
               default: (() -> Set<T>)? = null,
               validator: ((T) -> Boolean)? = null): Set<T> =
         getValuesAsSet(queryParameters, default, validator)
 
-    fun asList(queryParameters: Map<String, List<String>>,
+    fun asList(queryParameters: Map<String, Array<String>>,
                default: (() -> List<T>)? = null,
                validator: ((T) -> Boolean)? = null): List<T> =
         getValuesAsList(queryParameters, default, validator)
@@ -138,15 +138,15 @@ class BinderWithInnerValidator<T : Any>(name: String,
                                         private val validator: ((T) -> Boolean)? = null) :
     AbstractBinder<T>(name, transformer) {
 
-    fun asSingle(queryParameters: Map<String, List<String>>,
+    fun asSingle(queryParameters: Map<String, Array<String>>,
                  default: (() -> T)? = null): T =
         getSingleValue(queryParameters, default, validator)
 
-    fun asSet(queryParameters: Map<String, List<String>>,
+    fun asSet(queryParameters: Map<String, Array<String>>,
               default: (() -> Set<T>)? = null): Set<T> =
         getValuesAsSet(queryParameters, default, validator)
 
-    fun asList(queryParameters: Map<String, List<String>>,
+    fun asList(queryParameters: Map<String, Array<String>>,
                default: (() -> List<T>)? = null): List<T> =
         getValuesAsList(queryParameters, default, validator)
 }

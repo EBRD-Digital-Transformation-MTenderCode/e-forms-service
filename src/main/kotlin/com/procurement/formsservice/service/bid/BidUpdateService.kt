@@ -10,13 +10,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface BidUpdateService {
-    fun update(queryParameters: BidUpdateParameters): Mono<String>
+    fun update(queryParameters: BidUpdateParameters): String
 }
 
 @Service
@@ -24,7 +22,7 @@ class BidUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                            private val publicPointService: PublicPointService) : BidUpdateService {
     private val updateTemplate = formTemplateService[KindTemplate.UPDATE, KindEntity.BID]
 
-    override fun update(queryParameters: BidUpdateParameters): Mono<String> = mono {
+    override fun update(queryParameters: BidUpdateParameters): String {
         val ocid = queryParameters.ocid
         val cpid = ocid.toCPID()
         val records = publicPointService.getBidUpdateData(cpid = cpid.value).records
@@ -37,7 +35,7 @@ class BidUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             uris = uris(queryParameters),
             amount = amount(queryParameters = queryParameters, records = records)
         )
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = updateTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

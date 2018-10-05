@@ -26,13 +26,11 @@ class WebExceptionHandler {
     }
 
     @ExceptionHandler(value = [RemoteServiceException::class])
-    fun remoteService(exception: RemoteServiceException): Mono<ResponseEntity<*>> {
-        log.error(exception.message, exception)
+    fun remoteService(exception: RemoteServiceException): ResponseEntity<*> {
+        log.error(exception.message)
 
-        return Mono.just(
-            ResponseEntity.status(exception.code)
-                .body(exception.payload)
-        )
+        return ResponseEntity.status(exception.code ?: HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(exception.payload)
     }
 
     @ExceptionHandler(value = [TemplateEvaluateException::class])

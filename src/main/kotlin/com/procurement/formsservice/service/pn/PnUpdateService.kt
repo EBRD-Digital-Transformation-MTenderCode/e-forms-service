@@ -11,14 +11,12 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.io.IOException
 import java.util.*
 
 interface PnUpdateService {
-    fun update(queryParameters: PnUpdateParameters): Mono<String>
+    fun update(queryParameters: PnUpdateParameters): String
 }
 
 @Service
@@ -27,7 +25,7 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                           private val objectMapper: ObjectMapper) : PnUpdateService {
     private val updateTemplate = formTemplateService[KindTemplate.UPDATE, KindEntity.PN]
 
-    override fun update(queryParameters: PnUpdateParameters): Mono<String> = mono {
+    override fun update(queryParameters: PnUpdateParameters): String {
         val cpid = queryParameters.ocid.toCPID().value
         val ocid = queryParameters.ocid.value
 
@@ -43,7 +41,7 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             tender = tender(queryParameters = queryParameters, ms = ms, cn = cn)
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = updateTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

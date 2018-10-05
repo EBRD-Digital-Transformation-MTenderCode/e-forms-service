@@ -10,7 +10,6 @@ import com.procurement.formsservice.model.cancellation.tender.CancellationTender
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -41,21 +40,20 @@ class CancellationTenterServiceTest : AbstractBase() {
     @Test
     fun test() {
         val params = genParams()
-        runBlocking {
-            whenever(publicPointService.getCancellationTenderData(any()))
-                .thenReturn(DATA_FOR_CANCELLATION_TENDER)
 
-            val json = service.cancel(params).block()
-            assertNotNull(json)
-        }
+        whenever(publicPointService.getCancellationTenderData(any()))
+            .thenReturn(DATA_FOR_CANCELLATION_TENDER)
+
+        val json = service.cancel(params)
+        assertNotNull(json)
     }
 
     private fun genParams(): CancellationTenderParameters =
         CancellationTenderParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
                 .apply {
-                    this["lang"] = listOf("EN")
-                    this["ocid"] = listOf(OCID)
+                    this["lang"] = arrayOf("EN")
+                    this["ocid"] = arrayOf(OCID)
                 }
             )
         )

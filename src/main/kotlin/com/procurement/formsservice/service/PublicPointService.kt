@@ -1,6 +1,5 @@
 package com.procurement.formsservice.service
 
-import com.procurement.formsservice.client.execute
 import com.procurement.formsservice.model.bid.create.BidCreateData
 import com.procurement.formsservice.model.bid.update.BidUpdateData
 import com.procurement.formsservice.model.cancellation.tender.CancellationTenderData
@@ -13,108 +12,106 @@ import com.procurement.formsservice.model.fs.update.FsUpdateEiData
 import com.procurement.formsservice.model.fs.update.FsUpdateFsData
 import com.procurement.formsservice.model.pn.create.PnCreateData
 import com.procurement.formsservice.model.pn.update.PnUpdateData
-import kotlinx.coroutines.experimental.reactive.awaitFirst
 import org.springframework.stereotype.Service
-import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.util.UriComponentsBuilder
 
 interface PublicPointService {
-    suspend fun getBidCreateData(cpid: String, ocid: String): BidCreateData
-    suspend fun getCnCreateData(cpid: String): CnCreateData
-    suspend fun getEnquiryCreateData(cpid: String, ocid: String): EnquiryCreateData
-    suspend fun getFsCreateData(cpid: String): FsCreateData
-    suspend fun getPnCreateData(cpid: String): PnCreateData
+    fun getBidCreateData(cpid: String, ocid: String): BidCreateData
+    fun getCnCreateData(cpid: String): CnCreateData
+    fun getEnquiryCreateData(cpid: String, ocid: String): EnquiryCreateData
+    fun getFsCreateData(cpid: String): FsCreateData
+    fun getPnCreateData(cpid: String): PnCreateData
 
-    suspend fun getEiUpdateData(cpid: String): EiUpdateData
-    suspend fun getFsUpdateEiData(cpid: String): FsUpdateEiData
-    suspend fun getFsUpdateFsData(cpid: String, ocid: String): FsUpdateFsData
-    suspend fun getCnUpdateData(cpid: String): CnUpdateData
-    suspend fun getPnUpdateData(cpid: String): PnUpdateData
-    suspend fun getBidUpdateData(cpid: String): BidUpdateData
+    fun getEiUpdateData(cpid: String): EiUpdateData
+    fun getFsUpdateEiData(cpid: String): FsUpdateEiData
+    fun getFsUpdateFsData(cpid: String, ocid: String): FsUpdateFsData
+    fun getCnUpdateData(cpid: String): CnUpdateData
+    fun getPnUpdateData(cpid: String): PnUpdateData
+    fun getBidUpdateData(cpid: String): BidUpdateData
 
-    suspend fun getCancellationTenderData(cpid: String): CancellationTenderData
+    fun getCancellationTenderData(cpid: String): CancellationTenderData
 }
 
 @Service
-class PublicPointServiceImpl(private val webClientBuilder: WebClient.Builder) : PublicPointService {
+class PublicPointServiceImpl(private val remoteService: RemoteService) : PublicPointService {
     companion object {
         private const val PUBLIC_POINT_DOMAIN = "http://public-point:8080"
     }
 
-    override suspend fun getBidCreateData(cpid: String, ocid: String): BidCreateData {
+    override fun getBidCreateData(cpid: String, ocid: String): BidCreateData {
         val uri = genTendersUri(cpid = cpid, ocid = ocid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, BidCreateData::class.java)
     }
 
-    override suspend fun getCnCreateData(cpid: String): CnCreateData {
+    override fun getCnCreateData(cpid: String): CnCreateData {
         val uri = genBudgetsUri(cpid, cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, CnCreateData::class.java)
     }
 
-    override suspend fun getEnquiryCreateData(cpid: String, ocid: String): EnquiryCreateData {
+    override fun getEnquiryCreateData(cpid: String, ocid: String): EnquiryCreateData {
         val uri = genTendersUri(cpid = cpid, ocid = ocid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, EnquiryCreateData::class.java)
     }
 
-    override suspend fun getFsCreateData(cpid: String): FsCreateData {
+    override fun getFsCreateData(cpid: String): FsCreateData {
         val uri = genBudgetsUri(cpid, cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, FsCreateData::class.java)
     }
 
-    override suspend fun getPnCreateData(cpid: String): PnCreateData {
+    override fun getPnCreateData(cpid: String): PnCreateData {
         val uri = genBudgetsUri(cpid, cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, PnCreateData::class.java)
     }
 
-    override suspend fun getEiUpdateData(cpid: String): EiUpdateData {
+    override fun getEiUpdateData(cpid: String): EiUpdateData {
         val uri = genBudgetsUri(cpid, cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, EiUpdateData::class.java)
     }
 
-    override suspend fun getFsUpdateEiData(cpid: String): FsUpdateEiData {
+    override fun getFsUpdateEiData(cpid: String): FsUpdateEiData {
         val uri = genBudgetsUri(cpid, cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, FsUpdateEiData::class.java)
     }
 
-    override suspend fun getFsUpdateFsData(cpid: String, ocid: String): FsUpdateFsData {
+    override fun getFsUpdateFsData(cpid: String, ocid: String): FsUpdateFsData {
         val uri = genBudgetsUri(cpid = cpid, ocid = ocid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, FsUpdateFsData::class.java)
     }
 
-    override suspend fun getCnUpdateData(cpid: String): CnUpdateData {
+    override fun getCnUpdateData(cpid: String): CnUpdateData {
         val uri = genTendersUri(cpid = cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, CnUpdateData::class.java)
     }
 
-    override suspend fun getPnUpdateData(cpid: String): PnUpdateData {
+    override fun getPnUpdateData(cpid: String): PnUpdateData {
         val uri = genTendersUri(cpid = cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, PnUpdateData::class.java)
     }
 
-    override suspend fun getBidUpdateData(cpid: String): BidUpdateData {
+    override fun getBidUpdateData(cpid: String): BidUpdateData {
         val uri = genTendersUri(cpid = cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, BidUpdateData::class.java)
     }
 
-    override suspend fun getCancellationTenderData(cpid: String): CancellationTenderData {
+    override fun getCancellationTenderData(cpid: String): CancellationTenderData {
         val uri = genTendersUri(cpid = cpid)
-        return webClientBuilder.execute(uri) { it.awaitFirst() }
+        return remoteService.execute(uri, CancellationTenderData::class.java)
     }
 
     private fun genBudgetsUri(cpid: String, ocid: String) = UriComponentsBuilder.fromHttpUrl(PUBLIC_POINT_DOMAIN)
         .pathSegment("budgets")
         .pathSegment(cpid)
         .pathSegment(ocid)
-        .toUriString()
+        .build(emptyMap<String, Any>())
 
     private fun genTendersUri(cpid: String, ocid: String) = UriComponentsBuilder.fromHttpUrl(PUBLIC_POINT_DOMAIN)
         .pathSegment("tenders")
         .pathSegment(cpid)
         .pathSegment(ocid)
-        .toUriString()
+        .build(emptyMap<String, Any>())
 
     private fun genTendersUri(cpid: String) = UriComponentsBuilder.fromHttpUrl(PUBLIC_POINT_DOMAIN)
         .pathSegment("tenders")
         .pathSegment(cpid)
-        .toUriString()
+        .build(emptyMap<String, Any>())
 }

@@ -10,13 +10,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface FsUpdateService {
-    fun update(queryParameters: FsUpdateParameters): Mono<String>
+    fun update(queryParameters: FsUpdateParameters): String
 }
 
 @Service
@@ -25,7 +23,7 @@ class FsUpdateServiceImpl(private val formTemplateService: FormTemplateService,
 
     private val updateTemplate = formTemplateService[KindTemplate.UPDATE, KindEntity.FS]
 
-    override fun update(queryParameters: FsUpdateParameters): Mono<String> = mono {
+    override fun update(queryParameters: FsUpdateParameters): String {
         val ocid = queryParameters.ocid.value
         val cpid = queryParameters.ocid.toCPID().value
 
@@ -44,7 +42,7 @@ class FsUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             uris = uris(queryParameters)
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = updateTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

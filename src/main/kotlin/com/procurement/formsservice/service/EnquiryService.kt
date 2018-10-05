@@ -3,20 +3,18 @@ package com.procurement.formsservice.service
 import com.procurement.formsservice.domain.mdm.MDMKind
 import com.procurement.formsservice.model.enquiry.create.EnquiryCreateContext
 import com.procurement.formsservice.model.enquiry.create.EnquiryCreateParameters
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface EnquiryService {
-    fun create(queryParameters: EnquiryCreateParameters): Mono<String>
+    fun create(queryParameters: EnquiryCreateParameters): String
 }
 
 @Service
 class EnquiryServiceImpl(private val formTemplateService: FormTemplateService) : EnquiryService {
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.ENQUIRY]
 
-    override fun create(queryParameters: EnquiryCreateParameters): Mono<String> = mono {
+    override fun create(queryParameters: EnquiryCreateParameters): String {
         queryParameters.lotid.takeIf { it.isNotEmpty() }
 
         val data = EnquiryCreateContext(
@@ -25,7 +23,7 @@ class EnquiryServiceImpl(private val formTemplateService: FormTemplateService) :
             ),
             uris = uris(queryParameters)
         )
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = createTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

@@ -10,7 +10,6 @@ import com.procurement.formsservice.model.bid.update.BidUpdateParameters
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -42,23 +41,22 @@ class BidUpdateServiceTest : AbstractBase() {
     @Test
     fun test() {
         val params = genBidUpdateParameters()
-        runBlocking {
-            whenever(publicPointService.getBidUpdateData(any()))
-                .thenReturn(DATA_FOR_BID)
 
-            val json = service.update(params).block()
-            assertNotNull(json)
-        }
+        whenever(publicPointService.getBidUpdateData(any()))
+            .thenReturn(DATA_FOR_BID)
+
+        val json = service.update(params)
+        assertNotNull(json)
     }
 
     private fun genBidUpdateParameters(): BidUpdateParameters =
         BidUpdateParameters(
             queryParameters = sensitiveQueryParameters(
-                mutableMapOf<String, List<String>>()
+                mutableMapOf<String, Array<String>>()
                     .apply {
-                        this["lang"] = listOf("EN")
-                        this["ocid"] = listOf(OCID)
-                        this["lot-id"] = listOf(LOT_ID)
+                        this["lang"] = arrayOf("EN")
+                        this["ocid"] = arrayOf(OCID)
+                        this["lot-id"] = arrayOf(LOT_ID)
                     }
             )
         )

@@ -3,7 +3,6 @@ package com.procurement.formsservice.service
 import com.procurement.formsservice.AbstractBase
 import com.procurement.formsservice.domain.query.v4.sensitiveQueryParameters
 import com.procurement.formsservice.model.award.update.AwardUpdateParameters
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -29,19 +28,17 @@ class AwardServiceTest : AbstractBase() {
     @Test
     fun test() {
         val params = genParams()
-        runBlocking {
-            val json = service.update(params).block()
-            assertNotNull(json)
-        }
+        val json = service.update(params)
+        assertNotNull(json)
     }
 
     private fun genParams(): AwardUpdateParameters =
         AwardUpdateParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
                 .apply {
-                    this["lang"] = listOf("EN")
-                    this["award-id"] = listOf(AWARD_ID)
-                    this["lot-id"] = listOf(LOT_ID)
+                    this["lang"] = arrayOf("EN")
+                    this["award-id"] = arrayOf(AWARD_ID)
+                    this["lot-id"] = arrayOf(LOT_ID)
                 }
             )
         )

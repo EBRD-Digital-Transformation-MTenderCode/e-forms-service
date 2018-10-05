@@ -7,13 +7,12 @@ import com.procurement.formsservice.AbstractBase
 import com.procurement.formsservice.domain.query.v4.sensitiveQueryParameters
 import com.procurement.formsservice.exception.query.QueryParameterStateException
 import com.procurement.formsservice.model.fs.create.FsCreateData
-import com.procurement.formsservice.model.fs.create.FsFunder
 import com.procurement.formsservice.model.fs.create.FsCreateParameters
+import com.procurement.formsservice.model.fs.create.FsFunder
 import com.procurement.formsservice.model.fs.create.FsPayer
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
@@ -66,38 +65,39 @@ class FsCreateServiceTest : AbstractBase() {
     @MethodSource("genTestData")
     fun test(fsFunder: FsFunder, fsPayer: FsPayer, isEuropeanUnionFunded: Boolean) {
         val params = genFsCreateParameters(fsFunder, fsPayer, isEuropeanUnionFunded)
-        runBlocking {
-            whenever(publicPointService.getFsCreateData(any()))
-                .thenReturn(EI_FOR_FS)
 
-            when {
-                fsFunder == FsFunder.BUYER && fsPayer == FsPayer.FUNDER -> {
-                    assertThrows(QueryParameterStateException::class.java) {
-                        service.create(params).block()
-                    }
+        whenever(publicPointService.getFsCreateData(any()))
+            .thenReturn(EI_FOR_FS)
+
+        when {
+            fsFunder == FsFunder.BUYER && fsPayer == FsPayer.FUNDER -> {
+                assertThrows(QueryParameterStateException::class.java) {
+                    service.create(params)
                 }
-                fsFunder == FsFunder.STATE && fsPayer == FsPayer.FUNDER -> {
-                    assertThrows(QueryParameterStateException::class.java) {
-                        service.create(params).block()
-                    }
+            }
+            fsFunder == FsFunder.STATE && fsPayer == FsPayer.FUNDER -> {
+                assertThrows(QueryParameterStateException::class.java) {
+                    service.create(params)
                 }
-                else -> {
-                    val json = service.create(params)
-                    assertNotNull(json)
-                }
+            }
+            else -> {
+                val json = service.create(params)
+                assertNotNull(json)
             }
         }
     }
 
-    private fun genFsCreateParameters(fsFunder: FsFunder, fsPayer: FsPayer, isEuropeanUnionFunded: Boolean): FsCreateParameters =
+    private fun genFsCreateParameters(fsFunder: FsFunder,
+                                      fsPayer: FsPayer,
+                                      isEuropeanUnionFunded: Boolean): FsCreateParameters =
         FsCreateParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
                 .apply {
-                    this["lang"] = listOf("RU")
-                    this["ocid"] = listOf(OCID)
-                    this["funder"] = listOf(fsFunder.name)
-                    this["payer"] = listOf(fsPayer.name)
-                    this["isEuropeanUnionFunded"] = listOf(isEuropeanUnionFunded.toString())
+                    this["lang"] = arrayOf("RU")
+                    this["ocid"] = arrayOf(OCID)
+                    this["funder"] = arrayOf(fsFunder.name)
+                    this["payer"] = arrayOf(fsPayer.name)
+                    this["isEuropeanUnionFunded"] = arrayOf(isEuropeanUnionFunded.toString())
                 }
             )
         )

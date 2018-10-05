@@ -12,13 +12,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface CnCreateService {
-    fun create(queryParameters: CnCreateParameters): Mono<String>
+    fun create(queryParameters: CnCreateParameters): String
 }
 
 @Service
@@ -28,7 +26,7 @@ class CnCreateServiceImpl(private val formTemplateService: FormTemplateService,
     CnCreateService {
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.CN]
 
-    override fun create(queryParameters: CnCreateParameters): Mono<String> = mono {
+    override fun create(queryParameters: CnCreateParameters): String {
         val release: CnCreateData.Release =
             publicPointService.getCnCreateData(queryParameters.cpid.value).releases[0]
 
@@ -54,14 +52,14 @@ class CnCreateServiceImpl(private val formTemplateService: FormTemplateService,
             budget = budget(release)
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = createTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)
         )
     }
 
-    private suspend fun validation(queryParameters: CnCreateParameters, release: CnCreateData.Release) {
+    private fun validation(queryParameters: CnCreateParameters, release: CnCreateData.Release) {
         val lang = queryParameters.lang
         val country = release.parties[0].address.addressDetails.country.id
 
@@ -182,7 +180,7 @@ class CnCreateServiceImpl(private val formTemplateService: FormTemplateService,
         release.planning.budget.amount.let { amount ->
             CnCreateContext.Budget(
                 amount = CnCreateContext.Budget.Amount(
-                currency = amount?.currency ?: throw EiNotContainFsException())
+                    currency = amount?.currency ?: throw EiNotContainFsException())
             )
         }
 }

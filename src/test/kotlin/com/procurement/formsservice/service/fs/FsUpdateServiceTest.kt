@@ -5,28 +5,14 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import com.procurement.formsservice.AbstractBase
 import com.procurement.formsservice.domain.query.v4.sensitiveQueryParameters
-import com.procurement.formsservice.exception.query.QueryParameterStateException
-import com.procurement.formsservice.model.ei.update.EiUpdateData
-import com.procurement.formsservice.model.fs.create.FsCreateData
-import com.procurement.formsservice.model.fs.create.FsFunder
-import com.procurement.formsservice.model.fs.create.FsCreateParameters
-import com.procurement.formsservice.model.fs.create.FsPayer
 import com.procurement.formsservice.model.fs.update.FsUpdateEiData
 import com.procurement.formsservice.model.fs.update.FsUpdateFsData
 import com.procurement.formsservice.model.fs.update.FsUpdateParameters
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
-import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
-import kotlin.streams.asStream
 
 class FsUpdateServiceTest : AbstractBase() {
     private lateinit var formTemplateService: FormTemplateService
@@ -55,22 +41,21 @@ class FsUpdateServiceTest : AbstractBase() {
     @Test
     fun test() {
         val params = genFsUpdateParameters()
-        runBlocking {
-            whenever(publicPointService.getFsUpdateEiData(any()))
-                .thenReturn(FS_UPDATE_FI_DATA)
-            whenever(publicPointService.getFsUpdateFsData(any(), any()))
-                .thenReturn(FS_UPDATE_FS_DATA)
 
-            service.update(params).block()
-        }
+        whenever(publicPointService.getFsUpdateEiData(any()))
+            .thenReturn(FS_UPDATE_FI_DATA)
+        whenever(publicPointService.getFsUpdateFsData(any(), any()))
+            .thenReturn(FS_UPDATE_FS_DATA)
+
+        service.update(params)
     }
 
     private fun genFsUpdateParameters(): FsUpdateParameters =
         FsUpdateParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
                 .apply {
-                    this["lang"] = listOf("EN")
-                    this["ocid"] = listOf(OCID)
+                    this["lang"] = arrayOf("EN")
+                    this["ocid"] = arrayOf(OCID)
                 }
             )
         )

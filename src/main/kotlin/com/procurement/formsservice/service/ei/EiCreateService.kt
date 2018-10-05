@@ -9,13 +9,11 @@ import com.procurement.formsservice.repository.MDMRepository
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface EiCreateService {
-    fun create(queryParameters: EiCreateParameters): Mono<String>
+    fun create(queryParameters: EiCreateParameters): String
 }
 
 @Service
@@ -24,7 +22,7 @@ class EiCreateServiceImpl(private val formTemplateService: FormTemplateService,
     EiCreateService {
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.EI]
 
-    override fun create(queryParameters: EiCreateParameters): Mono<String> = mono {
+    override fun create(queryParameters: EiCreateParameters): String {
 
         validation(queryParameters)
 
@@ -42,14 +40,14 @@ class EiCreateServiceImpl(private val formTemplateService: FormTemplateService,
             )
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = createTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)
         )
     }
 
-    private suspend fun validation(queryParameters: EiCreateParameters) {
+    private fun validation(queryParameters: EiCreateParameters) {
         val lang = queryParameters.lang
         val country = queryParameters.country
 

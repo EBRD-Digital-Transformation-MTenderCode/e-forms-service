@@ -5,26 +5,14 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import com.procurement.formsservice.AbstractBase
 import com.procurement.formsservice.domain.query.v4.sensitiveQueryParameters
-import com.procurement.formsservice.model.cn.create.CnCreateData
-import com.procurement.formsservice.model.cn.create.CnCreateParameters
-import com.procurement.formsservice.model.cn.create.CnPmd
-import com.procurement.formsservice.model.cn.create.CnProcuringEntity
-import com.procurement.formsservice.model.cn.create.CnResponsibleContactPerson
 import com.procurement.formsservice.model.cn.update.CnUpdateData
 import com.procurement.formsservice.model.cn.update.CnUpdateParameters
-import com.procurement.formsservice.repository.MDMRepository
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
-import kotlin.streams.asStream
 
 class CnUpdateServiceTest : AbstractBase() {
     private lateinit var formTemplateService: FormTemplateService
@@ -53,21 +41,20 @@ class CnUpdateServiceTest : AbstractBase() {
     @Test
     fun update() {
         val params = genParams()
-        runBlocking {
-            whenever(publicPointService.getCnUpdateData(any()))
-                .thenReturn(DATA_FOR_UPDATE_CN)
 
-            val json = service.update(params).block()
-            assertNotNull(json)
-        }
+        whenever(publicPointService.getCnUpdateData(any()))
+            .thenReturn(DATA_FOR_UPDATE_CN)
+
+        val json = service.update(params)
+        assertNotNull(json)
     }
 
     private fun genParams(): CnUpdateParameters =
         CnUpdateParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
                 .apply {
-                    this["lang"] = listOf("EN")
-                    this["ocid"] = listOf(OCID)
+                    this["lang"] = arrayOf("EN")
+                    this["ocid"] = arrayOf(OCID)
                 }
             )
         )

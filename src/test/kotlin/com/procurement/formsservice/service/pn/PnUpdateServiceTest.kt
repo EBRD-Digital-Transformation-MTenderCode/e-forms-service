@@ -10,7 +10,6 @@ import com.procurement.formsservice.model.pn.update.PnUpdateParameters
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.FormTemplateServiceImpl
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.runBlocking
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -42,22 +41,21 @@ class PnUpdateServiceTest : AbstractBase() {
     @Test
     fun update() {
         val params = genParams()
-        runBlocking {
-            whenever(publicPointService.getPnUpdateData(any()))
-                .thenReturn(DATA_FOR_UPDATE_PN)
 
-            val json = service.update(params).block()
-            assertNotNull(json)
-        }
+        whenever(publicPointService.getPnUpdateData(any()))
+            .thenReturn(DATA_FOR_UPDATE_PN)
+
+        val json = service.update(params)
+        assertNotNull(json)
     }
 
     private fun genParams(): PnUpdateParameters =
         PnUpdateParameters(
-            queryParameters = sensitiveQueryParameters(mutableMapOf<String, List<String>>()
-                                                           .apply {
-                                                               this["lang"] = listOf("EN")
-                                                               this["ocid"] = listOf(OCID)
-                                                           }
+            queryParameters = sensitiveQueryParameters(mutableMapOf<String, Array<String>>()
+                .apply {
+                    this["lang"] = arrayOf("EN")
+                    this["ocid"] = arrayOf(OCID)
+                }
             )
         )
 

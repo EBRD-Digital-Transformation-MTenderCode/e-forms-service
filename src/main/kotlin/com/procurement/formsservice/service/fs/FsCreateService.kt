@@ -4,20 +4,18 @@ import com.procurement.formsservice.domain.mdm.MDMKind
 import com.procurement.formsservice.exception.query.QueryParameterStateException
 import com.procurement.formsservice.model.fs.create.FsCreateContext
 import com.procurement.formsservice.model.fs.create.FsCreateData
-import com.procurement.formsservice.model.fs.create.FsFunder
 import com.procurement.formsservice.model.fs.create.FsCreateParameters
+import com.procurement.formsservice.model.fs.create.FsFunder
 import com.procurement.formsservice.model.fs.create.FsPayer
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface FsCreateService {
-    fun create(queryParameters: FsCreateParameters): Mono<String>
+    fun create(queryParameters: FsCreateParameters): String
 }
 
 @Service
@@ -26,7 +24,7 @@ class FsCreateServiceImpl(private val formTemplateService: FormTemplateService,
     FsCreateService {
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.FS]
 
-    override fun create(queryParameters: FsCreateParameters): Mono<String> = mono {
+    override fun create(queryParameters: FsCreateParameters): String {
         validateParameters(queryParameters)
 
         val release: FsCreateData.Release =
@@ -52,7 +50,7 @@ class FsCreateServiceImpl(private val formTemplateService: FormTemplateService,
             budget = budget
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = createTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)
@@ -62,7 +60,8 @@ class FsCreateServiceImpl(private val formTemplateService: FormTemplateService,
     private fun Funder(queryParameters: FsCreateParameters, buyer: FsCreateContext.Buyer): FsCreateContext.Funder =
         FsCreateContext.Funder(uris = funderUris(queryParameters, buyer))
 
-    private fun funderUris(queryParameters: FsCreateParameters, buyer: FsCreateContext.Buyer): FsCreateContext.Funder.Uris {
+    private fun funderUris(queryParameters: FsCreateParameters,
+                           buyer: FsCreateContext.Buyer): FsCreateContext.Funder.Uris {
         val countryId = buyer.address.country.id
         val regionId = buyer.address.region.id
         val lang = queryParameters.lang
@@ -89,7 +88,8 @@ class FsCreateServiceImpl(private val formTemplateService: FormTemplateService,
     private fun Payer(queryParameters: FsCreateParameters, buyer: FsCreateContext.Buyer): FsCreateContext.Payer =
         FsCreateContext.Payer(uris = payerUris(queryParameters, buyer))
 
-    private fun payerUris(queryParameters: FsCreateParameters, buyer: FsCreateContext.Buyer): FsCreateContext.Payer.Uris {
+    private fun payerUris(queryParameters: FsCreateParameters,
+                          buyer: FsCreateContext.Buyer): FsCreateContext.Payer.Uris {
         val countryId = buyer.address.country.id
         val regionId = buyer.address.region.id
         val lang = queryParameters.lang

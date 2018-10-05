@@ -8,13 +8,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface EiUpdateService {
-    fun update(queryParameters: EiUpdateParameters): Mono<String>
+    fun update(queryParameters: EiUpdateParameters): String
 }
 
 @Service
@@ -23,7 +21,7 @@ class EiUpdateServiceImpl(private val formTemplateService: FormTemplateService,
 
     private val updateTemplate = formTemplateService[KindTemplate.UPDATE, KindEntity.EI]
 
-    override fun update(queryParameters: EiUpdateParameters): Mono<String> = mono {
+    override fun update(queryParameters: EiUpdateParameters): String {
         val release: EiUpdateData.Release =
             publicPointService.getEiUpdateData(queryParameters.cpid.value).releases[0]
 
@@ -36,7 +34,7 @@ class EiUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             buyer = buyer(release)
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = updateTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)

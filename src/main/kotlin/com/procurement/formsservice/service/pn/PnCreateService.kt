@@ -12,13 +12,11 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
-import kotlinx.coroutines.experimental.reactor.mono
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 import java.util.*
 
 interface PnCreateService {
-    fun create(queryParameters: PnCreateParameters): Mono<String>
+    fun create(queryParameters: PnCreateParameters): String
 }
 
 @Service
@@ -27,7 +25,7 @@ class PnCreateServiceImpl(private val formTemplateService: FormTemplateService,
                           private val mdmRepository: MDMRepository) : PnCreateService {
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.PN]
 
-    override fun create(queryParameters: PnCreateParameters): Mono<String> = mono {
+    override fun create(queryParameters: PnCreateParameters): String {
 
         val release: PnCreateData.Release = publicPointService.getPnCreateData(queryParameters.cpid.value).releases[0]
 
@@ -53,14 +51,14 @@ class PnCreateServiceImpl(private val formTemplateService: FormTemplateService,
             budget = budget(release)
         )
 
-        formTemplateService.evaluate(
+        return formTemplateService.evaluate(
             template = createTemplate,
             context = mapOf("context" to data),
             locale = Locale(queryParameters.lang)
         )
     }
 
-    private suspend fun validation(queryParameters: PnCreateParameters, release: PnCreateData.Release) {
+    private fun validation(queryParameters: PnCreateParameters, release: PnCreateData.Release) {
         val lang = queryParameters.lang
         val country = release.parties[0].address.addressDetails.country.id
 
