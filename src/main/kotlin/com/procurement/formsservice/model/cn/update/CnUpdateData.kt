@@ -124,8 +124,13 @@ data class CnUpdateData(
             data class Tender(
                 @JsonProperty("tenderPeriod") val tenderPeriod: TenderPeriod,
                 @JsonProperty("documents") val documents: List<Document>?,
+                @JsonProperty("enquiryPeriod") val enquiryPeriod: EnquiryPeriod?,
                 @JsonProperty("items") val items: List<Item>?,
                 @JsonProperty("lots") val lots: List<Lot>?) {
+
+                data class EnquiryPeriod(
+                    @JsonProperty("endDate") val endDate: String?
+                )
 
                 data class TenderPeriod(
                     @JsonProperty("endDate") val endDate: String?

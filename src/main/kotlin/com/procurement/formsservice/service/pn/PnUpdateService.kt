@@ -178,50 +178,64 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             }?.toList()
     }
 
-    private fun lots(cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot>? {
-        return cn.tender.lots?.map {
+    private fun lots(pn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot>? {
+        return pn.tender.lots?.map { lot ->
             PnUpdateContext.Tender.Lot(
-                id = it.id,
-                title = it.title,
-                description = it.description,
+                id = lot.id,
+                title = lot.title,
+                description = lot.description,
                 value = PnUpdateContext.Tender.Lot.Value(
-                    amount = it.value.amount,
-                    currency = it.value.currency
+                    amount = lot.value.amount,
+                    currency = lot.value.currency
                 ),
-                performance = PnUpdateContext.Tender.Lot.Performance(
-                    placeOfPerformance = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance(
-                        address = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address(
-                            streetAddress = it.placeOfPerformance.address.streetAddress,
-                            postalCode = it.placeOfPerformance.address.postalCode,
-                            country = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Country(
-                                id = it.placeOfPerformance.address.addressDetails.country.id,
-                                description = it.placeOfPerformance.address.addressDetails.country.description
-                            ),
-                            region = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Region(
-                                id = it.placeOfPerformance.address.addressDetails.region.id,
-                                description = it.placeOfPerformance.address.addressDetails.region.description
-                            ),
-                            locality = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Locality(
-                                scheme = it.placeOfPerformance.address.addressDetails.locality.scheme,
-                                id = it.placeOfPerformance.address.addressDetails.locality.id,
-                                description = it.placeOfPerformance.address.addressDetails.locality.description
-                            )
-                        ),
-                        description = it.placeOfPerformance.description
-                    ),
-                    deliveryPeriod = PnUpdateContext.Tender.Lot.Performance.DeliveryPeriod(
-                        startDate = it.contractPeriod.startDate,
-                        endDate = it.contractPeriod.endDate
-                    )
+                performance = performance(lot),
+                items = items(lotId = lot.id, cn = pn),
+                documents = documents(lotId = lot.id, cn = pn)
+            )
+        }
+    }
+
+    private fun performance(lot: PnUpdateData.Record.PN.Tender.Lot): PnUpdateContext.Tender.Lot.Performance {
+        val placeOfPerformance = lot.placeOfPerformance?.let {
+            PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance(
+                address = performanceAddress(lot.placeOfPerformance),
+                description = lot.placeOfPerformance.description
+            )
+        }
+
+        return PnUpdateContext.Tender.Lot.Performance(
+            placeOfPerformance = placeOfPerformance,
+            deliveryPeriod = PnUpdateContext.Tender.Lot.Performance.DeliveryPeriod(
+                startDate = lot.contractPeriod.startDate,
+                endDate = lot.contractPeriod.endDate
+            )
+        )
+    }
+
+    private fun performanceAddress(placeOfPerformance: PnUpdateData.Record.PN.Tender.Lot.PlaceOfPerformance): PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address? {
+        return placeOfPerformance.address?.let { address ->
+            PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address(
+                streetAddress = address.streetAddress,
+                postalCode = address.postalCode,
+                country = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Country(
+                    id = address.addressDetails.country.id,
+                    description = address.addressDetails.country.description
                 ),
-                items = items(lotId = it.id, cn = cn),
-                documents = documents(lotId = it.id, cn = cn)
+                region = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Region(
+                    id = address.addressDetails.region.id,
+                    description = address.addressDetails.region.description
+                ),
+                locality = PnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Locality(
+                    scheme = address.addressDetails.locality.scheme,
+                    id = address.addressDetails.locality.id,
+                    description = address.addressDetails.locality.description
+                )
             )
         }
     }
 
     private fun items(lotId: String, cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Item>? =
-        cn.tender.items?.filter {
+        cn.tender.items?.asSequence()?.filter {
             it.relatedLot == lotId
         }?.map { item ->
             PnUpdateContext.Tender.Lot.Item(
@@ -254,7 +268,7 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                     )
                 }
             )
-        }
+        }?.toList()
 
     private fun documents(lotId: String, cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Document>? =
         cn.tender.documents?.asSequence()

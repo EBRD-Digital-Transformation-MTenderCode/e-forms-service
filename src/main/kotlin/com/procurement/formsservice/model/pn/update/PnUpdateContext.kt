@@ -105,11 +105,11 @@ class PnUpdateContext(
             )
 
             data class Performance(
-                val placeOfPerformance: PlaceOfPerformance,
+                val placeOfPerformance: PlaceOfPerformance?, // PN.tender.lots[i].placeOfPerformance
                 val deliveryPeriod: DeliveryPeriod
             ) {
                 data class PlaceOfPerformance(
-                    val address: Address,
+                    val address: Address?, // PN.tender.lots[i].placeOfPerformance.address
                     val description: String? // PN.tender.lots[i].placeOfPerformance.description
                 ) {
                     data class Address(

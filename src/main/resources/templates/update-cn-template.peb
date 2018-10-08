@@ -493,7 +493,7 @@
                           "ocds": "tender::object/lots::array[object]/value::object/amount::number"
                         },
                         "currency": {
-                          "title": "{{ translate("cn", "section2.lots.description.value.amount.title") }}",
+                          "title": "{{ translate("cn", "section2.lots.description.value.currency.title") }}",
                           "type": "string",
                           "default": "{{ context.tender.currency }}",
                           "readOnly": true,
@@ -990,14 +990,27 @@
             "description": "{{ translate("cn", "section4.administrative.description") }}",
             "type": "object",
             "properties": {
-              "validityPeriod": {
+              "enquiryPeriod": {
                 "type": "object",
                 "required": [
                   "endDate"
                 ],
                 "properties": {
                   "endDate": {
-                    "title": "{{ translate("cn", "section4.administrative.endDate.title") }}",
+                    "title": "{{ translate("cn", "section4.administrative.enquiryPeriod.endDate.title") }}",
+                    "type": "string",
+                    "ocds": "tender::object/enquiryPeriod::object/endDate::string"
+                  }
+                }
+              },
+              "tenderPeriod": {
+                "type": "object",
+                "required": [
+                  "endDate"
+                ],
+                "properties": {
+                  "endDate": {
+                    "title": "{{ translate("cn", "section4.administrative.tenderPeriod.endDate.title") }}",
                     "type": "string",
                     "ocds": "tender::object/tenderPeriod::object/endDate::string"
                   }
@@ -1261,8 +1274,11 @@
         "legalBasis": "{{ context.tender.legalBasis }}"
       },
       "administrative": {
-        "validityPeriod": {
-          "endDate": "{{ context.tender.validityPeriod }}"
+        "enquiryPeriod": {
+          "endDate": "{{ context.tender.enquiryPeriod }}"
+        },
+        "enquiryPeriod": {
+          "endDate": "{{ context.tender.enquiryPeriod }}"
         }
       }
     },

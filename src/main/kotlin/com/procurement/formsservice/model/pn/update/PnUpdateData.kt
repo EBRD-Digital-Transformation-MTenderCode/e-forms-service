@@ -167,7 +167,7 @@ data class PnUpdateData(
                     @JsonProperty("description") val description: String,
                     @JsonProperty("value") val value: Value,
                     @JsonProperty("contractPeriod") val contractPeriod: ContractPeriod,
-                    @JsonProperty("placeOfPerformance") val placeOfPerformance: PlaceOfPerformance) {
+                    @JsonProperty("placeOfPerformance") val placeOfPerformance: PlaceOfPerformance?) {
 
                     data class Value(
                         @JsonProperty("amount") val amount: Double,
@@ -180,7 +180,7 @@ data class PnUpdateData(
                     )
 
                     data class PlaceOfPerformance(
-                        @JsonProperty("address") val address: Address,
+                        @JsonProperty("address") val address: Address?,
                         @JsonProperty("description") val description: String?) {
 
                         data class Address(

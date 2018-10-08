@@ -78,7 +78,8 @@ class CnUpdateContext(
         val lots: List<Lot>?, // CN.tender.lots
         val procurementMethodDetails: String, // MS.tender.procurementMethodDetails
         val legalBasis: String,  // MS.tender.legalBasis
-        val validityPeriod: String?, // CN.tender.tenderPeriod.endDate
+        val enquiryPeriod: String?, // CN.tender.enquiryPeriod?.endDate
+        val tenderPeriod: String?, // CN.tender.tenderPeriod.endDate
         val budgetBreakdown: List<BudgetBreakdown>,
         val uris: Uris,
         val currency: String // MS.tender.value.currency
