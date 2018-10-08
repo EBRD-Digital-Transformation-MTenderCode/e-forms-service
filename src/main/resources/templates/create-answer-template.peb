@@ -3,6 +3,9 @@
 {% import "../macros/translate" %}
     "schema": {
       "type": "object",
+      "required": [
+        "answer"
+      ],
       "properties": {
         "answer": {
           "title": "{{ translate("answer", "answer.title") }}",

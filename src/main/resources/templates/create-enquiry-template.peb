@@ -4,6 +4,10 @@
   "schema": {
     "title": "{{ translate("enquiry", "title") }}",
     "type": "object",
+    "required": [
+      "title",
+      "description"
+    ],
     "properties": {
       "title": {
         "title": "{{ translate("enquiry", "title.title") }}",
@@ -19,6 +23,9 @@
         "title": "{{ translate("enquiry", "author.title") }}",
         "description": "{{ translate("enquiry", "author.description") }}",
         "type": "object",
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "title": "{{ translate("enquiry", "author.name.title") }}",

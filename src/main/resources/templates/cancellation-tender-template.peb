@@ -1,57 +1,57 @@
 {# @pebvariable name="context" type="com.procurement.formsservice.model.cancellation.CancellationTenderContext" #}
 {
 {% import "../macros/translate" %}
-    "schema": {
-      "type": "object",
-      "properties": {
-        "title": "{{ translate("cancellation",  "title") }}",
-        "description": "{{ translate("cancellation",  "description") }}",
-        "tenderInfo": {
-          "type": "object",
-          "properties": {
-            "tenderTitle": {
-              "type": "string",
-              "readOnly": true
-            },
-            "tenderDescription": {
-              "type": "string",
-              "readOnly": true
-            }
+  "schema": {
+    "title": "{{ translate("cancellation",  "title") }}",
+    "description": "{{ translate("cancellation",  "description") }}",
+    "type": "object",
+    "properties": {
+      "tenderInfo": {
+        "type": "object",
+        "properties": {
+          "tenderTitle": {
+            "type": "string",
+            "readOnly": true
+          },
+          "tenderDescription": {
+            "type": "string",
+            "readOnly": true
           }
-        },
-        "cancellationInfo": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": {
-            "type": "object",
-            "required": [
-              "reason"
-            ],
-            "properties": {
-              "reason": {
-                "title": "{{ translate("cancellation",  "cancellationInfo.reason.title") }}",
-                "type": "string",
-                "enum": [
-                  "{{ translate("cancellation",  "cancellationInfo.reason.enum[0]") }}",
-                  "{{ translate("cancellation",  "cancellationInfo.reason.enum[1]") }}"
-                ],
-                "ocds": "amendments::array[object]/rationale::string"
-              },
-              "description": {
-                "title": "{{ translate("cancellation",  "cancellationInfo.description.title") }}",
-                "type": "string",
-                "ocds": "amendments::array[object]/description::string"
-              }
+        }
+      },
+      "cancellationInfo": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 1,
+        "items": {
+          "type": "object",
+          "required": [
+            "reason"
+          ],
+          "properties": {
+            "reason": {
+              "title": "{{ translate("cancellation",  "cancellationInfo.reason.title") }}",
+              "type": "string",
+              "enum": [
+                "{{ translate("cancellation",  "cancellationInfo.reason.enum[0]") }}",
+                "{{ translate("cancellation",  "cancellationInfo.reason.enum[1]") }}"
+              ],
+              "ocds": "amendments::array[object]/rationale::string"
+            },
+            "description": {
+              "title": "{{ translate("cancellation",  "cancellationInfo.description.title") }}",
+              "type": "string",
+              "ocds": "amendments::array[object]/description::string"
             }
           }
         }
       }
-    },
-    "data": {
-      "tenderInfo": {
-        "tenderTitle": "{{ context.tender.title }}",
-        "tenderDescription": "{{ context.tender.description}}"
-      }
     }
+  },
+  "data": {
+    "tenderInfo": {
+      "tenderTitle": "{{ context.tender.title }}",
+      "tenderDescription": "{{ context.tender.description}}"
+    }
+  }
 }
