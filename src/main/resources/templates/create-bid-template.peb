@@ -73,6 +73,7 @@
             "relatedLots": {
               "type": "array",
               "minItems": 1,
+              "maxItems": 1,
               "items": {
                 "type": "string",
                 "default": "{{ context.parameters.lotId }}",
@@ -435,6 +436,7 @@
       "bidRelatedLots": {
         "type": "array",
         "minItems": 1,
+        "maxItems": 1,
         "items": {
           "type": "string",
           "ocds": "bid::object/relatedLots::array[string]"
