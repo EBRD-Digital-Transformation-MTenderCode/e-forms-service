@@ -9,6 +9,8 @@ import com.procurement.formsservice.repository.MDMRepository
 import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -20,6 +22,10 @@ interface EiCreateService {
 class EiCreateServiceImpl(private val formTemplateService: FormTemplateService,
                           private val mdmRepository: MDMRepository) :
     EiCreateService {
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(EiCreateServiceImpl::class.java)
+    }
+
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.EI]
 
     override fun create(queryParameters: EiCreateParameters): String {
@@ -52,6 +58,7 @@ class EiCreateServiceImpl(private val formTemplateService: FormTemplateService,
         val country = queryParameters.country
 
         val countries = mdmRepository.countries(lang)
+        log.debug("Countries from MDM (Create Ei): ${countries.joinToString()}")
         if (!countries.contains(country))
             throw QueryParameterValidationException(
                 name = CommonQueryParametersBinder.COUNTRY.name,
@@ -59,6 +66,7 @@ class EiCreateServiceImpl(private val formTemplateService: FormTemplateService,
             )
 
         val schemesRegistration = mdmRepository.schemeRegistration(lang, country)
+        log.debug("Schemes from MDM (Create Ei): ${schemesRegistration.joinToString()}")
         if (!schemesRegistration.contains(queryParameters.identifierSchema))
             throw QueryParameterValidationException(
                 name = EiCreateParameters.IDENTIFIER_SCHEMA.name,

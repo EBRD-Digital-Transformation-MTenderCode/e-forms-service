@@ -12,6 +12,8 @@ import com.procurement.formsservice.service.FormTemplateService
 import com.procurement.formsservice.service.KindEntity
 import com.procurement.formsservice.service.KindTemplate
 import com.procurement.formsservice.service.PublicPointService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -23,6 +25,10 @@ interface PnCreateService {
 class PnCreateServiceImpl(private val formTemplateService: FormTemplateService,
                           private val publicPointService: PublicPointService,
                           private val mdmRepository: MDMRepository) : PnCreateService {
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(PnCreateServiceImpl::class.java)
+    }
+
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.PN]
 
     override fun create(queryParameters: PnCreateParameters): String {
@@ -63,6 +69,7 @@ class PnCreateServiceImpl(private val formTemplateService: FormTemplateService,
         val country = release.parties[0].address.addressDetails.country.id
 
         val pmds = mdmRepository.pmd(lang, country)
+        log.debug("PMDs from MDM (Create PN): ${pmds.joinToString()}")
         if (!pmds.contains(queryParameters.pmd.toString()))
             throw QueryParameterValidationException(
                 name = PnCreateParameters.PMD.name,
