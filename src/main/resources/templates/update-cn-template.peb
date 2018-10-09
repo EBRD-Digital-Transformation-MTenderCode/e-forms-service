@@ -1282,15 +1282,18 @@
       "method": {
         "procurementMethodDetails": "{{ context.tender.procurementMethodDetails }}",
         "legalBasis": "{{ context.tender.legalBasis }}"
-      },
-      "administrative": {
-        "enquiryPeriod": {
-          "endDate": "{{ context.tender.enquiryPeriod }}"
-        },
-        "enquiryPeriod": {
-          "endDate": "{{ context.tender.enquiryPeriod }}"
-        }
       }
+      {% if context.tender.enquiryPeriod != null and context.tender.tenderPeriod != null %}
+        ,
+        "administrative": {
+          "enquiryPeriod": {
+            "endDate": "{{ context.tender.enquiryPeriod }}"
+          },
+          "tenderPeriod": {
+            "endDate": "{{ context.tender.tenderPeriod }}"
+          }
+        }
+      {% endif %}
     },
     "budget": {
       {% if context.tender.budgetBreakdown != null %}
