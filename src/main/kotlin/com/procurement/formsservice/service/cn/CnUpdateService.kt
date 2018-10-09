@@ -181,43 +181,57 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
     }
 
     private fun lots(cn: CnUpdateData.Record.CN): List<CnUpdateContext.Tender.Lot>? {
-        return cn.tender.lots?.map {
+        return cn.tender.lots?.map { lot ->
             CnUpdateContext.Tender.Lot(
-                id = it.id,
-                title = it.title,
-                description = it.description,
+                id = lot.id,
+                title = lot.title,
+                description = lot.description,
                 value = CnUpdateContext.Tender.Lot.Value(
-                    amount = it.value.amount,
-                    currency = it.value.currency
+                    amount = lot.value.amount,
+                    currency = lot.value.currency
                 ),
-                performance = CnUpdateContext.Tender.Lot.Performance(
-                    placeOfPerformance = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance(
-                        address = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address(
-                            streetAddress = it.placeOfPerformance.address.streetAddress,
-                            postalCode = it.placeOfPerformance.address.postalCode,
-                            country = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Country(
-                                id = it.placeOfPerformance.address.addressDetails.country.id,
-                                description = it.placeOfPerformance.address.addressDetails.country.description
-                            ),
-                            region = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Region(
-                                id = it.placeOfPerformance.address.addressDetails.region.id,
-                                description = it.placeOfPerformance.address.addressDetails.region.description
-                            ),
-                            locality = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Locality(
-                                scheme = it.placeOfPerformance.address.addressDetails.locality.scheme,
-                                id = it.placeOfPerformance.address.addressDetails.locality.id,
-                                description = it.placeOfPerformance.address.addressDetails.locality.description
-                            )
-                        ),
-                        description = it.placeOfPerformance.description
-                    ),
-                    deliveryPeriod = CnUpdateContext.Tender.Lot.Performance.DeliveryPeriod(
-                        startDate = it.contractPeriod.startDate,
-                        endDate = it.contractPeriod.endDate
-                    )
+                performance = performance(lot),
+                items = items(lotId = lot.id, cn = cn),
+                documents = documents(lotId = lot.id, cn = cn)
+            )
+        }
+    }
+
+    private fun performance(lot: CnUpdateData.Record.CN.Tender.Lot): CnUpdateContext.Tender.Lot.Performance {
+        val placeOfPerformance = lot.placeOfPerformance?.let {
+            CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance(
+                address = performanceAddress(it),
+                description = it.description
+            )
+        }
+
+        return CnUpdateContext.Tender.Lot.Performance(
+            placeOfPerformance = placeOfPerformance,
+            deliveryPeriod = CnUpdateContext.Tender.Lot.Performance.DeliveryPeriod(
+                startDate = lot.contractPeriod.startDate,
+                endDate = lot.contractPeriod.endDate
+            )
+        )
+    }
+
+    private fun performanceAddress(placeOfPerformance: CnUpdateData.Record.CN.Tender.Lot.PlaceOfPerformance): CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address? {
+        return placeOfPerformance.address?.let { address ->
+            CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address(
+                streetAddress = address.streetAddress,
+                postalCode = address.postalCode,
+                country = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Country(
+                    id = address.addressDetails.country.id,
+                    description = address.addressDetails.country.description
                 ),
-                items = items(lotId = it.id, cn = cn),
-                documents = documents(lotId = it.id, cn = cn)
+                region = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Region(
+                    id = address.addressDetails.region.id,
+                    description = address.addressDetails.region.description
+                ),
+                locality = CnUpdateContext.Tender.Lot.Performance.PlaceOfPerformance.Address.Locality(
+                    scheme = address.addressDetails.locality.scheme,
+                    id = address.addressDetails.locality.id,
+                    description = address.addressDetails.locality.description
+                )
             )
         }
     }

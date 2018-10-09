@@ -936,6 +936,7 @@
                       "relatedLots": {
                         "type": "array",
                         "minItems": 1,
+                        "maxItems": 1,
                         "items": {
                           "type": "string",
                           "ocds": "tender::object/documents::array[object]/relatedLots::array[string]"
@@ -1028,6 +1029,9 @@
             "type": "array",
             "items": {
               "type": "object",
+              "required": [
+                "id"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
@@ -1036,6 +1040,10 @@
                 },
                 "budgetBreakdownAmount": {
                   "type": "object",
+                  "required": [
+                    "amount",
+                    "currency"
+                  ],
                   "properties": {
                     "amount": {
                       "type": "number",
@@ -1163,37 +1171,39 @@
                 }
               },
               "performance": {
-                "placeOfPerformance": {
-                  "address": {
-                    "location": {
-                      "country": {
-                        "id": "{{ lot.performance.placeOfPerformance.address.country.id }}",
-                        "description": "{{ lot.performance.placeOfPerformance.address.country.description }}"
-                      },
-                      "region": {
-                        "id": "{{ lot.performance.placeOfPerformance.address.region.id }}",
-                        "description": "{{ lot.performance.placeOfPerformance.address.region.description }}"
-                      },
-                      "locality": {
-                        "localityType": {% if lot.performance.placeOfPerformance.address.locality.scheme == "CUATM" %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[0]") }}"{% else %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[1]") }}"{% endif %},
-                        {% if lot.performance.placeOfPerformance.address.locality.scheme == "CUATM" %}"directory"{% else %}"manual"{% endif %}: {
-                          "locality": {
-                            "scheme": "{{ lot.performance.placeOfPerformance.address.locality.scheme }}",
-                            "id": "{{ lot.performance.placeOfPerformance.address.locality.id }}",
-                            "description": "{{ lot.performance.placeOfPerformance.address.locality.description }}"
+                {% if lot.performance.placeOfPerformance != null %}
+                  "placeOfPerformance": {
+                    "address": {
+                      "location": {
+                        "country": {
+                          "id": "{{ lot.performance.placeOfPerformance.address.country.id }}",
+                          "description": "{{ lot.performance.placeOfPerformance.address.country.description }}"
+                        },
+                        "region": {
+                          "id": "{{ lot.performance.placeOfPerformance.address.region.id }}",
+                          "description": "{{ lot.performance.placeOfPerformance.address.region.description }}"
+                        },
+                        "locality": {
+                          "localityType": {% if lot.performance.placeOfPerformance.address.locality.scheme == "CUATM" %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[0]") }}"{% else %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[1]") }}"{% endif %},
+                          {% if lot.performance.placeOfPerformance.address.locality.scheme == "CUATM" %}"directory"{% else %}"manual"{% endif %}: {
+                            "locality": {
+                              "scheme": "{{ lot.performance.placeOfPerformance.address.locality.scheme }}",
+                              "id": "{{ lot.performance.placeOfPerformance.address.locality.id }}",
+                              "description": "{{ lot.performance.placeOfPerformance.address.locality.description }}"
+                            }
                           }
                         }
+                      },
+                      "postalAddress": {
+                        "streetAddress": "{{ lot.performance.placeOfPerformance.address.streetAddress }}"
+                        {{ commaIf(lot.performance.placeOfPerformance.address.postalCode) }}
+                        {{ stringAttributeIf(name = "postalCode", value = lot.performance.placeOfPerformance.address.postalCode) }}
                       }
-                    },
-                    "postalAddress": {
-                      "streetAddress": "{{ lot.performance.placeOfPerformance.address.streetAddress }}"
-                      {{ commaIf(lot.performance.placeOfPerformance.address.postalCode) }}
-                      {{ stringAttributeIf(name = "postalCode", value = lot.performance.placeOfPerformance.address.postalCode) }}
                     }
-                  }
-                  {{ commaIf(lot.performance.placeOfPerformance.description) }}
-                  {{ stringAttributeIf(name = "description", value = lot.performance.placeOfPerformance.description) }}
-                },
+                    {% if lot.performance.placeOfPerformance.address != null and lot.performance.placeOfPerformance.description != null %},{% endif %}
+                    {{ stringAttributeIf(name = "description", value = lot.performance.placeOfPerformance.description) }}
+                  },
+                {% endif %}
                 "deliveryPeriod": {
                   "startDate": "{{ lot.performance.deliveryPeriod.startDate }}",
                   "endDate": "{{ lot.performance.deliveryPeriod.endDate }}"
