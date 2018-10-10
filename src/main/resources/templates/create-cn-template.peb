@@ -889,7 +889,6 @@
             "title": "{{ translate("cn", "section2.lots.title") }}",
             "description": "{{ translate("cn", "section2.lots.description") }}",
             "type": "array",
-            "minItems": 1,
             "items": {
               "type": "object",
               "properties": {
@@ -1468,6 +1467,7 @@
         "properties": {
           "budgetBreakdown": {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "object",
               "required": [

@@ -21,7 +21,6 @@
       },
       "author": {
         "title": "{{ translate("enquiry", "author.title") }}",
-        "description": "{{ translate("enquiry", "author.description") }}",
         "type": "object",
         "required": [
           "name"
