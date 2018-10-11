@@ -885,19 +885,19 @@
                               },
                               "projectIdentifier": {
                                 "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectIdentifier.title") }}",
-                                "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectIdentifier.title") }}",
+                                "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectIdentifier.description") }}",
                                 "type": "string",
                                 "ocds": "planning::object/budget::object/europeanUnionFunding::object/projectIdentifier::string"
                               },
                               "projectName": {
                                 "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectName.title") }}",
-                                "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectName.title") }}",
+                                "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.projectName.description") }}",
                                 "type": "string",
                                 "ocds": "planning::object/budget::object/europeanUnionFunding::object/projectName::string"
                               },
                               "uri": {
                                 "title": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.uri.title") }}",
-                                "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.uri.title") }}",
+                                "description": "{{ translate("fs", "fsBudget.budgetProject.projectDetails.EUfunded.uri.description") }}",
                                 "type": "string",
                                 "ocds": "planning::object/budget::object/europeanUnionFunding::object/uri::string"
                               }
