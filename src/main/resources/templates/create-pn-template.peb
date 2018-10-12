@@ -1203,7 +1203,7 @@
                             "type": "object",
                             "properties": {
                               "unitClass": {
-                                "title": "{{ translate("pn", "section2.lots.items.quantity.title") }}",
+                                "title": "{{ translate("pn", "section2.lots.items.quantity.unitClass.title") }}",
                                 "type": "object",
                                 "source": "{{ context.uris.unitClass }}",
                                 "required": [

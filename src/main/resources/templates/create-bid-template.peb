@@ -2,7 +2,7 @@
 {
 {% import "../macros/translate" %}
   "schema": {
-    "title": "{{ translate("bid",  "title") }}",
+    "title": "{{ translate("bid", "title") }}",
     "type": "object",
     "properties": {
       {% if findSubString(context.parameters.ocid, ".*-EV-[0-9]{13}") %}
@@ -77,7 +77,7 @@
               "items": {
                 "type": "string",
                 "default": "{{ context.parameters.lotId }}",
-                "ocds": "bgit clone https://rotberry@bitbucket.org/ustudio-llc/form-templates.gitid::object/documents::array[object]/relatedLots::array[string]"
+                "ocds": "bid::object/documents::array[object]/relatedLots::array[string]"
               }
             }
           }

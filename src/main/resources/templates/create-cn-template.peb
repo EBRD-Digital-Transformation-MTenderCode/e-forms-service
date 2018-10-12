@@ -1206,7 +1206,7 @@
                             "type": "object",
                             "properties": {
                               "unitClass": {
-                                "title": "{{ translate("cn", "section2.lots.items.quantity.title") }}",
+                                "title": "{{ translate("cn", "section2.lots.items.quantity.unitClass.title") }}",
                                 "type": "object",
                                 "source": "{{ context.uris.unitClass }}",
                                 "required": [
