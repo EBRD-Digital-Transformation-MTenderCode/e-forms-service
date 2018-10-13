@@ -996,18 +996,6 @@
                   "startDate": {
                     "title": "{{ translate("pn", "section4.administrative.startDate.title") }}",
                     "type": "string",
-                    "enum": [
-                      "2018-01-01T00:00:00Z",
-                      "2018-04-01T00:00:00Z",
-                      "2018-07-01T00:00:00Z",
-                      "2018-10-01T00:00:00Z"
-                    ],
-                    "enumNames": [
-                      "{{ translate("pn", "section4.administrative.startDate.enumNames[0]") }}",
-                      "{{ translate("pn", "section4.administrative.startDate.enumNames[1]") }}",
-                      "{{ translate("pn", "section4.administrative.startDate.enumNames[2]") }}",
-                      "{{ translate("pn", "section4.administrative.startDate.enumNames[3]") }}"
-                    ],
                     "ocds": "tender::object/tenderPeriod::object/startDate::string"
                   }
                 }
