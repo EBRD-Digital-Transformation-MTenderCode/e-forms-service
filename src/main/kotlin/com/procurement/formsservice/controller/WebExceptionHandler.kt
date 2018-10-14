@@ -15,10 +15,10 @@ import com.procurement.formsservice.exception.query.QueryParameterValidationExce
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import reactor.core.publisher.Mono
 
 @ControllerAdvice
 class WebExceptionHandler {
@@ -31,68 +31,63 @@ class WebExceptionHandler {
         log.error(exception.message)
 
         return ResponseEntity.status(exception.code ?: HttpStatus.INTERNAL_SERVER_ERROR)
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
             .body(exception.payload)
     }
 
     @ExceptionHandler(value = [TemplateEvaluateException::class])
-    fun templateEvaluate(exception: TemplateEvaluateException): Mono<ResponseEntity<*>> {
+    fun templateEvaluate(exception: TemplateEvaluateException): ResponseEntity<*> {
         log.error(exception.message, exception)
 
-        return Mono.just(
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(
-                    ErrorRS(
-                        errors = listOf(
-                            ErrorRS.Error(
-                                code = CodesOfErrors.INTERNAL_SERVER_ERROR.code,
-                                description = exception.message!!
-                            )
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(
+                ErrorRS(
+                    errors = listOf(
+                        ErrorRS.Error(
+                            code = CodesOfErrors.INTERNAL_SERVER_ERROR.code,
+                            description = exception.message!!
                         )
                     )
                 )
-        )
+            )
     }
 
     @ExceptionHandler(value = [EiNotContainFsException::class])
-    fun eiNotContainFsException(exception: EiNotContainFsException): Mono<ResponseEntity<*>> {
+    fun eiNotContainFsException(exception: EiNotContainFsException): ResponseEntity<*> {
         log.error(exception.message, exception)
 
-        return Mono.just(
-            ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body(
-                    ErrorRS(
-                        errors = listOf(
-                            ErrorRS.Error(
-                                code = CodesOfErrors.EI_NOT_CONTAIN_FS.code,
-                                description = exception.message!!
-                            )
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+            .body(
+                ErrorRS(
+                    errors = listOf(
+                        ErrorRS.Error(
+                            code = CodesOfErrors.EI_NOT_CONTAIN_FS.code,
+                            description = exception.message!!
                         )
                     )
                 )
-        )
+            )
     }
 
     @ExceptionHandler(value = [LotNotFoundException::class])
-    fun lotNotFound(exception: LotNotFoundException): Mono<ResponseEntity<*>> {
+    fun lotNotFound(exception: LotNotFoundException): ResponseEntity<*> {
         log.error(exception.message, exception)
 
-        return Mono.just(
-            ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(
-                    ErrorRS(
-                        errors = listOf(
-                            ErrorRS.Error(
-                                code = CodesOfErrors.LOT_NOT_FOUND.code,
-                                description = exception.message!!
-                            )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(
+                ErrorRS(
+                    errors = listOf(
+                        ErrorRS.Error(
+                            code = CodesOfErrors.LOT_NOT_FOUND.code,
+                            description = exception.message!!
                         )
                     )
                 )
-        )
+            )
     }
 
     @ExceptionHandler(value = [QueryParameterException::class])
-    fun validationQueryParameters(exception: QueryParameterException): Mono<ResponseEntity<*>> {
+    fun validationQueryParameters(exception: QueryParameterException): ResponseEntity<*> {
         log.error(exception.message)
 
         val code: String
@@ -122,18 +117,16 @@ class WebExceptionHandler {
         }
         val description = exception.message!!
 
-        return Mono.just(
-            ResponseEntity.status(httpCode)
-                .body(
-                    ErrorRS(
-                        errors = listOf(
-                            ErrorRS.Error(
-                                code = code,
-                                description = description
-                            )
+        return ResponseEntity.status(httpCode)
+            .body(
+                ErrorRS(
+                    errors = listOf(
+                        ErrorRS.Error(
+                            code = code,
+                            description = description
                         )
                     )
                 )
-        )
+            )
     }
 }
