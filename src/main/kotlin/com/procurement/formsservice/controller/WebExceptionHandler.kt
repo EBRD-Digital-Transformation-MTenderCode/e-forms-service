@@ -1,5 +1,6 @@
 package com.procurement.formsservice.controller
 
+import com.procurement.formsservice.domain.CodesOfErrors
 import com.procurement.formsservice.domain.response.ErrorRS
 import com.procurement.formsservice.exception.TemplateEvaluateException
 import com.procurement.formsservice.exception.bid.LotNotFoundException
@@ -39,7 +40,16 @@ class WebExceptionHandler {
 
         return Mono.just(
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("")
+                .body(
+                    ErrorRS(
+                        errors = listOf(
+                            ErrorRS.Error(
+                                code = CodesOfErrors.INTERNAL_SERVER_ERROR.code,
+                                description = exception.message!!
+                            )
+                        )
+                    )
+                )
         )
     }
 
@@ -53,7 +63,7 @@ class WebExceptionHandler {
                     ErrorRS(
                         errors = listOf(
                             ErrorRS.Error(
-                                code = "ei.notContain.fs",
+                                code = CodesOfErrors.EI_NOT_CONTAIN_FS.code,
                                 description = exception.message!!
                             )
                         )
@@ -72,7 +82,7 @@ class WebExceptionHandler {
                     ErrorRS(
                         errors = listOf(
                             ErrorRS.Error(
-                                code = "lot.notFound",
+                                code = CodesOfErrors.LOT_NOT_FOUND.code,
                                 description = exception.message!!
                             )
                         )
@@ -90,27 +100,23 @@ class WebExceptionHandler {
 
         when (exception) {
             is QueryParameterMissingException -> {
-                code = "request.parameter.missing"
+                code = CodesOfErrors.REQUEST_PARAMETER_MISSING.code
                 httpCode = HttpStatus.BAD_REQUEST
             }
             is QueryParameterInvalidNumberException -> {
-                code = "request.parameter.invalidNumber"
+                code = CodesOfErrors.REQUEST_PARAMETER_INVALID_NUMBER.code
                 httpCode = HttpStatus.BAD_REQUEST
             }
             is QueryParameterTransformationException -> {
-                code = "request.parameter.invalidType"
+                code = CodesOfErrors.REQUEST_PARAMETER_INVALID_TYPE.code
                 httpCode = HttpStatus.BAD_REQUEST
             }
-//            is QueryParameterFiltrationException -> {
-//                code = "request.parameter.noValidValues"
-//                httpCode = HttpStatus.BAD_REQUEST
-//            }
             is QueryParameterValidationException -> {
-                code = "request.parameter.invalidValue"
+                code = CodesOfErrors.REQUEST_PARAMETER_INVALID_VALUE.code
                 httpCode = HttpStatus.BAD_REQUEST
             }
             is QueryParameterStateException -> {
-                code = "request.parameter.state"
+                code = CodesOfErrors.REQUEST_PARAMETER_STATE.code
                 httpCode = HttpStatus.UNPROCESSABLE_ENTITY
             }
         }
