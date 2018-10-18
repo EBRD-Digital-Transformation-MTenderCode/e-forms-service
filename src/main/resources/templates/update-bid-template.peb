@@ -71,6 +71,13 @@
                 "x_qualificationDocuments",
                 "x_eligibilityDocuments"
               ],
+              "enumNames": [
+                "{{ translate("bid", "documentType.enumNames[1]") }}",
+                "{{ translate("bid", "documentType.enumNames[2]") }}",
+                "{{ translate("bid", "documentType.enumNames[3]") }}",
+                "{{ translate("bid", "documentType.enumNames[4]") }}",
+                "{{ translate("bid", "documentType.enumNames[5]") }}"
+              ],
               "ocds": "bid::object/documents::array[object]/documentType::string"
             },
             "relatedLots": {

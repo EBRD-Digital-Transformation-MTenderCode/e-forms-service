@@ -63,9 +63,23 @@
                 "shortlistedFirms",
                 "winningBid",
                 "complaints",
-                "bidders",
                 "conflictOfInterest",
-                "cancellationDetails"
+                "cancellationDetails",
+                "contractDraft",
+                "contractArrangements",
+                "contractSchedule"
+              ],
+              "enumNames": [
+                "{{ translate("award", "documentType.enumNames[1]") }}",
+                "{{ translate("award", "documentType.enumNames[2]") }}",
+                "{{ translate("award", "documentType.enumNames[3]") }}",
+                "{{ translate("award", "documentType.enumNames[4]") }}",
+                "{{ translate("award", "documentType.enumNames[5]") }}",
+                "{{ translate("award", "documentType.enumNames[6]") }}",
+                "{{ translate("award", "documentType.enumNames[7]") }}",
+                "{{ translate("award", "documentType.enumNames[8]") }}",
+                "{{ translate("award", "documentType.enumNames[9]") }}",
+                "{{ translate("award", "documentType.enumNames[10]") }}"
               ],
               "ocds": "awards::object/documents::array[object]/documentType::string"
             },
