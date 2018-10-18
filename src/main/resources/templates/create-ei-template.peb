@@ -350,11 +350,6 @@
           "details": {
             "title": "{{ translate("ei", "eiBuyer.details.title") }}",
             "type": "object",
-            "required": [
-              "typeOfBuyer",
-              "mainGeneralActivity",
-              "mainSectoralActivity"
-            ],
             "properties": {
               "typeOfBuyer": {
                 "title": "{{ translate("ei", "eiBuyer.details.typeOfBuyer.title") }}",

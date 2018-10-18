@@ -16,7 +16,7 @@ data class EiUpdateData(
             @JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifier>?,
             @JsonProperty("address") val address: Address,
             @JsonProperty("contactPoint") val contactPoint: ContactPoint,
-            @JsonProperty("details") val details: Details) {
+            @JsonProperty("details") val details: Details?) {
 
             data class Address(
                 @JsonProperty("streetAddress") val streetAddress: String,
@@ -66,9 +66,9 @@ data class EiUpdateData(
             )
 
             data class Details(
-                @JsonProperty("typeOfBuyer") val typeOfBuyer: String,
-                @JsonProperty("mainGeneralActivity") val mainGeneralActivity: String,
-                @JsonProperty("mainSectoralActivity") val mainSectoralActivity: String
+                @JsonProperty("typeOfBuyer") val typeOfBuyer: String?,
+                @JsonProperty("mainGeneralActivity") val mainGeneralActivity: String?,
+                @JsonProperty("mainSectoralActivity") val mainSectoralActivity: String?
             )
         }
 

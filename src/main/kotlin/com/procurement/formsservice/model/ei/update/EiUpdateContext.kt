@@ -44,7 +44,7 @@ class EiUpdateContext(
         val address: Address,
         val identifier: Identifier,
         val additionalIdentifiers: List<AdditionalIdentifier>?,
-        val details: Details,
+        val details: Details?, // EI.parties[0].details
         val contactPoint: ContactPoint
     ) {
         data class Address(
@@ -86,9 +86,9 @@ class EiUpdateContext(
         )
 
         data class Details(
-            val typeOfBuyer: String, // EI.parties[0].details.typeOfBuyer
-            val mainGeneralActivity: String, // EI.parties[0].details.mainGeneralActivity
-            val mainSectoralActivity: String // EI.parties[0].details.mainSectoralActivity
+            val typeOfBuyer: String?, // EI.parties[0].details.typeOfBuyer
+            val mainGeneralActivity: String?, // EI.parties[0].details.mainGeneralActivity
+            val mainSectoralActivity: String? // EI.parties[0].details.mainSectoralActivity
         )
 
         data class ContactPoint(

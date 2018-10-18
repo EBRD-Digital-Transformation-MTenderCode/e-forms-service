@@ -138,11 +138,7 @@ class EiUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                     uri = it.uri
                 )
             },
-            details = EiUpdateContext.Buyer.Details(
-                typeOfBuyer = details.typeOfBuyer,
-                mainGeneralActivity = details.mainGeneralActivity,
-                mainSectoralActivity = details.mainSectoralActivity
-            ),
+            details = buyerDetails(details),
             contactPoint = EiUpdateContext.Buyer.ContactPoint(
                 name = contactPoint.name,
                 url = contactPoint.url,
@@ -153,78 +149,12 @@ class EiUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         )
     }
 
-//    private fun address(party: EiUpdateData.Release.Party): EiUpdateContext.Buyer.Address {
-//        val address = party.address
-//        val addressDetails = address.addressDetails
-//        return EiUpdateContext.Buyer.Address(
-//            country = country(addressDetails.country),
-//            region = region(addressDetails.region),
-//            locality = locality(addressDetails.locality),
-//            streetAddress = address.streetAddress,
-//            postalCode = address.postalCode
-//        )
-//    }
-
-//    private fun country(country: EiUpdateData.Release.Party.Address.AddressDetails.Country): EiUpdateContext.Buyer.Address.Country {
-//        return EiUpdateContext.Buyer.Address.Country(
-//            id = country.id,
-//            description = country.description
-//        )
-//    }
-
-//    private fun region(region: EiUpdateData.Release.Party.Address.AddressDetails.Region): EiUpdateContext.Buyer.Address.Region {
-//        return EiUpdateContext.Buyer.Address.Region(
-//            id = region.id,
-//            description = region.description
-//        )
-//    }
-
-//    private fun locality(locality: EiUpdateData.Release.Party.Address.AddressDetails.Locality): EiUpdateContext.Buyer.Address.Locality {
-//        return EiUpdateContext.Buyer.Address.Locality(
-//            scheme = locality.scheme,
-//            id = locality.id,
-//            description = locality.description
-//        )
-//    }
-
-//    private fun identifier(party: EiUpdateData.Release.Party): EiUpdateContext.Buyer.Identifier {
-//        val identifier = party.identifier
-//        return EiUpdateContext.Buyer.Identifier(
-//            scheme = identifier.scheme,
-//            id = identifier.id,
-//            legalName = identifier.legalName,
-//            uri = identifier.uri
-//        )
-//    }
-
-//    private fun additionalIdentifiers(party: EiUpdateData.Release.Party): List<EiUpdateContext.Buyer.AdditionalIdentifier>? {
-//        return party.additionalIdentifiers?.map {
-//            EiUpdateContext.Buyer.AdditionalIdentifier(
-//                scheme = it.scheme,
-//                id = it.id,
-//                legalName = it.legalName,
-//                uri = it.uri
-//            )
-//        }
-//    }
-//
-//    private fun details(party: EiUpdateData.Release.Party): EiUpdateContext.Buyer.Details {
-//        val details = party.details
-//        return EiUpdateContext.Buyer.Details(
-//            typeOfBuyer = details.typeOfBuyer,
-//            mainGeneralActivity = details.mainGeneralActivity,
-//            mainSectoralActivity = details.mainSectoralActivity
-//        )
-//    }
-//
-//    private fun contactPoint(party: EiUpdateData.Release.Party): EiUpdateContext.Buyer.ContactPoint {
-//        val contactPoint = party.contactPoint
-//        return EiUpdateContext.Buyer.ContactPoint(
-//            name = contactPoint.name,
-//            url = contactPoint.url,
-//            telephone = contactPoint.telephone,
-//            email = contactPoint.email,
-//            faxNumber = contactPoint.faxNumber
-//        )
-//    }
+    private fun buyerDetails(details: EiUpdateData.Release.Party.Details?): EiUpdateContext.Buyer.Details? =
+        details?.let {
+            EiUpdateContext.Buyer.Details(
+                typeOfBuyer = details.typeOfBuyer,
+                mainGeneralActivity = details.mainGeneralActivity,
+                mainSectoralActivity = details.mainSectoralActivity
+            )
+        }
 }

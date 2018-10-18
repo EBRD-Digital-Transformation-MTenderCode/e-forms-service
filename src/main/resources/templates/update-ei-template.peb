@@ -375,11 +375,6 @@
           "details": {
             "title": "{{ translate("ei", "eiBuyer.details.title") }}",
             "type": "object",
-            "required": [
-              "typeOfBuyer",
-              "mainGeneralActivity",
-              "mainSectoralActivity"
-            ],
             "properties": {
               "typeOfBuyer": {
                 "title": "{{ translate("ei", "eiBuyer.details.typeOfBuyer.title") }}",
@@ -594,11 +589,15 @@
           {% endfor %}
         ],
       {% endif %}
-      "details": {
-        "typeOfBuyer": "{{ context.buyer.details.typeOfBuyer }}",
-        "mainGeneralActivity": "{{ context.buyer.details.mainGeneralActivity }}",
-        "mainSectoralActivity": "{{ context.buyer.details.mainSectoralActivity }}"
-      },
+      {% if context.buyer.details != null %}
+        "details": {
+          {{ stringAttributeIf(name = "typeOfBuyer", value = context.buyer.details.typeOfBuyer) }}
+          {% if context.buyer.details.typeOfBuyer != null and (context.buyer.details.mainGeneralActivity != null or context.buyer.details.mainSectoralActivity != null) %},{% endif %}
+          {{ stringAttributeIf(name = "mainGeneralActivity", value = context.buyer.details.mainGeneralActivity) }}
+          {% if (context.buyer.details.typeOfBuyer != null or context.buyer.details.mainGeneralActivity != null) and context.buyer.details.mainSectoralActivity != null %},{% endif %}
+          {{ stringAttributeIf(name = "mainSectoralActivity", value = context.buyer.details.mainSectoralActivity) }}
+        },
+      {% endif %}
       "contactPoint": {
         "person": {
           "name": "{{ context.buyer.contactPoint.name }}"
