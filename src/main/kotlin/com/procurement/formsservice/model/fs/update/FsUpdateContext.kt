@@ -6,7 +6,8 @@ class FsUpdateContext(
     val funder: Funder?,
     val payer: Payer,
     val budget: Budget,
-    val uris: Uris
+    val uris: Uris,
+    val statusFS: String // FS.tender.status
 ) {
     data class Parameters(
         val ocid: String

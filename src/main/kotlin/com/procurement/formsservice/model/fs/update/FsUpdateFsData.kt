@@ -8,7 +8,10 @@ class FsUpdateFsData(
 
     data class Release(
         @JsonProperty("parties") val parties: List<Party>,
+        @JsonProperty("tender") val tender: Tender,
         @JsonProperty("planning") val planning: Planning) {
+
+        data class Tender(@JsonProperty("status") val status: String)
 
         data class Planning(
             @JsonProperty("budget") val budget: Budget,

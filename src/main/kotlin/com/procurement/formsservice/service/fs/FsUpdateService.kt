@@ -39,7 +39,8 @@ class FsUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             funder = funder(queryParameters = queryParameters, release = fsRelease),
             payer = payer(queryParameters = queryParameters, release = fsRelease),
             budget = budget(fsRelease),
-            uris = uris(queryParameters)
+            uris = uris(queryParameters),
+            statusFS = fsRelease.tender.status
         )
 
         return formTemplateService.evaluate(

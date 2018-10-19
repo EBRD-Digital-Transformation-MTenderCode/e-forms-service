@@ -765,7 +765,9 @@
                 "title": "{{ translate("fs", "fsBudget.budgetDetails.id.title") }}",
                 "description": "{{ translate("fs", "fsBudget.budgetDetails.id.description") }}",
                 "type": "string",
-                "readOnly": true,
+                {% if context.statusFS != "planning" %}
+                  "readOnly": true,
+                {% endif %}
                 "ocds": "planning::object/budget::object/id::string"
               }
             }
