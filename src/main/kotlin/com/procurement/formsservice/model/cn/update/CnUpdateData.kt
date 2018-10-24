@@ -126,7 +126,10 @@ data class CnUpdateData(
                 @JsonProperty("documents") val documents: List<Document>?,
                 @JsonProperty("enquiryPeriod") val enquiryPeriod: EnquiryPeriod?,
                 @JsonProperty("items") val items: List<Item>?,
-                @JsonProperty("lots") val lots: List<Lot>?) {
+                @JsonProperty("lots") val lots: List<Lot>?,
+                @JsonProperty("procurementMethodModalities") val procurementMethodModalities: List<String>?,
+                @JsonProperty("electronicAuctions") val electronicAuctions: ElectronicAuctions?
+                ) {
 
                 data class EnquiryPeriod(
                     @JsonProperty("endDate") val endDate: String?
@@ -219,6 +222,25 @@ data class CnUpdateData(
                                     @JsonProperty("description") val description: String
                                 )
                             }
+                        }
+                    }
+                }
+
+                data class ElectronicAuctions(
+                    @field:JsonProperty("details") @param:JsonProperty("details") val details: List<Detail>
+                ) {
+                    data class Detail(
+                        @param:JsonProperty("id") val id: String,
+                        @param:JsonProperty("relatedLot") val relatedLot: String,
+                        @param:JsonProperty("electronicAuctionModalities") val electronicAuctionModalities: List<ElectronicAuctionModality>
+                    ) {
+                        data class ElectronicAuctionModality(
+                            @param:JsonProperty("eligibleMinimumDifference") val eligibleMinimumDifference: EligibleMinimumDifference
+                        ) {
+                            data class EligibleMinimumDifference(
+                                @param:JsonProperty("amount") val amount: Double,
+                                @param:JsonProperty("currency") val currency: String
+                            )
                         }
                     }
                 }

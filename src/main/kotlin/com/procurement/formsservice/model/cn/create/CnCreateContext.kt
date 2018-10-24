@@ -6,12 +6,13 @@ class CnCreateContext(
     val lot: Lot,
     val uris: Uris,
     val buyer: Buyer?,
+    val mainProcurementCategory: String, // EI.tender.mainProcurementCategory
     val budget: Budget
 ) {
     data class Parameters(
         val procuringEntity: String,
         val responsibleContactPerson: String,
-        val pmd: String
+        val pmd: String // variants: "OT", "TEST_OT", "SV", "TEST_SV"
     )
 
     data class ProcuringEntity(val uris: Uris) {

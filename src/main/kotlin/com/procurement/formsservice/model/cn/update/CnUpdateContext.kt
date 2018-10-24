@@ -3,7 +3,8 @@ package com.procurement.formsservice.model.cn.update
 class CnUpdateContext(
     val parameters: Parameters,
     val procuringEntity: ProcuringEntity,
-    val tender: Tender
+    val tender: Tender,
+    val parentEntity: String // ocds-t1s2t3-MD-1532010121824->PN | EV<-1532010122650
 ) {
     data class Parameters(
         val ocid: String
@@ -76,6 +77,8 @@ class CnUpdateContext(
         val description: String, // MS.tender.description
         val documents: List<Document>?, // CN.tender.documents
         val lots: List<Lot>?, // CN.tender.lots
+        val procurementMethodModalities: String?, // CN.tender.procurementMethodModalities[0]
+        val electronicAuctions: List<ElectronicAuction>?, // CN.tender.electronicAuctions?.details
         val procurementMethodDetails: String, // MS.tender.procurementMethodDetails
         val legalBasis: String,  // MS.tender.legalBasis
         val enquiryPeriod: String?, // CN.tender.enquiryPeriod?.endDate
@@ -189,6 +192,17 @@ class CnUpdateContext(
                 val title: String?, // CN.tender.documents[relatedLots[0] = lot.id].title
                 val description: String?, // CN.tender.documents[relatedLots[0] = lot.id].description
                 val relatedLots: String // CN.tender.documents[relatedLots[0] = lot.id].relatedLots[0]
+            )
+        }
+
+        data class ElectronicAuction(
+            val id: String, // CN.tender.electronicAuctions?.details[i].id
+            val relatedLot: String, // CN.tender.electronicAuctions?.details[i].relatedLot
+            val value: Value
+        ) {
+            data class Value(
+                val amount: Double, // CN.tender.electronicAuctions?.details[i].electronicAuctionModalities[0].eligibleMinimumDifference.amount
+                val currency: String // CN.tender.electronicAuctions?.details[i].electronicAuctionModalities[0].eligibleMinimumDifference.currency
             )
         }
 

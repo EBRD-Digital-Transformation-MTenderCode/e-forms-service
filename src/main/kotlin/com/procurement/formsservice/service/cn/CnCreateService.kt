@@ -52,6 +52,7 @@ class CnCreateServiceImpl(private val formTemplateService: FormTemplateService,
                 pmd = queryParameters.pmd.name
             ),
             procuringEntity = CnCreateContext.ProcuringEntity(procuringEntityUris),
+            mainProcurementCategory = release.tender.mainProcurementCategory,
             lot = CnCreateContext.Lot(lotUris),
             uris = uris,
             buyer = buyer,
