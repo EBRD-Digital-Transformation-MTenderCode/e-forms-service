@@ -995,14 +995,14 @@
                   "type": "string",
                   "enum": ["electronicAuction"],
                   "enumNames": ["{{ translate("cn", "section2.modalities.procurementMethodModalities.enumNames[0]") }}"],
-                  {% if context.parentEntity == "PN" %}
+                  {#{% if context.parentEntity == "PN" %}
                     {% if (context.tender.pmd == "smallValue" or context.tender.pmd == "TEST smallValue") and (context.tender.mainProcurementCategory == "goods" or context.tender.mainProcurementCategory == "services") %}
                       "readOnly": true,
                       "default": ["electronicAuction"],
                     {% endif %}
                   {% else %}
                     "readOnly": true,
-                  {% endif %}
+                  {% endif %}#}
                   "ocds": "tender::object/procurementMethodModalities::array[string]"
                 }
               }
