@@ -84,6 +84,8 @@ class CnUpdateContext(
         val enquiryPeriod: String?, // CN.tender.enquiryPeriod?.endDate
         val tenderPeriod: String?, // CN.tender.tenderPeriod.endDate
         val budgetBreakdown: List<BudgetBreakdown>,
+        /*val pmd: String, // MS.tender.procurementMethodDetails
+        val mainProcurementCategory: String, // MS.tender.mainProcurementCategory*/
         val uris: Uris,
         val currency: String // MS.tender.value.currency
     ) {

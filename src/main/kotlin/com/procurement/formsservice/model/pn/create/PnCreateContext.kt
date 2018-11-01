@@ -11,7 +11,7 @@ class PnCreateContext(
     data class Parameters(
         val procuringEntity: String,
         val responsibleContactPerson: String,
-        val pmd: String
+        val pmd: String // variants: "OT", "TEST_OT", "SV", "TEST_SV"
     )
 
     data class ProcuringEntity(val uris: Uris) {
