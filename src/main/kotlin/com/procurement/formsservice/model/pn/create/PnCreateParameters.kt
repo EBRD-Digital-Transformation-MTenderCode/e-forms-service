@@ -17,54 +17,8 @@ enum class PnResponsibleContactPerson {
 }
 
 enum class PnPmd {
-    OT, RT, TEST_OT, TEST_RT;
+    OT, TEST_OT, SV, TEST_SV;
 }
-
-//class PnParameters private constructor(val lang: String,
-//                                       val cpid: CPID,
-//                                       val procuringEntity: PnProcuringEntity,
-//                                       val responsibleContactPerson: PnResponsibleContactPerson,
-//                                       val pmd: PnPmd) {
-//    companion object {
-//        val CPID = binder(name = "ocid", transformer = StringToCPIDTransformer)
-//
-//        private val allowableProcuringEntity = enumValues<PnProcuringEntity>().toSet()
-//        val PROCURING_ENTITY = binder(
-//            name = "procuringEntity",
-//            transformer = transformer(enumValues<PnProcuringEntity>()),
-//            validator = { allowableProcuringEntity.contains(it) }
-//        )
-//
-//        private val allowableResponsibleContactPerson = enumValues<PnResponsibleContactPerson>().toSet()
-//        val RESPONSIBLE_CONTRACT_PERSON = binder(
-//            name = "responsibleContactPerson",
-//            transformer = transformer(enumValues<PnResponsibleContactPerson>()),
-//            validator = { allowableResponsibleContactPerson.contains(it) }
-//        )
-//
-//        val PMD = binder(
-//            name = "pmd",
-//            transformer = transformer(enumValues<PnPmd>())
-//        )
-//
-//        fun create(queryParameters: QueryParameters,
-//                   mdmRepository: MDMRepository): PnParameters = queryParameters.let {
-//            val lang: String = it.bind(binder = LANG, default = { defaultLang })
-//            val cpid: CPID = it.bind(CPID)
-//            val procuringEntity: PnProcuringEntity = it.bind(PROCURING_ENTITY)
-//            val responsibleContactPerson: PnResponsibleContactPerson = it.bind(RESPONSIBLE_CONTRACT_PERSON)
-//            val pmd: PnPmd = it.bind(binder = PMD,
-//                validator = { value ->
-//                    runBlocking {
-//                        mdmRepository.schemeRegistration(lang, country).contains(value)
-//                    }
-//                }
-//            )
-//
-//            PnParameters(lang, cpid, procuringEntity, responsibleContactPerson, pmd)
-//        }
-//    }
-//}
 
 class PnCreateParameters(queryParameters: QueryParameters) {
     companion object {
