@@ -39,7 +39,8 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                 ocid = queryParameters.ocid.value
             ),
             procuringEntity = procuringEntity(queryParameters = queryParameters, ms = ms),
-            tender = tender(queryParameters = queryParameters, ms = ms, cn = cn)
+            tender = tender(queryParameters = queryParameters, ms = ms, cn = cn),
+            parentEntity = queryParameters.ocid.entity.toString()
         )
 
         return formTemplateService.evaluate(
@@ -148,6 +149,8 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             documents = tenderDocuments(cn),
             lots = lots(cn),
             procurementMethodDetails = ms.tender.procurementMethodDetails,
+            procurementMethodModalities = procurementMethodDetails(cn),
+            electronicAuctions = electronicAuctions(cn),
             legalBasis = ms.tender.legalBasis,
             enquiryPeriod = cn.tender.enquiryPeriod?.endDate,
             tenderPeriod = cn.tender.tenderPeriod.endDate,
@@ -196,6 +199,30 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             )
         }
     }
+
+    private fun procurementMethodDetails(cn: CnUpdateData.Record.CN): String? {
+        val procurementMethodModalities = cn.tender.procurementMethodModalities
+        return if (procurementMethodModalities != null && procurementMethodModalities.isNotEmpty())
+            procurementMethodModalities[0]
+        else
+            null
+    }
+
+    private fun electronicAuctions(cn: CnUpdateData.Record.CN): List<CnUpdateContext.Tender.ElectronicAuction>? =
+        cn.tender.electronicAuctions?.let { electronicAuction ->
+            electronicAuction.details
+                .map { detail ->
+                    CnUpdateContext.Tender.ElectronicAuction(
+                        id = detail.id,
+                        relatedLot = detail.relatedLot,
+                        value = CnUpdateContext.Tender.ElectronicAuction.Value(
+                            amount = detail.electronicAuctionModalities[0].eligibleMinimumDifference.amount,
+                            currency = detail.electronicAuctionModalities[0].eligibleMinimumDifference.currency
+                        )
+                    )
+
+                }
+        }
 
     private fun performance(lot: CnUpdateData.Record.CN.Tender.Lot): CnUpdateContext.Tender.Lot.Performance {
         val placeOfPerformance = lot.placeOfPerformance?.let {

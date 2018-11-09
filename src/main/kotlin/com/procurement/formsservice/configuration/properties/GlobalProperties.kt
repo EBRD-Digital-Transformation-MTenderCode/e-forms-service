@@ -1,6 +1,6 @@
 package com.procurement.formsservice.configuration.properties
 
 object GlobalProperties {
-    const val serviceId = "16"
+    const val serviceId = "11"
 }
 

@@ -11,8 +11,8 @@ data class CnCreateData(
         @JsonProperty("planning") val planning: Planning) {
 
         data class Tender(
-            @JsonProperty("classification") val classification: Classification) {
-
+            @JsonProperty("classification") val classification: Classification,
+            @JsonProperty("mainProcurementCategory") val mainProcurementCategory: String) {
             data class Classification(@JsonProperty("id") val id: String)
         }
 
