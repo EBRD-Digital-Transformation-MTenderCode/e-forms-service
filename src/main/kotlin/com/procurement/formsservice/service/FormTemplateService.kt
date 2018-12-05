@@ -12,6 +12,7 @@ import java.io.StringWriter
 import java.util.*
 
 enum class KindEntity(val value: String) {
+    AWARD_CONTRACT("ac"),
     ANSWER("answer"),
     AWARD("award"),
     BID("bid"),

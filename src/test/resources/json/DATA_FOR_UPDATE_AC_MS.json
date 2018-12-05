@@ -1,0 +1,203 @@
+{
+  "uri": "http://public.mtender.gov.md/tenders/ocds-b3wdp1-MD-1541833999619/ocds-b3wdp1-MD-1541833999619",
+  "version": "1.1",
+  "extensions": [
+    "https://raw.githubusercontent.com/open-contracting/ocds_bid_extension/v1.1.1/extension.json",
+    "https://raw.githubusercontent.com/open-contracting/ocds_enquiry_extension$/v1.1.1/extension.json"
+  ],
+  "publisher": {
+    "name": "M-Tender",
+    "uri": "https://www.mtender.gov.md"
+  },
+  "license": "http://opendefinition.org/licenses/",
+  "publicationPolicy": "http://opendefinition.org/licenses/",
+  "publishedDate": "2018-11-10T07:13:19Z",
+  "releases": [
+    {
+      "ocid": "ocds-b3wdp1-MD-1541833999619",
+      "id": "ocds-b3wdp1-MD-1541833999619-1543830192041",
+      "date": "2018-12-03T09:43:11Z",
+      "tag": [
+        "compiled"
+      ],
+      "initiationType": "tender",
+      "planning": {
+        "budget": {
+          "amount": {
+            "amount": 475708.52,
+            "currency": "MDL"
+          },
+          "isEuropeanUnionFunded": false,
+          "budgetBreakdown": [
+            {
+              "id": "ocds-b3wdp1-MD-1541833696297-FS-1541833877863",
+              "description": "buget",
+              "amount": {
+                "amount": 475708.52,
+                "currency": "MDL"
+              },
+              "period": {
+                "startDate": "2018-11-10T00:00:00Z",
+                "endDate": "2018-12-31T00:00:00Z"
+              },
+              "sourceParty": {
+                "id": "MD-IDNO-1007601010301",
+                "name": "Serviciul Cultura si Turism Cantemir"
+              }
+            }
+          ]
+        }
+      },
+      "tender": {
+        "id": "ocds-b3wdp1-MD-1541833999619",
+        "title": "lucrari de pavare in jurul casei de cultura Cantemir",
+        "description": "lucrari de constructii",
+        "status": "active",
+        "statusDetails": "execution",
+        "value": {
+          "amount": 475708.52,
+          "currency": "MDL"
+        },
+        "procurementMethod": "open",
+        "procurementMethodDetails": "Licitație deschisă",
+        "mainProcurementCategory": "works",
+        "hasEnquiries": false,
+        "eligibilityCriteria": "Regulile generale privind naționalitatea și originea, precum și alte criterii de eligibilitate sunt enumerate în Ghidul practic privind procedurile de contractare a acțiunilor externe ale UE (PRAG)",
+        "contractPeriod": {
+          "startDate": "2018-11-25T09:20:46Z",
+          "endDate": "2018-12-31T09:20:46Z"
+        },
+        "procuringEntity": {
+          "id": "MD-IDNO-1007601010301",
+          "name": "Serviciul Cultura si Turism Cantemir"
+        },
+        "acceleratedProcedure": {
+          "isAcceleratedProcedure": false
+        },
+        "classification": {
+          "scheme": "CPV",
+          "id": "45400000-1",
+          "description": "Lucrări de finisare a construcţiilor"
+        },
+        "designContest": {
+          "serviceContractAward": false
+        },
+        "electronicWorkflows": {
+          "useOrdering": false,
+          "usePayment": false,
+          "acceptInvoicing": false
+        },
+        "jointProcurement": {
+          "isJointProcurement": false
+        },
+        "legalBasis": "REGULATION_966_2012",
+        "procedureOutsourcing": {
+          "procedureOutsourced": false
+        },
+        "dynamicPurchasingSystem": {
+          "hasDynamicPurchasingSystem": false
+        },
+        "framework": {
+          "isAFramework": false
+        }
+      },
+      "parties": [
+        {
+          "id": "MD-IDNO-1007601010301",
+          "name": "Serviciul Cultura si Turism Cantemir",
+          "identifier": {
+            "scheme": "MD-IDNO",
+            "id": "1007601010301",
+            "legalName": "Serviciul Cultura si Turism Cantemir"
+          },
+          "address": {
+            "streetAddress": "Cantemir, str. Trandafirilor-2",
+            "postalCode": "MD-7300",
+            "addressDetails": {
+              "country": {
+                "scheme": "iso-alpha2",
+                "id": "MD",
+                "description": "MOLDOVA",
+                "uri": "http://reference.iatistandard.org"
+              },
+              "region": {
+                "scheme": "CUATM",
+                "id": "2100000",
+                "description": "Cantemir",
+                "uri": "http://statistica.md"
+              },
+              "locality": {
+                "scheme": "UN/LOCODE",
+                "id": "2101000",
+                "description": "or.Cantemir"
+              }
+            }
+          },
+          "contactPoint": {
+            "name": "Bujac Nina",
+            "email": "ninabujac@gmail.com",
+            "telephone": "079544121"
+          },
+          "details": {
+            "typeOfBuyer": "REGIONAL_AUTHORITY",
+            "mainGeneralActivity": "GENERAL_PUBLIC_SERVICES",
+            "mainSectoralActivity": "AIRPORT_RELATED_ACTIVITIES"
+          },
+          "roles": [
+            "procuringEntity",
+            "funder",
+            "buyer",
+            "payer"
+          ]
+        }
+      ],
+      "relatedProcesses": [
+        {
+          "id": "7be52e60-e4b9-11e8-b9ec-19e909ecb113",
+          "relationship": [
+            "x_evaluation"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-b3wdp1-MD-1541833999619-EV-1541834593349",
+          "uri": "http://public.mtender.gov.md/tenders/ocds-b3wdp1-MD-1541833999619/ocds-b3wdp1-MD-1541833999619-EV-1541834593349"
+        },
+        {
+          "id": "1a42f032-e4b8-11e8-b9ec-19e909ecb113",
+          "relationship": [
+            "x_fundingSource"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-b3wdp1-MD-1541833696297-FS-1541833877863",
+          "uri": "http://public.mtender.gov.md/budgets/ocds-b3wdp1-MD-1541833696297/ocds-b3wdp1-MD-1541833696297-FS-1541833877863"
+        },
+        {
+          "id": "1a42f030-e4b8-11e8-b9ec-19e909ecb113",
+          "relationship": [
+            "planning"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-b3wdp1-MD-1541833999619-PN-1541834000048",
+          "uri": "http://public.mtender.gov.md/tenders/ocds-b3wdp1-MD-1541833999619/ocds-b3wdp1-MD-1541833999619-PN-1541834000048"
+        },
+        {
+          "id": "d9686ec1-f6df-11e8-98f1-2b0a6f84ad04",
+          "relationship": [
+            "x_contracting"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-b3wdp1-MD-1541833999619-AC-1544472547543",
+          "uri": "http://public.mtender.gov.md/tenders/ocds-b3wdp1-MD-1541833999619/ocds-b3wdp1-MD-1541833999619-AC-1544472547543"
+        },
+        {
+          "id": "1a42f031-e4b8-11e8-b9ec-19e909ecb113",
+          "relationship": [
+            "x_expenditureItem"
+          ],
+          "scheme": "ocid",
+          "identifier": "ocds-b3wdp1-MD-1541833696297",
+          "uri": "http://public.mtender.gov.md/budgets/ocds-b3wdp1-MD-1541833696297/ocds-b3wdp1-MD-1541833696297"
+        }
+      ]
+    }
+  ]
+}
