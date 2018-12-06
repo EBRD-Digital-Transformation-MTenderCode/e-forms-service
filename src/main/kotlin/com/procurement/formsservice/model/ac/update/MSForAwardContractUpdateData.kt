@@ -16,7 +16,7 @@ data class MSForAwardContractUpdateData(
             @JsonProperty("contactPoint") val contactPoint: ContactPoint,
             @JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifier>?,
             @JsonProperty("roles") val roles: List<String>,
-            @JsonProperty("details") val details: Details
+            @JsonProperty("details") val details: Details?
         ) {
             data class Identifier(
                 @JsonProperty("id") val id: String,
