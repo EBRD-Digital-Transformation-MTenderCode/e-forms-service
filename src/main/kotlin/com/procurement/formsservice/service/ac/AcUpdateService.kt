@@ -131,7 +131,7 @@ class AcUpdateServiceImpl(
                             valueAddedTaxIncluded = value.valueAddedTaxIncluded
                         )
                     },
-                    deliveryAddress = item.deliveryAddress.let { deliveryAddress ->
+                    deliveryAddress = item.deliveryAddress?.let { deliveryAddress ->
                         AwardContractUpdateContext.Award.Item.DeliveryAddress(
                             streetAddress = deliveryAddress.streetAddress,
                             postalCode = deliveryAddress.postalCode,
@@ -188,7 +188,7 @@ class AcUpdateServiceImpl(
                     AwardContractUpdateContext.Term.Observation(
                         id = observation.id,
                         notes = observation.notes,
-                        measure = observation.measure.toString()
+                        measure = observation.measure?.toString()
                     )
                 }
             )
@@ -423,14 +423,15 @@ class AcUpdateServiceImpl(
                             }
                         )
                     },
-                    legalForm = details.legalForm.let { legalForm ->
-                        AwardContractUpdateContext.Buyer.Details.LegalForm(
-                            scheme = legalForm.scheme,
-                            id = legalForm.id,
-                            description = legalForm.description,
-                            uri = legalForm.uri
-                        )
-                    }
+                    legalForm = details.legalForm
+                        ?.let { legalForm ->
+                            AwardContractUpdateContext.Buyer.Details.LegalForm(
+                                scheme = legalForm.scheme,
+                                id = legalForm.id,
+                                description = legalForm.description,
+                                uri = legalForm.uri
+                            )
+                        }
                 )
             }
             ?: msPartyWithRoleBuyer.details.let { details ->
@@ -664,14 +665,15 @@ class AcUpdateServiceImpl(
                         }
                     )
                 },
-                legalForm = details.legalForm.let { legalForm ->
-                    AwardContractUpdateContext.Supplier.Details.LegalForm(
-                        scheme = legalForm.scheme,
-                        id = legalForm.id,
-                        description = legalForm.description,
-                        uri = legalForm.uri
-                    )
-                }
+                legalForm = details.legalForm
+                    ?.let { legalForm ->
+                        AwardContractUpdateContext.Supplier.Details.LegalForm(
+                            scheme = legalForm.scheme,
+                            id = legalForm.id,
+                            description = legalForm.description,
+                            uri = legalForm.uri
+                        )
+                    }
             )
         }
     }

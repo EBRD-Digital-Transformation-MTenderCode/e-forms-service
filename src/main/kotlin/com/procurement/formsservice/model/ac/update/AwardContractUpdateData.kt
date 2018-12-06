@@ -109,7 +109,7 @@ data class AwardContractUpdateData(
                 data class Observation(
                     @JsonProperty("id") val id: String,
                     @JsonProperty("notes") val notes: String,
-                    @JsonProperty("measure") val measure: Int
+                    @JsonProperty("measure") val measure: Int?
                 )
             }
         }
@@ -141,7 +141,7 @@ data class AwardContractUpdateData(
                 @JsonProperty("id") val id: String,
                 @JsonProperty("quantity") val quantity: BigDecimal,
                 @JsonProperty("unit") val unit: Unit,
-                @JsonProperty("deliveryAddress") val deliveryAddress: DeliveryAddress
+                @JsonProperty("deliveryAddress") val deliveryAddress: DeliveryAddress?
             ) {
                 data class Unit(
                     @JsonProperty("value") val value: Value?
@@ -285,7 +285,7 @@ data class AwardContractUpdateData(
                 @JsonProperty("scale") val scale: String?,
                 @JsonProperty("permits") val permits: List<Permit>?,
                 @JsonProperty("bankAccounts") val bankAccounts: List<BankAccount>,
-                @JsonProperty("legalForm") val legalForm: LegalForm
+                @JsonProperty("legalForm") val legalForm: LegalForm?
             ) {
                 data class Permit(
                     @JsonProperty("scheme") val scheme: String,
