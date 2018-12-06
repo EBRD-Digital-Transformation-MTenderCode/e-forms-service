@@ -372,57 +372,58 @@ class AcUpdateServiceImpl(
                             }
                         )
                     } ?: emptyList(),
-                    bankAccounts = details.bankAccounts.map { bankAccount ->
-                        AwardContractUpdateContext.Buyer.Details.BankAccount(
-                            bankName = bankAccount.bankName,
-                            description = bankAccount.description,
-                            address = bankAccount.address.let { address ->
-                                AwardContractUpdateContext.Buyer.Details.BankAccount.Address(
-                                    streetAddress = address.streetAddress,
-                                    postalCode = address.postalCode,
-                                    country = address.addressDetails.country.let { country ->
-                                        AwardContractUpdateContext.Buyer.Details.BankAccount.Address.Country(
-                                            id = country.id,
-                                            description = country.description,
-                                            uri = country.uri
-                                        )
-                                    },
-                                    region = address.addressDetails.region.let { region ->
-                                        AwardContractUpdateContext.Buyer.Details.BankAccount.Address.Region(
-                                            id = region.id,
-                                            description = region.description,
-                                            uri = region.uri
-                                        )
-                                    },
-                                    locality = address.addressDetails.locality.let { locality ->
-                                        AwardContractUpdateContext.Buyer.Details.BankAccount.Address.Locality(
-                                            scheme = locality.scheme,
-                                            id = locality.id,
-                                            description = locality.description
-                                        )
-                                    }
-                                )
-                            },
-                            identifier = bankAccount.identifier.let { identifier ->
-                                AwardContractUpdateContext.Buyer.Details.BankAccount.Identifier(
-                                    scheme = identifier.scheme,
-                                    id = identifier.id
-                                )
-                            },
-                            accountIdentification = bankAccount.accountIdentification.let { accountIdentification ->
-                                AwardContractUpdateContext.Buyer.Details.BankAccount.AccountIdentification(
-                                    scheme = accountIdentification.scheme,
-                                    id = accountIdentification.id
-                                )
-                            },
-                            additionalAccountIdentifiers = bankAccount.additionalAccountIdentifiers.map { additionalAccountIdentifiers ->
-                                AwardContractUpdateContext.Buyer.Details.BankAccount.AdditionalAccountIdentifier(
-                                    scheme = additionalAccountIdentifiers.scheme,
-                                    id = additionalAccountIdentifiers.id
-                                )
-                            }
-                        )
-                    },
+                    bankAccounts = details.bankAccounts
+                        ?.map { bankAccount ->
+                            AwardContractUpdateContext.Buyer.Details.BankAccount(
+                                bankName = bankAccount.bankName,
+                                description = bankAccount.description,
+                                address = bankAccount.address.let { address ->
+                                    AwardContractUpdateContext.Buyer.Details.BankAccount.Address(
+                                        streetAddress = address.streetAddress,
+                                        postalCode = address.postalCode,
+                                        country = address.addressDetails.country.let { country ->
+                                            AwardContractUpdateContext.Buyer.Details.BankAccount.Address.Country(
+                                                id = country.id,
+                                                description = country.description,
+                                                uri = country.uri
+                                            )
+                                        },
+                                        region = address.addressDetails.region.let { region ->
+                                            AwardContractUpdateContext.Buyer.Details.BankAccount.Address.Region(
+                                                id = region.id,
+                                                description = region.description,
+                                                uri = region.uri
+                                            )
+                                        },
+                                        locality = address.addressDetails.locality.let { locality ->
+                                            AwardContractUpdateContext.Buyer.Details.BankAccount.Address.Locality(
+                                                scheme = locality.scheme,
+                                                id = locality.id,
+                                                description = locality.description
+                                            )
+                                        }
+                                    )
+                                },
+                                identifier = bankAccount.identifier.let { identifier ->
+                                    AwardContractUpdateContext.Buyer.Details.BankAccount.Identifier(
+                                        scheme = identifier.scheme,
+                                        id = identifier.id
+                                    )
+                                },
+                                accountIdentification = bankAccount.accountIdentification.let { accountIdentification ->
+                                    AwardContractUpdateContext.Buyer.Details.BankAccount.AccountIdentification(
+                                        scheme = accountIdentification.scheme,
+                                        id = accountIdentification.id
+                                    )
+                                },
+                                additionalAccountIdentifiers = bankAccount.additionalAccountIdentifiers.map { additionalAccountIdentifiers ->
+                                    AwardContractUpdateContext.Buyer.Details.BankAccount.AdditionalAccountIdentifier(
+                                        scheme = additionalAccountIdentifiers.scheme,
+                                        id = additionalAccountIdentifiers.id
+                                    )
+                                }
+                            )
+                        } ?: emptyList(),
                     legalForm = details.legalForm
                         ?.let { legalForm ->
                             AwardContractUpdateContext.Buyer.Details.LegalForm(
@@ -614,57 +615,58 @@ class AcUpdateServiceImpl(
                         }
                     )
                 } ?: emptyList(),
-                bankAccounts = details.bankAccounts.map { bankAccount ->
-                    AwardContractUpdateContext.Supplier.Details.BankAccount(
-                        bankName = bankAccount.bankName,
-                        description = bankAccount.description,
-                        address = bankAccount.address.let { address ->
-                            AwardContractUpdateContext.Supplier.Details.BankAccount.Address(
-                                streetAddress = address.streetAddress,
-                                postalCode = address.postalCode,
-                                country = address.addressDetails.country.let { country ->
-                                    AwardContractUpdateContext.Supplier.Details.BankAccount.Address.Country(
-                                        id = country.id,
-                                        description = country.description,
-                                        uri = country.uri
-                                    )
-                                },
-                                region = address.addressDetails.region.let { region ->
-                                    AwardContractUpdateContext.Supplier.Details.BankAccount.Address.Region(
-                                        id = region.id,
-                                        description = region.description,
-                                        uri = region.uri
-                                    )
-                                },
-                                locality = address.addressDetails.locality.let { locality ->
-                                    AwardContractUpdateContext.Supplier.Details.BankAccount.Address.Locality(
-                                        scheme = locality.scheme,
-                                        id = locality.id,
-                                        description = locality.description
-                                    )
-                                }
-                            )
-                        },
-                        identifier = bankAccount.identifier.let { identifier ->
-                            AwardContractUpdateContext.Supplier.Details.BankAccount.Identifier(
-                                scheme = identifier.scheme,
-                                id = identifier.id
-                            )
-                        },
-                        accountIdentification = bankAccount.accountIdentification.let { accountIdentification ->
-                            AwardContractUpdateContext.Supplier.Details.BankAccount.AccountIdentification(
-                                scheme = accountIdentification.scheme,
-                                id = accountIdentification.id
-                            )
-                        },
-                        additionalAccountIdentifiers = bankAccount.additionalAccountIdentifiers.map { additionalAccountIdentifiers ->
-                            AwardContractUpdateContext.Supplier.Details.BankAccount.AdditionalAccountIdentifier(
-                                scheme = additionalAccountIdentifiers.scheme,
-                                id = additionalAccountIdentifiers.id
-                            )
-                        }
-                    )
-                },
+                bankAccounts = details.bankAccounts
+                    ?.map { bankAccount ->
+                        AwardContractUpdateContext.Supplier.Details.BankAccount(
+                            bankName = bankAccount.bankName,
+                            description = bankAccount.description,
+                            address = bankAccount.address.let { address ->
+                                AwardContractUpdateContext.Supplier.Details.BankAccount.Address(
+                                    streetAddress = address.streetAddress,
+                                    postalCode = address.postalCode,
+                                    country = address.addressDetails.country.let { country ->
+                                        AwardContractUpdateContext.Supplier.Details.BankAccount.Address.Country(
+                                            id = country.id,
+                                            description = country.description,
+                                            uri = country.uri
+                                        )
+                                    },
+                                    region = address.addressDetails.region.let { region ->
+                                        AwardContractUpdateContext.Supplier.Details.BankAccount.Address.Region(
+                                            id = region.id,
+                                            description = region.description,
+                                            uri = region.uri
+                                        )
+                                    },
+                                    locality = address.addressDetails.locality.let { locality ->
+                                        AwardContractUpdateContext.Supplier.Details.BankAccount.Address.Locality(
+                                            scheme = locality.scheme,
+                                            id = locality.id,
+                                            description = locality.description
+                                        )
+                                    }
+                                )
+                            },
+                            identifier = bankAccount.identifier.let { identifier ->
+                                AwardContractUpdateContext.Supplier.Details.BankAccount.Identifier(
+                                    scheme = identifier.scheme,
+                                    id = identifier.id
+                                )
+                            },
+                            accountIdentification = bankAccount.accountIdentification.let { accountIdentification ->
+                                AwardContractUpdateContext.Supplier.Details.BankAccount.AccountIdentification(
+                                    scheme = accountIdentification.scheme,
+                                    id = accountIdentification.id
+                                )
+                            },
+                            additionalAccountIdentifiers = bankAccount.additionalAccountIdentifiers.map { additionalAccountIdentifiers ->
+                                AwardContractUpdateContext.Supplier.Details.BankAccount.AdditionalAccountIdentifier(
+                                    scheme = additionalAccountIdentifiers.scheme,
+                                    id = additionalAccountIdentifiers.id
+                                )
+                            }
+                        )
+                    } ?: emptyList(),
                 legalForm = details.legalForm
                     ?.let { legalForm ->
                         AwardContractUpdateContext.Supplier.Details.LegalForm(

@@ -284,7 +284,7 @@ data class AwardContractUpdateData(
                 @JsonProperty("mainEconomicActivities") val mainEconomicActivities: List<String>?,
                 @JsonProperty("scale") val scale: String?,
                 @JsonProperty("permits") val permits: List<Permit>?,
-                @JsonProperty("bankAccounts") val bankAccounts: List<BankAccount>,
+                @JsonProperty("bankAccounts") val bankAccounts: List<BankAccount>?,
                 @JsonProperty("legalForm") val legalForm: LegalForm?
             ) {
                 data class Permit(
