@@ -162,7 +162,7 @@ class AcUpdateServiceImpl(
             value = award.value.let { value ->
                 AwardContractUpdateContext.Award.Value(
                     amount = value.amount.toDouble(),
-                    amountNet = value.amountNet.toDouble(),
+                    amountNet = value.amountNet?.toDouble(),
                     valueAddedTaxIncluded = value.valueAddedTaxIncluded
                 )
             },

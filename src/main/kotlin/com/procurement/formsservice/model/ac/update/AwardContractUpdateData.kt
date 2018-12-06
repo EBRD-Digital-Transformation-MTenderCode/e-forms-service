@@ -132,7 +132,7 @@ data class AwardContractUpdateData(
 
             data class Value(
                 @JsonProperty("amount") val amount: BigDecimal,
-                @JsonProperty("amountNet") val amountNet: BigDecimal,
+                @JsonProperty("amountNet") val amountNet: BigDecimal?,
                 @JsonProperty("currency") val currency: String,
                 @JsonProperty("valueAddedTaxIncluded") val valueAddedTaxIncluded: Boolean?
             )
