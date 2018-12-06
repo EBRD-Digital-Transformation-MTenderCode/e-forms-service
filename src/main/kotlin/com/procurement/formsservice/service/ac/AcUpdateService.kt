@@ -338,7 +338,7 @@ class AcUpdateServiceImpl(
     }
 
     private fun getBuyerDetails(acPartyWithRoleBuyer: AwardContractUpdateData.Release.Party?,
-                                msPartyWithRoleBuyer: MSForAwardContractUpdateData.Release.Party): AwardContractUpdateContext.Buyer.Details {
+                                msPartyWithRoleBuyer: MSForAwardContractUpdateData.Release.Party): AwardContractUpdateContext.Buyer.Details? {
         return acPartyWithRoleBuyer
             ?.let { party ->
                 val details = party.details!!
@@ -435,7 +435,7 @@ class AcUpdateServiceImpl(
                         }
                 )
             }
-            ?: msPartyWithRoleBuyer.details.let { details ->
+            ?: msPartyWithRoleBuyer.details?.let { details ->
                 AwardContractUpdateContext.Buyer.Details(
                     typeOfBuyer = details.typeOfBuyer,
                     mainGeneralActivity = details.mainGeneralActivity,
