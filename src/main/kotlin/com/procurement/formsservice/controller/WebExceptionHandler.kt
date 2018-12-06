@@ -28,7 +28,7 @@ class WebExceptionHandler {
 
     @ExceptionHandler(value = [RemoteServiceException::class])
     fun remoteService(exception: RemoteServiceException): ResponseEntity<*> {
-        log.error(exception.message)
+        log.error(exception.message, exception)
 
         return ResponseEntity.status(exception.code ?: HttpStatus.INTERNAL_SERVER_ERROR)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
