@@ -2458,27 +2458,30 @@
           {% if loop.index  > 0 %},{% endif %}
           {
             "id": "{{ item.id }}",
-            "quantity": {{ item.quantity }},
+            "quantity": {{ item.quantity }}
             {% if item.value != null %}
+              ,
               "value": {
                 "amount": {{ item.value.amount }},
                 "amountNet": {{ item.value.amountNet }},
                 "valueAddedTaxIncluded": {{ item.value.valueAddedTaxIncluded }},
                 "currency": "{{ context.currency }}"
-              },
+              }
             {% endif %}
-            "deliveryAddress": {
-              "location": {
-                "country": {
-                  "id": "{{ item.deliveryAddress.country.id }}",
-                  "description": "{{ item.deliveryAddress.country.description }}"
-                },
-                "region": {
-                  "id": "{{ item.deliveryAddress.region.id }}", 
-                  "description": "{{ item.deliveryAddress.region.description }}"
-                },
-                "locality": {
-                  "localityType": {% if item.deliveryAddress.locality.scheme == "CUATM" %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[0]") }}"{% else %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[1]") }}"{% endif %},
+            {% if item.deliveryAddress != null %}
+              ,
+              "deliveryAddress": {
+                "location": {
+                  "country": {
+                    "id": "{{ item.deliveryAddress.country.id }}",
+                    "description": "{{ item.deliveryAddress.country.description }}"
+                  },
+                  "region": {
+                    "id": "{{ item.deliveryAddress.region.id }}",
+                    "description": "{{ item.deliveryAddress.region.description }}"
+                  },
+                  "locality": {
+                    "localityType": {% if item.deliveryAddress.locality.scheme == "CUATM" %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[0]") }}"{% else %}"{{ translate("cn", "section2.lots.performance.address.location.locality.localityType.enum[1]") }}"{% endif %},
                     {% if item.deliveryAddress.locality.scheme == "CUATM" %}"directory"{% else %}"manual"{% endif %}: {
                       "locality": {
                         "scheme": "{{ item.deliveryAddress.locality.scheme }}",
@@ -2489,11 +2492,12 @@
                   }
                 },
                 "postalAddress": {
-                "streetAddress": "{{ item.deliveryAddress.streetAddress }}"
-                {{ commaIf(item.deliveryAddress.postalCode) }}
-                {{ stringAttributeIf(name = "postalCode", value = item.deliveryAddress.postalCode) }}
+                  "streetAddress": "{{ item.deliveryAddress.streetAddress }}"
+                  {{ commaIf(item.deliveryAddress.postalCode) }}
+                  {{ stringAttributeIf(name = "postalCode", value = item.deliveryAddress.postalCode) }}
+                }
               }
-            }
+            {% endif %}
           }
         {% endfor %}
       ],
