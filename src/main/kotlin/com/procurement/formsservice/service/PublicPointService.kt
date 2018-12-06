@@ -125,7 +125,7 @@ class PublicPointServiceImpl(private val remoteService: RemoteService) : PublicP
     }
 
     override fun getMSForAwardContractUpdateData(cpid: String): MSForAwardContractUpdateData {
-        val uri = genTendersUri(cpid = cpid)
+        val uri = genTendersUri(cpid = cpid, ocid = cpid)
         log.debug("Public Point (MS for Update Award Contract) [url]: ${uri.toURL()}")
         return remoteService.execute(uri)
     }
