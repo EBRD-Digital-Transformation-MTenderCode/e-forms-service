@@ -7,7 +7,7 @@ data class AwardContractUpdateData(
     @JsonProperty("releases") val releases: List<Release>
 ) {
     data class Release(
-        @JsonProperty("planning") val planning: Planning,
+        @JsonProperty("planning") val planning: Planning?,
         @JsonProperty("contracts") val contracts: List<Contract>,
         @JsonProperty("awards") val awards: List<Award>,
         @JsonProperty("parties") val parties: List<Party>
