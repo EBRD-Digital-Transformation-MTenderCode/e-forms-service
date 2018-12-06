@@ -23,7 +23,7 @@ class AwardContractUpdateContext(
     data class Contract(
         val title: String?, // AC.contracts[0].title
         val description: String?, // AC.contracts[0].description
-        val period: Period,
+        val period: Period?,
         val documents: List<Document> // AC.contracts[0].documents
     ) {
         data class Period(

@@ -84,7 +84,7 @@ class AcUpdateServiceImpl(
         return AwardContractUpdateContext.Contract(
             title = contract.title,
             description = contract.description,
-            period = contract.period.let { period ->
+            period = contract.period?.let { period ->
                 AwardContractUpdateContext.Contract.Period(
                     startDate = period.startDate,
                     endDate = period.endDate

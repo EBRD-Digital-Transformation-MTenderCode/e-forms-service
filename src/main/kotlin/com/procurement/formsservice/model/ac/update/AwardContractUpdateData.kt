@@ -62,9 +62,9 @@ data class AwardContractUpdateData(
         }
 
         data class Contract(
-            @JsonProperty("title") val title: String,
-            @JsonProperty("description") val description: String,
-            @JsonProperty("period") val period: Period,
+            @JsonProperty("title") val title: String?,
+            @JsonProperty("description") val description: String?,
+            @JsonProperty("period") val period: Period?,
             @JsonProperty("documents") val documents: List<Document>?,
             @JsonProperty("milestones") val milestones: List<Milestone>?,
             @JsonProperty("confirmationRequests") val confirmationRequests: List<ConfirmationRequest>?,
@@ -72,8 +72,8 @@ data class AwardContractUpdateData(
         ) {
 
             data class Period(
-                @JsonProperty("startDate") val startDate: String,
-                @JsonProperty("endDate") val endDate: String
+                @JsonProperty("startDate") val startDate: String?,
+                @JsonProperty("endDate") val endDate: String?
             )
 
             data class Document(
