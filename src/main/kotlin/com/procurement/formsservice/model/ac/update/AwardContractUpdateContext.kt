@@ -27,8 +27,8 @@ class AwardContractUpdateContext(
         val documents: List<Document> // AC.contracts[0].documents
     ) {
         data class Period(
-            val startDate: String?, // AC.contracts[0].period.startDate
-            val endDate: String? // AC.contracts[0].period.endDate
+            val startDate: String, // AC.contracts[0].period.startDate
+            val endDate: String // AC.contracts[0].period.endDate
         )
 
         data class Document(

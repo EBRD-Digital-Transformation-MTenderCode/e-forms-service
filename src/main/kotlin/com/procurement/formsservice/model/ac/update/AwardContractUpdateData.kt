@@ -72,8 +72,8 @@ data class AwardContractUpdateData(
         ) {
 
             data class Period(
-                @JsonProperty("startDate") val startDate: String?,
-                @JsonProperty("endDate") val endDate: String?
+                @JsonProperty("startDate") val startDate: String,
+                @JsonProperty("endDate") val endDate: String
             )
 
             data class Document(

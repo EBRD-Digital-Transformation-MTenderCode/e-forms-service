@@ -2416,12 +2416,14 @@
     "contract": {
       {{ stringAttributeIf(name = "title", value = context.contract.title) }}
       {{ commaIf(context.contract.description) }}
-      {{ stringAttributeIf(name = "description", value = context.contract.description) }},
-      "period": {
-        {{ stringAttributeIf(name = "startDate", value = context.contract.period.startDate) }}
-        {{ commaIf(context.contract.period.endDate) }}
-        {{ stringAttributeIf(name = "endDate", value = context.contract.period.endDate) }}
-      }
+      {{ stringAttributeIf(name = "description", value = context.contract.description) }}
+      {% if context.contract.period != null %}
+        ,
+        "period": {
+          "startDate": "{{ context.contract.period.startDate }}",
+          "endDate": "{{ context.contract.period.endDate }}"
+        }
+      {% endif %}
       {% if context.contract.documents != null %}
         ,
         "documents": [
@@ -2498,12 +2500,12 @@
       "value": {
         "amount": {{ context.award.value.amount }},
         "currency": "{{ context.currency }}"
-        {{ commaIf(context.award.value.amountNet) }}
         {% if context.award.value.amountNet != null %}
+          ,
           "amountNet": {{ context.award.value.amountNet }}
         {% endif %}
-        {{ commaIf(context.award.value.valueAddedTaxIncluded) }}
         {% if context.award.value.valueAddedTaxIncluded != null %}
+          ,
           "valueAddedTaxIncluded": {{ context.award.value.valueAddedTaxIncluded }}
         {% endif %}
       },
