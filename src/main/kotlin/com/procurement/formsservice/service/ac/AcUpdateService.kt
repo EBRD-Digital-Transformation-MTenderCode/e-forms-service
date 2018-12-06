@@ -487,21 +487,17 @@ class AcUpdateServiceImpl(
                              lang: String): AwardContractUpdateContext.BuyerUris {
         return acPartyWithRoleBuyer?.let { party ->
             AwardContractUpdateContext.BuyerUris(
-                uris = AwardContractUpdateContext.BuyerUris.Uris(
-                    country = "/country/${party.address.addressDetails.country.id}?lang=$lang",
-                    region = "/region?lang=$lang&country=${party.address.addressDetails.country.id}",
-                    locality = "/locality?lang=$lang&country=${party.address.addressDetails.country.id}&region=${party.address.addressDetails.region.id}",
-                    registrationScheme = "/registration-scheme?lang=$lang&country=${party.address.addressDetails.country.id}"
-                )
+                country = "/country/${party.address.addressDetails.country.id}?lang=$lang",
+                region = "/region?lang=$lang&country=${party.address.addressDetails.country.id}",
+                locality = "/locality?lang=$lang&country=${party.address.addressDetails.country.id}&region=${party.address.addressDetails.region.id}",
+                registrationScheme = "/registration-scheme?lang=$lang&country=${party.address.addressDetails.country.id}"
             )
         } ?: msPartyWithRoleBuyer.let { party ->
             AwardContractUpdateContext.BuyerUris(
-                uris = AwardContractUpdateContext.BuyerUris.Uris(
-                    country = "/country/${party.address.addressDetails.country.id}?lang=$lang",
-                    region = "/region?lang=$lang&country=${party.address.addressDetails.country.id}",
-                    locality = "/locality?lang=$lang&country=${party.address.addressDetails.country.id}&region=${party.address.addressDetails.region.id}",
-                    registrationScheme = "/registration-scheme?lang=$lang&country=${party.address.addressDetails.country.id}"
-                )
+                country = "/country/${party.address.addressDetails.country.id}?lang=$lang",
+                region = "/region?lang=$lang&country=${party.address.addressDetails.country.id}",
+                locality = "/locality?lang=$lang&country=${party.address.addressDetails.country.id}&region=${party.address.addressDetails.region.id}",
+                registrationScheme = "/registration-scheme?lang=$lang&country=${party.address.addressDetails.country.id}"
             )
         }
     }
@@ -720,12 +716,10 @@ class AcUpdateServiceImpl(
                                 lang: String): AwardContractUpdateContext.SupplierUris {
         return acPartiesWithRoleSupplier[0].let { party ->
             AwardContractUpdateContext.SupplierUris(
-                uris = AwardContractUpdateContext.SupplierUris.Uris(
-                    country = "/country/${party.address.addressDetails.country.id}?lang=$lang",
-                    region = "/region?lang=$lang&country=${party.address.addressDetails.country.id}",
-                    locality = "/locality?lang=$lang&country=${party.address.addressDetails.country.id}&region=${party.address.addressDetails.region.id}",
-                    registrationScheme = "/registration-scheme?lang=$lang&country=${party.address.addressDetails.country.id}"
-                )
+                country = "/country/${party.address.addressDetails.country.id}?lang=$lang",
+                region = "/region?lang=$lang&country=${party.address.addressDetails.country.id}",
+                locality = "/locality?lang=$lang&country=${party.address.addressDetails.country.id}&region=${party.address.addressDetails.region.id}",
+                registrationScheme = "/registration-scheme?lang=$lang&country=${party.address.addressDetails.country.id}"
             )
         }
     }

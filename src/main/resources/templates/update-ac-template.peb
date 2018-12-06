@@ -606,7 +606,7 @@
                       "country": {
                         "title": "{{ translate("ac", "parties.buyer.address.location.country.title") }}",
                         "type": "object",
-                        "source": "{{ context.buyerUris.uris.country }}",
+                        "source": "{{ context.buyerUris.country }}",
                         "properties": {
                           "id": {
                             "type": "string",
@@ -621,7 +621,7 @@
                       "region": {
                         "title": "{{ translate("ac", "parties.buyer.address.location.region.title") }}",
                         "type": "object",
-                        "source": "{{ context.buyerUris.uris.region }}",
+                        "source": "{{ context.buyerUris.region }}",
                         "properties": {
                           "id": {
                             "type": "string",
@@ -662,7 +662,7 @@
                                       "locality": {
                                         "title": "{{ translate("ac", "parties.buyer.address.location.locality.title") }}",
                                         "type": "object",
-                                        "source": "{{ context.buyerUris.uris.locality }}",
+                                        "source": "{{ context.buyerUris.locality }}",
                                         "properties": {
                                           "scheme": {
                                             "type": "string",
@@ -751,7 +751,7 @@
                   "scheme": {
                     "title": "{{ translate("ac", "parties.buyer.identifier.scheme.title") }}",
                     "type": "string",
-                    "source": "{{ context.buyer.buyerUris.registrationScheme }}",
+                    "source": "{{ context.buyerUris.registrationScheme }}",
                     "readOnly": true
                   },
                   "id": {
@@ -1420,7 +1420,7 @@
                         "country": {
                           "title": "{{ translate("ac", "parties.suppliers.address.location.country.title") }}",
                           "type": "object",
-                          "source": "{{ context.supplierUris.uris.country }}",
+                          "source": "{{ context.supplierUris.country }}",
                           "properties": {
                             "id": {
                               "type": "string",
@@ -1435,7 +1435,7 @@
                         "region": {
                           "title": "{{ translate("ac", "parties.suppliers.address.location.region.title") }}",
                           "type": "object",
-                          "source": "{{ context.supplierUris.uris.region }}",
+                          "source": "{{ context.supplierUris.region }}",
                           "properties": {
                             "id": {
                               "type": "string",
@@ -1476,7 +1476,7 @@
                                         "locality": {
                                           "title": "{{ translate("ac", "parties.suppliers.address.location.locality.title") }}",
                                           "type": "object",
-                                          "source": "{{ context.supplierUris.uris.locality }}",
+                                          "source": "{{ context.supplierUris.locality }}",
                                           "properties": {
                                             "scheme": {
                                               "type": "string",
@@ -1538,7 +1538,7 @@
                       }
                     },
                     "postalAddress": {
-                      "title": "{{ translate("ac", "parties.suppliers.address.postalAddress.postalAddress.title") }}",
+                      "title": "{{ translate("ac", "parties.suppliers.address.postalAddress.title") }}",
                       "type": "object",
                       "required": [
                         "streetAddress"
@@ -1565,7 +1565,7 @@
                     "scheme": {
                       "title": "{{ translate("ac", "parties.suppliers.identifier.scheme.title") }}",
                       "type": "string",
-                      "source": "{{ context.buyer.buyerUris.registrationScheme }}",
+                      "source": "{{ context.buyerUris.registrationScheme }}",
                       "readOnly": true
                     },
                     "id": {
@@ -1694,7 +1694,7 @@
                       }
                     },
                     "scale": {
-                      "title": "{{ translate("ac", "parties.suppliers.detail.scale.title") }}",
+                      "title": "{{ translate("ac", "parties.suppliers.details.scale.title") }}",
                       "type": "string",
                       "enum": [
                         "micro",
@@ -1702,9 +1702,9 @@
                         "large"
                       ],
                       "enumNames": [
-                        "{{ translate("ac", "parties.suppliers.detail.scale.enumNames[0]") }}",
-                        "{{ translate("ac", "parties.suppliers.detail.scale.enumNames[1]") }}",
-                        "{{ translate("ac", "parties.suppliers.detail.scale.enumNames[2]") }}"
+                        "{{ translate("ac", "parties.suppliers.details.scale.enumNames[0]") }}",
+                        "{{ translate("ac", "parties.suppliers.details.scale.enumNames[1]") }}",
+                        "{{ translate("ac", "parties.suppliers.details.scale.enumNames[2]") }}"
                       ],
                       "ocds": "award::object/suppliers::array[object]/details::object/scale::string"
                     },
@@ -1822,7 +1822,7 @@
                             "ocds": "award::object/suppliers::array[object]/details::object/bankAccounts::array[object]/bankName::string"
                           },
                           "description": {
-                            "title": "{{ translate("ac", "parties.supplierssupplierssuppliers.details.bankAccounts.description.title") }}",
+                            "title": "{{ translate("ac", "parties.suppliers.details.bankAccounts.description.title") }}",
                             "type": "string",
                             "ocds": "award::object/suppliers::array[object]/details::object/bankAccounts::array[object]/description::string"
                           },
@@ -2399,7 +2399,7 @@
                   "ocds": "planning::object/budget::object/budgetSource::array[object]/amount::number"
                 },
                 "currency": {
-                  "title": "{{ translate("ac", "budget.budgetAllocations.currency.title") }}",
+                  "title": "{{ translate("ac", "budget.budgetSources.currency.title") }}",
                   "type": "string",
                   "default": "{{ context.currency }}",
                   "readOnly": true,
@@ -2414,9 +2414,9 @@
   },
   "data": {
     "contract": {
-      {{ stringAttributeIf(name = "title", value = context.contract.title.title) }}
+      {{ stringAttributeIf(name = "title", value = context.contract.title) }}
       {{ commaIf(context.contract.description) }}
-      {{ stringAttributeIf(name = "description", value = context.contract.description) }}
+      {{ stringAttributeIf(name = "description", value = context.contract.description) }},
       "period": {
         {{ stringAttributeIf(name = "startDate", value = context.contract.period.startDate) }}
         {{ commaIf(context.contract.period.endDate) }}
@@ -2430,7 +2430,7 @@
             {
               "documentId": "{{ contractDoc.id }}",
               "documentType": "{{ contractDoc.type }}",
-              "relatedLots": ["{{ contractDoc.relatedLots }}"],
+              "relatedLots": ["{{ contractDoc.relatedLot }}"],
               "mustConfirmationRequests": {% if contractDoc.confirmationRequest != null %}true{% else %}false{% endif %}
               {% if contractDoc.confirmationRequest != null %}
                 ,
@@ -2460,10 +2460,10 @@
             {% if item.value != null %}
               "value": {
                 "amount": {{ item.value.amount }},
-                "amountNet": {{ item.value.amountNet }}
+                "amountNet": {{ item.value.amountNet }},
                 "valueAddedTaxIncluded": {{ item.value.valueAddedTaxIncluded }},
                 "currency": "{{ context.currency }}"
-              }
+              },
             {% endif %}
             "deliveryAddress": {
               "location": {
@@ -2512,8 +2512,11 @@
           {% if loop.index  > 0 %},{% endif %}
           {
             "documentId": "{{ awardDoc.id }}",
-            "documentType": "{{ awardDoc.type }}",
-            "relatedLots": ["{{ awardDoc.relatedLots }}"],
+            "documentType": "{{ awardDoc.type }}"
+            {{ commaIf(awardDoc.relatedLot) }}
+            {% if awardDoc.relatedLot != null %}
+              "relatedLots": ["{{ awardDoc.relatedLot }}"]
+            {% endif %}
             {{ commaIf(awardDoc.title) }}
             {{ stringAttributeIf(name = "title", value = awardDoc.title) }}
             {{ commaIf(awardDoc.description) }}
@@ -2545,7 +2548,7 @@
     "parties": {
       "buyer": {
         "id": "{{ context.buyer.id }}",
-        "name": "{{ context.buyer.name }}"
+        "name": "{{ context.buyer.name }}",
         "address": {
           "location": {
             "country": {
@@ -2608,12 +2611,13 @@
           }
         },
         "details": {
-          {{ stringAttributeIf(name = "url", value = context.buyer.details.typeOfBuyer ) }}
+          {{ stringAttributeIf(name = "typeOfBuyer", value = context.buyer.details.typeOfBuyer ) }}
           {{ commaIf(context.buyer.details.mainGeneralActivity) }}
-          {{ stringAttributeIf(name = "url", value = context.buyer.details.mainGeneralActivity ) }}
+          {{ stringAttributeIf(name = "mainGeneralActivity", value = context.buyer.details.mainGeneralActivity ) }}
           {{ commaIf(context.buyer.details.mainSectoralActivity) }}
-          {{ stringAttributeIf(name = "url", value = context.buyer.details.mainSectoralActivity ) }}
+          {{ stringAttributeIf(name = "mainSectoralActivity", value = context.buyer.details.mainSectoralActivity ) }}
           {% if context.buyer.details.permits != null %}
+            ,
             "permits": [
               {% for buyerPermit in context.buyer.details.permits %}
                 {% if loop.index  > 0 %},{% endif %}
@@ -2688,7 +2692,7 @@
                           "id": "{{ buyerAdditionalAccountIdentifier.id }}"
                         }
                       {% endfor %}
-                    ],
+                    ]
                   {% endif %}
                 }
               {% endfor %}
@@ -2705,6 +2709,7 @@
           {% endif %}
         }
         {% if context.buyer.persones != null %}
+          ,
           "persones": [
             {% for buyerPersone in context.buyer.persones %}
               {% if loop.index  > 0 %},{% endif %}
@@ -2730,7 +2735,7 @@
                           {% if loop.index  > 0 %},{% endif %}
                           {
                             "documentId": "{{ buyerBusinessFunctionDocument.id }}",
-                            "documentType": "{{ buyerBusinessFunctionDocument.type }}",
+                            "documentType": "{{ buyerBusinessFunctionDocument.type }}"
                             {{ commaIf(buyerBusinessFunctionDocument.title) }}
                             {{ stringAttributeIf(name = "title", value = buyerBusinessFunctionDocument.title) }}
                             {{ commaIf(buyerBusinessFunctionDocument.description) }}
@@ -2751,7 +2756,7 @@
           {% if loop.index  > 0 %},{% endif %}
           {
             "id": "{{ supplier.id }}",
-            "name": "{{ supplier.name }}"
+            "name": "{{ supplier.name }}",
             "address": {
               "location": {
                 "country": {
@@ -2814,12 +2819,15 @@
               }
             },
             "details": {
+              "scale": "{{ supplier.details.scale }}"
+              {{ commaIf(supplier.details.typeOfSupplier) }}
               {{ stringAttributeIf(name = "typeOfSupplier", value = supplier.details.typeOfSupplier ) }}
-              {{ commaIf(supplier.details.mainEconomicActivities) }}
-              {{ stringAttributeIf(name = "mainEconomicActivities", value = supplier.details.mainEconomicActivities ) }}
-              {{ commaIf(supplier.details.scale) }}
-              {{ stringAttributeIf(name = "scale", value = supplier.details.scale ) }}
+              {% if supplier.details.mainEconomicActivities is not empty %}
+                ,
+                "mainEconomicActivities": [{% for mainEconomicActivity in supplier.details.mainEconomicActivities %}{% if loop.index  > 0 %},{% endif %}"{{ mainEconomicActivity }}"{% endfor %}]
+              {% endif %}
               {% if supplier.details.permits != null %}
+                ,
                 "permits": [
                   {% for supplierPermit in supplier.details.permits %}
                     {% if loop.index  > 0 %},{% endif %}
@@ -2830,11 +2838,11 @@
                       "permitDetails": {
                         "issuedBy": {
                           "id": "{{ supplierPermit.issuedBy.id }}",
-                          "name": "{{ supplierPermit.issuedBy.name }}",
+                          "name": "{{ supplierPermit.issuedBy.name }}"
                         },
                         "issuedThought": {
                           "id": "{{ supplierPermit.issuedThought.id }}",
-                          "name": "{{ supplierPermit.issuedThought.name }}",
+                          "name": "{{ supplierPermit.issuedThought.name }}"
                         },
                         "validityPeriod": {
                           "startDate": "{{ supplierPermit.validityPeriod.startDate }}"
@@ -2862,7 +2870,7 @@
                             },
                           "region": {
                             "id": "{{ supplierBankAccount.address.region.id }}",
-                            "description": "{{ supplierBankAccount.address.region.description }}"
+                            "description": "{{ supplierBankAccount.address.region.description }}",
                             "uri": "{{ supplierBankAccount.address.region.uri }}"
                           },
                           "locality": {
@@ -2894,7 +2902,7 @@
                               "id": "{{ supplierAdditionalAccountIdentifier.id }}"
                             }
                           {% endfor %}
-                        ],
+                        ]
                       {% endif %}
                     }
                   {% endfor %}
@@ -2911,36 +2919,37 @@
               {% endif %}
             }
             {% if supplier.persones != null %}
+              ,
               "persones": [
                 {% for supplierPersone in supplier.persones %}
                   {% if loop.index  > 0 %},{% endif %}
                   {
-                    "title": "{{ buyerPersone.title }}",
-                    "name": "{{ buyerPersone.name }}",
+                    "title": "{{ supplierPersone.title }}",
+                    "name": "{{ supplierPersone.name }}",
                     "identifier": {
-                      "scheme": "{{ buyerPersone.identifier.scheme }}",
-                      "id": "{{ buyerPersone.identifier.id }}"
-                      {{ commaIf(buyerPersone.identifier.uri) }}
-                      {{ stringAttributeIf(name = "uri", value = buyerPersone.identifier.uri) }}
+                      "scheme": "{{ supplierPersone.identifier.scheme }}",
+                      "id": "{{ supplierPersone.identifier.id }}"
+                      {{ commaIf(supplierPersone.identifier.uri) }}
+                      {{ stringAttributeIf(name = "uri", value = supplierPersone.identifier.uri) }}
                     },
                     "businessFunctions": [
-                      {% for buyerBusinessFunction in buyerPersone.businessFunctions %}
+                      {% for supplierBusinessFunction in supplierPersone.businessFunctions %}
                         {% if loop.index  > 0 %},{% endif %}
                         {
-                          "id": "{{ buyerBusinessFunction.id }}",
-                          "type": "{{ buyerBusinessFunction.type }}",
-                          "jobTitle": "{{ buyerBusinessFunction.jobTitle }}",
-                          "startDate": "{{ buyerBusinessFunction.startDate }}",
+                          "id": "{{ supplierBusinessFunction.id }}",
+                          "type": "{{ supplierBusinessFunction.type }}",
+                          "jobTitle": "{{ supplierBusinessFunction.jobTitle }}",
+                          "startDate": "{{ supplierBusinessFunction.startDate }}",
                           "documents": [
-                            {% for buyerBusinessFunctionDocument in buyerBusinessFunction.documents %}
+                            {% for supplierBusinessFunctionDocument in supplierBusinessFunction.documents %}
                               {% if loop.index  > 0 %},{% endif %}
                               {
-                                "documentId": "{{ buyerBusinessFunctionDocument.id }}",
-                                "documentType": "{{ buyerBusinessFunctionDocument.type }}",
-                                {{ commaIf(buyerBusinessFunctionDocument.title) }}
-                                {{ stringAttributeIf(name = "title", value = buyerBusinessFunctionDocument.title) }}
-                                {{ commaIf(buyerBusinessFunctionDocument.description) }}
-                                {{ stringAttributeIf(name = "description", value = buyerBusinessFunctionDocument.description) }}
+                                "documentId": "{{ supplierBusinessFunctionDocument.id }}",
+                                "documentType": "{{ supplierBusinessFunctionDocument.type }}"
+                                {{ commaIf(supplierBusinessFunctionDocument.title) }}
+                                {{ stringAttributeIf(name = "title", value = supplierBusinessFunctionDocument.title) }}
+                                {{ commaIf(supplierBusinessFunctionDocument.description) }}
+                                {{ stringAttributeIf(name = "description", value = supplierBusinessFunctionDocument.description) }}
                               }
                             {% endfor %}
                           ]
@@ -2967,7 +2976,7 @@
             "type": "{{ milestone.type }}",
             "additionalInformation": "{{ milestone.additionalInformation }}",
             "dueDate": "{{ milestone.dueDate }}",
-            "relatedItems": ["{{ milestone.relatedItem }}"],
+            "relatedItems": ["{{ milestone.relatedItem }}"]
           }
         {% endfor %}
       ]
@@ -2982,7 +2991,7 @@
             "type": "{{ transaction.type }}",
             "value": {
               "amount": {{ transaction.value.amount }},
-              "currency": "{{ context.currency }}",
+              "currency": "{{ context.currency }}"
             },
             "durationInDays": {{ transaction.durationInDays }}
             {% if transaction.type == "payment" %}
@@ -2994,6 +3003,7 @@
       ]
     {% endif %}
     {% if context.budget != null %}
+      ,
       "budget": {
         "description": "{{ context.budget.description }}",
         "budgetAllocations": [
@@ -3003,7 +3013,7 @@
               "budgetBreakdownId": "{{ budgetAllocation.budgetBreakdownId }}",
               "period": {
                 "startDate": "{{ budgetAllocation.period.startDate }}",
-                "endDate": "{{ budgetAllocation.period.endDate }}",
+                "endDate": "{{ budgetAllocation.period.endDate }}"
               },
               "amount": {{ budgetAllocation.amount }},
               "relatedItem": "{{ budgetAllocation.relatedItem }}"
@@ -3014,8 +3024,8 @@
           {% for budgetSource in context.budget.budgetSources %}
             {% if loop.index  > 0 %},{% endif %}
             {
-              "budgetBreakdownID": "{{ budgetSource.budgetBreakdownID }}"
-              "amount": {{ budgetSource.amount }}
+              "budgetBreakdownID": "{{ budgetSource.budgetBreakdownID }}",
+              "amount": {{ budgetSource.amount }},
               "currency": "{{ context.currency }}"
             }
           {% endfor %}
