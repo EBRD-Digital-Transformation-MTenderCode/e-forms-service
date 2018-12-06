@@ -144,7 +144,7 @@ data class AwardContractUpdateData(
                 @JsonProperty("deliveryAddress") val deliveryAddress: DeliveryAddress
             ) {
                 data class Unit(
-                    @JsonProperty("value") val value: Value
+                    @JsonProperty("value") val value: Value?
                 ) {
                     data class Value(
                         @JsonProperty("amount") val amount: BigDecimal,

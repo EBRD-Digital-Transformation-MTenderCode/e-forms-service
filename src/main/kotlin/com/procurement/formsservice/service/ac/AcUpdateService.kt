@@ -124,7 +124,7 @@ class AcUpdateServiceImpl(
                 AwardContractUpdateContext.Award.Item(
                     id = item.id,
                     quantity = item.quantity.toDouble(),
-                    value = item.unit.value.let { value ->
+                    value = item.unit.value?.let { value ->
                         AwardContractUpdateContext.Award.Item.Value(
                             amount = value.amount.toDouble(),
                             amountNet = value.amountNet.toDouble(),
