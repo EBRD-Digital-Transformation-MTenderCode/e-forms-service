@@ -538,12 +538,12 @@
             },
             "title": {
               "title": "{{ translate("ac", "terms.title.title") }}",
-              "type": "sting",
+              "type": "string",
               "readOnly": true
             },
             "description": {
               "title": "{{ translate("ac", "terms.description.title") }}",
-              "type": "sting",
+              "type": "string",
               "readOnly": true
             },
             "observations": {
@@ -2356,12 +2356,12 @@
                   "properties": {
                     "startDate": {
                       "title": "{{ translate("ac", "budget.budgetAllocations.period.startDate.title") }}",
-                      "type": "sting",
+                      "type": "string",
                       "ocds": "planning::object/budget::object/budgetAllocation::array[object]/period::object/startDate::string"
                     },
                     "endDate": {
                       "title": "{{ translate("ac", "budget.budgetAllocations.period.endDate.title") }}",
-                      "type": "sting",
+                      "type": "string",
                       "ocds": "planning::object/budget::object/budgetAllocation::array[object]/period::object/endDate::string"
                     }
                   }
