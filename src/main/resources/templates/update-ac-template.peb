@@ -2424,8 +2424,8 @@
           "endDate": "{{ context.contract.period.endDate }}"
         }
       {% endif %}
+      {% if context.contract.title != null or context.contract.description != null or context.contract.period != null %},{% endif %}
       {% if context.contract.documents != null %}
-        ,
         "documents": [
           {% for contractDoc in context.contract.documents %}
             {% if loop.index  > 0 %},{% endif %}
