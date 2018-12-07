@@ -2519,8 +2519,8 @@
           {
             "documentId": "{{ awardDoc.id }}",
             "documentType": "{{ awardDoc.type }}"
-            {{ commaIf(awardDoc.relatedLot) }}
             {% if awardDoc.relatedLot != null %}
+              ,
               "relatedLots": ["{{ awardDoc.relatedLot }}"]
             {% endif %}
             {{ commaIf(awardDoc.title) }}
@@ -2543,8 +2543,9 @@
               {% if loop.index  > 0 %},{% endif %}
               {
                 "id": "{{ observation.id }}",
-                "notes": "{{ observation.notes }}",
-                "measure": "{{ observation.measure }}"
+                "notes": "{{ observation.notes }}"
+                {{ commaIf(observation.measure) }}
+                {{ stringAttributeIf(name = "measure", value = observation.measure) }}
               }
             {% endfor %}
           ]
@@ -2615,105 +2616,110 @@
             {{ commaIf(context.buyer.contactPoint.faxNumber) }}
             {{ stringAttributeIf(name = "faxNumber", value = context.buyer.contactPoint.faxNumber) }}
           }
-        },
-        "details": {
-          {{ stringAttributeIf(name = "typeOfBuyer", value = context.buyer.details.typeOfBuyer ) }}
-          {{ commaIf(context.buyer.details.mainGeneralActivity) }}
-          {{ stringAttributeIf(name = "mainGeneralActivity", value = context.buyer.details.mainGeneralActivity ) }}
-          {{ commaIf(context.buyer.details.mainSectoralActivity) }}
-          {{ stringAttributeIf(name = "mainSectoralActivity", value = context.buyer.details.mainSectoralActivity ) }}
-          {% if context.buyer.details.permits != null %}
-            ,
-            "permits": [
-              {% for buyerPermit in context.buyer.details.permits %}
-                {% if loop.index  > 0 %},{% endif %}
-                {
-                  "scheme": "{{ buyerPermit.scheme }}",
-                  "id": "{{ buyerPermit.id }}",
-                  "url": "{{ buyerPermit.url }}",
-                  "permitDetails": {
-                    "issuedBy": {
-                      "id": "{{ buyerPermit.issuedBy.id }}",
-                      "name": "{{ buyerPermit.issuedBy.name }}",
-                    },
-                    "issuedThought": {
-                      "id": "{{ buyerPermit.issuedThought.id }}",
-                      "name": "{{ buyerPermit.issuedThought.name }}",
-                    },
-                    "validityPeriod": {
-                      "startDate": "{{ buyerPermit.validityPeriod.startDate }}"
-                      {{ commaIf(buyerPermit.validityPeriod.endDate) }}
-                      {{ stringAttributeIf(name = "endDate", value = buyerPermit.validityPeriod.endDate) }}
+        }
+        {% if context.buyer.details != null %}
+          ,
+          "details": {
+            {{ stringAttributeIf(name = "typeOfBuyer", value = context.buyer.details.typeOfBuyer ) }}
+            {{ commaIf(context.buyer.details.mainGeneralActivity) }}
+            {{ stringAttributeIf(name = "mainGeneralActivity", value = context.buyer.details.mainGeneralActivity ) }}
+            {{ commaIf(context.buyer.details.mainSectoralActivity) }}
+            {{ stringAttributeIf(name = "mainSectoralActivity", value = context.buyer.details.mainSectoralActivity ) }}
+            {% if context.buyer.details.permits != null %}
+              ,
+              "permits": [
+                {% for buyerPermit in context.buyer.details.permits %}
+                  {% if loop.index  > 0 %},{% endif %}
+                  {
+                    "scheme": "{{ buyerPermit.scheme }}",
+                    "id": "{{ buyerPermit.id }}",
+                    "url": "{{ buyerPermit.url }}",
+                    "permitDetails": {
+                      "issuedBy": {
+                        "id": "{{ buyerPermit.issuedBy.id }}",
+                        "name": "{{ buyerPermit.issuedBy.name }}",
+                      },
+                      "issuedThought": {
+                        "id": "{{ buyerPermit.issuedThought.id }}",
+                        "name": "{{ buyerPermit.issuedThought.name }}",
+                      },
+                      "validityPeriod": {
+                        "startDate": "{{ buyerPermit.validityPeriod.startDate }}"
+                        {{ commaIf(buyerPermit.validityPeriod.endDate) }}
+                        {{ stringAttributeIf(name = "endDate", value = buyerPermit.validityPeriod.endDate) }}
+                      }
                     }
                   }
-                }
-              {% endfor %}
-            ],
-          {% endif %}
-          {% if context.buyer.details.bankAccounts != null %}
-            "bankAccounts": [
-              {% for buyerBankAccount in context.buyer.details.bankAccounts %}
-                {% if loop.index  > 0 %},{% endif %}
-                {
-                  "bankName": "{{ buyerBankAccount.bankName }}",
-                  "description": "{{ buyerBankAccount.description }}",
-                  "address": {
-                    "location": {
-                      "country": {
-                        "id": "{{ buyerBankAccount.address.country.id }}",
-                        "description": "{{ buyerBankAccount.address.country.description }}",
-                        "uri": "{{ buyerBankAccount.address.country.uri }}"
+                {% endfor %}
+              ]
+            {% endif %}
+            {% if context.buyer.details.bankAccounts != null %}
+              ,
+              "bankAccounts": [
+                {% for buyerBankAccount in context.buyer.details.bankAccounts %}
+                  {% if loop.index  > 0 %},{% endif %}
+                  {
+                    "bankName": "{{ buyerBankAccount.bankName }}",
+                    "description": "{{ buyerBankAccount.description }}",
+                    "address": {
+                      "location": {
+                        "country": {
+                          "id": "{{ buyerBankAccount.address.country.id }}",
+                          "description": "{{ buyerBankAccount.address.country.description }}",
+                          "uri": "{{ buyerBankAccount.address.country.uri }}"
+                        },
+                        "region": {
+                          "id": "{{ buyerBankAccount.address.region.id }}",
+                          "description": "{{ buyerBankAccount.address.region.description }}",
+                          "uri": "{{ buyerBankAccount.address.region.uri }}"
+                        },
+                        "locality": {
+                          "scheme": "{{ buyerBankAccount.address.locality.scheme }}",
+                          "id": "{{ buyerBankAccount.address.locality.id }}",
+                          "description": "{{ buyerBankAccount.address.locality.description }}"
+                        }
                       },
-                      "region": {
-                        "id": "{{ buyerBankAccount.address.region.id }}",
-                        "description": "{{ buyerBankAccount.address.region.description }}",
-                        "uri": "{{ buyerBankAccount.address.region.uri }}"
-                      },
-                      "locality": {
-                        "scheme": "{{ buyerBankAccount.address.locality.scheme }}",
-                        "id": "{{ buyerBankAccount.address.locality.id }}",
-                        "description": "{{ buyerBankAccount.address.locality.description }}"
+                      "postalAddress": {
+                        "streetAddress": "{{buyerBankAccount.address.streetAddress }}"
+                        {{ commaIf(buyerBankAccount.address.postalCode) }}
+                        {{ stringAttributeIf(name = "postalCode", value = buyerBankAccount.address.postalCode) }}
                       }
                     },
-                    "postalAddress": {
-                      "streetAddress": "{{buyerBankAccount.address.streetAddress }}"
-                      {{ commaIf(buyerBankAccount.address.postalCode) }}
-                      {{ stringAttributeIf(name = "postalCode", value = buyerBankAccount.address.postalCode) }}
-                    }
-                  },
-                  "identifier": {
-                    "scheme": "{{ buyerBankAccount.identifier.scheme }}",
-                    "id": "{{ buyerBankAccount.identifier.id }}"
-                  },
-                  "accountIdentification": {
-                    "scheme": "{{ buyerBankAccount.accountIdentification.scheme }}",
-                    "id": "{{ buyerBankAccount.accountIdentification.id }}"
-                  },
-                  {% if buyerBankAccount.additionalAccountIdentifiers != null %}
-                    "additionalAccountIdentifiers": [
-                      {% for buyerAdditionalAccountIdentifier in buyerBankAccount.additionalAccountIdentifiers %}
-                        {% if loop.index  > 0 %},{% endif %}
-                        {
-                          "scheme": "{{ buyerAdditionalAccountIdentifier.scheme }}",
-                          "id": "{{ buyerAdditionalAccountIdentifier.id }}"
-                        }
-                      {% endfor %}
-                    ]
-                  {% endif %}
-                }
-              {% endfor %}
-            ],
-          {% endif %}
-          {% if context.buyer.details.legalForm.scheme != null %}
-            "legalForm": {
-              "scheme": "{{ context.buyer.details.legalForm.scheme }}",
-              "id": "{{ context.buyer.details.legalForm.id }}",
-              "description": "{{ context.buyer.details.legalForm.description }}"
-              {{ commaIf(context.buyer.details.legalForm.uri) }}
-              {{ stringAttributeIf(name = "uri", value = context.buyer.details.legalForm.uri ) }}
-            }
-          {% endif %}
-        }
+                    "identifier": {
+                      "scheme": "{{ buyerBankAccount.identifier.scheme }}",
+                      "id": "{{ buyerBankAccount.identifier.id }}"
+                    },
+                    "accountIdentification": {
+                      "scheme": "{{ buyerBankAccount.accountIdentification.scheme }}",
+                      "id": "{{ buyerBankAccount.accountIdentification.id }}"
+                    },
+                    {% if buyerBankAccount.additionalAccountIdentifiers != null %}
+                      "additionalAccountIdentifiers": [
+                        {% for buyerAdditionalAccountIdentifier in buyerBankAccount.additionalAccountIdentifiers %}
+                          {% if loop.index  > 0 %},{% endif %}
+                          {
+                            "scheme": "{{ buyerAdditionalAccountIdentifier.scheme }}",
+                            "id": "{{ buyerAdditionalAccountIdentifier.id }}"
+                          }
+                        {% endfor %}
+                      ]
+                    {% endif %}
+                  }
+                {% endfor %}
+              ]
+            {% endif %}
+            {% if context.buyer.details.legalForm != null %}
+              ,
+              "legalForm": {
+                "scheme": "{{ context.buyer.details.legalForm.scheme }}",
+                "id": "{{ context.buyer.details.legalForm.id }}",
+                "description": "{{ context.buyer.details.legalForm.description }}"
+                {{ commaIf(context.buyer.details.legalForm.uri) }}
+                {{ stringAttributeIf(name = "uri", value = context.buyer.details.legalForm.uri ) }}
+              }
+            {% endif %}
+          }
+        {% endif %}
         {% if context.buyer.persones != null %}
           ,
           "persones": [
@@ -2912,9 +2918,10 @@
                       {% endif %}
                     }
                   {% endfor %}
-                ],
+                ]
               {% endif %}
-              {% if supplier.details.legalForm.scheme != null %}
+              {% if supplier.details.legalForm != null %}
+                ,
                 "legalForm": {
                   "scheme": "{{ supplier.details.legalForm.scheme }}",
                   "id": "{{ supplier.details.legalForm.id }}",

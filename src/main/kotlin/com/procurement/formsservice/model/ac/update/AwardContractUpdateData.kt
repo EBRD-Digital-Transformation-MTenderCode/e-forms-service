@@ -41,7 +41,7 @@ data class AwardContractUpdateData(
             }
 
             data class Implementation(
-                @JsonProperty("transactions") val transactions: List<Transaction>
+                @JsonProperty("transactions") val transactions: List<Transaction>?
             ) {
                 data class Transaction(
                     @JsonProperty("id") val id: String,

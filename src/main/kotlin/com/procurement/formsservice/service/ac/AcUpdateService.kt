@@ -744,19 +744,20 @@ class AcUpdateServiceImpl(
 
     private fun getTransactions(planning: AwardContractUpdateData.Release.Planning?): List<AwardContractUpdateContext.Transaction> {
         return planning?.let {
-            it.implementation.transactions.map { transaction ->
-                AwardContractUpdateContext.Transaction(
-                    id = transaction.id,
-                    type = transaction.type,
-                    value = transaction.value.let { value ->
-                        AwardContractUpdateContext.Transaction.Value(
-                            amount = value.amount.toDouble()
-                        )
-                    },
-                    durationInDays = transaction.executionPeriod.durationInDays,
-                    relatedContractMilestone = transaction.relatedContractMilestone
-                )
-            }
+            it.implementation.transactions
+                ?.map { transaction ->
+                    AwardContractUpdateContext.Transaction(
+                        id = transaction.id,
+                        type = transaction.type,
+                        value = transaction.value.let { value ->
+                            AwardContractUpdateContext.Transaction.Value(
+                                amount = value.amount.toDouble()
+                            )
+                        },
+                        durationInDays = transaction.executionPeriod.durationInDays,
+                        relatedContractMilestone = transaction.relatedContractMilestone
+                    )
+                } ?: emptyList()
         } ?: emptyList()
     }
 

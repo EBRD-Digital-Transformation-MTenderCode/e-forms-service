@@ -11,7 +11,7 @@ class AwardContractUpdateContext(
     val suppliers: List<Supplier>,
     val supplierUris: SupplierUris,
     val milestones: List<Milestone>, // AC.contracts[0].milestones[*]?
-    val transactions: List<Transaction>, // AC.planning?.implementation.transactions[*]
+    val transactions: List<Transaction>, // AC.planning?.implementation.transactions[*]?
     val budget: Budget?, // AC.planning?.budget
     val itemUris: ItemUris,
     val currency: String // AC.awards[0].value.currency
