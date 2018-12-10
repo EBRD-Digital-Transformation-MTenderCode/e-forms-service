@@ -820,7 +820,7 @@
                         "readOnly": true
                       },
                       "url": {
-                        "title": "{{ translate("ac", "parties.buyer.contactPoint.person.name.title") }}",
+                        "title": "{{ translate("ac", "parties.buyer.contactPoint.person.url.title") }}",
                         "type": "string",
                         "readOnly": true
                       }
@@ -1275,7 +1275,7 @@
                       "ocds": "buyer::object/persones::array[object]/title::string"
                     },
                     "name": {
-                      "title": "{{ translate("ac", "parties.buyer.persones.title.title") }}",
+                      "title": "{{ translate("ac", "parties.buyer.persones.name.title") }}",
                       "type": "string",
                       "ocds": "buyer::object/persones::array[object]/name::string"
                     },
@@ -1634,7 +1634,7 @@
                           "readOnly": true
                         },
                         "url": {
-                          "title": "{{ translate("ac", "parties.suppliers.contactPoint.person.name.title") }}",
+                          "title": "{{ translate("ac", "parties.suppliers.contactPoint.person.url.title") }}",
                           "type": "string",
                           "readOnly": true
                         }
@@ -2044,7 +2044,7 @@
                         "ocds": "award::object/suppliers::array[object]/persones::array[object]/title::string"
                       },
                       "name": {
-                        "title": "{{ translate("ac", "parties.suppliers.persones.title.title") }}",
+                        "title": "{{ translate("ac", "parties.suppliers.persones.name.title") }}",
                         "type": "string",
                         "ocds": "award::object/suppliers::array[object]/persones::array[object]/name::string"
                       },
@@ -2057,18 +2057,18 @@
                         ],
                         "properties": {
                           "scheme": {
-                            "title": "{{ translate("ac", "parties.buyer.persones.identifier.scheme.title") }}",
+                            "title": "{{ translate("ac", "parties.suppliers.persones.identifier.scheme.title") }}",
                             "type": "string",
                             "default": "MD-IDNP",
                             "ocds": "award::object/suppliers::array[object]/persones::array[object]/identifier::object/scheme::string"
                           },
                           "id": {
-                            "title": "{{ translate("ac", "parties.buyer.persones.identifier.id.title") }}",
+                            "title": "{{ translate("ac", "parties.suppliers.persones.identifier.id.title") }}",
                             "type": "string",
                             "ocds": "award::object/suppliers::array[object]/persones::array[object]/identifier::object/id::string"
                           },
                           "uri": {
-                            "title": "{{ translate("ac", "parties.buyer.persones.identifier.uri.title") }}",
+                            "title": "{{ translate("ac", "parties.suppliers.persones.identifier.uri.title") }}",
                             "type": "string",
                             "default": "http://e-services.md/?q=ru/verifica-idnp",
                             "ocds": "award::object/suppliers::array[object]/persones::array[object]/identifier::object/uri::string"
@@ -2344,7 +2344,7 @@
               "properties": {
                 "budgetBreakdownId": {
                   "type": "string",
-                  "ocds": "planning::object/budget::object/budgetAllocation::array[object]/budgetBreakdownID::string"
+                  "ocds": "planning::object/budget::object/budgetAllocation::array[object]/budgetBreakdownId::string"
                 },
                 "period": {
                   "title": "{{ translate("ac", "budget.budgetAllocations.period.title") }}",
@@ -2389,9 +2389,9 @@
                 "currency"
               ],
               "properties": {
-                "budgetBreakdownID": {
-                  "type": "object",
-                  "ocds": "planning::object/budget::object/budgetSource::array[object]/budgetBreakdownID::string"
+                "budgetBreakdownId": {
+                  "type": "string",
+                  "ocds": "planning::object/budget::object/budgetSource::array[object]/budgetBreakdownId::string"
                 },
                 "amount": {
                   "title": "{{ translate("ac", "budget.budgetAllocations.amount.title") }}",
@@ -3037,7 +3037,7 @@
           {% for budgetSource in context.budget.budgetSources %}
             {% if loop.index  > 0 %},{% endif %}
             {
-              "budgetBreakdownID": "{{ budgetSource.budgetBreakdownID }}",
+              "budgetBreakdownId": "{{ budgetSource.budgetBreakdownId }}",
               "amount": {{ budgetSource.amount }},
               "currency": "{{ context.currency }}"
             }

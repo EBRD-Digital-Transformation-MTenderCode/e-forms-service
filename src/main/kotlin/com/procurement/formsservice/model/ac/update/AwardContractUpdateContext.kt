@@ -511,7 +511,7 @@ class AwardContractUpdateContext(
         val budgetSources: List<BudgetSource>
     ) {
         data class BudgetAllocation(
-            val budgetBreakdownId: String, // AC.planning?.budget.budgetAllocation[*].budgetBreakdownID
+            val budgetBreakdownId: String, // AC.planning?.budget.budgetAllocation[*].budgetBreakdownId
             val period: Period,
             val amount: Double, // AC.planning?.budget.budgetAllocation[*].amount
             val relatedItem: String // AC.planning?.budget.budgetAllocation[*].relatedItem
@@ -523,7 +523,7 @@ class AwardContractUpdateContext(
         }
 
         data class BudgetSource(
-            val budgetBreakdownID: String, // AC.planning?.budget.budgetSource[*].budgetBreakdownID
+            val budgetBreakdownID: String, // AC.planning?.budget.budgetSource[*].budgetBreakdownId
             val amount: Double // AC.planning?.budget.budgetSource[*].amount
         )
     }
