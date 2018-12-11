@@ -746,7 +746,8 @@
                     "type": "object",
                     "required": [
                       "itemId",
-                      "relatedLot"
+                      "relatedLot",
+                      "description"
                     ],
                     "properties": {
                       "itemId": {

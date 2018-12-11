@@ -6,6 +6,8 @@ import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import java.net.URI
 
+inline fun <reified T> RemoteService.execute(uri: URI): T = this.execute(uri, T::class.java)
+
 interface RemoteService {
     fun <T> execute(uri: URI, type: Class<T>): T
 }
