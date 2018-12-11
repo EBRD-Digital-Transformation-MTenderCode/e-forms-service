@@ -2637,11 +2637,11 @@
                     "permitDetails": {
                       "issuedBy": {
                         "id": "{{ buyerPermit.issuedBy.id }}",
-                        "name": "{{ buyerPermit.issuedBy.name }}",
+                        "name": "{{ buyerPermit.issuedBy.name }}"
                       },
                       "issuedThought": {
                         "id": "{{ buyerPermit.issuedThought.id }}",
-                        "name": "{{ buyerPermit.issuedThought.name }}",
+                        "name": "{{ buyerPermit.issuedThought.name }}"
                       },
                       "validityPeriod": {
                         "startDate": "{{ buyerPermit.validityPeriod.startDate }}"
