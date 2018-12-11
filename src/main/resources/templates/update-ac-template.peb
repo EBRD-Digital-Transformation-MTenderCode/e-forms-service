@@ -1682,7 +1682,7 @@
                         "{{ translate("ac", "parties.suppliers.details.typeOfSupplier.enumNames[0]") }}",
                         "{{ translate("ac", "parties.suppliers.details.typeOfSupplier.enumNames[1]") }}"
                       ],
-                      "ocds": "award::object/suppliers::array[object]/details::object/typeOfBuyer::string"
+                      "ocds": "award::object/suppliers::array[object]/details::object/typeOfSupplier::string"
                     },
                     "mainEconomicActivities": {
                       "title": "{{ translate("ac", "parties.suppliers.details.mainEconomicActivities.title") }}",
@@ -2621,9 +2621,9 @@
           ,
           "details": {
             {{ stringAttributeIf(name = "typeOfBuyer", value = context.buyer.details.typeOfBuyer ) }}
-            {{ commaIf(context.buyer.details.mainGeneralActivity) }}
+            {% if context.buyer.details.typeOfBuyer != null and context.buyer.details.mainGeneralActivity != null %},{% endif %}
             {{ stringAttributeIf(name = "mainGeneralActivity", value = context.buyer.details.mainGeneralActivity ) }}
-            {{ commaIf(context.buyer.details.mainSectoralActivity) }}
+            {% if (context.buyer.details.typeOfBuyer != null or context.buyer.details.mainGeneralActivity != null) and context.buyer.details.mainSectoralActivity != null %},{% endif %}
             {{ stringAttributeIf(name = "mainSectoralActivity", value = context.buyer.details.mainSectoralActivity ) }}
             {% if context.buyer.details.permits != null %}
               ,
