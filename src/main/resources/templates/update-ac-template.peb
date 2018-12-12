@@ -34,6 +34,10 @@
       "contract": {
         "title": "{{ translate("ac", "contract.title") }}",
         "type": "object",
+        "required": [
+          "title",
+          "description"
+        ],
         "properties": {
           "title": {
             "title": "{{ translate("ac", "contract.title.title") }}",
@@ -45,7 +49,7 @@
             "title": "{{ translate("ac", "contract.description.title") }}",
             "description": "{{ translate("ac", "contract.description.description") }}",
             "type": "string",
-            "ocds": "contract::object/descripiton::string"
+            "ocds": "contract::object/description::string"
           },
           "period": {
             "title": "{{ translate("ac", "contract.period.title") }}",
@@ -99,10 +103,10 @@
                   "title": "{{ translate("ac", "contract.documents.documentType.title") }}",
                   "type": "string",
                   "enum": [
-                    "+contractNotice",
-                    "+contractArrangements",
-                    "+contractSchedule",
-                    "+contractAnnexe",
+                    "contractNotice",
+                    "contractArrangements",
+                    "contractSchedule",
+                    "contractAnnexe",
                     "contractGuarantees",
                     "subContract",
                     "illustration",
@@ -1402,7 +1406,7 @@
                 "id": {
                   "type": "string",
                   "readOnly": true,
-                  "ocds": "buyer::object/id::string"
+                  "ocds": "award::object/suppliers::array[object]/id::string"
                 },
                 "name": {
                   "title": "{{ translate("ac", "parties.suppliers.name.title") }}",
@@ -1565,7 +1569,7 @@
                     "scheme": {
                       "title": "{{ translate("ac", "parties.suppliers.identifier.scheme.title") }}",
                       "type": "string",
-                      "source": "{{ context.buyerUris.registrationScheme }}",
+                      "source": "{{ context.supplierUris.registrationScheme }}",
                       "readOnly": true
                     },
                     "id": {
@@ -1890,7 +1894,7 @@
                                     "properties": {
                                       "scheme": {
                                         "type": "string",
-                                        "ocds": "buyer::objectaward::object/suppliers::array[object]/details::object/bankAccounts::array[object]address::object/addressDetails::object/locality::object/scheme::string"
+                                        "ocds": "award::object/suppliers::array[object]/details::object/bankAccounts::array[object]address::object/addressDetails::object/locality::object/scheme::string"
                                       },
                                       "id": {
                                         "type": "string",
@@ -2384,7 +2388,7 @@
             "items": {
               "type": "object",
               "required": [
-                "budgetBreakdownID",
+                "budgetBreakdownId",
                 "amount",
                 "currency"
               ],
