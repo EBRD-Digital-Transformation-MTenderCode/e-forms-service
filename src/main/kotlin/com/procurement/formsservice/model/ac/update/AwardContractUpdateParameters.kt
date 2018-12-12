@@ -9,10 +9,8 @@ import com.procurement.formsservice.model.parameters.CommonQueryParametersBinder
 class AwardContractUpdateParameters(queryParameters: QueryParameters) {
     companion object {
         val OCID = binder<OCID>(name = "ocid")
-        val LOT_ID = binder<String>("lot-id")
     }
 
     val lang: String = queryParameters.bind(binder = LANG, default = { defaultLang })
     val ocid: OCID = queryParameters.bind(OCID)
-    val lotid: String = queryParameters.bind(LOT_ID)
 }
