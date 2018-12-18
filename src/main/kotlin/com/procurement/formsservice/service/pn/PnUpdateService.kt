@@ -148,6 +148,7 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             lots = lots(cn),
             procurementMethodDetails = ms.tender.procurementMethodDetails,
             legalBasis = ms.tender.legalBasis,
+            awardCriteria = cn.tender.awardCriteria,
             validityPeriod = cn.tender.tenderPeriod.startDate,
             budgetBreakdown = budgetBreakdown(ms),
             uris = PnUpdateContext.Tender.Uris(
