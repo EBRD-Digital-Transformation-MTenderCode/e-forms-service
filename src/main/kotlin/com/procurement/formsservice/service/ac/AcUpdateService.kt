@@ -188,7 +188,7 @@ class AcUpdateServiceImpl(
                     AwardContractUpdateContext.Term.Observation(
                         id = observation.id,
                         notes = observation.notes,
-                        measure = observation.measure?.toString()
+                        measure = observation.measure
                     )
                 }
             )

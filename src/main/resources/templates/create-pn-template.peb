@@ -1455,6 +1455,23 @@
                   "NULL"
                 ],
                 "ocds": "tender::object/legalBasis::string"
+              },
+              "awardCriteria": {
+                "title": "{{ translate("pn", "section4.awardCriteria.title") }}",
+                "type": "string",
+                "enum": [
+                  "priceOnly",
+                  "costOnly",
+                  "qualityOnly",
+                  "ratedCriteria"
+                ],
+                "enumNames": [
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[1]") }}",
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[2]") }}",
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[3]") }}",
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[4]") }}"
+                ],
+                "ocds": "tender::object/awardCriteria::string"
               }
             }
           },

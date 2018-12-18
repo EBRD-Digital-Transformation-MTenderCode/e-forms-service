@@ -1014,6 +1014,24 @@
                   "NULL"
                 ],
                 "ocds": "tender::object/legalBasis::string"
+              },
+              "awardCriteria": {
+                "title": "{{ translate("pn", "section4.awardCriteria.title") }}",
+                "type": "string",
+                "readOnly": true,
+                "enum": [
+                  "priceOnly",
+                  "costOnly",
+                  "qualityOnly",
+                  "ratedCriteria"
+                ],
+                "enumNames": [
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[1]") }}",
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[2]") }}",
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[3]") }}",
+                  "{{ translate("pn", "section4.awardCriteria.enumNames[4]") }}"
+                ],
+                "ocds": "tender::object/awardCriteria::string"
               }
             }
           },
@@ -1300,7 +1318,8 @@
     "section4": {
       "method": {
         "procurementMethodDetails": "{{ context.tender.procurementMethodDetails }}",
-        "legalBasis": "{{ context.tender.legalBasis }}"
+        "legalBasis": "{{ context.tender.legalBasis }}",
+        "awardCriteria": "{{ context.tender.awardCriteria }}"
       },
       "administrative": {
         "validityPeriod": {

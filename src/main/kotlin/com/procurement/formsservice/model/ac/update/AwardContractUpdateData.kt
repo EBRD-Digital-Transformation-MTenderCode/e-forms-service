@@ -109,7 +109,7 @@ data class AwardContractUpdateData(
                 data class Observation(
                     @JsonProperty("id") val id: String,
                     @JsonProperty("notes") val notes: String,
-                    @JsonProperty("measure") val measure: Int?
+                    @JsonProperty("measure") val measure: String?
                 )
             }
         }

@@ -31,14 +31,14 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
 
         val records: List<PnUpdateData.Record> = publicPointService.getPnUpdateData(cpid = cpid).records
         val ms = getMS(cpid, records)
-        val cn = getPN(ocid, records)
+        val pn = getPN(ocid, records)
 
         val data = PnUpdateContext(
             parameters = PnUpdateContext.Parameters(
                 ocid = queryParameters.ocid.value
             ),
             procuringEntity = procuringEntity(queryParameters = queryParameters, ms = ms),
-            tender = tender(queryParameters = queryParameters, ms = ms, cn = cn)
+            tender = tender(queryParameters = queryParameters, ms = ms, pn = pn)
         )
 
         return formTemplateService.evaluate(
@@ -138,17 +138,18 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
 
     private fun tender(queryParameters: PnUpdateParameters,
                        ms: PnUpdateData.Record.MS,
-                       cn: PnUpdateData.Record.PN): PnUpdateContext.Tender {
+                       pn: PnUpdateData.Record.PN): PnUpdateContext.Tender {
         val lang = queryParameters.lang
 
         return PnUpdateContext.Tender(
             title = ms.tender.title,
             description = ms.tender.description,
-            documents = tenderDocuments(cn),
-            lots = lots(cn),
+            documents = tenderDocuments(pn),
+            lots = lots(pn),
             procurementMethodDetails = ms.tender.procurementMethodDetails,
             legalBasis = ms.tender.legalBasis,
-            validityPeriod = cn.tender.tenderPeriod.startDate,
+            awardCriteria = pn.tender.awardCriteria,
+            validityPeriod = pn.tender.tenderPeriod.startDate,
             budgetBreakdown = budgetBreakdown(ms),
             uris = PnUpdateContext.Tender.Uris(
                 country = "${MDMKind.COUNTRY}?lang=$lang",
@@ -164,8 +165,8 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         )
     }
 
-    private fun tenderDocuments(cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Document>? {
-        return cn.tender.documents?.asSequence()
+    private fun tenderDocuments(pn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Document>? {
+        return pn.tender.documents?.asSequence()
             ?.filter {
                 it.relatedLots == null || it.relatedLots.isEmpty()
             }?.map {
@@ -189,8 +190,8 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                     currency = lot.value.currency
                 ),
                 performance = performance(lot),
-                items = items(lotId = lot.id, cn = pn),
-                documents = documents(lotId = lot.id, cn = pn)
+                items = items(lotId = lot.id, pn = pn),
+                documents = documents(lotId = lot.id, pn = pn)
             )
         }
     }
@@ -234,8 +235,8 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         }
     }
 
-    private fun items(lotId: String, cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Item>? =
-        cn.tender.items?.asSequence()?.filter {
+    private fun items(lotId: String, pn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Item>? =
+        pn.tender.items?.asSequence()?.filter {
             it.relatedLot == lotId
         }?.map { item ->
             PnUpdateContext.Tender.Lot.Item(
@@ -270,8 +271,8 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             )
         }?.toList()
 
-    private fun documents(lotId: String, cn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Document>? =
-        cn.tender.documents?.asSequence()
+    private fun documents(lotId: String, pn: PnUpdateData.Record.PN): List<PnUpdateContext.Tender.Lot.Document>? =
+        pn.tender.documents?.asSequence()
             ?.filter {
                 it.relatedLots != null && it.relatedLots[0] == lotId
             }?.map {
