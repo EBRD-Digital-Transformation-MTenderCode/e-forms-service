@@ -29,7 +29,7 @@ data class CnUpdateData(
                 @JsonProperty("address") val address: Address,
                 @JsonProperty("contactPoint") val contactPoint: ContactPoint,
                 @JsonProperty("roles") val roles: List<Role>) {
-                
+
                 data class Address(
                     @JsonProperty("streetAddress") val streetAddress: String,
                     @JsonProperty("postalCode") val postalCode: String?,
@@ -128,8 +128,9 @@ data class CnUpdateData(
                 @JsonProperty("items") val items: List<Item>?,
                 @JsonProperty("lots") val lots: List<Lot>?,
                 @JsonProperty("procurementMethodModalities") val procurementMethodModalities: List<String>?,
+                @JsonProperty("awardCriteria") val awardCriteria: String,
                 @JsonProperty("electronicAuctions") val electronicAuctions: ElectronicAuctions?
-                ) {
+            ) {
 
                 data class EnquiryPeriod(
                     @JsonProperty("endDate") val endDate: String?

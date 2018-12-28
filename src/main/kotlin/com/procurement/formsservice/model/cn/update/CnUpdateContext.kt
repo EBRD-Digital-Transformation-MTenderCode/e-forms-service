@@ -80,6 +80,7 @@ class CnUpdateContext(
         val procurementMethodModalities: String?, // CN.tender.procurementMethodModalities[0]
         val electronicAuctions: List<ElectronicAuction>?, // CN.tender.electronicAuctions?.details
         val procurementMethodDetails: String, // MS.tender.procurementMethodDetails
+        val awardCriteria: String, // CN.tender.awardCriteria
         val legalBasis: String,  // MS.tender.legalBasis
         val enquiryPeriod: String?, // CN.tender.enquiryPeriod?.endDate
         val tenderPeriod: String?, // CN.tender.tenderPeriod.endDate
