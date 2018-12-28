@@ -128,7 +128,7 @@ data class CnUpdateData(
                 @JsonProperty("items") val items: List<Item>?,
                 @JsonProperty("lots") val lots: List<Lot>?,
                 @JsonProperty("procurementMethodModalities") val procurementMethodModalities: List<String>?,
-                @JsonProperty("awardCriteria") val awardCriteria: String,
+                @JsonProperty("awardCriteria") val awardCriteria: String?,
                 @JsonProperty("electronicAuctions") val electronicAuctions: ElectronicAuctions?
             ) {
 

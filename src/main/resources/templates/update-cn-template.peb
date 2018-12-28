@@ -1453,8 +1453,9 @@
     "section4": {
       "method": {
         "procurementMethodDetails": "{{ context.tender.procurementMethodDetails }}",
-        "legalBasis": "{{ context.tender.legalBasis }}",
-        "awardCriteria": "{{ context.tender.awardCriteria }}"
+        "legalBasis": "{{ context.tender.legalBasis }}"
+        {{ commaIf(context.tender.awardCriteria) }}
+        {{ stringAttributeIf(name = "awardCriteria", value = context.tender.awardCriteria) }}
       }
       {% if context.tender.enquiryPeriod != null and context.tender.tenderPeriod != null %}
         ,
