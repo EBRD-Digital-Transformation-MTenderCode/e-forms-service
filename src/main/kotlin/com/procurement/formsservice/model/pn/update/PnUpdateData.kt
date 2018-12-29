@@ -117,7 +117,6 @@ data class PnUpdateData(
             @JsonProperty("tender") val tender: Tender) {
 
             data class Tender(
-                @JsonProperty("awardCriteria") val awardCriteria: String,
                 @JsonProperty("tenderPeriod") val tenderPeriod: TenderPeriod,
                 @JsonProperty("documents") val documents: List<Document>?,
                 @JsonProperty("items") val items: List<Item>?,
