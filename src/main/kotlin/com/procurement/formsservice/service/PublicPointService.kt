@@ -1,5 +1,6 @@
 package com.procurement.formsservice.service
 
+import com.procurement.formsservice.model.ac.create.AwardContractCreateData
 import com.procurement.formsservice.model.ac.update.AwardContractUpdateData
 import com.procurement.formsservice.model.ac.update.MSForAwardContractUpdateData
 import com.procurement.formsservice.model.bid.create.BidCreateData
@@ -36,6 +37,7 @@ interface PublicPointService {
     fun getCancellationTenderData(cpid: String): CancellationTenderData
 
     fun getAwardContractUpdateData(cpid: String, ocid: String): AwardContractUpdateData
+    fun getAwardContractCreateData(cpid: String, ocid: String): AwardContractCreateData
     fun getMSForAwardContractUpdateData(cpid: String): MSForAwardContractUpdateData
 }
 
@@ -121,6 +123,12 @@ class PublicPointServiceImpl(private val remoteService: RemoteService) : PublicP
     override fun getAwardContractUpdateData(cpid: String, ocid: String): AwardContractUpdateData {
         val uri = genTendersUri(cpid = cpid, ocid = ocid)
         log.debug("Public Point (Update Award Contract) [url]: ${uri.toURL()}")
+        return remoteService.execute(uri)
+    }
+
+    override fun getAwardContractCreateData(cpid: String, ocid: String): AwardContractCreateData {
+        val uri = genTendersUri(cpid = cpid, ocid = ocid)
+        log.debug("Public Point (Create Award Contract) [url]: ${uri.toURL()}")
         return remoteService.execute(uri)
     }
 

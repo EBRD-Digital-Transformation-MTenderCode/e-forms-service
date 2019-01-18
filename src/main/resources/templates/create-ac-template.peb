@@ -1,0 +1,35 @@
+{# @pebvariable name="context" type="com.procurement.formsservice.model.ac.ACCreateContext" #}
+{# @pebvariable name="contract" type="com.procurement.formsservice.model.ac.ACCreateContext.Contract" #}
+{
+{% import "../macros/translate" %}
+  "schema": {
+    "title": "{{ translate("ac", "titleCreate") }}",
+    "type": "object",
+    "properties": {
+      "contracts": {
+        "title": "{{ translate("ac", "contracts.title") }}",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "title": "{{ translate("ac", "contracts.id.title") }}",
+              "type": "string",
+              "ocds": "contracts::array[object]/id::string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": {
+    "contracts": [
+      {% for contract in context.contracts %}
+        {% if loop.index  > 0 %},{% endif %}
+        {
+          "id": "{{ contract.id }}"
+        }
+      {% endfor %}
+    ]
+  }
+}
