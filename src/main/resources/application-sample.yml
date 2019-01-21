@@ -1,0 +1,75 @@
+spring:
+  cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168
+
+eureka:
+  client:
+#    fetchRegistry: true
+#    registerWithEureka: true
+#    serviceUrl:
+#      defaultZone: http://eureka-peer-1:8801/eureka/,http://eureka-peer-2:8802/eureka/
+    enabled: false
+
+ribbon:
+  eureka:
+   enabled: false
+
+PUBLIC-POINT:
+  ribbon:
+    listOfServers: http://10.0.20.116:9111
+
+
+E-MDM:
+  ribbon:
+    listOfServers: http://10.0.20.116:9161
+
+
+health:
+  config:
+    enabled: false
+
+management:
+  health:
+    #    diskspace:
+    #      enabled: true
+    db:
+      enabled: true
+    #    refresh:
+    #      enabled: false
+    defaults:
+      enabled: false
+
+  endpoint:
+    health:
+      show-details: always
+
+  #    loggers:
+  #      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+
+#    jmx:
+#      domain: com.procurement
+#      exposure:
+#        exclude: "*"
+
+#  metrics:
+#    distribution:
+#      percentiles-histogram:
+#        http:
+#          server:
+#            requests: true
+#      sla:
+#        http:
+#          server:
+#            requests: 1ms,5ms
+#  server:
+#    port: 9999
+#  info:
+#    git:
+#      mode: full
