@@ -10,6 +10,6 @@ class AwardContractCreateContext(
     )
 
     data class Contract(
-        val id: String //EV.contracts[*].id
+        val id: String //EV.contracts[statusDetails == "contractProject"].id
     )
 }

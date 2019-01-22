@@ -17,7 +17,8 @@ interface AcCreateService {
 @Service
 class AcCreateServiceImpl(
     private val formTemplateService: FormTemplateService,
-    private val publicPointService: PublicPointService) : AcCreateService {
+    private val publicPointService: PublicPointService
+) : AcCreateService {
 
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.AWARD_CONTRACT]
 
@@ -41,11 +42,16 @@ class AcCreateServiceImpl(
             parameters = AwardContractCreateContext.Parameters(
                 ocid = ocid
             ),
-            contracts = release.contracts.map { contract ->
-                AwardContractCreateContext.Contract(
-                    id = contract.id
-                )
-            }
+            contracts = release.contracts.asSequence()
+                .filter { contract ->
+                    contract.id == "contractProject"
+                }
+                .map { contract ->
+                    AwardContractCreateContext.Contract(
+                        id = contract.id
+                    )
+                }
+                .toList()
         )
     }
 }
