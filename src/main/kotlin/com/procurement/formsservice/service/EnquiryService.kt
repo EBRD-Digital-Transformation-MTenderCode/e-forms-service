@@ -15,8 +15,6 @@ class EnquiryServiceImpl(private val formTemplateService: FormTemplateService) :
     private val createTemplate = formTemplateService[KindTemplate.CREATE, KindEntity.ENQUIRY]
 
     override fun create(queryParameters: EnquiryCreateParameters): String {
-        queryParameters.lotid.takeIf { it.isNotEmpty() }
-
         val data = EnquiryCreateContext(
             parameters = EnquiryCreateContext.Parameters(
                 lotId = queryParameters.lotid.takeIf { it.isNotEmpty() }
