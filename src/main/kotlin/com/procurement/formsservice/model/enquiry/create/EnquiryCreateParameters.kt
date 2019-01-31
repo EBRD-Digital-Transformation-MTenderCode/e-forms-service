@@ -11,5 +11,5 @@ class EnquiryCreateParameters(queryParameters: QueryParameters) {
     }
 
     val lang: String = queryParameters.bind(binder = LANG, default = { defaultLang })
-    val lotid: String = queryParameters.bind(LOT_ID)
+    val lotid: String = queryParameters.bind(LOT_ID, default = { "" })
 }

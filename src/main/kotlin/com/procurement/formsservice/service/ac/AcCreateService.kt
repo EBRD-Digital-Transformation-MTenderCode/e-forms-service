@@ -44,7 +44,7 @@ class AcCreateServiceImpl(
             ),
             contracts = release.contracts.asSequence()
                 .filter { contract ->
-                    contract.id == "contractProject"
+                    contract.statusDetails == "contractProject"
                 }
                 .map { contract ->
                     AwardContractCreateContext.Contract(
