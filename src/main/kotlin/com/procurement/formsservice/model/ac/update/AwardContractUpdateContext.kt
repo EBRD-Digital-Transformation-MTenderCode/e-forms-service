@@ -36,7 +36,7 @@ class AwardContractUpdateContext(
             val type: String, // AC.contracts[0].documents[*].documentType
             val title: String?, // AC.contracts[0].documents[*].title
             val description: String?, // AC.contracts[0].documents[*].description
-            val relatedLot: String, // AC.contracts[0].documents[*].relatedLots[0]
+            val relatedLot: String?, // AC.contracts[0].documents[*].relatedLots[0]
             val confirmationRequest: ConfirmationRequest? // AC.contracts[0].confirmationRequests
         ) {
             data class ConfirmationRequest(

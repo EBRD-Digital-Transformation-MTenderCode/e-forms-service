@@ -2438,7 +2438,6 @@
             {
               "documentId": "{{ contractDoc.id }}",
               "documentType": "{{ contractDoc.type }}",
-              "relatedLots": ["{{ contractDoc.relatedLot }}"],
               "mustConfirmationRequests": {% if contractDoc.confirmationRequest != null %}true{% else %}false{% endif %}
               {% if contractDoc.confirmationRequest != null %}
                 ,
@@ -2448,6 +2447,8 @@
                   "source": "{{ contractDoc.confirmationRequest.source }}"
                 }
               {% endif %}
+              {{ commaIf(contractDoc.relatedLot) }}
+              {{ stringAttributeIf(name = "relatedLot", value = contractDoc.relatedLot) }}
               {{ commaIf(contractDoc.title) }}
               {{ stringAttributeIf(name = "title", value = contractDoc.title) }}
               {{ commaIf(contractDoc.description) }}
