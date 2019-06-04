@@ -96,7 +96,7 @@ class AcUpdateServiceImpl(
                     type = document.documentType,
                     title = document.title,
                     description = document.description,
-                    relatedLot = document.relatedLots[0],
+                    relatedLot = document.relatedLots?.get(0),
                     confirmationRequest = getConfirmationRequest(document.id, contract.confirmationRequests)
                 )
             } ?: emptyList()

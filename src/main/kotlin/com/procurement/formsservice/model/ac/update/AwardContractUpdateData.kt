@@ -81,7 +81,7 @@ data class AwardContractUpdateData(
                 @JsonProperty("id") val id: String,
                 @JsonProperty("title") val title: String?,
                 @JsonProperty("description") val description: String?,
-                @JsonProperty("relatedLots") val relatedLots: List<String>
+                @JsonProperty("relatedLots") val relatedLots: List<String>?
             )
 
             data class Milestone(
