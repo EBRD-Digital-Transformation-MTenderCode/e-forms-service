@@ -17,7 +17,7 @@ enum class CnResponsibleContactPerson {
 }
 
 enum class CnPmd {
-    OT, TEST_OT, SV, TEST_SV
+    OT, TEST_OT, SV, TEST_SV, MV, TEST_MV
 }
 
 class CnCreateParameters(queryParameters: QueryParameters) {
