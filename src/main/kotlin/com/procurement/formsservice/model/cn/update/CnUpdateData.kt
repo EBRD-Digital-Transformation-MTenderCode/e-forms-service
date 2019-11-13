@@ -10,17 +10,20 @@ import com.procurement.formsservice.model.cn.Role
 //annotation class PS
 
 data class CnUpdateData(
-    @JsonProperty("records") val records: List<Record>) {
+    @JsonProperty("records") val records: List<Record>
+) {
 
     data class Record(
         @JsonProperty("ocid") val ocid: String,
-        @JsonProperty("compiledRelease") val compiledRelease: JsonNode) {
+        @JsonProperty("compiledRelease") val compiledRelease: JsonNode
+    ) {
 
         data class MS(
             @JsonProperty("ocid") val ocid: String,
             @JsonProperty("planning") val planning: Planning,
             @JsonProperty("tender") val tender: Tender,
-            @JsonProperty("parties") val parties: List<Party>) {
+            @JsonProperty("parties") val parties: List<Party>
+        ) {
 
             data class Party(
                 @JsonProperty("name") val name: String,
@@ -28,17 +31,21 @@ data class CnUpdateData(
                 @JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifier>?,
                 @JsonProperty("address") val address: Address,
                 @JsonProperty("contactPoint") val contactPoint: ContactPoint,
-                @JsonProperty("roles") val roles: List<Role>) {
+                @JsonProperty("roles") val roles: List<Role>,
+                @JsonProperty("persones") val persons: List<Person>?
+            ) {
 
                 data class Address(
                     @JsonProperty("streetAddress") val streetAddress: String,
                     @JsonProperty("postalCode") val postalCode: String?,
-                    @JsonProperty("addressDetails") val addressDetails: AddressDetails) {
+                    @JsonProperty("addressDetails") val addressDetails: AddressDetails
+                ) {
 
                     data class AddressDetails(
                         @JsonProperty("country") val country: Country,
                         @JsonProperty("region") val region: Region,
-                        @JsonProperty("locality") val locality: Locality) {
+                        @JsonProperty("locality") val locality: Locality
+                    ) {
 
                         data class Region(
                             @JsonProperty("id") val id: String,
@@ -79,6 +86,39 @@ data class CnUpdateData(
                     @JsonProperty("faxNumber") val faxNumber: String?,
                     @JsonProperty("url") val url: String?
                 )
+
+                data class Person(
+                    @JsonProperty("title") val title: String,
+                    @JsonProperty("name") val name: String,
+                    @JsonProperty("identifier") val identifier: Identifier,
+                    @JsonProperty("businessFunctions") val businessFunctions: List<BusinessFunction>
+                ) {
+
+                    data class Identifier(
+                        @JsonProperty("scheme") val scheme: String,
+                        @JsonProperty("id") val id: String,
+                        @JsonProperty("uri") val uri: String?
+                    )
+
+                    data class BusinessFunction(
+                        @JsonProperty("id") val id: String,
+                        @JsonProperty("type") val type: String,
+                        @JsonProperty("jobTitle") val jobTitle: String,
+                        @JsonProperty("period") val period: Period,
+                        @JsonProperty("documents") val documents: List<Document>?
+                    ) {
+                        data class Period(
+                            @JsonProperty("startDate") val startDate: String
+                        )
+
+                        data class Document(
+                            @JsonProperty("id") val id: String,
+                            @JsonProperty("documentType") val documentType: String,
+                            @JsonProperty("title") val title: String,
+                            @JsonProperty("description") val description: String?
+                        )
+                    }
+                }
             }
 
             data class Tender(
@@ -86,8 +126,10 @@ data class CnUpdateData(
                 @JsonProperty("description") val description: String,
                 @JsonProperty("classification") val classification: Classification,
                 @JsonProperty("procurementMethodDetails") val procurementMethodDetails: String,
+                @JsonProperty("mainProcurementCategory") val mainProcurementCategory: String,
                 @JsonProperty("legalBasis") val legalBasis: String,
-                @JsonProperty("value") val value: Value) {
+                @JsonProperty("value") val value: Value
+            ) {
 
                 data class Classification(
                     @JsonProperty("id") val id: String
@@ -99,14 +141,17 @@ data class CnUpdateData(
             }
 
             data class Planning(
-                @JsonProperty("budget") val budget: Budget) {
+                @JsonProperty("budget") val budget: Budget
+            ) {
 
                 data class Budget(
-                    @JsonProperty("budgetBreakdown") val budgetBreakdown: List<BudgetBreakdown>) {
+                    @JsonProperty("budgetBreakdown") val budgetBreakdown: List<BudgetBreakdown>
+                ) {
 
                     data class BudgetBreakdown(
                         @JsonProperty("id") val id: String,
-                        @JsonProperty("amount") val amount: Amount) {
+                        @JsonProperty("amount") val amount: Amount
+                    ) {
 
                         data class Amount(
                             @JsonProperty("amount") val amount: Double,
@@ -119,7 +164,8 @@ data class CnUpdateData(
 
         data class CN(
             @JsonProperty("ocid") val ocid: String,
-            @JsonProperty("tender") val tender: Tender) {
+            @JsonProperty("tender") val tender: Tender
+        ) {
 
             data class Tender(
                 @JsonProperty("tenderPeriod") val tenderPeriod: TenderPeriod,
@@ -129,7 +175,10 @@ data class CnUpdateData(
                 @JsonProperty("lots") val lots: List<Lot>?,
                 @JsonProperty("procurementMethodModalities") val procurementMethodModalities: List<String>?,
                 @JsonProperty("awardCriteria") val awardCriteria: String?,
-                @JsonProperty("electronicAuctions") val electronicAuctions: ElectronicAuctions?
+                @JsonProperty("awardCriteriaDetails") val awardCriteriaDetails: String?,
+                @JsonProperty("electronicAuctions") val electronicAuctions: ElectronicAuctions?,
+                @field:JsonProperty("criteria") @param:JsonProperty("criteria") val criteria: List<Criteria>?,
+                @field:JsonProperty("conversions") @param:JsonProperty("conversions") val conversions: List<Conversion>?
             ) {
 
                 data class EnquiryPeriod(
@@ -150,12 +199,14 @@ data class CnUpdateData(
 
                 data class Item(
                     @JsonProperty("id") val id: String,
+                    @JsonProperty("internalId") val internalId: String?,
                     @JsonProperty("description") val description: String?,
                     @JsonProperty("classification") val classification: Classification,
                     @JsonProperty("additionalClassification") val additionalClassifications: List<AdditionalClassification>?,
                     @JsonProperty("quantity") val quantity: Double,
                     @JsonProperty("unit") val unit: Unit,
-                    @JsonProperty("relatedLot") val relatedLot: String) {
+                    @JsonProperty("relatedLot") val relatedLot: String
+                ) {
 
                     data class Classification(
                         @JsonProperty("scheme") val scheme: String,
@@ -177,11 +228,13 @@ data class CnUpdateData(
 
                 data class Lot(
                     @JsonProperty("id") val id: String,
+                    @JsonProperty("internalId") val internalId: String?,
                     @JsonProperty("title") val title: String,
                     @JsonProperty("description") val description: String,
                     @JsonProperty("value") val value: Value,
                     @JsonProperty("contractPeriod") val contractPeriod: ContractPeriod,
-                    @JsonProperty("placeOfPerformance") val placeOfPerformance: PlaceOfPerformance?) {
+                    @JsonProperty("placeOfPerformance") val placeOfPerformance: PlaceOfPerformance?
+                ) {
 
                     data class Value(
                         @JsonProperty("amount") val amount: Double,
@@ -195,17 +248,20 @@ data class CnUpdateData(
 
                     data class PlaceOfPerformance(
                         @JsonProperty("address") val address: Address?,
-                        @JsonProperty("description") val description: String?) {
+                        @JsonProperty("description") val description: String?
+                    ) {
 
                         data class Address(
                             @JsonProperty("streetAddress") val streetAddress: String,
                             @JsonProperty("postalCode") val postalCode: String?,
-                            @JsonProperty("addressDetails") val addressDetails: AddressDetails) {
+                            @JsonProperty("addressDetails") val addressDetails: AddressDetails
+                        ) {
 
                             data class AddressDetails(
                                 @JsonProperty("country") val country: Country,
                                 @JsonProperty("region") val region: Region,
-                                @JsonProperty("locality") val locality: Locality) {
+                                @JsonProperty("locality") val locality: Locality
+                            ) {
 
                                 data class Region(
                                     @JsonProperty("id") val id: String,
@@ -245,17 +301,70 @@ data class CnUpdateData(
                         }
                     }
                 }
+
+                data class Criteria(
+                    @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
+                    @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
+                    @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+                    @field:JsonProperty("source") @param:JsonProperty("source") val source: String?,
+                    @field:JsonProperty("relatesTo") @param:JsonProperty("relatesTo") val relatesTo: String?,
+                    @field:JsonProperty("relatedItem") @param:JsonProperty("relatedItem") val relatedItem: String?,
+                    @field:JsonProperty("requirementGroups") @param:JsonProperty("requirementGroups") val requirementGroups: List<RequirementGroup>
+                ) {
+
+                    data class RequirementGroup(
+                        @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
+                        @field:JsonProperty("description") @param:JsonProperty("description") val description: String,
+                        @field:JsonProperty("requirements") @param:JsonProperty("requirements") val requirements: List<Requirement>
+                    ) {
+
+                        data class Requirement(
+                            @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
+                            @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
+                            @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+                            @field:JsonProperty("period") @param:JsonProperty("period") val period: Period?,
+                            @field:JsonProperty("dataType") @param:JsonProperty("dataType") val dataType: String,
+                            @field:JsonProperty("expectedValue") @param:JsonProperty("expectedValue") val expectedValue: String?,
+                            @field:JsonProperty("minValue") @param:JsonProperty("minValue") val minValue: String?,
+                            @field:JsonProperty("maxValue") @param:JsonProperty("maxValue") val maxValue: String?
+                        ) {
+
+                            data class Period(
+                                @field:JsonProperty("startDate") @param:JsonProperty("startDate") val startDate: String,
+                                @field:JsonProperty("endDate") @param:JsonProperty("endDate") val endDate: String
+                            )
+                        }
+                    }
+                }
+
+                data class Conversion(
+                    @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
+                    @field:JsonProperty("relatesTo") @param:JsonProperty("relatesTo") val relatesTo: String,
+                    @field:JsonProperty("relatedItem") @param:JsonProperty("relatedItem") val relatedItem: String,
+                    @field:JsonProperty("rationale") @param:JsonProperty("rationale") val rationale: String,
+                    @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+                    @field:JsonProperty("coefficients") @param:JsonProperty("coefficients") val coefficients: List<Coefficient>
+                ) {
+                    data class Coefficient(
+                        @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
+                        @field:JsonProperty("value") @param:JsonProperty("value") val value: String,
+                        @field:JsonProperty("coefficient") @param:JsonProperty("coefficient") val coefficient: String
+                    )
+                }
             }
 
             data class Planning(
-                @JsonProperty("budget") val budget: Budget) {
+                @JsonProperty("budget") val budget: Budget
+            ) {
 
                 data class Budget(
-                    @JsonProperty("budgetBreakdown") val budgetBreakdown: List<BudgetBreakdown>) {
+                    @JsonProperty("budgetBreakdown") val budgetBreakdown: List<BudgetBreakdown>
+                ) {
 
                     data class BudgetBreakdown(
                         @JsonProperty("id") val id: String,
-                        @JsonProperty("amount") val amount: Amount) {
+                        @JsonProperty("amount") val amount: Amount
+                    ) {
 
                         data class Amount(
                             @JsonProperty("amount") val amount: Int,

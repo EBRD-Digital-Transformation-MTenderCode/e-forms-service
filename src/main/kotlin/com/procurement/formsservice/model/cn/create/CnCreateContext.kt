@@ -12,7 +12,7 @@ class CnCreateContext(
     data class Parameters(
         val procuringEntity: String,
         val responsibleContactPerson: String,
-        val pmd: String // variants: "OT", "TEST_OT", "SV", "TEST_SV"
+        val pmd: String  // variants: "OT", "TEST_OT", "SV", "TEST_SV", "MV", "TEST_MV", "DA", "TEST_DA", "OP", "TEST_OP", "NP", "TEST_NP"
     )
 
     data class ProcuringEntity(val uris: Uris) {

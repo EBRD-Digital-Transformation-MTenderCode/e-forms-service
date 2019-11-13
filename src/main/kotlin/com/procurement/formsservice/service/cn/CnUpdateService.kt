@@ -20,9 +20,11 @@ interface CnUpdateService {
 }
 
 @Service
-class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
-                          private val publicPointService: PublicPointService,
-                          private val objectMapper: ObjectMapper) : CnUpdateService {
+class CnUpdateServiceImpl(
+    private val formTemplateService: FormTemplateService,
+    private val publicPointService: PublicPointService,
+    private val objectMapper: ObjectMapper
+) : CnUpdateService {
 
     private val updateTemplate = formTemplateService[KindTemplate.UPDATE, KindEntity.CN]
 
@@ -72,8 +74,10 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         throw IllegalArgumentException(e)
     }
 
-    private fun procuringEntity(queryParameters: CnUpdateParameters,
-                                ms: CnUpdateData.Record.MS): CnUpdateContext.ProcuringEntity {
+    private fun procuringEntity(
+        queryParameters: CnUpdateParameters,
+        ms: CnUpdateData.Record.MS
+    ): CnUpdateContext.ProcuringEntity {
         val party = ms.parties.first {
             it.roles.contains(Role.PROCURING_ENTITY)
         }
@@ -134,13 +138,50 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                 region = "${MDMKind.REGION}?lang=$lang&country=${country.id}",
                 locality = "${MDMKind.LOCALITY}?lang=$lang&country=${country.id}&region=${region.id}",
                 registrationScheme = "${MDMKind.REGISTRATION_SCHEME}?lang=$lang&country=${country.id}"
-            )
+            ),
+            persones = party.persons?.map { person ->
+                CnUpdateContext.ProcuringEntity.Persone(
+                    title = person.title,
+                    name = person.name,
+                    identifier = person.identifier.let { identifier ->
+                        CnUpdateContext.ProcuringEntity.Persone.Identifier(
+                            scheme = identifier.scheme,
+                            id = identifier.id,
+                            uri = identifier.uri
+                        )
+                    },
+                    businessFunctions = person.businessFunctions
+                        .map { businessFunction ->
+                            CnUpdateContext.ProcuringEntity.Persone.BusinessFunction(
+                                id = businessFunction.id,
+                                type = businessFunction.type,
+                                jobTitle = businessFunction.jobTitle,
+                                period = businessFunction.period.let { period ->
+                                    CnUpdateContext.ProcuringEntity.Persone.BusinessFunction.Period(
+                                        startDate = period.startDate
+                                    )
+                                },
+                                documents = businessFunction.documents
+                                    ?.map { document ->
+                                        CnUpdateContext.ProcuringEntity.Persone.BusinessFunction.Document(
+                                            id = document.id,
+                                            type = document.documentType,
+                                            title = document.title,
+                                            description = document.description
+                                        )
+                                    }
+                            )
+                        }
+                )
+            }
         )
     }
 
-    private fun tender(queryParameters: CnUpdateParameters,
-                       ms: CnUpdateData.Record.MS,
-                       cn: CnUpdateData.Record.CN): CnUpdateContext.Tender {
+    private fun tender(
+        queryParameters: CnUpdateParameters,
+        ms: CnUpdateData.Record.MS,
+        cn: CnUpdateData.Record.CN
+    ): CnUpdateContext.Tender {
         val lang = queryParameters.lang
 
         return CnUpdateContext.Tender(
@@ -166,7 +207,127 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                 cpvs = "${MDMKind.CPVS}?lang=$lang",
                 pmd = "${MDMKind.PMD}?lang=$lang&country=${queryParameters.ocid.country}"
             ),
-            currency = ms.tender.value.currency
+            currency = ms.tender.value.currency,
+            pmd = ms.tender.procurementMethodDetails,
+            mainProcurementCategory = ms.tender.mainProcurementCategory,
+            tenderCriteria = cn.tender.criteria
+                ?.asSequence()
+                ?.filter { criteria ->
+                    criteria.relatesTo == null
+                }
+                ?.map { criteria ->
+                    CnUpdateContext.Tender.TenderCriterion(
+                        id = criteria.id,
+                        title = criteria.title,
+                        description = criteria.description,
+                        requirementGroups = criteria.requirementGroups.map { requirementGroup ->
+                            CnUpdateContext.Tender.TenderCriterion.RequirementGroup(
+                                id = requirementGroup.id,
+                                description = requirementGroup.description,
+                                requirements = requirementGroup.requirements.map { requirement ->
+                                    CnUpdateContext.Tender.TenderCriterion.RequirementGroup.Requirement(
+                                        id = requirement.id,
+                                        title = requirement.title,
+                                        description = requirement.description,
+                                        period = requirement.period?.let { period ->
+                                            CnUpdateContext.Tender.TenderCriterion.RequirementGroup.Requirement.Period(
+                                                startDate = period.startDate,
+                                                endDate = period.endDate
+                                            )
+                                        },
+                                        dataType = requirement.dataType,
+                                        expectedValue = requirement.expectedValue,
+                                        minValue = requirement.minValue,
+                                        maxValue = requirement.maxValue,
+                                        conversions = cn.tender.conversions
+                                            ?.asSequence()
+                                            ?.filter { conversion ->
+                                                conversion.relatedItem == requirement.id
+                                            }
+                                            ?.map { conversion ->
+                                                CnUpdateContext.Tender.TenderCriterion.RequirementGroup.Requirement.Conversion(
+                                                    id = conversion.id,
+                                                    description = conversion.description,
+                                                    rationale = conversion.rationale,
+                                                    relatedItem = conversion.relatedItem,
+                                                    relatesTo = conversion.relatesTo,
+                                                    coefficients = conversion.coefficients.map { coefficient ->
+                                                        CnUpdateContext.Tender.TenderCriterion.RequirementGroup.Requirement.Conversion.Coefficient(
+                                                            id = coefficient.id,
+                                                            value = coefficient.value,
+                                                            coefficient = coefficient.coefficient.toDouble()
+                                                        )
+                                                    }
+                                                )
+                                            }
+                                            ?.toList()
+                                    )
+                                }
+                            )
+                        }
+                    )
+                }
+                ?.toList(),
+            tendererCriteria = cn.tender.criteria
+                ?.asSequence()
+                ?.filter { criteria ->
+                    criteria.relatesTo == "tenderer"
+                }
+                ?.map { criteria ->
+                    CnUpdateContext.Tender.TendererCriterion(
+                        id = criteria.id,
+                        title = criteria.title,
+                        description = criteria.description,
+                        relatesTo = criteria.relatesTo!!,
+                        requirementGroups = criteria.requirementGroups.map { requirementGroup ->
+                            CnUpdateContext.Tender.TendererCriterion.RequirementGroup(
+                                id = requirementGroup.id,
+                                description = requirementGroup.description,
+                                requirements = requirementGroup.requirements.map { requirement ->
+                                    CnUpdateContext.Tender.TendererCriterion.RequirementGroup.Requirement(
+                                        id = requirement.id,
+                                        title = requirement.title,
+                                        description = requirement.description,
+                                        period = requirement.period?.let { period ->
+                                            CnUpdateContext.Tender.TendererCriterion.RequirementGroup.Requirement.Period(
+                                                startDate = period.startDate,
+                                                endDate = period.endDate
+                                            )
+                                        },
+                                        dataType = requirement.dataType,
+                                        expectedValue = requirement.expectedValue,
+                                        minValue = requirement.minValue,
+                                        maxValue = requirement.maxValue,
+                                        conversions = cn.tender.conversions
+                                            ?.asSequence()
+                                            ?.filter { conversion ->
+                                                conversion.relatedItem == requirement.id
+                                            }
+                                            ?.map { conversion ->
+                                                CnUpdateContext.Tender.TendererCriterion.RequirementGroup.Requirement.Conversion(
+                                                    id = conversion.id,
+                                                    description = conversion.description,
+                                                    rationale = conversion.rationale,
+                                                    relatedItem = conversion.relatedItem,
+                                                    relatesTo = conversion.relatesTo,
+                                                    coefficients = conversion.coefficients.map { coefficient ->
+                                                        CnUpdateContext.Tender.TendererCriterion.RequirementGroup.Requirement.Conversion.Coefficient(
+                                                            id = coefficient.id,
+                                                            value = coefficient.value,
+                                                            coefficient = coefficient.coefficient.toDouble()
+                                                        )
+                                                    }
+                                                )
+                                            }
+                                            ?.toList()
+                                    )
+                                }
+                            )
+                        }
+                    )
+                }
+                ?.toList(),
+            awardCriteriaDetails = cn.tender.awardCriteriaDetails
         )
     }
 
@@ -188,6 +349,7 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         return cn.tender.lots?.map { lot ->
             CnUpdateContext.Tender.Lot(
                 id = lot.id,
+                internalId = lot.internalId,
                 title = lot.title,
                 description = lot.description,
                 value = CnUpdateContext.Tender.Lot.Value(
@@ -196,7 +358,68 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                 ),
                 performance = performance(lot),
                 items = items(lotId = lot.id, cn = cn),
-                documents = documents(lotId = lot.id, cn = cn)
+                documents = documents(lotId = lot.id, cn = cn),
+                lotCriteria = cn.tender.criteria
+                    ?.asSequence()
+                    ?.filter { criteria ->
+                        criteria.relatesTo != null && criteria.relatedItem != null
+                            && criteria.relatesTo == "lot" && criteria.relatedItem == lot.id
+                    }
+                    ?.map { criteria ->
+                        CnUpdateContext.Tender.Lot.LotCriterion(
+                            id = criteria.id,
+                            title = criteria.title,
+                            description = criteria.description,
+                            relatedItem = criteria.relatedItem!!,
+                            relatesTo = criteria.relatesTo!!,
+                            requirementGroups = criteria.requirementGroups.map { requirementGroup ->
+                                CnUpdateContext.Tender.Lot.LotCriterion.RequirementGroup(
+                                    id = requirementGroup.id,
+                                    description = requirementGroup.description,
+                                    requirements = requirementGroup.requirements.map { requirement ->
+                                        CnUpdateContext.Tender.Lot.LotCriterion.RequirementGroup.Requirement(
+                                            id = requirement.id,
+                                            title = requirement.title,
+                                            description = requirement.description,
+                                            period = requirement.period?.let { period ->
+                                                CnUpdateContext.Tender.Lot.LotCriterion.RequirementGroup.Requirement.Period(
+                                                    startDate = period.startDate,
+                                                    endDate = period.endDate
+                                                )
+                                            },
+                                            dataType = requirement.dataType,
+                                            expectedValue = requirement.expectedValue,
+                                            minValue = requirement.minValue,
+                                            maxValue = requirement.maxValue,
+                                            conversions = cn.tender.conversions
+                                                ?.asSequence()
+                                                ?.filter { conversion ->
+                                                    conversion.relatedItem == requirement.id
+                                                }
+                                                ?.map { conversion ->
+                                                    CnUpdateContext.Tender.Lot.LotCriterion.RequirementGroup.Requirement.Conversion(
+                                                        id = conversion.id,
+                                                        description = conversion.description,
+                                                        rationale = conversion.rationale,
+                                                        relatedItem = conversion.relatedItem,
+                                                        relatesTo = conversion.relatesTo,
+                                                        coefficients = conversion.coefficients.map { coefficient ->
+                                                            CnUpdateContext.Tender.Lot.LotCriterion.RequirementGroup.Requirement.Conversion.Coefficient(
+                                                                id = coefficient.id,
+                                                                value = coefficient.value,
+                                                                coefficient = coefficient.coefficient.toDouble()
+                                                            )
+                                                        }
+                                                    )
+                                                }
+                                                ?.toList()
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                    }
+                    ?.toList()
             )
         }
     }
@@ -270,6 +493,7 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         }?.map { item ->
             CnUpdateContext.Tender.Lot.Item(
                 id = item.id,
+                internalId = item.internalId,
                 relatedLot = item.relatedLot,
                 description = item.description,
                 quantity = CnUpdateContext.Tender.Lot.Item.Quantity(
@@ -296,7 +520,68 @@ class CnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
                         description = it.description,
                         title = "${it.id} - ${it.description}"
                     )
-                }
+                },
+                itemCriteria = cn.tender.criteria
+                    ?.asSequence()
+                    ?.filter { criteria ->
+                        criteria.relatesTo != null && criteria.relatedItem != null
+                            && criteria.relatesTo == "item" && criteria.relatedItem == item.id
+                    }
+                    ?.map { criteria ->
+                        CnUpdateContext.Tender.Lot.Item.ItemCriterion(
+                            id = criteria.id,
+                            title = criteria.title,
+                            description = criteria.description,
+                            relatedItem = criteria.relatedItem!!,
+                            relatesTo = criteria.relatesTo!!,
+                            requirementGroups = criteria.requirementGroups.map { requirementGroup ->
+                                CnUpdateContext.Tender.Lot.Item.ItemCriterion.RequirementGroup(
+                                    id = requirementGroup.id,
+                                    description = requirementGroup.description,
+                                    requirements = requirementGroup.requirements.map { requirement ->
+                                        CnUpdateContext.Tender.Lot.Item.ItemCriterion.RequirementGroup.Requirement(
+                                            id = requirement.id,
+                                            title = requirement.title,
+                                            description = requirement.description,
+                                            period = requirement.period?.let { period ->
+                                                CnUpdateContext.Tender.Lot.Item.ItemCriterion.RequirementGroup.Requirement.Period(
+                                                    startDate = period.startDate,
+                                                    endDate = period.endDate
+                                                )
+                                            },
+                                            dataType = requirement.dataType,
+                                            expectedValue = requirement.expectedValue,
+                                            minValue = requirement.minValue,
+                                            maxValue = requirement.maxValue,
+                                            conversions = cn.tender.conversions
+                                                ?.asSequence()
+                                                ?.filter { conversion ->
+                                                    conversion.relatedItem == requirement.id
+                                                }
+                                                ?.map { conversion ->
+                                                    CnUpdateContext.Tender.Lot.Item.ItemCriterion.RequirementGroup.Requirement.Conversion(
+                                                        id = conversion.id,
+                                                        description = conversion.description,
+                                                        rationale = conversion.rationale,
+                                                        relatedItem = conversion.relatedItem,
+                                                        relatesTo = conversion.relatesTo,
+                                                        coefficients = conversion.coefficients.map { coefficient ->
+                                                            CnUpdateContext.Tender.Lot.Item.ItemCriterion.RequirementGroup.Requirement.Conversion.Coefficient(
+                                                                id = coefficient.id,
+                                                                value = coefficient.value,
+                                                                coefficient = coefficient.coefficient.toDouble()
+                                                            )
+                                                        }
+                                                    )
+                                                }
+                                                ?.toList()
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                    }
+                    ?.toList()
             )
         }
 

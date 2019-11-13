@@ -924,6 +924,11 @@
                       "type": "string",
                       "ocds": "tender::object/lots::array[object]/id::string"
                     },
+                    "internalId": {
+                      "title": "{{ translate("cn", "section2.lots.description.internalId.title") }}",
+                      "type": "string",
+                      "ocds": "tender::object/lots::array[object]/internalId::string"
+                    },
                     "title": {
                       "title": "{{ translate("cn", "section2.lots.description.title.title") }}",
                       "description": "{{ translate("cn", "section2.lots.description.title.description") }}",
@@ -1202,6 +1207,11 @@
                       "relatedLot": {
                         "type": "string",
                         "ocds": "tender::object/items::array[object]/relatedLot::string"
+                      },
+                      "internalId": {
+                        "title": "{{ translate("cn", "section2.lots.items.internalId.title") }}",
+                        "type": "string",
+                        "ocds": "tender::object/items::array[object]/internalId::string"
                       },
                       "description": {
                         "title": "{{ translate("cn", "section2.lots.items.description.title") }}",

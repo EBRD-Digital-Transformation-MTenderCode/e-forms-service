@@ -182,6 +182,7 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         return pn.tender.lots?.map { lot ->
             PnUpdateContext.Tender.Lot(
                 id = lot.id,
+                internalId = lot.internalId,
                 title = lot.title,
                 description = lot.description,
                 value = PnUpdateContext.Tender.Lot.Value(
@@ -240,6 +241,7 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
         }?.map { item ->
             PnUpdateContext.Tender.Lot.Item(
                 id = item.id,
+                internalId = item.internalId,
                 relatedLot = item.relatedLot,
                 description = item.description,
                 quantity = PnUpdateContext.Tender.Lot.Item.Quantity(

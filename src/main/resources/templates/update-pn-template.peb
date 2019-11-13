@@ -480,6 +480,11 @@
                       "type": "string",
                       "ocds": "tender::object/lots::array[object]/id::string"
                     },
+                    "internalId": {
+                      "title": "{{ translate("pn", "section2.lots.description.internalId.title") }}",
+                      "type": "string",
+                      "ocds": "tender::object/lots::array[object]/internalId::string"
+                    },
                     "title": {
                       "title": "{{ translate("pn", "section2.lots.description.title.title") }}",
                       "description": "{{ translate("pn", "section2.lots.description.title.description") }}",
@@ -757,6 +762,11 @@
                       "relatedLot": {
                         "type": "string",
                         "ocds": "tender::object/items::array[object]/relatedLot::string"
+                      },
+                      "internalId": {
+                        "title": "{{ translate("pn", "section2.lots.items.internalId.title") }}",
+                        "type": "string",
+                        "ocds": "tender::object/items::array[object]/internalId::string"
                       },
                       "description": {
                         "title": "{{ translate("pn", "section2.lots.items.description.title") }}",
@@ -1181,6 +1191,8 @@
             {
               "description": {
                 "lotId": "{{ lot.id }}",
+                {{ stringAttributeIf(name = "internalId", value = lot.internalId) }}
+                {{ commaIf(lot.internalId) }}
                 "title": "{{ lot.title }}",
                 {{ stringAttributeIf(name = "description", value = lot.description) }}
                 {{ commaIf(lot.description) }}
@@ -1236,6 +1248,8 @@
                     {
                       "itemId": "{{ item.id }}",
                       "relatedLot": "{{ item.relatedLot }}",
+                      {{ stringAttributeIf(name = "internalId", value = item.internalId) }}
+                      {{ commaIf(item.internalId) }}
                       {{ stringAttributeIf(name = "description", value = item.description) }}
                       {{ commaIf(item.description) }}
                       "quantity": {
