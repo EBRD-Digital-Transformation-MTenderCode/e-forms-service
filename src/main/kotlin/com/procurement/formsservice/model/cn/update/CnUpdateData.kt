@@ -314,7 +314,7 @@ data class CnUpdateData(
 
                     data class RequirementGroup(
                         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
-                        @field:JsonProperty("description") @param:JsonProperty("description") val description: String,
+                        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
                         @field:JsonProperty("requirements") @param:JsonProperty("requirements") val requirements: List<Requirement>
                     ) {
 

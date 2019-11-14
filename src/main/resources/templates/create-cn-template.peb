@@ -953,7 +953,7 @@
                         "amount": {
                           "title": "{{ translate("cn", "section2.lots.description.value.amount.title") }}",
                           "type": "number",
-                          "min": 0.00001,
+                          "min": 0.01,
                           "ocds": "tender::object/lots::array[object]/value::object/amount::number"
                         },
                         "currency": {
@@ -1507,7 +1507,7 @@
                                   "amount": {
                                     "title": "{{ translate("cn", "section2.modalities.details.electronicAuctionModalities.amount.title") }}",
                                     "type": "number",
-                                    "min": 0.00001,
+                                    "min": 0.01,
                                     "ocds": "tender::object/electronicAuctions::object/details::array[object]/electronicAuctionModalities::array[object]/eligibleMinimumDifference::object/amount::number"
                                   },
                                   "currency": {
@@ -1559,8 +1559,7 @@
                   "DIRECTIVE_2014_25_EU",
                   "DIRECTIVE_2009_81_EC",
                   "REGULATION_966_2012",
-                  "NATIONAL_PROCUREMENT_LAW",
-                  "NULL"
+                  "NATIONAL_PROCUREMENT_LAW"
                 ],
                 "ocds": "tender::object/legalBasis::string"
               }
@@ -1627,7 +1626,7 @@
                   "properties": {
                     "amount": {
                       "type": "number",
-                      "min": 0.00001,
+                      "min": 0.01,
                       "ocds": "planning::object/budget::object/budgetBreakdown::array[object]/amount::object/amount::number"
                     },
                     "currency": {
