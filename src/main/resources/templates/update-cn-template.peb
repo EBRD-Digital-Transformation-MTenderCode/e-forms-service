@@ -59,7 +59,7 @@
               "name"
             ],
             "properties": {
-              {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+              {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
                 "id": {
                   "type": "string",
                   "readOnly": true,
@@ -390,7 +390,7 @@
                   }
                 }
               }
-              {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+              {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
                 ,
                 "persones": {
                   "title": "",
@@ -937,7 +937,7 @@
                     }
                   }
                 },
-                {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+                {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
                   "lotCriteria": {
                     "title": "",
                     "type": "array",
@@ -1602,7 +1602,7 @@
                           }
                         }
                       }
-                      {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+                      {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
                         ,
                         "itemCriteria": {
                           "title": "",
@@ -2204,7 +2204,7 @@
               }
             }
           }
-          {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+          {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
             ,
             "tendererCriteria": {
               "title": "",
@@ -3316,7 +3316,7 @@
             "type": "object",
             "required": [
               "legalBasis"
-              {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+              {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
                 ,
                 "awardCriteria"
               {% endif %}
@@ -3362,7 +3362,7 @@
                 ],
                 "ocds": "tender::object/awardCriteria::string"
               }
-              {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+              {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
                 ,
                 "awardCriteriaDetails": {
                   "title": "",
@@ -3463,7 +3463,7 @@
   "data": {
     "section1": {
       "procuringEntity": {
-        {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+        {% if context.tender.pmd != "negotiatedProcedure" and context.tender.pmd != "TEST_negotiatedProcedure" and context.tender.pmd != "directAward" and context.tender.pmd != "TEST_directAward" and context.tender.pmd != "otherProcedure" and context.tender.pmd != "otherProcedure" %}
           "id": "{{ context.procuringEntity.id }}",
         {% endif %}
         "name": "{{ context.procuringEntity.name }}",
