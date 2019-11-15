@@ -26,6 +26,7 @@ data class CnUpdateData(
         ) {
 
             data class Party(
+                @JsonProperty("id") val id: String,
                 @JsonProperty("name") val name: String,
                 @JsonProperty("identifier") val identifier: Identifier,
                 @JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifier>?,

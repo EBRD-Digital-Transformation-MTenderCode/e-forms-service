@@ -11,6 +11,7 @@ class CnUpdateContext(
     )
 
     data class ProcuringEntity(
+        val id: String, // MS.parties[role="procuringEntity"].id
         val name: String, // MS.parties[role="procuringEntity"].name
         val address: Address,
         val identifier: Identifier,

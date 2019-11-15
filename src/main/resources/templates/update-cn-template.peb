@@ -59,10 +59,13 @@
               "name"
             ],
             "properties": {
-              "id": {
-                "type": "string",
-                "ocds": "tender::object/procuringEntity::object/id::string"
-              },
+              {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+                "id": {
+                  "type": "string",
+                  "readOnly": true,
+                  "ocds": "tender::object/procuringEntity::object/id::string"
+                },
+              {% endif %}
               "name": {
                 "title": "{{ translate("cn", "section1.procuringEntity.name.title") }}",
                 "type": "string",
@@ -3459,6 +3462,9 @@
   "data": {
     "section1": {
       "procuringEntity": {
+        {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+          "id": "{{ context.procuringEntity.id }}",
+        {% endif %}
         "name": "{{ context.procuringEntity.name }}",
         "address": {
           "location": {
@@ -3840,7 +3846,7 @@
                       {% if item.itemCriteria != null %}
                         ,
                         "itemCriteria": [
-                          {% for itemCriterion in lot.itemCriteria %}
+                          {% for itemCriterion in item.itemCriteria %}
                             {% if loop.index  > 0 %},{% endif %}
                             {
                               "id": "{{ itemCriterion.id }}",

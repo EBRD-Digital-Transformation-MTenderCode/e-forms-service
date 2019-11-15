@@ -90,6 +90,7 @@ class CnUpdateServiceImpl(
         val locality = addressDetails.locality
 
         return CnUpdateContext.ProcuringEntity(
+            id = party.id,
             name = party.name,
             address = CnUpdateContext.ProcuringEntity.Address(
                 streetAddress = address.streetAddress,
