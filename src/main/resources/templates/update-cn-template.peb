@@ -2203,8 +2203,9 @@
                 }
               }
             }
-          },
+          }
           {% if context.tender.pmd != "negotiatedProcedure" or context.tender.pmd != "TEST_negotiatedProcedure" or context.tender.pmd != "directAward" or context.tender.pmd != "TEST_directAward" or context.tender.pmd != "otherProcedure" or context.tender.pmd != "otherProcedure" %}
+            ,
             "tendererCriteria": {
               "title": "",
               "type": "array",
@@ -3205,93 +3206,93 @@
                 }
               }
             },
-          {% endif %}
-          "modalities": {
-            "title": "{{ translate("cn", "section2.modalities.title") }}",
-            "type": "object",
-            "properties": {
-              "procurementMethodModalities": {
-                "type": "array",
-                "minItems": 1,
-                "maxItems": 1,
-                "uniqueItems": true,
-                "items": {
-                  "type": "string",
-                  "enum": ["electronicAuction"],
-                  "enumNames": ["{{ translate("cn", "section2.modalities.procurementMethodModalities.enumNames[0]") }}"],
-                  {% if context.parentEntity == "PN" %}
-                    {% if (context.tender.pmd == "smallValue" or context.tender.pmd == "TEST_smallValue") and (context.tender.mainProcurementCategory == "goods" or context.tender.mainProcurementCategory == "services") %}
-                      "readOnly": true,
-                      "default": ["electronicAuction"],
+            "modalities": {
+              "title": "{{ translate("cn", "section2.modalities.title") }}",
+              "type": "object",
+              "properties": {
+                "procurementMethodModalities": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "enum": ["electronicAuction"],
+                    "enumNames": ["{{ translate("cn", "section2.modalities.procurementMethodModalities.enumNames[0]") }}"],
+                    {% if context.parentEntity == "PN" %}
+                      {% if (context.tender.pmd == "smallValue" or context.tender.pmd == "TEST_smallValue") and (context.tender.mainProcurementCategory == "goods" or context.tender.mainProcurementCategory == "services") %}
+                        "readOnly": true,
+                        "default": ["electronicAuction"],
+                      {% endif %}
+                      {% else %}
+                        "readOnly": true,
                     {% endif %}
-                  {% else %}
-                    "readOnly": true,
-                  {% endif %}
-                  "ocds": "tender::object/procurementMethodModalities::array[string]"
+                    "ocds": "tender::object/procurementMethodModalities::array[string]"
+                  }
                 }
-              }
-            },
-            "dependencies": {
-              "procurementMethodModalities": {
-                "oneOf": [
-                  {
-                    "properties": {
-                      "procurementMethodModalities": {
-                        "items": {
-                          "enum": [""]
+              },
+              "dependencies": {
+                "procurementMethodModalities": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "procurementMethodModalities": {
+                          "items": {
+                            "enum": [""]
+                          }
                         }
                       }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "procurementMethodModalities": {
-                        "items": {
-                          "enum": ["electronicAuction"]
-                        }
-                      },
-                      "details": {
-                        "title": "{{ translate("cn", "section2.modalities.details.title") }}",
-                        "type": "array",
-                        "minItems": 1,
-                        "items": {
-                          "type": "object",
-                          "required": [
-                            "id",
-                            "relatedLot"
-                          ],
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "ocds": "tender::object/electronicAuctions::object/details::array[object]/id::string"
-                            },
-                            "relatedLot": {
-                              "type": "string",
-                              "ocds": "tender::object/electronicAuctions::object/details::array[object]/relatedLot::string"
-                            },
-                            "electronicAuctionModalities": {
-                              "type": "array",
-                              "minItems": 1,
-                              "maxItems": 1,
-                              "items": {
-                                "type": "object",
-                                "required": [
-                                  "amount",
-                                  "currency"
-                                ],
-                                "properties": {
-                                  "amount": {
-                                    "title": "{{ translate("cn", "section2.modalities.details.electronicAuctionModalities.amount.title") }}",
-                                    "type": "number",
-                                    "min": 0.01,
-                                    "ocds": "tender::object/electronicAuctions::object/details::array[object]/electronicAuctionModalities::array[object]/eligibleMinimumDifference::object/amount::number"
-                                  },
-                                  "currency": {
-                                    "title": "{{ translate("cn", "section2.modalities.details.electronicAuctionModalities.currency.title") }}",
-                                    "type": "string",
-                                    "default": "{{ context.tender.currency }}",
-                                    "readOnly": true,
-                                    "ocds": "tender::object/electronicAuctions::object/details::array[object]/electronicAuctionModalities::array[object]/eligibleMinimumDifference::object/currency::string"
+                    },
+                    {
+                      "properties": {
+                        "procurementMethodModalities": {
+                          "items": {
+                            "enum": ["electronicAuction"]
+                          }
+                        },
+                        "details": {
+                          "title": "{{ translate("cn", "section2.modalities.details.title") }}",
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "relatedLot"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "ocds": "tender::object/electronicAuctions::object/details::array[object]/id::string"
+                              },
+                              "relatedLot": {
+                                "type": "string",
+                                "ocds": "tender::object/electronicAuctions::object/details::array[object]/relatedLot::string"
+                              },
+                              "electronicAuctionModalities": {
+                                "type": "array",
+                                "minItems": 1,
+                                "maxItems": 1,
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ],
+                                  "properties": {
+                                    "amount": {
+                                      "title": "{{ translate("cn", "section2.modalities.details.electronicAuctionModalities.amount.title") }}",
+                                      "type": "number",
+                                      "min": 0.01,
+                                      "ocds": "tender::object/electronicAuctions::object/details::array[object]/electronicAuctionModalities::array[object]/eligibleMinimumDifference::object/amount::number"
+                                    },
+                                    "currency": {
+                                      "title": "{{ translate("cn", "section2.modalities.details.electronicAuctionModalities.currency.title") }}",
+                                      "type": "string",
+                                      "default": "{{ context.tender.currency }}",
+                                      "readOnly": true,
+                                      "ocds": "tender::object/electronicAuctions::object/details::array[object]/electronicAuctionModalities::array[object]/eligibleMinimumDifference::object/currency::string"
+                                    }
                                   }
                                 }
                               }
@@ -3300,11 +3301,11 @@
                         }
                       }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
-          }
+          {% endif %}
         }
       },
       "section4": {
