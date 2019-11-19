@@ -3348,6 +3348,9 @@
               "awardCriteria": {
                 "title": "{{ translate("cn", "section4.awardCriteria.title") }}",
                 "type": "string",
+                {% if context.parentEntity == "EV" %}
+                  "readOnly": true,
+                {% endif %}
                 "enum": [
                   "priceOnly",
                   "costOnly",
@@ -3367,6 +3370,9 @@
                 "awardCriteriaDetails": {
                   "title": "",
                   "type": "string",
+                  {% if context.parentEntity == "EV" %}
+                    "readOnly": true,
+                  {% endif %}
                   "enum": [
                     "manual",
                     "automated"
