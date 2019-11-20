@@ -92,6 +92,7 @@ class PnUpdateContext(
 
         data class Lot(
             val id: String, // PN.tender.lots[i].id
+            val internalId: String?, // PN.tender.lots[i].internalId
             val title: String, // PN.tender.lots[i].title
             val description: String, // PN.tender.lots[i].description
             val value: Value,
@@ -145,6 +146,7 @@ class PnUpdateContext(
 
             data class Item(
                 val id: String, // PN.tender.items[relatedLot = lot.id].id
+                val internalId: String?, // PN.tender.items[relatedLot = lot.id].internalId
                 val relatedLot: String, // PN.tender.items[relatedLot = lot.id].relatedLot
                 val description: String?, // PN.tender.items[relatedLot = lot.id] description
                 val quantity: Quantity,

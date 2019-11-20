@@ -136,6 +136,7 @@ data class PnUpdateData(
 
                 data class Item(
                     @JsonProperty("id") val id: String,
+                    @JsonProperty("internalId") val internalId: String?,
                     @JsonProperty("description") val description: String?,
                     @JsonProperty("classification") val classification: Classification,
                     @JsonProperty("additionalClassification") val additionalClassifications: List<AdditionalClassification>?,
@@ -163,6 +164,7 @@ data class PnUpdateData(
 
                 data class Lot(
                     @JsonProperty("id") val id: String,
+                    @JsonProperty("internalId") val internalId: String?,
                     @JsonProperty("title") val title: String,
                     @JsonProperty("description") val description: String,
                     @JsonProperty("value") val value: Value,

@@ -16,7 +16,7 @@
           "properties": {
             "amount": {
               "type": "number",
-              "min": 0.00001,
+              "min": 0.01,
               "maximum": {{ context.amount.maxAmount }},
               "ocds": "bid::object/value::object/amount::number"
             },
