@@ -390,7 +390,8 @@
               "type": "object",
               "required": [
                 "documentId",
-                "documentType"
+                "documentType",
+                "title"
               ],
               "properties": {
                 "file": {
@@ -908,7 +909,8 @@
                     "type": "object",
                     "required": [
                       "documentId",
-                      "documentType"
+                      "documentType",
+                      "title"
                     ],
                     "properties": {
                       "file": {
@@ -1009,6 +1011,18 @@
                 "readOnly": true,
                 "ocds": "tender::object/procurementMethodDetails::string"
               },
+              "procurementMethodRationale": {
+                "title": "",
+                "description": "",
+                "type": "string",
+                "ocds": "tender::object/procurementMethodRationale::string"
+              },
+              "procurementMethodAdditionalInfo": {
+                "title": "",
+                "description": "",
+                "type": "string",
+                "ocds": "tender::object/procurementMethodAdditionalInfo::string"
+              },
               "legalBasis": {
                 "title": "{{ translate("pn", "section4.legalBasis.title") }}",
                 "description": "{{ translate("pn", "section4.legalBasis.description") }}",
@@ -1052,6 +1066,16 @@
         "title": "{{ translate("pn", "budget.title") }}",
         "type": "object",
         "properties": {
+          "rationale": {
+            "title": "",
+            "type": "string",
+            "ocds": "planning::object/rationale::string"
+          },
+          "description": {
+            "title": "",
+            "type": "string",
+            "ocds": "planning::object/budget::object/description::string"
+          },
           "budgetBreakdown": {
             "type": "array",
             "minItems": 1,
@@ -1313,6 +1337,10 @@
     "section4": {
       "method": {
         "procurementMethodDetails": "{{ context.tender.procurementMethodDetails }}",
+        {{ stringAttributeIf(name = "procurementMethodRationale", value = context.tender.procurementMethodRationale) }}
+        {{ commaIf(context.tender.procurementMethodRationale) }}
+        {{ stringAttributeIf(name = "procurementMethodAdditionalInfo", value = context.tender.procurementMethodAdditionalInfo) }}
+        {{ commaIf(context.tender.procurementMethodAdditionalInfo) }}
         "legalBasis": "{{ context.tender.legalBasis }}"
       },
       "administrative": {
