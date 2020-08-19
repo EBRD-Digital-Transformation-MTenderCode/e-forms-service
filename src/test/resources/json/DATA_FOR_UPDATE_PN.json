@@ -88,7 +88,6 @@
           "procurementMethod": "open",
           "procurementMethodDetails": "test",
           "procurementMethodRationale": "pmr_update",
-          "procurementMethodAdditionalInfo": "procurementMethodAdditionalInfo",
           "mainProcurementCategory": "goods",
           "hasEnquiries": false,
           "eligibilityCriteria": "eligibilityCriteria",
