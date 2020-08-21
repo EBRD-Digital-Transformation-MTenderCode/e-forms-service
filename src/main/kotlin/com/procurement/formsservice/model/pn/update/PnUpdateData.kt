@@ -81,6 +81,8 @@ data class PnUpdateData(
                 @JsonProperty("description") val description: String,
                 @JsonProperty("classification") val classification: Classification,
                 @JsonProperty("procurementMethodDetails") val procurementMethodDetails: String,
+                @JsonProperty("procurementMethodAdditionalInfo") val procurementMethodAdditionalInfo: String?,
+                @JsonProperty("procurementMethodRationale") val procurementMethodRationale: String?,
                 @JsonProperty("legalBasis") val legalBasis: String,
                 @JsonProperty("value") val value: Value) {
 

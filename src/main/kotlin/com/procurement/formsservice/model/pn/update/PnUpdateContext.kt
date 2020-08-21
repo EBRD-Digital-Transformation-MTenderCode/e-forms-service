@@ -77,6 +77,8 @@ class PnUpdateContext(
         val documents: List<Document>?, // PN.tender.documents
         val lots: List<Lot>?, // PN.tender.lots
         val procurementMethodDetails: String, // MS.tender.procurementMethodDetails
+        val procurementMethodRationale: String?, // MS.tender.procurementMethodRationale
+        val procurementMethodAdditionalInfo: String?, // MS.tender.procurementMethodAdditionalInfo
         val legalBasis: String,  // MS.tender.legalBasis
         val validityPeriod: String, // PN.tender.tenderPeriod.startDate
         val budgetBreakdown: List<BudgetBreakdown>,

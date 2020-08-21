@@ -150,6 +150,8 @@ class PnUpdateServiceImpl(private val formTemplateService: FormTemplateService,
             legalBasis = ms.tender.legalBasis,
             validityPeriod = pn.tender.tenderPeriod.startDate,
             budgetBreakdown = budgetBreakdown(ms),
+            procurementMethodRationale = ms.tender.procurementMethodRationale,
+            procurementMethodAdditionalInfo = ms.tender.procurementMethodAdditionalInfo,
             uris = PnUpdateContext.Tender.Uris(
                 country = "${MDMKind.COUNTRY}?lang=$lang",
                 region = "${MDMKind.REGION}?lang=$lang&country=\$country\$",

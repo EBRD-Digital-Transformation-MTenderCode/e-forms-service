@@ -832,7 +832,8 @@
               "type": "object",
               "required": [
                 "documentId",
-                "documentType"
+                "documentType",
+                "title"
               ],
               "properties": {
                 "file": {
@@ -1350,7 +1351,8 @@
                     "type": "object",
                     "required": [
                       "documentId",
-                      "documentType"
+                      "documentType",
+                      "title"
                     ],
                     "properties": {
                       "file": {
@@ -1451,6 +1453,18 @@
                 "readOnly": true,
                 "ocds": "tender::object/procurementMethodDetails::string"
               },
+              "procurementMethodRationale": {
+                "title": "",
+                "description": "",
+                "type": "string",
+                "ocds": "tender::object/procurementMethodRationale::string"
+              },
+              "procurementMethodAdditionalInfo": {
+                "title": "",
+                "description": "",
+                "type": "string",
+                "ocds": "tender::object/procurementMethodAdditionalInfo::string"
+              },
               "legalBasis": {
                 "title": "{{ translate("pn", "section4.legalBasis.title") }}",
                 "description": "{{ translate("pn", "section4.legalBasis.description") }}",
@@ -1493,6 +1507,16 @@
         "title": "{{ translate("pn", "budget.title") }}",
         "type": "object",
         "properties": {
+          "rationale": {
+            "title": "",
+            "type": "string",
+            "ocds": "planning::object/ratioanle::string"
+          },
+          "description": {
+            "title": "",
+            "type": "string",
+            "ocds": "planning::object/budget::object/description::string"
+          },
           "budgetBreakdown": {
             "type": "array",
             "minItems": 1,
@@ -1506,6 +1530,7 @@
                   "type": "string",
                   "ocds": "planning::object/budget::object/budgetBreakdown::array[object]/id::string"
                 },
+              
                 "budgetBreakdownAmount": {
                   "type": "object",
                   "required": [
